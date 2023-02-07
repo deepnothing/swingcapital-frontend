@@ -2,8 +2,8 @@ import 'dotenv/config';
 
 export default {
   "expo": {
-    "name": "legal-call",
-    "slug": "legal-call",
+    "name": "swingcapital",
+    "slug": "swingcapital",
     "privacy": "public",
     "version": "1.0.0",
     "orientation": "portrait",
