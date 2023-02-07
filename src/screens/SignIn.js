@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../../assets/logo.png";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 import {

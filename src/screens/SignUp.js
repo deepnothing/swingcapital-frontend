@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from "../../assets/logo.png"
 import Icon from '@expo/vector-icons/MaterialCommunityIcons'
 import { Image, Pressable, StyleSheet, TextInput, Text, View } from 'react-native';
 //import Icon from 'react-native-vector-icons/FontAwesome';
