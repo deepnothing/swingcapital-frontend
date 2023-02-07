@@ -37,8 +37,8 @@ function SignUpScreen<StackScreenProps>({ navigation }) {
   return (
     <View className="w-full h-full">
       <View className="mx-4 h-5/6 flex justify-center align-center space-y-6">
-        <Image source={logo} style={{ width: 100, height: 100, alignSelf: "center" }} />
-        <Text className="block  font-title text-2xl font-bold text-center text-white">
+        {/* <Image source={logo} style={{ width: 100, height: 100, alignSelf: "center" }} /> */}
+        <Text className="block  font-title text-2xl font-bold text-center text-black">
           Sign Up
         </Text>
 
@@ -64,9 +64,9 @@ function SignUpScreen<StackScreenProps>({ navigation }) {
               />
             </View>
           </View>
-          <Pressable className="bg-background border border-white rounded-3xl py-2 px-4 m-4" ><Text className="text-center text-white font-bold text-base" onPress={signUp}>Sign Up</Text></Pressable>
+          <Pressable className="bg-[#ffc72c] rounded-3xl py-2 px-4 m-4" ><Text className="text-center text-black font-bold text-base" onPress={signUp}>Sign Up</Text></Pressable>
         </View>
-        <Text className="text-center text-white font-main text-base">Have an account? <Text className="text-blue" onPress={() => navigation.navigate('Sign In')}>Sign In</Text></Text>
+        <Text className="text-center text-black font-main text-base">Have an account? <Text className="text-[#ffc72c]" onPress={() => navigation.navigate('Sign In')}>Sign In</Text></Text>
       </View>
     </View>
   );

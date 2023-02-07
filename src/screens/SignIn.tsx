@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../assets/logo.png";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+
 import {
   Image,
   Pressable,
@@ -8,6 +9,7 @@ import {
   TextInput,
   Text,
   View,
+  Alert,
 } from "react-native";
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import { StackScreenProps } from "@react-navigation/stack";
@@ -28,12 +30,33 @@ function SignInScreen<StackScreenProps>({ navigation }) {
         ...value,
         error: "Email and password are mandatory.",
       });
+
+      Alert.alert("Error", 'Email and password are mandatory.', [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") },
+      ]);
+
       return;
     }
 
     try {
       await signInWithEmailAndPassword(auth, value.email, value.password);
     } catch (error) {
+      console.log(error);
+
+      Alert.alert("Error", error.message.replace('Firebase:',''), [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") },
+      ]);
+
       setValue({
         ...value,
         error: error.message,
@@ -44,11 +67,11 @@ function SignInScreen<StackScreenProps>({ navigation }) {
   return (
     <View className="w-full h-full">
       <View className="mx-4 h-5/6 flex justify-center align-center space-y-6">
-        <Image
+        {/* <Image
           source={logo}
           style={{ width: 100, height: 100, alignSelf: "center" }}
-        />
-        <Text className="block  font-title text-2xl font-bold text-center text-white">
+        /> */}
+        <Text className="block  font-title text-2xl font-bold text-center text-black">
           Sign In
         </Text>
 
@@ -74,19 +97,19 @@ function SignInScreen<StackScreenProps>({ navigation }) {
               />
             </View>
           </View>
-          <Pressable className="bg-background border border-white rounded-3xl py-2 px-4 m-4">
+          <Pressable className="bg-[#ffc72c] rounded-3xl py-2 px-4 m-4">
             <Text
-              className="text-center text-white font-bold text-base"
+              className="text-center text-black font-bold text-base"
               onPress={signIn}
             >
               Sign In
             </Text>
           </Pressable>
         </View>
-        <Text className="text-center text-white font-main text-base">
+        <Text className="text-center text-black font-main text-base">
           Don't Have an account?{" "}
           <Text
-            className="text-blue"
+            className="text-[#ffc72c]"
             onPress={() => navigation.navigate("Sign Up")}
           >
             Sign Up

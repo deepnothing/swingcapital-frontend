@@ -16,9 +16,9 @@ export default function UserStack() {
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
-          tabBarStyle: { backgroundColor: "#0e1529" },
+          tabBarStyle: { backgroundColor: "#ffc72c" },
         }}
-        sceneContainerStyle={{ backgroundColor: "#0e1529" }}
+        sceneContainerStyle={{ backgroundColor: "#FFFFFF" }}
       >
         <Tab.Screen
           name="Home"
@@ -41,7 +41,7 @@ export default function UserStack() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => (
               <Feather
-                name="users"
+                name="heart"
                 color={focused ? "white" : "gray"}
                 size={"24"}
               />

@@ -7,8 +7,11 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const auth = getAuth();
 
+
 function Settings() {
   const [modalVisible, setModalVisible] = React.useState(false);
+  const { user } = useAuth();
+
   return (
     <View>
       <Pressable onPress={() => setModalVisible(true)}>
@@ -17,24 +20,23 @@ function Settings() {
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <TouchableOpacity
           onPress={() => setModalVisible(!modalVisible)}
-          style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)" }}
+          style={{ flex: 1, backgroundColor: "rgba(0,0,0,0)" }}
         >
-          <View className="h-[30%] mt-auto border rounded-t-3xl ">
-            <LinearGradient
-              colors={["#141e30", "#243b55"]}
-              style={{ flex: 1, borderRadius: 20 }}
+          <View className="h-[40%] mt-auto rounded-t-3xl ">
+            <View
+              style={{ flex: 1, borderRadius: 20,backgroundColor:"#ffc72c" }}
             >
               <Pressable onPress={() => signOut(auth)}>
                 <View className="flex flex-row m-4">
                   <Feather
                     name="log-out"
-                    color="white"
+                    color="black"
                     size={"24"}
                   />
-                  <Text className="text-white text-xl">Logout</Text>
+                  <Text className="text-black text-xl">&nbsp;Logout {user?.email}</Text>
                 </View>
               </Pressable>
-            </LinearGradient>
+            </View>
           </View>
         </TouchableOpacity>
       </Modal>
