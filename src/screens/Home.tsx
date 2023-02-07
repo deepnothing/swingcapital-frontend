@@ -7,7 +7,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView className="w-full h-full">
-      <View className="pl-4 pt-3 pb-3 border w-full flex justify-center align-center">
+      <View className="pl-4 pt-3 pb-3 border-b w-full flex justify-center align-center">
         <SwingCapital/>
       </View>
     </SafeAreaView>
