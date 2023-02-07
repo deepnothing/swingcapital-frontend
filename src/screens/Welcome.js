@@ -1,9 +1,8 @@
 import React from 'react';
 import { Text, Pressable,Image, View } from 'react-native';
-import { StackScreenProps } from '@react-navigation/stack';
 import {LinearGradient} from 'expo-linear-gradient';
 
-function WelcomeScreen<StackScreenProps>({ navigation }) {
+function WelcomeScreen({ navigation }) {
   return (
     <View className="w-full h-full">
   <View style={{flex:1, borderRadius: 20}}>

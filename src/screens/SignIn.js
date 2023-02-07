@@ -12,12 +12,11 @@ import {
   Alert,
 } from "react-native";
 //import Icon from 'react-native-vector-icons/FontAwesome';
-import { StackScreenProps } from "@react-navigation/stack";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const auth = getAuth();
 
-function SignInScreen<StackScreenProps>({ navigation }) {
+function SignInScreen({ navigation }) {
   const [value, setValue] = React.useState({
     email: "",
     password: "",

@@ -3,7 +3,6 @@ import { Modal, TouchableOpacity, Text, Pressable, View } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import { useAuth } from "../hooks/useAuth";
 import { getAuth, signOut } from "firebase/auth";
-import { LinearGradient } from "expo-linear-gradient";
 
 const auth = getAuth();
 
