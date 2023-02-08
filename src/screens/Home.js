@@ -1,29 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, SafeAreaView, StyleSheet, FlatList } from "react-native";
 import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
+import Coin from "../components/Coin";
 
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
+
 
 export default function HomeScreen() {
-  const DATA = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "First Item",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "Second Item",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      title: "Third Item",
-    },
-  ];
+  const [data,setData]=useState()
+  useEffect(() => {
+    fetch(`${baseUrl}/home`).then(res=>res.json()).then(response=>setData(response))
+  }, []);
+  
 
   return (
     <SafeAreaView className="w-full h-full">
@@ -31,10 +19,11 @@ export default function HomeScreen() {
         <SwingCapital text="Swing Capital" />
       </View>
       <FlatList
-        data={DATA}
-        renderItem={({ item }) => <Item title={item.title} />}
-        keyExtractor={(item) => item.id}
+        data={data}
+        renderItem={({ item }) => <Coin data={item} />}
+        keyExtractor={(item) => item.name}
         style={styles.coinList}
+        contentContainerStyle={{paddingBottom:40,paddingHorizontal:2}}
       />
     </SafeAreaView>
   );
@@ -52,9 +41,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 1,
     shadowRadius: 5,
+    elevation:10,
+    zIndex:1
   },
   coinList: {
     marginHorizontal: 15,
-    paddingTop:35
+    paddingTop: 35,
   },
 });
