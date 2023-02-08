@@ -10,7 +10,7 @@ import {
   Easing,
 } from "react-native";
 
-const SwingCapitalText = () => {
+const SwingCapitalText = ({text}) => {
   //animation
 
   const rotateX = new Animated.Value(0);
@@ -49,7 +49,7 @@ const SwingCapitalText = () => {
         <View style={[styles.ropeLeft, { backgroundColor: color }]} />
         <View style={[styles.ropeRight, { backgroundColor: color }]} />
         <Text style={[styles.brand, { color: color }]}>
-          Swing Capital
+          {text}
         </Text>
       </Animated.View>
     </View>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   brandcontainer: {
     position: "relative",
-    width:177
+    alignSelf: 'flex-start' 
     // borderColor: "red",
     // borderWidth: 1,
   },
@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 2,
   },
   wallTop: {
-    width: "100%",
     borderTopRightRadius: 3,
     borderTopLeftRadius: 3,
     borderColor: "red",

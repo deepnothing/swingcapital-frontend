@@ -4,8 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/Home";
 import CallScreen from "../screens/Call";
+import BotScreen from "../screens/Bot";
 import SettingsScreen from "../screens/Settings";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Feather from "react-native-vector-icons/Feather";
 
 const Tab = createBottomTabNavigator();
@@ -26,11 +26,14 @@ export default function UserStack() {
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => (
+              <View style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:10}}>
               <Feather
                 name="home"
-                color={focused ? "white" : "gray"}
+                color={focused ? "white" : "#343434"}
                 size={"24"}
               />
+                <Text style={{fontSize:12,color:`${focused ? "white" : "#343434"}`}}>Home</Text>
+              </View>
             ),
           }}
         />
@@ -40,11 +43,31 @@ export default function UserStack() {
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => (
-              <Feather
-                name="heart"
-                color={focused ? "white" : "gray"}
-                size={"24"}
-              />
+              <View style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:10}}>
+                <Feather
+                  name="activity"
+                  color={focused ? "white" : "#343434"}
+                  size={"24"}
+                />
+                  <Text style={{fontSize:12,color:`${focused ? "white" : "#343434"}`}}>News</Text>
+              </View>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Bot"
+          component={BotScreen}
+          options={{
+            tabBarShowLabel: false,
+            tabBarIcon: ({ focused }) => (
+              <View style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:10}}>
+                <Feather
+                  name="cpu"
+                  color={focused ? "white" : "#343434"}
+                  size={"24"}
+                />
+                <Text style={{fontSize:12,color:`${focused ? "white" : "#343434"}`}}>Bots</Text>
+              </View>
             ),
           }}
         />

@@ -13,8 +13,9 @@ function Settings() {
 
   return (
     <View>
-      <Pressable onPress={() => setModalVisible(true)}>
-        <Feather name="menu" color="gray" size={"24"} />
+      <Pressable  onPress={() => setModalVisible(true)} style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:10}}>
+        <Feather name="settings" color="#343434" size={"24"} />
+        <Text style={{fontSize:12,color:"#343434"}}>Settings</Text>
       </Pressable>
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <TouchableOpacity
