@@ -8,9 +8,15 @@ import Feather from "react-native-vector-icons/Feather";
 export default function HomeScreen() {
   const [data, setData] = useState();
   useEffect(() => {
+    setIsRefreshing(true);
     fetch(`${baseUrl}/home`)
       .then((res) => res.json())
-      .then((response) => setData(response));
+      .then((response) => {
+        setData(response);
+        setTimeout(() => {
+          setIsRefreshing(false);
+        }, 500);
+      });
   }, []);
 
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -25,7 +31,8 @@ export default function HomeScreen() {
         setTimeout(() => {
           setIsRefreshing(false);
         }, 500);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.error(error);
         setIsRefreshing(false);
       });
@@ -35,7 +42,7 @@ export default function HomeScreen() {
     <SafeAreaView className="w-full h-full">
       <View style={styles.topBar}>
         <SwingCapital text="Swing Capital" />
-        <Feather name="search" color={"#343434"} size={"25"}/>
+        <Feather name="search" color={"#343434"} size={"25"} />
       </View>
       <FlatList
         data={data}
@@ -64,10 +71,10 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 10,
     zIndex: 1,
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between'
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   coinList: {
     marginHorizontal: 15,

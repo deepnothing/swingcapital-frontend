@@ -3,7 +3,7 @@ import { Modal, Text, View, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/Home";
-import CallScreen from "../screens/Call";
+import NewsScreen from "../screens/News";
 import BotScreen from "../screens/Bot";
 import SettingsScreen from "../screens/Settings";
 import Feather from "react-native-vector-icons/Feather";
@@ -38,8 +38,8 @@ export default function UserStack() {
           }}
         />
         <Tab.Screen
-          name="Call"
-          component={CallScreen}
+          name="News"
+          component={NewsScreen}
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => (
@@ -58,7 +58,7 @@ export default function UserStack() {
           name="Bot"
           component={BotScreen}
           options={{
-            tabBarShowLabel: false,
+            tabBarShowLabel: true,
             tabBarIcon: ({ focused }) => (
               <View style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:10}}>
                 <Feather
