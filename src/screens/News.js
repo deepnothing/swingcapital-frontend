@@ -8,6 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import Article from "../components/Article";
+import IFrame from "../components/IFrame";
 import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
 
@@ -57,6 +58,7 @@ function News() {
         onRefresh={onRefresh}
         refreshing={isRefreshing}
       />
+      <IFrame/>
     </SafeAreaView>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Text, View, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -11,12 +11,16 @@ import Feather from "react-native-vector-icons/Feather";
 const Tab = createBottomTabNavigator();
 
 export default function UserStack() {
+  const [isTabBarShowing, setTabBarShowing] = useState(true);
   return (
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
-          tabBarStyle: { backgroundColor: "#ffc72c" },
+          tabBarStyle: {
+            backgroundColor: "#ffc72c",
+            display: isTabBarShowing ? "" : "none",
+          },
         }}
         sceneContainerStyle={{ backgroundColor: "#FFFFFF" }}
       >
@@ -26,13 +30,27 @@ export default function UserStack() {
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => (
-              <View style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:10}}>
-              <Feather
-                name="home"
-                color={focused ? "white" : "#343434"}
-                size={"24"}
-              />
-                <Text style={{fontSize:12,color:`${focused ? "white" : "#343434"}`}}>Home</Text>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: 10,
+                }}
+              >
+                <Feather
+                  name="home"
+                  color={focused ? "white" : "#343434"}
+                  size={"24"}
+                />
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: `${focused ? "white" : "#343434"}`,
+                  }}
+                >
+                  Home
+                </Text>
               </View>
             ),
           }}
@@ -43,13 +61,27 @@ export default function UserStack() {
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => (
-              <View style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:10}}>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: 10,
+                }}
+              >
                 <Feather
                   name="activity"
                   color={focused ? "white" : "#343434"}
                   size={"24"}
                 />
-                  <Text style={{fontSize:12,color:`${focused ? "white" : "#343434"}`}}>News</Text>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: `${focused ? "white" : "#343434"}`,
+                  }}
+                >
+                  News
+                </Text>
               </View>
             ),
           }}
@@ -60,13 +92,27 @@ export default function UserStack() {
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => (
-              <View style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:10}}>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: 10,
+                }}
+              >
                 <Feather
                   name="cpu"
                   color={focused ? "white" : "#343434"}
                   size={"24"}
                 />
-                <Text style={{fontSize:12,color:`${focused ? "white" : "#343434"}`}}>Bots</Text>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: `${focused ? "white" : "#343434"}`,
+                  }}
+                >
+                  Bots
+                </Text>
               </View>
             ),
           }}
