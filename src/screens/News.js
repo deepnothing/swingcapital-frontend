@@ -1,25 +1,43 @@
-import React,{useState} from "react";
-import { Text, Pressable, View, SafeAreaView ,StyleSheet,FlatList} from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Text,
+  Pressable,
+  View,
+  SafeAreaView,
+  StyleSheet,
+  FlatList,
+} from "react-native";
 import Article from "../components/Article";
-import SwingCapital from '../components/SwingCapital'
-function News() {
+import SwingCapital from "../components/SwingCapital";
+import { baseUrl } from "../config/api";
 
+function News() {
+  const [data, setData] = useState();
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  useEffect(() => {
+    fetch(`${baseUrl}/news`)
+      .then((res) => res.json())
+      .then((response) => {
+        setData(response);
+      });
+  }, []);
 
   const onRefresh = () => {
     //set isRefreshing to true
     setIsRefreshing(true);
-    // fetch(`${baseUrl}/home`)
-    //   .then((res) => res.json())
-    //   .then((response) => {
-    //     setData(response);
-    //     setTimeout(() => {
-    //       setIsRefreshing(false);
-    //     }, 500);
-    //   }).catch((error) => {
-    //     console.error(error);
-    //     setIsRefreshing(false);
-    //   });
+    fetch(`${baseUrl}/news`)
+      .then((res) => res.json())
+      .then((response) => {
+        setData(response);
+        setTimeout(() => {
+          setIsRefreshing(false);
+        }, 500);
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsRefreshing(false);
+      });
   };
   return (
     <SafeAreaView className="w-full h-full">
@@ -29,9 +47,13 @@ function News() {
       <FlatList
         data={data}
         renderItem={({ item }) => <Article data={item} />}
-        keyExtractor={(item) => item.name}
-        style={styles.coinList}
-        contentContainerStyle={{ paddingBottom: 40, paddingHorizontal: 2 }}
+        keyExtractor={(item) => item.source.name}
+        contentContainerStyle={{
+          paddingBottom: 40,
+          paddingHorizontal: 2,
+          marginHorizontal: 15,
+          paddingTop: 15,
+        }}
         onRefresh={onRefresh}
         refreshing={isRefreshing}
       />
@@ -54,10 +76,9 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 10,
     zIndex: 1,
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between'
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
-  
 });

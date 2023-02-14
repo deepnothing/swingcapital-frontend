@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, SafeAreaView, StyleSheet, FlatList } from "react-native";
+import {
+  Text,
+  View,
+  SafeAreaView,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
 import Coin from "../components/Coin";
@@ -7,19 +14,16 @@ import Feather from "react-native-vector-icons/Feather";
 
 export default function HomeScreen() {
   const [data, setData] = useState();
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    setIsRefreshing(true);
     fetch(`${baseUrl}/home`)
       .then((res) => res.json())
       .then((response) => {
         setData(response);
-        setTimeout(() => {
-          setIsRefreshing(false);
-        }, 500);
       });
   }, []);
-
-  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const onRefresh = () => {
     //set isRefreshing to true
@@ -48,8 +52,12 @@ export default function HomeScreen() {
         data={data}
         renderItem={({ item }) => <Coin data={item} />}
         keyExtractor={(item) => item.name}
-        style={styles.coinList}
-        contentContainerStyle={{ paddingBottom: 40, paddingHorizontal: 2 }}
+        contentContainerStyle={{
+          paddingBottom: 40,
+          paddingHorizontal: 2,
+          marginHorizontal: 15,
+          paddingTop: 15,
+        }}
         onRefresh={onRefresh}
         refreshing={isRefreshing}
       />
@@ -75,9 +83,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-  },
-  coinList: {
-    marginHorizontal: 15,
-    paddingTop: 15,
   },
 });

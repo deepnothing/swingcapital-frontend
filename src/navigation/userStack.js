@@ -58,7 +58,7 @@ export default function UserStack() {
           name="Bot"
           component={BotScreen}
           options={{
-            tabBarShowLabel: true,
+            tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => (
               <View style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:10}}>
                 <Feather

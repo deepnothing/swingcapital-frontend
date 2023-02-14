@@ -1,16 +1,7 @@
 import { useCallback, useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Dimensions,
-  ScrollView,
-  RefreshControl,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import Card from "./Card";
-import AllTimeChart from "./AlltTimeChart";
+import AllTimeChart from "./AllTimeChart";
 import Feather from "react-native-vector-icons/Feather";
 import IonIcon from "react-native-vector-icons/Ionicons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
