@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   StyleSheet,
   FlatList,
+  Modal,
 } from "react-native";
 import Article from "../components/Article";
 import IFrame from "../components/IFrame";
@@ -15,6 +16,9 @@ import { baseUrl } from "../config/api";
 function News() {
   const [data, setData] = useState();
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const [iFrameURL,setIframeUrl] = useState('')
+  const [isIframeVisible, setIframeVisible] = useState(false);
 
   useEffect(() => {
     fetch(`${baseUrl}/news`)
@@ -47,7 +51,10 @@ function News() {
       </View>
       <FlatList
         data={data}
-        renderItem={({ item }) => <Article data={item} />}
+        renderItem={({ item }) => <Article data={item} onPress={()=>{
+          setIframeUrl(item.url)
+          setIframeVisible(true)
+        }} />}
         keyExtractor={(item) => item.source.name}
         contentContainerStyle={{
           paddingBottom: 40,
@@ -58,7 +65,9 @@ function News() {
         onRefresh={onRefresh}
         refreshing={isRefreshing}
       />
-      <IFrame/>
+      <Modal animationType="slide" transparent={true} visible={isIframeVisible}>
+        <IFrame visible={isIframeVisible} setIframeVisible={setIframeVisible} url={iFrameURL} />
+      </Modal>
     </SafeAreaView>
   );
 }

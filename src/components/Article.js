@@ -2,7 +2,7 @@ import Card from "./Card";
 import { View, Image, Text } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 
-export default function Article({ data }) {
+export default function Article({ data,onPress }) {
   const formatDate = (input) => {
     const date = new Date(input);
     let time = date.toLocaleTimeString();
@@ -33,7 +33,7 @@ export default function Article({ data }) {
     );
   };
   return (
-    <Card>
+    <Card onPress={onPress}>
       <View style={{ display: "flex", flexDirection: "row" }}>
         <View
           style={{

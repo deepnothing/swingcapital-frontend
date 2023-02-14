@@ -1,9 +1,12 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 import { WebView } from "react-native-webview";
 import Feather from "react-native-vector-icons/Feather";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function IFrame({ url }) {
-  const urL = "https://gizmodo.com/genesis-crypto-bankruptcy-1850011318";
+export default function IFrame({ url, setIframeVisible }) {
+  const getDomainName = (fullUrl) => {
+    return fullUrl.replace(/^(https?:\/\/)?(www\.)?/i, '').split('/')[0];
+};
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -13,12 +16,17 @@ export default function IFrame({ url }) {
           size={"20"}
           style={{ position: "absolute", left: 10 }}
         />
-        <Text style={styles.siteName}>sitename</Text>
-        <Text style={styles.close}>Exit</Text>
+        <Text style={styles.siteName}>{getDomainName(url)}</Text>
+        <Pressable
+          onPress={() => setIframeVisible(false)}
+          style={{ position: "absolute", right: 0, marginRight: 15 }}
+        >
+          <Text style={styles.close}>Exit</Text>
+        </Pressable>
       </View>
       <WebView
         source={{
-          uri: urL,
+          uri: url,
         }}
         originWhitelist={["*"]}
       />
@@ -36,6 +44,15 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     backgroundColor: "#FFF",
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 22,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 70,
   },
   header: {
     display: "flex",
@@ -55,8 +72,5 @@ const styles = StyleSheet.create({
     color: "#ffc72c",
     fontWeight: "700",
     fontSize: 18,
-    marginRight: 15,
-    position: "absolute",
-    right: 0,
   },
 });
