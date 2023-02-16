@@ -7,6 +7,7 @@ import {
   StyleSheet,
   FlatList,
   Modal,
+  Image,
 } from "react-native";
 import Article from "../components/Article";
 import IFrame from "../components/IFrame";
@@ -66,55 +67,24 @@ function News() {
       <View style={styles.topBar}>
         <SwingCapital text="News" />
 
-        <View
-          style={{
-            width: 200,
-            position: "relative",
-            height: 10,
-            display: "flex",
-            flexDirection: "row",
-            top:'50%'
-          }}
-        >
+        <View style={styles.percentWrapper}>
           <View
-            style={{
-              borderRadius: 10,
-              height: "100%",
-              backgroundColor: "#E10600",
-              width: `${negativePercent}%`,
-              position: "relative",
-              marginHorizontal:1
-            }}
+            style={[
+              styles.percentBar,
+              { backgroundColor: "#E10600", width: `${negativePercent}%` },
+            ]}
           >
-            <Text
-              style={{
-                position: "absolute",
-                left: 0,
-                bottom: 10,
-                fontWeight: "600",
-              }}
-            >
+            <Text style={[styles.percentText, { left: 0 }]}>
               {Math.round(negativePercent)}%
             </Text>
           </View>
           <View
-            style={{
-              borderRadius: 10,
-              height: "100%",
-              backgroundColor: "#008000",
-              width: `${positivePercent}%`,
-              marginHorizontal:1
-
-            }}
+            style={[
+              styles.percentBar,
+              { backgroundColor: "#008000", width: `${positivePercent}%` },
+            ]}
           >
-            <Text
-              style={{
-                position: "absolute",
-                right: 0,
-                bottom: 10,
-                fontWeight: "600",
-              }}
-            >
+            <Text style={[styles.percentText, { right: 0 }]}>
               {Math.round(positivePercent)}%
             </Text>
           </View>
@@ -171,5 +141,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  percentWrapper: {
+    width: 200,
+    position: "relative",
+    height: 8,
+    display: "flex",
+    flexDirection: "row",
+    top: "60%",
+  },
+  percentBar: {
+    borderRadius: 10,
+    height: "100%",
+    position: "relative",
+    marginHorizontal: 1,
+  },
+  percentText: {
+    position: "absolute",
+    bottom: 8,
+    fontWeight: "600",
   },
 });
