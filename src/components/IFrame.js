@@ -1,12 +1,19 @@
-import { View, StyleSheet, Text, Pressable } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
 import { WebView } from "react-native-webview";
 import Feather from "react-native-vector-icons/Feather";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function IFrame({ url, setIframeVisible }) {
   const getDomainName = (fullUrl) => {
-    return fullUrl.replace(/^(https?:\/\/)?(www\.)?/i, '').split('/')[0];
-};
+    return fullUrl.replace(/^(https?:\/\/)?(www\.)?/i, "").split("/")[0];
+  };
+  console.log(url)
   return (
     <View style={styles.container}>
       <View style={styles.header}>

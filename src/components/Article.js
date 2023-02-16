@@ -1,8 +1,11 @@
 import Card from "./Card";
 import { View, Image, Text } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
+import bullImage from "../../assets/bull.png";
+import bearImage from "../../assets/bear.png";
+import questionImage from "../../assets/question.png";
 
-export default function Article({ data,onPress }) {
+export default function Article({ data, onPress }) {
   const formatDate = (input) => {
     const date = new Date(input);
     let time = date.toLocaleTimeString();
@@ -32,6 +35,33 @@ export default function Article({ data,onPress }) {
       ampm
     );
   };
+  const trend = {
+    icon:
+      data.sentiment > 0
+        ? "trending-up"
+        : data.sentiment < 0
+        ? "trending-down"
+        : "activity",
+    color:
+      data.sentiment > 0
+        ? "#008000"
+        : data.sentiment < 0
+        ? "#E10600"
+        : "#BABABA",
+    source:
+      data.sentiment > 0
+        ? bullImage
+        : data.sentiment < 0
+        ? bearImage
+        : questionImage,
+    title:
+      data.sentiment > 0
+        ? "Bullish"
+        : data.sentiment < 0
+        ? "Bearish"
+        : "Unkown",
+  };
+
   return (
     <Card onPress={onPress}>
       <View style={{ display: "flex", flexDirection: "row" }}>
@@ -89,19 +119,46 @@ export default function Article({ data,onPress }) {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent:'space-evenly',
-        //   borderWidth:1,
-          width:65,
-          height:'100%'
+          justifyContent: "space-evenly",
+          //   borderWidth:1,
+          width: 65,
+          height: "100%",
         }}
       >
-        <Feather name="trending-up" color={"#008000"} size={"18"} />
-        <Image style={{height:25,width:25,tintColor:"#008000"}} source={require('../../assets/bull.png')}/>
-        <Text style={{ fontSize: 11,fontWeight:'600', color: "#008000" }}>Bullish</Text>
-
-        {/* <Feather name="trending-down" color={"#E10600"} size={"18"} />
-        <Image style={{height:25,width:25,tintColor:"#E10600"}} source={require('../../assets/bear.png')}/>
-        <Text style={{ fontSize: 11,fontWeight:'600', color: "#E10600" }}>Bearish</Text> */}
+        <Feather name={trend.icon} color={trend.color} size={"18"} />
+        <Image
+          style={{ height: 25, width: 25, tintColor: trend.color }}
+          source={trend.source}
+        />
+        <Text style={{ fontSize: 11, fontWeight: "600", color: trend.color }}>
+          {trend.title}
+        </Text>
+        <View
+          style={{
+            height: 7,
+            width: 50,
+            borderWidth: 1,
+            borderRadius: 5,
+            position: "relative",
+            overflow: "hidden",
+            backgroundColor: data.sentiment === 0 ? "#BABABA" : null,
+            zIndex: 1,
+            borderColor: trend.color,
+          }}
+        >
+          <View
+            style={{
+              zIndex: 0,
+              height: 7,
+              width: 50,
+              borderRadius: 5,
+              position: "absolute",
+              right: `${100 - Math.abs(data.sentiment) * 10}%`,
+              top: -1,
+              backgroundColor: trend.color,
+            }}
+          />
+        </View>
       </View>
     </Card>
   );

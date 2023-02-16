@@ -14,10 +14,10 @@ import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
 
 function News() {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const [iFrameURL,setIframeUrl] = useState('')
+  const [iFrameURL, setIframeUrl] = useState("");
   const [isIframeVisible, setIframeVisible] = useState(false);
 
   useEffect(() => {
@@ -44,18 +44,94 @@ function News() {
         setIsRefreshing(false);
       });
   };
+
+  // filter out articles with unkown sentiments
+  const filteredSentiment = data.filter((obj) => obj.sentiment !== 0);
+
+  // get the percent of positive and negative articles from filtered array
+  const negativeSentiment = filteredSentiment.filter(
+    (obj) => obj.sentiment < 0
+  );
+  const positiveSentiment = filteredSentiment.filter(
+    (obj) => obj.sentiment > 0
+  );
+
+  const negativePercent =
+    (negativeSentiment.length / filteredSentiment.length) * 100;
+  const positivePercent =
+    (positiveSentiment.length / filteredSentiment.length) * 100;
+
   return (
     <SafeAreaView className="w-full h-full">
       <View style={styles.topBar}>
         <SwingCapital text="News" />
+
+        <View
+          style={{
+            width: 200,
+            position: "relative",
+            height: 10,
+            display: "flex",
+            flexDirection: "row",
+            top:'50%'
+          }}
+        >
+          <View
+            style={{
+              borderRadius: 10,
+              height: "100%",
+              backgroundColor: "#E10600",
+              width: `${negativePercent}%`,
+              position: "relative",
+              marginHorizontal:1
+            }}
+          >
+            <Text
+              style={{
+                position: "absolute",
+                left: 0,
+                bottom: 10,
+                fontWeight: "600",
+              }}
+            >
+              {Math.round(negativePercent)}%
+            </Text>
+          </View>
+          <View
+            style={{
+              borderRadius: 10,
+              height: "100%",
+              backgroundColor: "#008000",
+              width: `${positivePercent}%`,
+              marginHorizontal:1
+
+            }}
+          >
+            <Text
+              style={{
+                position: "absolute",
+                right: 0,
+                bottom: 10,
+                fontWeight: "600",
+              }}
+            >
+              {Math.round(positivePercent)}%
+            </Text>
+          </View>
+        </View>
       </View>
       <FlatList
         data={data}
-        renderItem={({ item }) => <Article data={item} onPress={()=>{
-          setIframeUrl(item.url)
-          setIframeVisible(true)
-        }} />}
-        keyExtractor={(item) => item.source.name}
+        renderItem={({ item }) => (
+          <Article
+            data={item}
+            onPress={() => {
+              setIframeUrl(item.url);
+              setIframeVisible(true);
+            }}
+          />
+        )}
+        keyExtractor={(item, index) => index}
         contentContainerStyle={{
           paddingBottom: 40,
           paddingHorizontal: 2,
@@ -66,7 +142,11 @@ function News() {
         refreshing={isRefreshing}
       />
       <Modal animationType="slide" transparent={true} visible={isIframeVisible}>
-        <IFrame visible={isIframeVisible} setIframeVisible={setIframeVisible} url={iFrameURL} />
+        <IFrame
+          visible={isIframeVisible}
+          setIframeVisible={setIframeVisible}
+          url={iFrameURL}
+        />
       </Modal>
     </SafeAreaView>
   );
