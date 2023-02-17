@@ -109,12 +109,7 @@ function News() {
           </TouchableOpacity>
         )}
         keyExtractor={(item, index) => index}
-        contentContainerStyle={{
-          paddingBottom: 40,
-          paddingHorizontal: 2,
-          marginHorizontal: 15,
-          paddingTop: 15,
-        }}
+        contentContainerStyle={styles.listStyle}
         onRefresh={onRefresh}
         refreshing={isRefreshing}
       />
@@ -167,5 +162,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 8,
     fontWeight: "600",
+  },
+  listStyle: {
+    paddingBottom: 40,
+    paddingHorizontal: 2,
+    marginHorizontal: 15,
+    paddingTop: 15,
   },
 });
