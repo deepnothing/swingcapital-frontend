@@ -1,94 +1,26 @@
-import React, { useEffect, useState } from "react";
-import {
-  Text,
-  View,
-  SafeAreaView,
-  StyleSheet,
-  FlatList,
-  ActivityIndicator,
-  Pressable,
-} from "react-native";
-import SwingCapital from "../components/SwingCapital";
-import { baseUrl } from "../config/api";
-import Coin from "../components/Coin";
-import Feather from "react-native-vector-icons/Feather";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function HomeScreen() {
-  const [data, setData] = useState();
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [loading, setLoading] = useState(true);
+import HomeScreen from './CoinList'
+import StatsScreen from './Stats';
 
-  useEffect(() => {
-    fetch(`${baseUrl}/home`)
-      .then((res) => res.json())
-      .then((response) => {
-        setData(response);
-      });
-  }, []);
+const Stack = createStackNavigator();
 
-  const onRefresh = () => {
-    //set isRefreshing to true
-    setIsRefreshing(true);
-    fetch(`${baseUrl}/home`)
-      .then((res) => res.json())
-      .then((response) => {
-        setData(response);
-        setTimeout(() => {
-          setIsRefreshing(false);
-        }, 500);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsRefreshing(false);
-      });
-  };
-
+export default function AuthStack() {
   return (
-    <SafeAreaView className="w-full h-full">
-      <View style={styles.topBar}>
-        <SwingCapital text="Swing Capital" />
-        <Feather name="search" color={"#343434"} size={"25"} />
-      </View>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => (
-          <Pressable onPress={()=>{
-            console.log("press")
-          }}>
-            <Coin data={item} />
-          </Pressable>
-        )}
-        keyExtractor={(item) => item.name}
-        contentContainerStyle={{
-          paddingBottom: 40,
-          paddingHorizontal: 2,
-          marginHorizontal: 15,
-          paddingTop: 15,
-        }}
-        onRefresh={onRefresh}
-        refreshing={isRefreshing}
-      />
-    </SafeAreaView>
+    <NavigationContainer independent>
+      <Stack.Navigator
+          screenOptions={{
+             cardStyle: {
+            backgroundColor: '#FFFF'
+          },
+          headerShown: false
+        }}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Stats" component={StatsScreen} />
+      
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  topBar: {
-    marginHorizontal: 12,
-    marginTop: 10,
-    borderRadius: 6,
-    padding: 15,
-    paddingTop: 19,
-    backgroundColor: "#ffc72c",
-    shadowColor: "rgba(0, 0, 0, 0.45)",
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    elevation: 10,
-    zIndex: 1,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-});
