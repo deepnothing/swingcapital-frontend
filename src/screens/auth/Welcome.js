@@ -8,7 +8,7 @@ function WelcomeScreen({ navigation }) {
   <View style={{flex:1, borderRadius: 20}}>
       <View className="mx-4 h-full flex justify-center align-center space-y-6">
       <View>
-      <Image source={require('../../assets/logo-500.png')} style={{width: 70, height: 70, alignSelf: 'center'}}/>
+      <Image source={require('../../../assets/logo-500.png')} style={{width: 70, height: 70, alignSelf: 'center'}}/>
       </View>
       <View >
         <Pressable className="bg-[#ffc72c]  rounded-3xl py-2 px-4 m-4" ><Text className="text-center text-black font-bold text-base" onPress={() => navigation.navigate('Sign In')}>Sign In</Text></Pressable>

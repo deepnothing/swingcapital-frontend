@@ -9,10 +9,12 @@ import {
   Modal,
   Image,
 } from "react-native";
+import SearchBar from "../components/SearchBar";
 import Article from "../components/Article";
 import IFrame from "../components/IFrame";
 import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 function News() {
   const [data, setData] = useState([]);
@@ -20,6 +22,10 @@ function News() {
 
   const [iFrameURL, setIframeUrl] = useState("");
   const [isIframeVisible, setIframeVisible] = useState(false);
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const onChangeSearch = (query) => setSearchQuery(query);
 
   useEffect(() => {
     fetch(`${baseUrl}/news`)
@@ -93,13 +99,14 @@ function News() {
       <FlatList
         data={data}
         renderItem={({ item }) => (
-          <Article
-            data={item}
+          <TouchableOpacity
             onPress={() => {
               setIframeUrl(item.url);
               setIframeVisible(true);
             }}
-          />
+          >
+            <Article data={item} />
+          </TouchableOpacity>
         )}
         keyExtractor={(item, index) => index}
         contentContainerStyle={{

@@ -6,6 +6,7 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
+  Pressable,
 } from "react-native";
 import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
@@ -50,7 +51,13 @@ export default function HomeScreen() {
       </View>
       <FlatList
         data={data}
-        renderItem={({ item }) => <Coin data={item} />}
+        renderItem={({ item }) => (
+          <Pressable onPress={()=>{
+            console.log("press")
+          }}>
+            <Coin data={item} />
+          </Pressable>
+        )}
         keyExtractor={(item) => item.name}
         contentContainerStyle={{
           paddingBottom: 40,

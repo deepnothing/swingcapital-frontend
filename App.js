@@ -1,8 +1,9 @@
 /// <reference types="nativewind/types" />
-import React from 'react';
-import './src/config/firebase';
-import RootNavigation from './src/navigation';
-import { useFonts } from 'expo-font'
+import React from "react";
+import "./src/config/firebase";
+import RootNavigation from "./src/navigation";
+import { useFonts } from "expo-font";
+import { View } from "react-native";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -24,16 +25,14 @@ export default function App() {
     "Montserrat-SemiBoldItalic": require("./assets/fonts/Montserrat-SemiBoldItalic.ttf"),
     "Montserrat-Thin": require("./assets/fonts/Montserrat-Thin.ttf"),
     "Montserrat-ThinItalic": require("./assets/fonts/Montserrat-ThinItalic.ttf"),
-    "Gotu-Regular": require("./assets/fonts/Gotu-Regular.ttf")
-  })
+    "Gotu-Regular": require("./assets/fonts/Gotu-Regular.ttf"),
+  });
 
   if (!loaded) {
-    return null
+    return null;
   }
 
   return (
-    <RootNavigation />
-  )
-
+      <RootNavigation />
+  );
 }
-

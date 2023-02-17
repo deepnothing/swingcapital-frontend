@@ -1,8 +1,7 @@
 import { View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 export default function Card(props) {
   return (
-    <TouchableOpacity
+    <View
       onPress={props.onPress}
       style={{
         display: "flex",
@@ -23,6 +22,6 @@ export default function Card(props) {
       }}
     >
       {props.children}
-    </TouchableOpacity>
+    </View>
   );
 }
