@@ -1,5 +1,5 @@
 import Card from "./Card";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import bullImage from "../../assets/bull.png";
 import bearImage from "../../assets/bear.png";
@@ -65,19 +65,9 @@ export default function Article({ data, onPress }) {
   return (
     <Card onPress={onPress}>
       <View style={{ display: "flex", flexDirection: "row" }}>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <View style={style.imageAndDate}>
           <Image
-            style={{
-              borderRadius: 10,
-              height: 60,
-              width: 110,
-            }}
+            style={style.newsImage}
             source={{
               uri: data.urlToImage,
             }}
@@ -87,17 +77,7 @@ export default function Article({ data, onPress }) {
             {formatDate(data.publishedAt)}
           </Text>
         </View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            marginLeft: 14,
-            width: 150,
-            height: 75,
-            // borderWidth: 1,
-          }}
-        >
+        <View style={style.articleText}>
           <Text
             style={{ fontSize: 12, fontWeight: "600" }}
             numberOfLines={2}
@@ -114,17 +94,7 @@ export default function Article({ data, onPress }) {
           </Text>
         </View>
       </View>
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "space-evenly",
-          //   borderWidth:1,
-          width: 65,
-          height: "100%",
-        }}
-      >
+      <View style={style.determinationWrapper}>
         <Feather name={trend.icon} color={trend.color} size={"18"} />
         <Image
           style={{ height: 25, width: 25, tintColor: trend.color }}
@@ -134,32 +104,69 @@ export default function Article({ data, onPress }) {
           {trend.title}
         </Text>
         <View
-          style={{
-            height: 7,
-            width: 50,
-            borderWidth: 1,
-            borderRadius: 5,
-            position: "relative",
-            overflow: "hidden",
-            backgroundColor: data.sentiment === 0 ? "#BABABA" : null,
-            zIndex: 1,
-            borderColor: trend.color,
-          }}
+          style={[
+            style.trendBar,
+            {
+              backgroundColor: data.sentiment === 0 ? "#BABABA" : null,
+              borderColor: trend.color,
+            },
+          ]}
         >
           <View
-            style={{
-              zIndex: 0,
-              height: 7,
-              width: 50,
-              borderRadius: 5,
-              position: "absolute",
-              right: `${100 - Math.abs(data.sentiment) * 10}%`,
-              top: -1,
-              backgroundColor: trend.color,
-            }}
+            style={[
+              style.trendBarPercentage,
+              {
+                right: `${100 - Math.abs(data.sentiment) * 10}%`,
+                backgroundColor: trend.color,
+              },
+            ]}
           />
         </View>
       </View>
     </Card>
   );
 }
+const style = StyleSheet.create({
+  determinationWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    width: 65,
+    height: "100%",
+  },
+  imageAndDate: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  newsImage: {
+    borderRadius: 10,
+    height: 60,
+    width: 110,
+  },
+  articleText: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    marginLeft: 14,
+    width: 150,
+    height: 75,
+  },
+  trendBar: {
+    height: 7,
+    width: 50,
+    borderWidth: 1,
+    borderRadius: 5,
+    position: "relative",
+    overflow: "hidden",
+  },
+  trendBarPercentage: {
+    zIndex: 0,
+    height: 7,
+    width: 500,
+    borderRadius: 5,
+    position: "absolute",
+    top: -1,
+  },
+});
