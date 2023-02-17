@@ -6,7 +6,6 @@ import LoadingScreen from "../screens/Loading";
 
 export default function RootNavigation() {
   const { user } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
 
 
   if (user === null) {
