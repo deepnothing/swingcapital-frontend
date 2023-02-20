@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SimpleLineIcons as Icon } from "@expo/vector-icons";
-import { useNavigation } from "react-navigation-hooks";
 
 const styles = StyleSheet.create({
   container: {
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Tabs = ({ tabs }: { tabs: string[] }) => (
+const Tabs = ({ tabs }) => (
   <View style={styles.tabContainer}>
     {tabs.map((tab, index) => (
       <View style={styles.tab} key={index}>
@@ -74,7 +73,6 @@ const Tabs = ({ tabs }: { tabs: string[] }) => (
 );
 
 export default () => {
-  const { goBack } = useNavigation();
   return (
     <View style={StyleSheet.absoluteFill}>
       <SafeAreaView style={styles.container}>
@@ -85,7 +83,7 @@ export default () => {
               color="#d3d3d3"
               size={32}
               style={styles.icon}
-              onPress={() => goBack()}
+              onPress={() => {}}
               backgroundColor="transparent"
             />
             <View style={styles.rightColumn}>

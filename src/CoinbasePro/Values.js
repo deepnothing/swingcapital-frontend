@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Animated, {
-  call,
-  divide,
-  floor,
-  onChange,
-  useCode,
-} from "react-native-reanimated";
-import * as Haptics from "expo-haptics";
-import moment from "moment";
+// import Animated, {
+//   call,
+//   divide,
+//   floor,
+//   onChange,
+//   useCode,
+// } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Candle } from "./Candle";
+// import { Candle } from "./Candle";
 import Row from "./Row";
 
 const styles = StyleSheet.create({
@@ -36,37 +34,32 @@ const styles = StyleSheet.create({
   },
 });
 
-const formatInt = (value: number) => {
+const formatInt = (value) => {
   const t = Math.floor(value / 1000);
   return t < 1 ? t : `${t}, ${value % 1000}`;
 };
 
-const formatValue = (value: number) => {
+const formatValue = (value) => {
   const int = Math.floor(value);
   const dec = Math.floor((value - int) * 100);
   const formattedDec = dec === 0 ? "00" : dec < 10 ? `0${dec}` : `${dec}`;
   return `$ ${formatInt(int)}.${formattedDec}`;
 };
 
-interface HeaderProps {
-  translateX: Animated.Node<number>;
-  caliber: number;
-  candles: Candle[];
-}
 
-export default ({ translateX, caliber, candles }: HeaderProps) => {
+export default ({ translateX, caliber, candles }) => {
   const [{ date, open, close, high, low }, setCandle] = useState(candles[0]);
-  useCode(
-    () =>
-      onChange(
-        translateX,
-        call([floor(divide(translateX, caliber))], ([index]) => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-          setCandle(candles[index]);
-        })
-      ),
-    [caliber, candles, translateX]
-  );
+  // useCode(
+  //   () =>
+  //     onChange(
+  //       translateX,
+  //       call([floor(divide(translateX, caliber))], ([index]) => {
+  //         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  //         setCandle(candles[index]);
+  //       })
+  //     ),
+  //   [caliber, candles, translateX]
+  // );
   const diff = `${((close - open) * 100) / open}`;
   const change = close - open < 0 ? diff.substring(0, 5) : diff.substring(0, 4);
   return (
@@ -88,9 +81,7 @@ export default ({ translateX, caliber, candles }: HeaderProps) => {
           />
         </View>
       </View>
-      <Text style={styles.date}>
-        {moment(date).format("h:mm MMM Do, YYYY")}
-      </Text>
+      <Text style={styles.date}>{date}</Text>
     </SafeAreaView>
   );
 };

@@ -2,12 +2,8 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import Svg, { Line } from "react-native-svg";
 
-interface LineProps {
-  x: number;
-  y: number;
-}
 
-export default ({ x, y }: LineProps) => {
+export default ({ x, y }) => {
   return (
     <Svg style={StyleSheet.absoluteFill}>
       <Line

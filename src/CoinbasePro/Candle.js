@@ -4,24 +4,7 @@ import { Line, Rect } from "react-native-svg";
 
 const MARGIN = 2;
 
-export interface Candle {
-  date: string;
-  day: number;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-}
-
-interface CandleProps {
-  candle: Candle;
-  index: number;
-  width: number;
-  scaleY: ScaleLinear<number, number>;
-  scaleBody: ScaleLinear<number, number>;
-}
-
-export default ({ candle, index, width, scaleY, scaleBody }: CandleProps) => {
+export default ({ candle, index, width, scaleY, scaleBody }) => {
   const { close, open, high, low } = candle;
   const fill = close > open ? "#4AFA9A" : "#E33F64";
   const x = index * width;

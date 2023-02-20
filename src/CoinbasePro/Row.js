@@ -16,13 +16,9 @@ const styles = StyleSheet.create({
   },
 });
 
-interface RowProps {
-  label: string;
-  value: string;
-  color?: string;
-}
 
-export default ({ label, value, color }: RowProps) => {
+
+export default ({ label, value, color }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>

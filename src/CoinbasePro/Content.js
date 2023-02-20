@@ -68,13 +68,9 @@ const styles = StyleSheet.create({
   },
 });
 
-interface ButtonProps {
-  color: string;
-  backgroundColor: string;
-  label: string;
-}
 
-const Button = ({ color, backgroundColor, label }: ButtonProps) => (
+
+const Button = ({ color, backgroundColor, label }) => (
   <View style={[styles.button, { backgroundColor }]}>
     <Text style={[styles.label, { color }]}>{label}</Text>
   </View>

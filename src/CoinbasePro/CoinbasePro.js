@@ -1,14 +1,14 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { PanGestureHandler, State } from "react-native-gesture-handler";
-import Animated, {
-  add,
-  diffClamp,
-  eq,
-  modulo,
-  sub,
-} from "react-native-reanimated";
-import { onGestureEvent, useValues } from "react-native-redash";
+// import { PanGestureHandler, State } from "react-native-gesture-handler";
+// import Animated, {
+//   add,
+//   diffClamp,
+//   eq,
+//   modulo,
+//   sub,
+// } from "react-native-reanimated";
+// import { onGestureEvent, useValues } from "react-native-redash";
 
 import data from "./data.json";
 import Chart, { size } from "./Chart";
@@ -26,33 +26,33 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
 });
-const getDomain = (rows: Candle[]): [number, number] => {
+const getDomain = (rows) => {
   const values = rows.map(({ high, low }) => [high, low]).flat();
   return [Math.min(...values), Math.max(...values)];
 };
 const domain = getDomain(candles);
 export default () => {
-  const [x, y, state] = useValues(0, 0, State.UNDETERMINED);
-  const gestureHandler = onGestureEvent({
-    x,
-    y,
-    state,
-  });
-  const caliber = size / candles.length;
-  const translateY = diffClamp(y, 0, size);
-  const translateX = add(sub(x, modulo(x, caliber)), caliber / 2);
-  const opacity = eq(state, State.ACTIVE);
+  // const [x, y, state] = useValues(0, 0, State.UNDETERMINED);
+  // const gestureHandler = onGestureEvent({
+  //   x,
+  //   y,
+  //   state,
+  // });
+  // const caliber = size / candles.length;
+  // const translateY = diffClamp(y, 0, size);
+  // const translateX = add(sub(x, modulo(x, caliber)), caliber / 2);
+  // const opacity = eq(state, State.ACTIVE);
   return (
     <View style={styles.container}>
       <View>
         <Header />
-        <Animated.View style={{ opacity }} pointerEvents="none">
+        {/* <Animated.View style={{ opacity }} pointerEvents="none">
           <Values {...{ candles, translateX, caliber }} />
-        </Animated.View>
+        </Animated.View> */}
       </View>
       <View>
         <Chart {...{ candles, domain }} />
-        <PanGestureHandler minDist={0} {...gestureHandler}>
+        {/* <PanGestureHandler minDist={0} {...gestureHandler}>
           <Animated.View style={StyleSheet.absoluteFill}>
             <Animated.View
               style={{
@@ -74,7 +74,7 @@ export default () => {
             </Animated.View>
             <Label y={translateY} {...{ size, domain, opacity }} />
           </Animated.View>
-        </PanGestureHandler>
+        </PanGestureHandler> */}
       </View>
       <Content />
     </View>

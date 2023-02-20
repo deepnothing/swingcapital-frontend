@@ -7,12 +7,8 @@ import Candle, { Candle as CandleModel } from "./Candle";
 
 export const { width: size } = Dimensions.get("window");
 
-interface ChartProps {
-  candles: CandleModel[];
-  domain: [number, number];
-}
 
-export default ({ candles, domain }: ChartProps) => {
+export default ({ candles, domain }) => {
   const width = size / candles.length;
   const scaleY = scaleLinear().domain(domain).range([size, 0]);
   const scaleBody = scaleLinear()
