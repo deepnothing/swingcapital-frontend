@@ -13,7 +13,8 @@ export default function AuthStack() {
       <Stack.Navigator
           screenOptions={{
              cardStyle: {
-            backgroundColor: '#FFFF'
+            backgroundColor: '#FFFF',
+            
           },
           headerShown: false
         }}>

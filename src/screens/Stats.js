@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View,SafeAreaView } from "react-native";
+import { StyleSheet, View, SafeAreaView } from "react-native";
 // import { PanGestureHandler, State } from "react-native-gesture-handler";
 // import Animated, {
 //   add,
@@ -25,7 +25,7 @@ const getDomain = (rows) => {
   return [Math.min(...values), Math.max(...values)];
 };
 const domain = getDomain(candles);
-export default ({route,navigation}) => {
+export default ({ route, navigation }) => {
   // const [x, y, state] = useValues(0, 0, State.UNDETERMINED);
   // const gestureHandler = onGestureEvent({
   //   x,
@@ -39,7 +39,7 @@ export default ({route,navigation}) => {
   return (
     <View style={styles.container}>
       <SafeAreaView>
-        <Header navigation={navigation}route={route} />
+        <Header navigation={navigation} route={route} />
         {/* <Animated.View style={{ opacity }} pointerEvents="none">
           <Values {...{ candles, translateX, caliber }} />
         </Animated.View> */}
@@ -76,10 +76,10 @@ export default ({route,navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // backgroundColor: "black",
+    flex: 1,
   },
-  chartContainer:{
-    borderWidth:1,
-  }
+  chartContainer: {
+    borderWidth: 1,
+    // transform: [{ scale: 0.9 }],
+  },
 });
