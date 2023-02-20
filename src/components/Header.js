@@ -8,10 +8,40 @@ import IonIcon from "react-native-vector-icons/Ionicons";
 const switchBorderRadius = 6;
 const windowWidth = Dimensions.get("window").width;
 
+function SwitchButton(props) {
+  return (
+    <Pressable
+      onPress={() => props.setSelectedMetric(props.type)}
+      style={[
+        style.switchBox,
+        {
+          backgroundColor: props.selected === props.type ? "#FFF" : null,
+        },
+        props.selected === props.type
+          ? {
+              shadowOffset: { width: 1.95, height: 0 },
+              shadowOpacity: 0.3,
+              shadowRadius: 2.6,
+              elevation: 3,
+              shadowColor: "#000",
+            }
+          : {},
+      ]}
+    >
+      <IonIcon
+        name={props.icon}
+        size="25"
+        color={props.selected === props.type ? props.color : "#4f4f4f"}
+      />
+      {/* <Text style={[style.switchText]}>$</Text> */}
+    </Pressable>
+  );
+}
+
 export default function Header({ navigation, route }) {
   const [selectedMetric, setSelectedMetric] = useState("finance");
-  const { coinName,coinColor } = route.params;
-  console.log(coinColor,coinName)
+  const { coinName, coinColor } = route.params;
+  console.log(coinColor, coinName);
   return (
     <View style={style.heading}>
       <View style={style.goBack}>
@@ -23,59 +53,25 @@ export default function Header({ navigation, route }) {
         </Text>
       </View>
       <View style={style.headerSwitch}>
-        <Pressable
-          onPress={() => setSelectedMetric("finance")}
-          style={[
-            style.switchBox,
-            {
-              backgroundColor: selectedMetric === "finance" ? "#FFF" : null,
-            },
-            selectedMetric === "finance"
-              ? {
-                  shadowColor: "#000",
-                  shadowOffset: { width: 1.95, height: 0 },
-                  shadowOpacity: 0.3,
-                  shadowRadius: 2.6,
-                  elevation: 3,
-                }
-              : {},
-          ]}
-        >
-          <IonIcon
-            name="bar-chart-outline"
-            size="25"
-            color={selectedMetric === "finance" ? "#228b22" : "#4f4f4f"}
-          />
-          {/* <Text style={[style.switchText]}>$</Text> */}
-        </Pressable>
-        <Pressable
-          onPress={() => setSelectedMetric("social")}
-          style={[
-            style.switchBox,
-            {
-              backgroundColor: selectedMetric === "social" ? "#FFF" : null,
-            },
-            selectedMetric === "social"
-              ? {
-                  shadowColor: "#000",
-                  shadowOffset: { width: -1.95, height: 0 },
-                  shadowOpacity: 0.3,
-                  shadowRadius: 2.6,
-                  elevation: 3,
-                }
-              : {},
-          ]}
-        >
-          <IonIcon
-            name="chatbox-ellipses-outline"
-            size="25"
-            color={selectedMetric === "social" ? "#55acee" : "#4f4f4f"}
-          />
-          {/* <Text style={[style.switchText]}>@</Text> */}
-        </Pressable>
+        <SwitchButton
+          icon="bar-chart-outline"
+          type="finance"
+          selected={selectedMetric}
+          setSelectedMetric={setSelectedMetric}
+          color="#228b22"
+        />
+        <SwitchButton
+          selected={selectedMetric}
+          type="social"
+          setSelectedMetric={setSelectedMetric}
+          icon="chatbox-ellipses-outline"
+          color="#55acee"
+        />
       </View>
       <View style={style.titleInfo}>
-        <Text style={[style.titleText,{color:`rgb(${coinColor})`}]}>{coinName.toUpperCase()}</Text>
+        <Text style={[style.titleText, { color: `rgb(${coinColor})` }]}>
+          {coinName.toUpperCase()}
+        </Text>
         <Text style={style.titleText}>/ USD</Text>
       </View>
     </View>
