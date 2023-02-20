@@ -1,26 +1,26 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, Dimensions } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import InsetShadow from "react-native-inset-shadow";
 import Feather from "react-native-vector-icons/Feather";
 import IonIcon from "react-native-vector-icons/Ionicons";
 
 const switchBorderRadius = 6;
+const windowWidth = Dimensions.get("window").width;
 
 export default function Header({ navigation, route }) {
   const [selectedMetric, setSelectedMetric] = useState("finance");
-  const { coinInfo } = route.params;
-
+  const { coinName,coinColor } = route.params;
+  console.log(coinColor,coinName)
   return (
     <View style={style.heading}>
-      <View style={style.relative}>
-        <TouchableOpacity
-          style={style.goBack}
-          onPress={() => navigation.navigate("Home")}
-        >
-          <Feather name="arrow-left" color={"#000"} size={"25"} />
-          <Text>Back</Text>
+      <View style={style.goBack}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <Feather name="arrow-left-circle" color={"#000"} size={"25"} />
         </TouchableOpacity>
+        <Text style={{ fontSize: 15, fontWeight: "600", color: "#FFC72C" }}>
+          &nbsp;Home
+        </Text>
       </View>
       <View style={style.headerSwitch}>
         <Pressable
@@ -74,8 +74,9 @@ export default function Header({ navigation, route }) {
           {/* <Text style={[style.switchText]}>@</Text> */}
         </Pressable>
       </View>
-      <View style={style.relative}>
-        <Text style={style.title}>{coinInfo.name.toUpperCase()} / USD</Text>
+      <View style={style.titleInfo}>
+        <Text style={[style.titleText,{color:`rgb(${coinColor})`}]}>{coinName.toUpperCase()}</Text>
+        <Text style={style.titleText}>/ USD</Text>
       </View>
     </View>
   );
@@ -91,23 +92,25 @@ const style = StyleSheet.create({
   },
   relative: {
     position: "relative",
+    borderWidth: 1,
   },
   goBack: {
-    borderWidth: 1,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    position: "absolute",
+    width: windowWidth / 3,
+    paddingLeft: 5,
   },
-  title: {
+  titleInfo: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    width: windowWidth / 3,
+  },
+  titleText: {
     fontWeight: "600",
     fontSize: 15,
-    borderWidth: 1,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    position: "absolute",
-    right: 0,
+    paddingRight: 5,
   },
   headerSwitch: {
     display: "flex",

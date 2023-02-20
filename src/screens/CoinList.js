@@ -55,7 +55,7 @@ export default function CoinList({navigation}){
           renderItem={({ item }) => (
             <Pressable
               onPress={() => {
-                navigation.navigate("Stats",{coinInfo:item});
+                navigation.navigate("Stats",{coinName:item.name,coinColor:item.color});
               }}
             >
               <Coin data={item} />
