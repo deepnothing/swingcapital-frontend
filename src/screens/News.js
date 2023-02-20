@@ -16,6 +16,23 @@ import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+function PercentBar(props) {
+  return (
+    <View
+      style={[
+        styles.percentBar,
+        { backgroundColor: props.color, width: `${props.percent}%` },
+      ]}
+    >
+      <Text
+        style={[styles.percentText, props.left ? { left: 0 } : { right: 0 }]}
+      >
+        {Math.round(props.percent)}%
+      </Text>
+    </View>
+  );
+}
+
 function News() {
   const [data, setData] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -72,28 +89,9 @@ function News() {
     <SafeAreaView className="w-full h-full">
       <View style={styles.topBar}>
         <SwingCapital text="News" />
-
         <View style={styles.percentWrapper}>
-          <View
-            style={[
-              styles.percentBar,
-              { backgroundColor: "#E10600", width: `${negativePercent}%` },
-            ]}
-          >
-            <Text style={[styles.percentText, { left: 0 }]}>
-              {Math.round(negativePercent)}%
-            </Text>
-          </View>
-          <View
-            style={[
-              styles.percentBar,
-              { backgroundColor: "#008000", width: `${positivePercent}%` },
-            ]}
-          >
-            <Text style={[styles.percentText, { right: 0 }]}>
-              {Math.round(positivePercent)}%
-            </Text>
-          </View>
+          <PercentBar color="#E10600" percent={negativePercent} left />
+          <PercentBar color="#008000" percent={positivePercent} />
         </View>
       </View>
       <FlatList

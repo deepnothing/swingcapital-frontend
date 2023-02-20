@@ -19,7 +19,10 @@ function SwitchButton(props) {
         },
         props.selected === props.type
           ? {
-              shadowOffset: { width: 1.95, height: 0 },
+              shadowOffset: {
+                width: props.leftShadow ? -1.95 : 1.95,
+                height: 0,
+              },
               shadowOpacity: 0.3,
               shadowRadius: 2.6,
               elevation: 3,
@@ -38,10 +41,8 @@ function SwitchButton(props) {
   );
 }
 
-export default function Header({ navigation, route }) {
-  const [selectedMetric, setSelectedMetric] = useState("finance");
+export default function Header({ navigation, route,selectedMetric,setSelectedMetric }) {
   const { coinName, coinColor } = route.params;
-  console.log(coinColor, coinName);
   return (
     <View style={style.heading}>
       <View style={style.goBack}>
@@ -49,7 +50,7 @@ export default function Header({ navigation, route }) {
           <Feather name="arrow-left-circle" color={"#000"} size={"25"} />
         </TouchableOpacity>
         <Text style={{ fontSize: 15, fontWeight: "600", color: "#FFC72C" }}>
-          &nbsp;Home
+          &nbsp;Back
         </Text>
       </View>
       <View style={style.headerSwitch}>
@@ -61,6 +62,7 @@ export default function Header({ navigation, route }) {
           color="#228b22"
         />
         <SwitchButton
+          leftShadow
           selected={selectedMetric}
           type="social"
           setSelectedMetric={setSelectedMetric}
@@ -72,7 +74,7 @@ export default function Header({ navigation, route }) {
         <Text style={[style.titleText, { color: `rgb(${coinColor})` }]}>
           {coinName.toUpperCase()}
         </Text>
-        <Text style={style.titleText}>/ USD</Text>
+        <Text style={style.titleText}> / USD</Text>
       </View>
     </View>
   );
@@ -84,7 +86,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-between",
-    paddingVertical: 5,
+    padding: 10,
   },
   relative: {
     position: "relative",
@@ -95,7 +97,6 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: windowWidth / 3,
-    paddingLeft: 5,
   },
   titleInfo: {
     display: "flex",
@@ -106,14 +107,13 @@ const style = StyleSheet.create({
   titleText: {
     fontWeight: "600",
     fontSize: 15,
-    paddingRight: 5,
   },
   headerSwitch: {
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#BABABA",
+    backgroundColor: "#CCCCCC",
     borderRadius: 8,
-    borderColor: "#BABABA",
+    borderColor: "#CCCCCC",
     borderWidth: 2,
   },
   switchBox: {

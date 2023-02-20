@@ -70,7 +70,7 @@ export default function UserStack() {
                 }}
               >
                 <Feather
-                  name="activity"
+                  name="file-text"
                   color={focused ? "white" : "#343434"}
                   size={"24"}
                 />
