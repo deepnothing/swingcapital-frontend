@@ -28,50 +28,50 @@ export default function Header({ navigation, route }) {
           style={[
             style.switchBox,
             {
-              borderTopLeftRadius: switchBorderRadius,
-              borderBottomLeftRadius: switchBorderRadius,
               backgroundColor: selectedMetric === "finance" ? "#FFF" : null,
             },
+            selectedMetric === "finance"
+              ? {
+                  shadowColor: "#000",
+                  shadowOffset: { width: 1.95, height: 0 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 2.6,
+                  elevation: 3,
+                }
+              : {},
           ]}
         >
           <IonIcon
-            name="wallet-outline"
-            size="22"
-            color={selectedMetric !== "finance" ? "grey" : "#000"}
+            name="bar-chart-outline"
+            size="25"
+            color={selectedMetric === "finance" ? "#228b22" : "#4f4f4f"}
           />
-          <Text
-            style={[
-              style.switchText,
-              { color: selectedMetric !== "finance" ? "grey" : "#000" },
-            ]}
-          >
-            Finance
-          </Text>
+          {/* <Text style={[style.switchText]}>$</Text> */}
         </Pressable>
         <Pressable
           onPress={() => setSelectedMetric("social")}
           style={[
             style.switchBox,
             {
-              borderTopRightRadius: switchBorderRadius,
-              borderBottomRightRadius: switchBorderRadius,
               backgroundColor: selectedMetric === "social" ? "#FFF" : null,
             },
+            selectedMetric === "social"
+              ? {
+                  shadowColor: "#000",
+                  shadowOffset: { width: -1.95, height: 0 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 2.6,
+                  elevation: 3,
+                }
+              : {},
           ]}
         >
           <IonIcon
             name="chatbox-ellipses-outline"
-            size="22"
-            color={selectedMetric !== "social" ? "grey" : "#000"}
+            size="25"
+            color={selectedMetric === "social" ? "#55acee" : "#4f4f4f"}
           />
-          <Text
-            style={[
-              style.switchText,
-              { color: selectedMetric !== "social" ? "grey" : null },
-            ]}
-          >
-            &nbsp;Social&nbsp;
-          </Text>
+          {/* <Text style={[style.switchText]}>@</Text> */}
         </Pressable>
       </View>
       <View style={style.relative}>
@@ -123,8 +123,9 @@ const style = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 14,
     paddingVertical: 4,
+    borderRadius: switchBorderRadius,
   },
   switchText: {
-    fontSize: 10,
+    fontSize: 12,
   },
 });
