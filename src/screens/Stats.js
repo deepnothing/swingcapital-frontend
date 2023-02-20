@@ -1,58 +1,85 @@
-import React, { useState } from "react";
-import {
-  Text,
-  Pressable,
-  View,
-  SafeAreaView,
-  Dimensions,
-  StatusBar,
-} from "react-native";
-import Header from "../components/stats/Header";
-// import { CandlestickChart } from 'react-native-wagmi-charts';
+import React from "react";
+import { StyleSheet, View,SafeAreaView } from "react-native";
+// import { PanGestureHandler, State } from "react-native-gesture-handler";
+// import Animated, {
+//   add,
+//   diffClamp,
+//   eq,
+//   modulo,
+//   sub,
+// } from "react-native-reanimated";
+// import { onGestureEvent, useValues } from "react-native-redash";
 
+import data from "../Stats/data.json";
+import Chart, { size } from "../Stats/Chart";
+import Values from "../Stats/Values";
+import Line from "../Stats/Line";
+import Label from "../Stats/Label";
+import { Candle } from "../Stats/Candle";
+import Header from "../components/Header";
 
-function StatsScreen({navigation,route}) {
-  const data = [
-    {
-      timestamp: 1625945400000,
-      open: 33575.25,
-      high: 33600.52,
-      low: 33475.12,
-      close: 33520.11,
-    },
-    {
-      timestamp: 1625946300000,
-      open: 33545.25,
-      high: 33560.52,
-      low: 33510.12,
-      close: 33520.11,
-    },
-    {
-      timestamp: 1625947200000,
-      open: 33510.25,
-      high: 33515.52,
-      low: 33250.12,
-      close: 33250.11,
-    },
-    {
-      timestamp: 1625948100000,
-      open: 33215.25,
-      high: 33430.52,
-      low: 33215.12,
-      close: 33420.11,
-    },
-  ];
+const candles = data.slice(0, 20);
+
+const getDomain = (rows) => {
+  const values = rows.map(({ high, low }) => [high, low]).flat();
+  return [Math.min(...values), Math.max(...values)];
+};
+const domain = getDomain(candles);
+export default ({route,navigation}) => {
+  // const [x, y, state] = useValues(0, 0, State.UNDETERMINED);
+  // const gestureHandler = onGestureEvent({
+  //   x,
+  //   y,
+  //   state,
+  // });
+  // const caliber = size / candles.length;
+  // const translateY = diffClamp(y, 0, size);
+  // const translateX = add(sub(x, modulo(x, caliber)), caliber / 2);
+  // const opacity = eq(state, State.ACTIVE);
   return (
-    <SafeAreaView>
-      <StatusBar />
-      <Header navigation={navigation}route={route} />
-      {/* <CandlestickChart.Provider data={data}>
-      <CandlestickChart>
-        <CandlestickChart.Candles />
-      </CandlestickChart>
-    </CandlestickChart.Provider> */}
-    </SafeAreaView>
+    <View style={styles.container}>
+      <SafeAreaView>
+        <Header navigation={navigation}route={route} />
+        {/* <Animated.View style={{ opacity }} pointerEvents="none">
+          <Values {...{ candles, translateX, caliber }} />
+        </Animated.View> */}
+      </SafeAreaView>
+      <View style={styles.chartContainer}>
+        <Chart {...{ candles, domain }} />
+        {/* <PanGestureHandler minDist={0} {...gestureHandler}>
+          <Animated.View style={StyleSheet.absoluteFill}>
+            <Animated.View
+              style={{
+                transform: [{ translateY }],
+                opacity,
+                ...StyleSheet.absoluteFillObject,
+              }}
+            >
+              <Line x={size} y={0} />
+            </Animated.View>
+            <Animated.View
+              style={{
+                transform: [{ translateX }],
+                opacity,
+                ...StyleSheet.absoluteFillObject,
+              }}
+            >
+              <Line x={0} y={size} />
+            </Animated.View>
+            <Label y={translateY} {...{ size, domain, opacity }} />
+          </Animated.View>
+        </PanGestureHandler> */}
+      </View>
+    </View>
   );
-}
+};
 
-export default StatsScreen;
+const styles = StyleSheet.create({
+  container: {
+    // flex: 1,
+    // backgroundColor: "black",
+  },
+  chartContainer:{
+    borderWidth:1,
+  }
+});

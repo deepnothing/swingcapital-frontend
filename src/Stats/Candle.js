@@ -6,7 +6,7 @@ const MARGIN = 2;
 
 export default ({ candle, index, width, scaleY, scaleBody }) => {
   const { close, open, high, low } = candle;
-  const fill = close > open ? "#4AFA9A" : "#E33F64";
+  const fill = close > open ? "#23C552" : "#F84F31";
   const x = index * width;
   const max = Math.max(open, close);
   const min = Math.min(open, close);
@@ -18,7 +18,7 @@ export default ({ candle, index, width, scaleY, scaleBody }) => {
         x2={x + width / 2}
         y2={scaleY(high)}
         stroke={fill}
-        strokeWidth={1}
+        strokeWidth={2}
       />
       <Rect
         x={x + MARGIN}

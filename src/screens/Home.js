@@ -3,8 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './CoinList'
+// import StatsScreen from './Stats';
 import StatsScreen from './Stats';
-import CoinbasePro from '../CoinbasePro';
 const Stack = createStackNavigator();
 
 export default function AuthStack() {
@@ -18,7 +18,7 @@ export default function AuthStack() {
           headerShown: false
         }}>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Stats" component={CoinbasePro} />
+        <Stack.Screen name="Stats" component={StatsScreen} />
       
       </Stack.Navigator>
     </NavigationContainer>
