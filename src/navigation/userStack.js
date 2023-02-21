@@ -120,14 +120,32 @@ export default function UserStack() {
         <Tab.Screen
           name="Settings"
           component={SettingsScreen}
-          listeners={{
-            tabPress: (e) => {
-              e.preventDefault();
-            },
-          }}
           options={{
             tabBarShowLabel: false,
-            tabBarIcon: () => <SettingsScreen />,
+            tabBarIcon: ({ focused }) => (
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: 10,
+                }}
+              >
+                <Feather
+                  name="settings"
+                  color={focused ? "white" : "#343434"}
+                  size={"24"}
+                />
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: `${focused ? "white" : "#343434"}`,
+                  }}
+                >
+                  Settings
+                </Text>
+              </View>
+            ),
           }}
         />
       </Tab.Navigator>

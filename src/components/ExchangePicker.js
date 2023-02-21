@@ -56,7 +56,7 @@ export default function ExchangePicker() {
 
   return (
     <View style={style.container}>
-      <View style={style.header}>
+      <TouchableOpacity onPress={() => setOpen(!isOpen)} style={style.header}>
         <View style={style.headerSelected}>
           <View
             style={[style.dot, { backgroundColor: `rgb(${exchangeColor})` }]}
@@ -69,14 +69,12 @@ export default function ExchangePicker() {
             &nbsp;{selectedExchange}
           </Text>
         </View>
-        <TouchableOpacity onPress={() => setOpen(!isOpen)}>
           <Feather
             name={isOpen ? "chevron-up" : "chevron-down"}
             color={"#000"}
             size={"20"}
           />
-        </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
       <View style={[style.dropdown, { display: isOpen ? "" : "none" }]}>
         <TextInput
           style={style.input}
@@ -170,11 +168,11 @@ const style = StyleSheet.create({
     borderRadius:5
   },
   input: {
-    margin: 5,
-    marginTop:7,
+    marginVertical:7,
     padding: 3,
     borderRadius: 5,
     fontSize: 12,
-    borderWidth:1
+    borderWidth:2,
+    borderColor:"#ffc72c"
   },
 });
