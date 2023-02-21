@@ -1,17 +1,73 @@
-import { useState } from "react";
-import { View, Image, StyleSheet, Text, TextInput } from "react-native";
+import { useEffect, useState } from "react";
+import {
+  View,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  FlatList,
+  Pressable,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Feather from "react-native-vector-icons/Feather";
+import { baseUrl } from "../config/api";
 
 export default function ExchangePicker() {
   const [isOpen, setOpen] = useState(false);
-  const [searchText,setSearchText]=('')
+  const [searchText, setSearchText] = useState("");
+  const [fullExchangeList, setFullExchangeList] = useState([]);
+  const [exchangeList, setExchangeList] = useState([]);
+  const [selectedExchange, setSelectedExchange] = useState();
+  const [exchangeColor, setExchangeColor] = useState("0,0,0");
+
+  useEffect(() => {
+    //get selected exchange
+    fetch(`${baseUrl}/financial/defaultExchange`)
+      .then((res) => res.json())
+      .then((response) => {
+        setSelectedExchange(response);
+        fetch(`${baseUrl}/financial/exchanges`)
+          .then((dres) => dres.json())
+          .then((dresponse) => {
+            setExchangeList(dresponse);
+            setFullExchangeList(dresponse);
+            setExchangeColor(dresponse?.find((o) => o.name === response).color);
+          });
+      });
+  }, []);
+
+  const Item = ({ item }) => {
+    return (
+      <Pressable
+        onPress={() => {
+          setSelectedExchange(item.name);
+          setExchangeColor(
+            fullExchangeList?.find((o) => o.name === item.name).color
+          );
+        }}
+      >
+        <Image
+          source={{ uri: item.logo }}
+          style={{ height: 30, width: "100%" }}
+        />
+      </Pressable>
+    );
+  };
+
   return (
     <View style={style.container}>
       <View style={style.header}>
         <View style={style.headerSelected}>
-          <View style={style.dot} />
-          <Text style={style.selectedText}>&nbsp;Kraken</Text>
+          <View
+            style={[style.dot, { backgroundColor: `rgb(${exchangeColor})` }]}
+          />
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="clip"
+            style={style.selectedText}
+          >
+            &nbsp;{selectedExchange}
+          </Text>
         </View>
         <TouchableOpacity onPress={() => setOpen(!isOpen)}>
           <Feather
@@ -24,10 +80,29 @@ export default function ExchangePicker() {
       <View style={[style.dropdown, { display: isOpen ? "" : "none" }]}>
         <TextInput
           style={style.input}
-          onChangeText={setSearchText}
+          onChangeText={(newText) => {
+            setSearchText(newText);
+            if (newText === "") {
+              setExchangeList(fullExchangeList);
+            } else {
+            }
+            setExchangeList(
+              fullExchangeList.filter((item) =>
+                item.name.toLowerCase().includes(newText.toLowerCase())
+              )
+            );
+          }}
           value={searchText}
           placeholder="Search..."
           placeholderTextColor="#000"
+        />
+        <FlatList
+          data={exchangeList}
+          renderItem={({ item }) => <Item item={item} />}
+          keyExtractor={(item, index) => index}
+          contentContainerStyle={{
+            borderWidth: 1,
+          }}
         />
       </View>
     </View>
@@ -37,7 +112,7 @@ export default function ExchangePicker() {
 const style = StyleSheet.create({
   container: {
     zIndex: 2,
-    position: "relative",
+    position: "absolute",
     width: "80%",
     display: "flex",
     justifyContent: "center",
@@ -72,7 +147,6 @@ const style = StyleSheet.create({
     maxWidth: "70%",
   },
   dot: {
-    backgroundColor: "red",
     width: 8,
     height: 8,
     borderRadius: "50%",
@@ -88,17 +162,19 @@ const style = StyleSheet.create({
     fontSize: 12,
   },
   dropdown: {
-    position: "absolute",
-    width: "110%",
+    position: "relative",
+    width: "100%",
     height: 200,
-    borderWidth: 1,
-    top: "150%",
     backgroundColor: "#FFF",
+    overflow: "hidden",
+    borderRadius:5
   },
-  input:{
-    margin:5,
-    padding:3,
-    borderRadius:5,
-    fontSize:12
-  }
+  input: {
+    margin: 5,
+    marginTop:7,
+    padding: 3,
+    borderRadius: 5,
+    fontSize: 12,
+    borderWidth:1
+  },
 });

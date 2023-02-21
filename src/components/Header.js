@@ -53,7 +53,7 @@ export default function Header({
     <View style={style.heading}>
       <View style={style.goBack}>
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <Feather name="arrow-left-circle" color={"#000"} size={"25"} />
+          <Feather name="arrow-left" color={"#000"} size={"25"} />
         </TouchableOpacity>
         <Text style={{ fontSize: 15, fontWeight: "600", color: "#FFC72C" }}>
           &nbsp;Back
