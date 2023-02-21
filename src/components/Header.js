@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import InsetShadow from "react-native-inset-shadow";
 import Feather from "react-native-vector-icons/Feather";
 import IonIcon from "react-native-vector-icons/Ionicons";
+import ExchangePicker from "./ExchangePicker";
 
 const switchBorderRadius = 6;
 const windowWidth = Dimensions.get("window").width;
@@ -33,7 +34,7 @@ function SwitchButton(props) {
     >
       <IonIcon
         name={props.icon}
-        size="25"
+        size="22"
         color={props.selected === props.type ? props.color : "#4f4f4f"}
       />
       {/* <Text style={[style.switchText]}>$</Text> */}
@@ -41,7 +42,12 @@ function SwitchButton(props) {
   );
 }
 
-export default function Header({ navigation, route,selectedMetric,setSelectedMetric }) {
+export default function Header({
+  navigation,
+  route,
+  selectedMetric,
+  setSelectedMetric,
+}) {
   const { coinName, coinColor } = route.params;
   return (
     <View style={style.heading}>
@@ -70,11 +76,16 @@ export default function Header({ navigation, route,selectedMetric,setSelectedMet
           color="#55acee"
         />
       </View>
-      <View style={style.titleInfo}>
-        <Text style={[style.titleText, { color: `rgb(${coinColor})` }]}>
-          {coinName.toUpperCase()}
-        </Text>
-        <Text style={style.titleText}> / USD</Text>
+      {/* <View style={{ display: "flex", flexDirection: "row", marginTop: 5 }}>
+          <Text style={[style.titleText, { color: `rgb(${coinColor})` }]}>
+            {coinName.toUpperCase()}
+          </Text>
+          <Text style={style.titleText}> / USD</Text>
+        </View> */}
+      <View style={style.titleContainer}>
+        <View style={[style.titleInfo]}>
+          <ExchangePicker />
+        </View>
       </View>
     </View>
   );
@@ -98,11 +109,15 @@ const style = StyleSheet.create({
     alignItems: "center",
     width: windowWidth / 3,
   },
+  titleContainer: {
+    width: windowWidth / 3,
+    display: "flex",
+    flexDirection: "column",
+  },
   titleInfo: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
-    width: windowWidth / 3,
   },
   titleText: {
     fontWeight: "600",

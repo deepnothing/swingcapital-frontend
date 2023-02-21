@@ -64,5 +64,6 @@ const styles = StyleSheet.create({
   chartContainer: {
     borderWidth: 1,
     // transform: [{ scale: 0.9 }],
+    zIndex:-1
   },
 });
