@@ -69,11 +69,11 @@ export default function ExchangePicker() {
             &nbsp;{selectedExchange}
           </Text>
         </View>
-          <Feather
-            name={isOpen ? "chevron-up" : "chevron-down"}
-            color={"#000"}
-            size={"20"}
-          />
+        <Feather
+          name={isOpen ? "chevron-up" : "chevron-down"}
+          color={"#000"}
+          size={"20"}
+        />
       </TouchableOpacity>
       <View style={[style.dropdown, { display: isOpen ? "" : "none" }]}>
         <TextInput
@@ -117,14 +117,19 @@ const style = StyleSheet.create({
     padding: 5,
     backgroundColor: "#FFF",
     borderRadius: 8,
-    shadowColor: "rgba(99, 99, 99, 0.9)",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
+    // shadowColor: "rgba(99, 99, 99, 0.9)",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowRadius: 2,
+    // shadowOpacity: 1,
+    // elevation: 2,
+    shadowColor: "rgba(60, 64, 67, 0.3)",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
     shadowRadius: 2,
-    shadowOpacity: 1,
-    elevation: 2,
+    elevation: 3,
   },
   header: {
     display: "flex",
@@ -162,17 +167,17 @@ const style = StyleSheet.create({
   dropdown: {
     position: "relative",
     width: "100%",
-    height: 200,
+    maxHeight: 200,
     backgroundColor: "#FFF",
     overflow: "hidden",
-    borderRadius:5
+    borderRadius: 5,
   },
   input: {
-    marginVertical:7,
+    marginVertical: 7,
     padding: 3,
     borderRadius: 5,
     fontSize: 12,
-    borderWidth:2,
-    borderColor:"#ffc72c"
+    borderWidth: 2,
+    borderColor: "#ffc72c",
   },
 });

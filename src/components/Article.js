@@ -68,9 +68,13 @@ export default function Article({ data, onPress }) {
         <View style={style.imageAndDate}>
           <Image
             style={style.newsImage}
-            source={{
-              uri: data.urlToImage,
-            }}
+            source={
+              data.urlToImage
+                ? {
+                    uri: data.urlToImage,
+                  }
+                : require("../../assets/newsDefault.png")
+            }
           />
           <View style={{ height: 3 }} />
           <Text style={{ fontSize: 10.5, fontWeight: "500" }}>
