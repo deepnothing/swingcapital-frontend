@@ -45,7 +45,7 @@ export default function UserStack() {
                 />
                 <Text
                   style={{
-                    fontSize: 12,
+                    fontSize: 10,
                     color: `${focused ? "white" : "#343434"}`,
                   }}
                 >
@@ -76,7 +76,7 @@ export default function UserStack() {
                 />
                 <Text
                   style={{
-                    fontSize: 12,
+                    fontSize: 10,
                     color: `${focused ? "white" : "#343434"}`,
                   }}
                 >
@@ -107,7 +107,7 @@ export default function UserStack() {
                 />
                 <Text
                   style={{
-                    fontSize: 12,
+                    fontSize: 10,
                     color: `${focused ? "white" : "#343434"}`,
                   }}
                 >
@@ -138,7 +138,7 @@ export default function UserStack() {
                 />
                 <Text
                   style={{
-                    fontSize: 12,
+                    fontSize: 10,
                     color: `${focused ? "white" : "#343434"}`,
                   }}
                 >
