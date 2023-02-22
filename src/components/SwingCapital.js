@@ -67,9 +67,7 @@ const styles = StyleSheet.create({
   },
   brandcontainer: {
     position: "relative",
-    alignSelf: 'flex-start' 
-    // borderColor: "red",
-    // borderWidth: 1,
+    alignSelf: 'flex-start' ,
   },
   wallLeft: {
     position: "absolute",

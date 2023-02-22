@@ -16,7 +16,7 @@ import Values from "../components/Stats/Values";
 import Line from "../components/Stats/Line";
 import Label from "../components/Stats/Label";
 import { Candle } from "../components/Stats/Candle";
-import Header from "../components/Header";
+import StatsHeader from "../components/StatsHeader";
 import Financial from "../components/Financial";
 
 export default ({ route, navigation }) => {
@@ -25,7 +25,7 @@ export default ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <SafeAreaView>
-        <Header
+        <StatsHeader
           navigation={navigation}
           route={route}
           selectedMetric={selectedMetric}

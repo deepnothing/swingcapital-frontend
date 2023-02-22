@@ -29,7 +29,7 @@ export default function Financial() {
   return (
     <View style={styles.chartContainer}>
       <Chart {...{ candles, domain }} />
-      {/* <PanGestureHandler minDist={0} {...gestureHandler}>
+       {/* <PanGestureHandler minDist={0} {...gestureHandler}>
           <Animated.View style={StyleSheet.absoluteFill}>
             <Animated.View
               style={{
@@ -51,7 +51,7 @@ export default function Financial() {
             </Animated.View>
             <Label y={translateY} {...{ size, domain, opacity }} />
           </Animated.View>
-        </PanGestureHandler> */}
+        </PanGestureHandler>  */}
     </View>
   );
 }
@@ -62,7 +62,7 @@ export default function Financial() {
 
 const styles = StyleSheet.create({
   chartContainer: {
-    borderWidth: 1,
+    borderWidth: 2,
     // transform: [{ scale: 0.9 }],
     zIndex:-1
   },

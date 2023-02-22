@@ -12,6 +12,7 @@ import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
 import Coin from "../components/Coin";
 import Feather from "react-native-vector-icons/Feather";
+import Header from "../components/Header";
 
 
 export default function CoinList({navigation}){
@@ -45,11 +46,11 @@ export default function CoinList({navigation}){
     };
   
     return (
-      <SafeAreaView className="w-full h-full">
-        <View style={styles.topBar}>
+      <View>
+        <Header>
           <SwingCapital text="Swing Capital" />
           <Feather name="search" color={"#343434"} size={"25"} />
-        </View>
+        </Header>
         <FlatList
           data={data}
           renderItem={({ item }) => (
@@ -66,29 +67,12 @@ export default function CoinList({navigation}){
           onRefresh={onRefresh}
           refreshing={isRefreshing}
         />
-      </SafeAreaView>
+      </View>
     );
   }
   
   const styles = StyleSheet.create({
-    topBar: {
-      marginHorizontal: 12,
-      marginTop: 10,
-      borderRadius: 6,
-      padding: 15,
-      paddingTop: 19,
-      backgroundColor: "#ffc72c",
-      shadowColor: "rgba(0, 0, 0, 0.45)",
-      shadowOffset: { width: 0, height: 5 },
-      shadowOpacity: 1,
-      shadowRadius: 5,
-      elevation: 10,
-      zIndex: 1,
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-    },
+  
     listStyle: {
       paddingBottom: 40,
       paddingHorizontal: 2,

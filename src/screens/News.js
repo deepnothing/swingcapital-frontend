@@ -15,6 +15,7 @@ import IFrame from "../components/IFrame";
 import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import Header from "../components/Header";
 
 function PercentBar(props) {
   return (
@@ -86,14 +87,14 @@ function News() {
     (positiveSentiment.length / filteredSentiment.length) * 100;
 
   return (
-    <SafeAreaView className="w-full h-full">
-      <View style={styles.topBar}>
+    <View>
+      <Header>
         <SwingCapital text="News" />
         <View style={styles.percentWrapper}>
           <PercentBar color="#E10600" percent={negativePercent} left />
           <PercentBar color="#008000" percent={positivePercent} />
         </View>
-      </View>
+      </Header>
       <FlatList
         data={data}
         renderItem={({ item }) => (
@@ -118,37 +119,20 @@ function News() {
           url={iFrameURL}
         />
       </Modal>
-    </SafeAreaView>
+    </View>
   );
 }
 
 export default News;
 const styles = StyleSheet.create({
-  topBar: {
-    marginHorizontal: 12,
-    marginTop: 10,
-    borderRadius: 6,
-    padding: 15,
-    paddingTop: 19,
-    backgroundColor: "#ffc72c",
-    shadowColor: "rgba(0, 0, 0, 0.45)",
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    elevation: 10,
-    zIndex: 1,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
+  
   percentWrapper: {
     width: 200,
     position: "relative",
     height: 8,
     display: "flex",
     flexDirection: "row",
-    top: "60%",
+    top: "40%",
   },
   percentBar: {
     borderRadius: 10,

@@ -48,7 +48,7 @@ export default function ExchangePicker() {
       >
         <Image
           source={{ uri: item.logo }}
-          style={{ height: 30, width: "100%" }}
+          style={{ height: 30}}
         />
       </Pressable>
     );
@@ -111,7 +111,7 @@ const style = StyleSheet.create({
   container: {
     zIndex: 2,
     position: "absolute",
-    width: "80%",
+    width: "100%",
     display: "flex",
     justifyContent: "center",
     padding: 5,
@@ -179,5 +179,6 @@ const style = StyleSheet.create({
     fontSize: 12,
     borderWidth: 2,
     borderColor: "#ffc72c",
+    backgroundColor:'#FFF',
   },
 });

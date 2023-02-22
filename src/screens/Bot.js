@@ -9,11 +9,19 @@ import {
   AreaChart,
 } from "react-native-svg-charts";
 import * as d3 from "d3";
+import Header from "../components/Header";
+import SwingCapitalText from "../components/SwingCapital";
 
 const screenWidth = Dimensions.get("window").width;
 
 function BotScreen() {
-  return <SafeAreaView style={{ marginTop: 300 }}></SafeAreaView>;
+  return (
+    <View>
+      <Header>
+        <SwingCapitalText text="Bots" />
+      </Header>
+    </View>
+  );
 }
 
 export default BotScreen;

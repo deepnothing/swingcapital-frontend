@@ -3,7 +3,7 @@ import { Dimensions } from "react-native";
 import { Svg } from "react-native-svg";
 import { scaleLinear } from "d3-scale";
 
-import Candle, { Candle as CandleModel } from "./Candle";
+import Candle from "./Candle";
 
 export const { width: size } = Dimensions.get("window");
 
