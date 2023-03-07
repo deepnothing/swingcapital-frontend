@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 //LIBRARIES
 import Svg, { G, Path, Circle } from "react-native-svg";
 import * as d3 from "d3";
+import { geoCylindricalStereographic } from "d3-geo-projection";
 //CONSTANTS
 import { COUNTRIES } from "./CountryShapes";
 const Map = (props) => {
@@ -14,15 +15,10 @@ const Map = (props) => {
       : dimensions.width;
   }, [dimensions]);
   const countryPaths = useMemo(() => {
-    const projection = d3
-      .geoAzimuthalEqualArea()
-      .rotate([0, -90])
-      .clipAngle(150)
-      .fitSize([mapExtent, mapExtent], {
-        type: "FeatureCollection",
-        features: COUNTRIES,
-      })
-      .translate([dimensions.width / 2, mapExtent / 2]);
+    const projection = geoCylindricalStereographic()
+      .translate([dimensions.width / 2, dimensions.height / 5])
+      .scale(dimensions.width / 6);
+
     const geoPath = d3.geoPath().projection(projection);
     const svgPaths = COUNTRIES.map(geoPath);
     return svgPaths;
@@ -52,7 +48,7 @@ const Map = (props) => {
             cx={dimensions.width / 2}
             cy={mapExtent / 2}
             r={mapExtent / 2}
-            fill={"#3b454f"}
+            fill={"#000"}
           />
           {countryList.map((x) => x)}
         </G>
