@@ -41,24 +41,71 @@ const Map = (props) => {
     );
   }, []);
   return (
-    <View
-      style={{
-        borderWidth: 1,
-        height: dimensions.height / 3,
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <>
       <View
-        style={{ borderWidth: 1, width: "100%", transform: [{ scale: 0.95 }] }}
+        style={{
+          borderWidth: 1,
+          height: dimensions.height / 3,
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <Svg width={"100%"} height={"100%"}>
-          <G>{countryList.map((x) => x)}</G>
-        </Svg>
+        <View
+          style={{
+            borderWidth: 1,
+            width: "100%",
+            transform: [{ scale: 0.95 }],
+          }}
+        >
+          <Svg width={"100%"} height={"100%"}>
+            <G>{countryList.map((x) => x)}</G>
+          </Svg>
+        </View>
       </View>
-    </View>
+
+      {/* <SvgPanZoom
+        minScale={0.5}
+        initialZoom={1}
+        maxScale={100}
+        onZoom={(zoom) => {
+          console.log("onZoom:" + zoom);
+        }}
+        canvasStyle={{
+          borderWidth: 1,
+          width: "100%",
+          height:dimensions.height / 3,
+        // transform: [{ scale: 0.95 }],
+        }}
+        viewStyle={{
+          borderWidth: 1,
+          borderColor:'red',
+          display: "flex",
+        //   justifyContent: "center",
+        //   alignItems: "center",
+          height:dimensions.height / 3
+        }}
+      >
+        
+        <SvgPanZoomElement
+          onClick={() => {
+            console.log("onClick!");
+          }}
+          onClickCanceled={() => {
+            console.log("onClickCanceled!");
+          }}
+          onClickRelease={() => {
+            console.log("onClickRelease!");
+          }}
+          onDrag={() => {
+            console.log("onDrag!");
+          }}
+        >
+          <G>{countryList.map((x) => x)}</G>
+        </SvgPanZoomElement>
+      </SvgPanZoom> */}
+    </>
   );
 };
 export default Map;
