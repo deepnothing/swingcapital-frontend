@@ -18,9 +18,11 @@ import Label from "../components/Stats/Label";
 import { Candle } from "../components/Stats/Candle";
 import StatsHeader from "../components/StatsHeader";
 import Financial from "../components/Financial";
+import Social from "../components/Social";
 
 export default ({ route, navigation }) => {
   const [selectedMetric, setSelectedMetric] = useState("finance");
+  console.log(route)
 
   return (
     <View style={styles.container}>
@@ -31,7 +33,7 @@ export default ({ route, navigation }) => {
           selectedMetric={selectedMetric}
           setSelectedMetric={setSelectedMetric}
         />
-        {selectedMetric === "finance" ? <Financial /> : <View />}
+        {selectedMetric === "finance" ? <Financial route={route} /> : <Social />}
       </SafeAreaView>
     </View>
   );

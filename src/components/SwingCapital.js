@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
-  KeyboardAvoidingView,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
   Animated,
   Easing,

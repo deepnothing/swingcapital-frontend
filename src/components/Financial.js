@@ -1,4 +1,4 @@
-import { StyleSheet, View, SafeAreaView } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import Slider from "@react-native-community/slider";
 
 import data from "./Stats/data.json";
@@ -9,6 +9,10 @@ import Line from "./Stats/Line";
 import Label from "./Stats/Label";
 import { Candle } from "./Stats/Candle";
 import { useState } from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import FinancialTopSection from "./FinancialTopSection";
+import Card from "./Card";
+import Strategy from "./Strategy";
 
 // const [x, y, state] = useValues(0, 0, State.UNDETERMINED);
 // const gestureHandler = onGestureEvent({
@@ -21,53 +25,59 @@ import { useState } from "react";
 // const translateX = add(sub(x, modulo(x, caliber)), caliber / 2);
 // const opacity = eq(state, State.ACTIVE);
 
-export default function Financial() {
+export default function Financial({ route }) {
   const [dateRange, setDateRange] = useState(20);
-  const [dateStart,setDateStart]=useState(0)
+  const [dateStart, setDateStart] = useState(0);
+  const [portionSize, setPortionSize] = useState(100);
+  const [portionIndex, setPortionIndex] = useState(1);
+  const [timeFrame, setTimeFrame] = useState("15m");
 
-  const candles = data.slice(0, dateRange);
+  function portion(array, portionSize, portionIndex) {
+    const start = portionIndex * portionSize;
+    const end = start + portionSize;
+    return array.slice(start, end);
+  }
+
+  const timeFrames = ["1m", "15m", "1H", "4H", "1D"];
+
   const getDomain = (rows) => {
     const values = rows.map(({ high, low }) => [high, low]).flat();
     return [Math.min(...values), Math.max(...values)];
   };
+
+  const candles = portion(data, portionSize, portionIndex);
+
   const domain = getDomain(candles);
+
+  const strategies = [
+    { heading: "Trend pullback", description: "hehbhbehbedhb" },
+    { heading: "Support & Resistance", description: "hehbhbehbedhb" },
+  ];
+
   return (
     <View style={styles.chartContainer}>
       <Chart {...{ candles, domain }} />
-      {/* <PanGestureHandler minDist={0} {...gestureHandler}>
-          <Animated.View style={StyleSheet.absoluteFill}>
-            <Animated.View
-              style={{
-                transform: [{ translateY }],
-                opacity,
-                ...StyleSheet.absoluteFillObject,
-              }}
-            >
-              <Line x={size} y={0} />
-            </Animated.View>
-            <Animated.View
-              style={{
-                transform: [{ translateX }],
-                opacity,
-                ...StyleSheet.absoluteFillObject,
-              }}
-            >
-              <Line x={0} y={size} />
-            </Animated.View>
-            <Label y={translateY} {...{ size, domain, opacity }} />
-          </Animated.View>
-        </PanGestureHandler>  */}
-      <Slider
-        minimumValue={1}
-        maximumValue={20}
-        step={1}
-        value={dateStart}
-        onValueChange={(value) => {
-          console.log(dateRange);
-          // setDateRange(value);
-          setDateStart(value)
-        }}
+      <FinancialTopSection
+        route={route}
+        timeFrames={timeFrames}
+        timeFrame={timeFrame}
+        setTimeFrame={setTimeFrame}
       />
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <FlatList
+          data={strategies}
+          renderItem={({ item }) => (
+            <Strategy heading={item.heading} description={item.description} />
+          )}
+          keyExtractor={(item, index) => index}
+          contentContainerStyle={{ paddingHorizontal: 2, marginHorizontal: 15 }}
+        />
+      </View>
     </View>
   );
 }

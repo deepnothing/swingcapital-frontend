@@ -75,12 +75,6 @@ export default function StatsHeader({
           color="#55acee"
         />
       </View>
-      {/* <View style={{ display: "flex", flexDirection: "row", marginTop: 5 }}>
-          <Text style={[style.titleText, { color: `rgb(${coinColor})` }]}>
-            {coinName.toUpperCase()}
-          </Text>
-          <Text style={style.titleText}> / USD</Text>
-        </View> */}
       <View style={style.titleContainer}>
         <View style={style.titleInfo}>
           <ExchangePicker />
@@ -116,10 +110,6 @@ const style = StyleSheet.create({
   },
   titleInfo: {
     width: "85%",
-  },
-  titleText: {
-    fontWeight: "600",
-    fontSize: 15,
   },
   headerSwitch: {
     display: "flex",
