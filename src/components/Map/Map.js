@@ -44,12 +44,6 @@ const Map = (props) => {
     <View>
       <Svg width={dimensions.width} height={dimensions.height / 2}>
         <G>
-          <Circle
-            cx={dimensions.width / 2}
-            cy={mapExtent / 2}
-            r={mapExtent / 2}
-            fill={"#000"}
-          />
           {countryList.map((x) => x)}
         </G>
       </Svg>
