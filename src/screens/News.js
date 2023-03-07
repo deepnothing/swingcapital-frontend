@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   listStyle: {
-    paddingBottom: 40,
+    paddingBottom: '25%',
     paddingHorizontal: 2,
     marginHorizontal: 15,
     paddingTop: 15,

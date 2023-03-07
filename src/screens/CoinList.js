@@ -74,7 +74,7 @@ export default function CoinList({navigation}){
   const styles = StyleSheet.create({
   
     listStyle: {
-      paddingBottom: 40,
+      paddingBottom: '25%',
       paddingHorizontal: 2,
       marginHorizontal: 15,
       paddingTop: 15,

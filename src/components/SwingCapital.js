@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Animated,
-  Easing,
-} from "react-native";
+import { StyleSheet, Text, View, Animated, Easing } from "react-native";
 
-const SwingCapitalText = ({text}) => {
+const SwingCapitalText = ({ text }) => {
   //animation
 
   const rotateX = new Animated.Value(0);
+  const scaleValue = new Animated.Value(1);
 
   function swing() {
     rotateX.setValue(0);
     Animated.timing(rotateX, {
       toValue: 1,
-      duration: 1500,
+      duration: 2000,
       useNativeDriver: true,
       easing: Easing.InOut,
     }).start(() => swing());
@@ -24,16 +19,22 @@ const SwingCapitalText = ({text}) => {
 
   useEffect(() => {
     swing();
-  }, []);
+  });
 
   const rotate = rotateX.interpolate({
     inputRange: [0, 0.5, 1],
     outputRange: ["33deg", "-33deg", "33deg"],
   });
 
+  const scale = scaleValue.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [1, 0.7, 1],
+  })
+ 
+
   const transformStyle = {
-    transform: [{ perspective: 550 }, { rotateX: rotate }],
-    top:-3
+    transform: [{ perspective: 250 }, { rotateX: rotate },{scale:scale}],
+    top: -3,
   };
 
   const color = "#343434";
@@ -45,9 +46,7 @@ const SwingCapitalText = ({text}) => {
       <Animated.View style={transformStyle}>
         <View style={[styles.ropeLeft, { backgroundColor: color }]} />
         <View style={[styles.ropeRight, { backgroundColor: color }]} />
-        <Text style={[styles.brand, { color: color }]}>
-          {text}
-        </Text>
+        <Text style={[styles.brand, { color: color }]}>{text}</Text>
       </Animated.View>
     </View>
   );
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
   },
   brandcontainer: {
     position: "relative",
-    alignSelf: 'flex-start' ,
+    alignSelf: "flex-start",
   },
   wallLeft: {
     position: "absolute",
