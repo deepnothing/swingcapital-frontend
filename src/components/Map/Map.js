@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 //LIBRARIES
 import Svg, { G, Path, Circle } from "react-native-svg";
 import * as d3 from "d3";
@@ -43,9 +43,7 @@ const Map = (props) => {
   return (
     <View>
       <Svg width={dimensions.width} height={dimensions.height / 2}>
-        <G>
-          {countryList.map((x) => x)}
-        </G>
+        <G>{countryList.map((x) => x)}</G>
       </Svg>
     </View>
   );
