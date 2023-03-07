@@ -33,7 +33,7 @@ export default ({ route, navigation }) => {
           selectedMetric={selectedMetric}
           setSelectedMetric={setSelectedMetric}
         />
-        {selectedMetric === "finance" ? <Financial route={route} /> : <Social />}
+        {selectedMetric === "finance" ? <Financial route={route} /> : <Social route={route}/>}
       </SafeAreaView>
     </View>
   );

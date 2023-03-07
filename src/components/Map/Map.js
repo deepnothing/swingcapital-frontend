@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-//LIBRARIES
 import Svg, { G, Path, Circle } from "react-native-svg";
 import * as d3 from "d3";
 import { geoCylindricalStereographic } from "d3-geo-projection";
-//CONSTANTS
+import SvgPanZoom, { SvgPanZoomElement } from "react-native-svg-pan-zoom";
 import { COUNTRIES } from "./CountryShapes";
+
 const Map = (props) => {
-  const { dimensions } = props;
+  const { dimensions, routeColor } = props;
   const [countryList, setCountryList] = useState([]);
   const mapExtent = useMemo(() => {
     return dimensions.width > dimensions.height / 2
@@ -30,21 +30,34 @@ const Map = (props) => {
           <Path
             key={COUNTRIES[i].properties.name}
             d={path}
-            stroke={"#aaa"}
+            stroke={"#000"}
             strokeOpacity={0.3}
             strokeWidth={0.6}
-            fill={"#aaa"}
-            opacity={0.4}
+            fill={`rgb(${routeColor})`}
+            opacity={1}
           />
         );
       })
     );
   }, []);
   return (
-    <View>
-      <Svg width={dimensions.width} height={dimensions.height / 2}>
-        <G>{countryList.map((x) => x)}</G>
-      </Svg>
+    <View
+      style={{
+        borderWidth: 1,
+        height: dimensions.height / 3,
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <View
+        style={{ borderWidth: 1, width: "100%", transform: [{ scale: 0.95 }] }}
+      >
+        <Svg width={"100%"} height={"100%"}>
+          <G>{countryList.map((x) => x)}</G>
+        </Svg>
+      </View>
     </View>
   );
 };
