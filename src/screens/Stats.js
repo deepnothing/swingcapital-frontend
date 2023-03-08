@@ -21,7 +21,7 @@ import Financial from "../components/Financial";
 import Social from "../components/Social";
 
 export default ({ route, navigation }) => {
-  const [selectedMetric, setSelectedMetric] = useState("finance");
+  const [selectedMetric, setSelectedMetric] = useState("social");
   console.log(route)
 
   return (

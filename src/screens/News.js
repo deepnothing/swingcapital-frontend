@@ -89,7 +89,7 @@ function News() {
   return (
     <View>
       <Header>
-        <SwingCapital text="News" />
+        {/* <SwingCapital text="News" /> */}
         <View style={styles.percentWrapper}>
           <PercentBar color="#E10600" percent={negativePercent} left />
           <PercentBar color="#008000" percent={positivePercent} />
@@ -127,12 +127,12 @@ export default News;
 const styles = StyleSheet.create({
   
   percentWrapper: {
-    width: 200,
+    width: '50%',
     position: "relative",
     height: 8,
     display: "flex",
     flexDirection: "row",
-    top: "40%",
+    top:25
   },
   percentBar: {
     borderRadius: 10,

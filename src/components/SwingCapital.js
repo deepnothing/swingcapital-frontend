@@ -1,43 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View, Animated, Easing } from "react-native";
 
 const SwingCapitalText = ({ text }) => {
-  //animation
+  const swingValue = React.useRef(new Animated.Value(0)).current;
+  const animationDuration = 500;
+  const color = "#343434";
 
-  const rotateX = new Animated.Value(0);
-  const scaleValue = new Animated.Value(1);
+  const swing = swingValue.interpolate({
+    inputRange: [-1, 0, 1],
+    outputRange: ["30deg", "0deg", "-30deg"],
+  });
 
-  function swing() {
-    rotateX.setValue(0);
-    Animated.timing(rotateX, {
-      toValue: 1,
-      duration: 2000,
+  const transformStyle = React.useMemo(
+    () => ({
+      transform: [{ perspective: 250 }, { rotateX: swing }],
+      top: -3.2,
+    }),
+    [swing]
+  );
+
+  const swinging = (val) => {
+    return Animated.timing(swingValue, {
+      toValue: val,
+      duration: animationDuration,
       useNativeDriver: true,
-      easing: Easing.InOut,
-    }).start(() => swing());
-  }
-
-  useEffect(() => {
-    swing();
-  });
-
-  const rotate = rotateX.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: ["33deg", "-33deg", "33deg"],
-  });
-
-  const scale = scaleValue.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: [1, 0.7, 1],
-  })
- 
-
-  const transformStyle = {
-    transform: [{ perspective: 250 }, { rotateX: rotate },{scale:scale}],
-    top: -3,
+      easing: Easing.linear,
+    });
   };
 
-  const color = "#343434";
+  useEffect(() => {
+    const animation = Animated.loop(
+      Animated.sequence([
+        swinging(1),
+        swinging(0),
+        swinging(-1),
+        swinging(0),
+      ])
+    );
+    animation.start();
+    return () => {
+      animation.stop();
+    };
+  }, []);
+
   return (
     <View style={styles.brandcontainer}>
       <View style={[styles.wallLeft, { backgroundColor: color }]} />
@@ -102,7 +107,7 @@ const styles = StyleSheet.create({
   ropeRight: {
     position: "absolute",
     height: 7.5,
-    width: 4,
+    width: 3.7,
     right: 9.6,
   },
 });

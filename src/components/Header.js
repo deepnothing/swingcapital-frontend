@@ -11,11 +11,12 @@ export default function Header(props) {
         shadowRadius: 5,
         elevation: 10,
         zIndex: 1,
+        height:90,
       }}
     >
       <View
         style={{
-          display: "flex",
+        display: "flex",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",

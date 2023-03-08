@@ -27,7 +27,7 @@ function Settings() {
   return (
     <View>
       <Header>
-        <SwingCapitalText text="Settings" />
+        {/* <SwingCapitalText text="Settings" /> */}
       </Header>
       <View style={styles.options}>
         <View style={styles.row}>

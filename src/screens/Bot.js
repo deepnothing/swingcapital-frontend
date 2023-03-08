@@ -18,7 +18,7 @@ function BotScreen() {
   return (
     <View>
       <Header>
-        <SwingCapitalText text="Bots" />
+        {/* <SwingCapitalText text="Bots" /> */}
       </Header>
     </View>
   );
