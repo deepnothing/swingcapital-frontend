@@ -2,22 +2,24 @@ import React, { useEffect } from "react";
 import { StyleSheet, Text, View, Animated, Easing } from "react-native";
 
 const SwingCapitalText = ({ text }) => {
-  const swingValue = React.useRef(new Animated.Value(0)).current;
-  const animationDuration = 500;
+  const swingValue = new Animated.Value(0);
+  const animationDuration = 350;
   const color = "#343434";
 
   const swing = swingValue.interpolate({
     inputRange: [-1, 0, 1],
-    outputRange: ["30deg", "0deg", "-30deg"],
+    outputRange: ["-17deg", "0deg", "17deg"],
   });
 
-  const transformStyle = React.useMemo(
-    () => ({
-      transform: [{ perspective: 250 }, { rotateX: swing }],
-      top: -3.2,
-    }),
-    [swing]
-  );
+  const scale = swingValue.interpolate({
+    inputRange: [-1, 0, 1],
+    outputRange: [0.98, 1, 1.02],
+  });
+
+  const transformStyle = {
+    transform: [{ perspective: 200 }, { rotateX: swing }, { scale }],
+    top: -1.7,
+  };
 
   const swinging = (val) => {
     return Animated.timing(swingValue, {
@@ -30,12 +32,7 @@ const SwingCapitalText = ({ text }) => {
 
   useEffect(() => {
     const animation = Animated.loop(
-      Animated.sequence([
-        swinging(1),
-        swinging(0),
-        swinging(-1),
-        swinging(0),
-      ])
+      Animated.sequence([swinging(1), swinging(0), swinging(-1), swinging(0)])
     );
     animation.start();
     return () => {

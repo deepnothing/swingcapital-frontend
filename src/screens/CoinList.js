@@ -48,7 +48,7 @@ export default function CoinList({navigation}){
     return (
       <View>
         <Header>
-          {/* <SwingCapital text="Swing Capital" /> */}
+          <SwingCapital text="Swing Capital" />
           {/* <Feather name="search" color={"#343434"} size={"25"} /> */}
         </Header>
         <FlatList
