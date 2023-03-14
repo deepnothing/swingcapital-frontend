@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Modal,
   TouchableOpacity,
@@ -17,13 +17,37 @@ import { getAuth, signOut, deleteUser } from "firebase/auth";
 import Header from "../components/Header";
 import SwingCapitalText from "../components/SwingCapital";
 import ExchangePicker from "../components/ExchangePicker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { async } from "@firebase/util";
 
 const auth = getAuth();
 
 function Settings() {
   const { user } = useAuth();
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    (async () => {
+      try {
+        const value = await AsyncStorage.getItem("@theme");
+        if (value !== null) {
+          // value previously stored
+          setTheme(value);
+        }
+      } catch (e) {
+        // error reading value
+        console.log(e);
+      }
+    })();
+  }, []);
+
+  const toggleSwitch = async () => {
+    setTheme(theme === "light" ? "dark" : "light");
+    try {
+      await AsyncStorage.setItem("@theme", value);
+    } catch (e) {
+      // saving error
+    }
+  };
   const deleteAccount = (user) => {
     Alert.alert(
       "",
@@ -68,10 +92,10 @@ function Settings() {
           <Switch
             style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
             trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+            thumbColor={theme === "light" ? "#f5dd4b" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}
-            value={isEnabled}
+            value={theme === "light" ? true : false}
           />
         </View>
         <TouchableOpacity style={styles.row} onPress={() => signOut(auth)}>
