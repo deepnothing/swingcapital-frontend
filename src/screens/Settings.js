@@ -12,7 +12,7 @@ import {
 import Feather from "react-native-vector-icons/Feather";
 import IonIcon from "react-native-vector-icons/Ionicons";
 import { useAuth } from "../hooks/useAuth";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, deleteUser } from "firebase/auth";
 import Header from "../components/Header";
 import SwingCapitalText from "../components/SwingCapital";
 import ExchangePicker from "../components/ExchangePicker";
@@ -26,10 +26,19 @@ function Settings() {
 
   return (
     <View>
-      <Header>
-        {/* <SwingCapitalText text="Settings" /> */}
-      </Header>
+      <Header>{/* <SwingCapitalText text="Settings" /> */}</Header>
       <View style={styles.options}>
+      <View style={styles.row}>
+          <TouchableOpacity>
+            <Feather
+              name="user"
+              color="black"
+              size={"25"}
+              style={{ marginRight: 10 }}
+            />
+          </TouchableOpacity>
+          <Text style={{fontWeight:'600'}}>{user?.email}</Text>
+        </View>
         <View style={styles.row}>
           <TouchableOpacity onPress={() => signOut(auth)}>
             <Feather
@@ -49,19 +58,6 @@ function Settings() {
             value={isEnabled}
           />
         </View>
-        <View style={[styles.row, { zIndex: 2 }]}>
-          <Feather
-            name="hard-drive"
-            color="black"
-            size={"25"}
-            style={{ marginRight: 10 }}
-          />
-          <Text>Default exchange  </Text>
-          <View style={{ width: "40%", height: 35 }}>
-            <ExchangePicker />
-          </View>
-        </View>
-
         <View style={styles.row}>
           <TouchableOpacity onPress={() => signOut(auth)}>
             <Feather
@@ -71,9 +67,18 @@ function Settings() {
               style={{ marginRight: 10 }}
             />
           </TouchableOpacity>
-          <Text>
-            Logout <Text style={{ fontWeight: "600" }}>{user?.email}</Text>
-          </Text>
+          <Text>Logout</Text>
+        </View>
+        <View style={styles.row}>
+          <TouchableOpacity onPress={() => signOut(auth)}>
+            <Feather
+              name="x-octagon"
+              color="red"
+              size={"25"}
+              style={{ marginRight: 10 }}
+            />
+          </TouchableOpacity>
+          <Text>Delete Account </Text>
         </View>
       </View>
     </View>
@@ -91,6 +96,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    marginVertical:10
+    marginVertical: 10,
   },
 });
