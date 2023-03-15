@@ -1,11 +1,12 @@
 /// <reference types="nativewind/types" />
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./src/config/firebase";
 import RootNavigation from "./src/navigation";
 import { useFonts } from "expo-font";
-import { View } from "react-native";
+
 
 export default function App() {
+  
   const [loaded] = useFonts({
     "Montserrat-Black": require("./assets/fonts/Montserrat-Black.ttf"),
     "Montserrat-Black-Italic": require("./assets/fonts/Montserrat-BlackItalic.ttf"),

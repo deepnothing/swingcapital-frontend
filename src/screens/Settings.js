@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   Modal,
   TouchableOpacity,
@@ -18,35 +18,17 @@ import Header from "../components/Header";
 import SwingCapitalText from "../components/SwingCapital";
 import ExchangePicker from "../components/ExchangePicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { async } from "@firebase/util";
+import { ThemeContext } from "../hooks/ThemeContext";
 
 const auth = getAuth();
 
-function Settings() {
+function Settings({ route }) {
   const { user } = useAuth();
-  const [theme, setTheme] = useState("light");
-  useEffect(() => {
-    (async () => {
-      try {
-        const value = await AsyncStorage.getItem("@theme");
-        if (value !== null) {
-          // value previously stored
-          setTheme(value);
-        }
-      } catch (e) {
-        // error reading value
-        console.log(e);
-      }
-    })();
-  }, []);
-
-  const toggleSwitch = async () => {
-    setTheme(theme === "light" ? "dark" : "light");
-    try {
-      await AsyncStorage.setItem("@theme", value);
-    } catch (e) {
-      // saving error
-    }
+  const { theme, updateTheme } = useContext(ThemeContext);
+  const [isActive, setIsActive] = useState(theme.mode === "light");
+  const toggleSwitch = () => {
+    updateTheme();
+    setIsActive((prevstate) => !prevstate);
   };
   const deleteAccount = (user) => {
     Alert.alert(
@@ -64,7 +46,6 @@ function Settings() {
         },
       ]
     );
-    // deleteUser(user)
   };
   return (
     <View>
@@ -83,7 +64,7 @@ function Settings() {
         </View>
         <View style={styles.row}>
           <Feather
-            name="sun"
+            name={theme.mode === "light" ? "sun" : "moon"}
             color="black"
             size={"25"}
             style={{ marginRight: 10 }}
@@ -92,10 +73,10 @@ function Settings() {
           <Switch
             style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
             trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor={theme === "light" ? "#f5dd4b" : "#f4f3f4"}
+            thumbColor={isActive ? "#f5dd4b" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}
-            value={theme === "light" ? true : false}
+            value={isActive ? true : false}
           />
         </View>
         <TouchableOpacity style={styles.row} onPress={() => signOut(auth)}>
