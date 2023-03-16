@@ -11,7 +11,6 @@ import {
 import * as d3 from "d3";
 import Header from "../components/Header";
 import SwingCapitalText from "../components/SwingCapital";
-import BubbleBarGraph from "../components/BubbleBarGraph";
 
 const screenWidth = Dimensions.get("window").width;
 function BotScreen() {
