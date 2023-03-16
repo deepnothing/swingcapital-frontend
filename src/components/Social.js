@@ -6,7 +6,6 @@ const dimensions = Dimensions.get("window");
 export default function Social({ route }) {
   return (
     <View>
-      <Text>kkk</Text>
       <Map dimensions={dimensions} routeColor={[251, 206, 177]} />
     </View>
   );

@@ -19,7 +19,7 @@ import { Candle } from "../components/Stats/Candle";
 import StatsHeader from "../components/StatsHeader";
 import Financial from "../components/Financial";
 import Social from "../components/Social";
-import BubbleBarGraph from "../components/BubbleBarGraph";
+import GoogleTrends from "../components/GoogleTrends";
 
 export default ({ route, navigation }) => {
   const [selectedMetric, setSelectedMetric] = useState("social");
@@ -44,7 +44,7 @@ export default ({ route, navigation }) => {
         />
       </SafeAreaView>
 
-      <BubbleBarGraph bars={data.default.timelineData} />
+      <GoogleTrends bars={data.default.timelineData} />
     </View>
   );
 };

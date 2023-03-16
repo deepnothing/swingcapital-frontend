@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { View, StyleSheet, Text, Dimensions } from "react-native";
+import { View, StyleSheet, Text, Dimensions, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LineGraph } from "react-native-graph";
+
 const { width, height } = Dimensions.get("window");
 
 const TouchMove = (props) => {
@@ -24,7 +25,7 @@ const TouchMove = (props) => {
   );
 };
 
-export default function BubbleBarGraph({ bars }) {
+export default function GoogleTrends({ bars }) {
   function calculateAveragesAndChanges(data) {
     const numPeriods = data.length / 24;
     const output = [];
@@ -52,8 +53,22 @@ export default function BubbleBarGraph({ bars }) {
   }
   return (
     <View style={styles.wrapper}>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          borderWidth: 1,
+        }}
+      >
+        <Image
+          style={{ aspectRatio: 3, height: "30%" }}
+          source={require("../../assets/google-logo.png")}
+        />
+        <Text style={{ fontSize: "15%" }}>Search Trends</Text>
+      </View>
       <View style={styles.barWrapper}>
-        {calculateAveragesAndChanges(bars).map((i,index) => (
+        {calculateAveragesAndChanges(bars).map((i, index) => (
           <TouchMove
             key={index}
             time={i.time}
@@ -75,21 +90,25 @@ export default function BubbleBarGraph({ bars }) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: width * 0.75,
+    width: "100%",
     alignSelf: "center",
     position: "relative",
     display: "flex",
-    justifyContent: "flex-end",
-    borderBottomWidth: 3,
-    borderColor: "",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
     height: 100,
-    overflow: "hidden",
-    backgroundColor: "#FFF",
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    // backgroundColor: "#FFF",
   },
   barWrapper: {
     position: "relative",
     display: "flex",
     height: "100%",
+    width: "60%",
+    borderBottomWidth: 3,
+    borderWidth: 1,
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
