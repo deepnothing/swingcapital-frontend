@@ -26,7 +26,6 @@ export default function Coin({ data }) {
       return value.toFixed(2);
     }
   }
-
   return (
     <Card>
       <View style={styles.face}>
@@ -38,7 +37,7 @@ export default function Coin({ data }) {
             }}
           />
           <View style={{ height: 5 }} />
-          <Text style={styles.title}>{data.symbol.toUpperCase()}</Text>
+          <Text style={styles.title}>{data.name.toUpperCase()}</Text>
         </View>
         <View>
           <Text

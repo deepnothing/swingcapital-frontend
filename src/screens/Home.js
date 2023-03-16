@@ -18,9 +18,8 @@ export default function AuthStack() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Stats" component={StatsScreen} />
-
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Stats" component={StatsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

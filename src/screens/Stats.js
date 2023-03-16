@@ -31,17 +31,11 @@ export default ({ route, navigation }) => {
       <SafeAreaView>
         <StatsHeader
           navigation={navigation}
-          route={{
-            params: { coinName: "Bitcoin", coinColor: [251, 206, 177] },
-          }}
+          route={route}
           selectedMetric={selectedMetric}
           setSelectedMetric={setSelectedMetric}
         />
-        <Social
-          route={{
-            params: { coinName: "Bitcoin", coinColor: [251, 206, 177] },
-          }}
-        />
+        <Social route={route} />
       </SafeAreaView>
 
       <GoogleTrends bars={data.default.timelineData} />
