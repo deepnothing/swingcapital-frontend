@@ -14,12 +14,11 @@ import SwingCapitalText from "../components/SwingCapital";
 import BubbleBarGraph from "../components/BubbleBarGraph";
 
 const screenWidth = Dimensions.get("window").width;
-const data = require('./dummy.json');
 function BotScreen() {
   return (
     <View>
       <Header>{/* <SwingCapitalText text="Bots" /> */}</Header>
-      <BubbleBarGraph bars={data.default.timelineData} />
+    
     </View>
   );
 }

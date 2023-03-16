@@ -38,7 +38,7 @@ export default function Coin({ data }) {
             }}
           />
           <View style={{ height: 5 }} />
-          <Text style={styles.title}>{data.name.toUpperCase()}</Text>
+          <Text style={styles.title}>{data.symbol.toUpperCase()}</Text>
         </View>
         <View>
           <Text

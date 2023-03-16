@@ -53,8 +53,9 @@ export default function BubbleBarGraph({ bars }) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.barWrapper}>
-        {calculateAveragesAndChanges(bars).map((i) => (
+        {calculateAveragesAndChanges(bars).map((i,index) => (
           <TouchMove
+            key={index}
             time={i.time}
             style={[
               styles.bar,
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "flex-end",
     borderBottomWidth: 3,
-    borderColor:"",
+    borderColor: "",
     height: 100,
     overflow: "hidden",
     backgroundColor: "#FFF",

@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import 'firebase/auth';
+import { getDatabase, ref, onValue } from "firebase/database";
+import "firebase/auth";
 // import Constants from "expo-constants";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -14,11 +15,18 @@ const firebaseConfig = {
   storageBucket: "swingcapital-9e531.appspot.com",
   messagingSenderId: "1095569946706",
   appId: "1:1095569946706:web:83f2962ce95b8f41e6478b",
-  measurementId: "G-H5S50G07W5"
-}
+  measurementId: "G-H5S50G07W5",
+};
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
-export default app;
+export const db = getDatabase(app);
+
+// function writeUserData(email) {
+//   const reference = ref(db, "users/" + userId);
+//   set(reference, {
+//     email: email,
+//   });
+// }
 

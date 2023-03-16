@@ -19,22 +19,32 @@ import { Candle } from "../components/Stats/Candle";
 import StatsHeader from "../components/StatsHeader";
 import Financial from "../components/Financial";
 import Social from "../components/Social";
+import BubbleBarGraph from "../components/BubbleBarGraph";
 
 export default ({ route, navigation }) => {
   const [selectedMetric, setSelectedMetric] = useState("social");
-  console.log(route)
+  console.log(route);
+  const data = require("./dummy.json");
 
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <StatsHeader
           navigation={navigation}
-          route={route}
+          route={{
+            params: { coinName: "Bitcoin", coinColor: [251, 206, 177] },
+          }}
           selectedMetric={selectedMetric}
           setSelectedMetric={setSelectedMetric}
         />
-        {selectedMetric === "finance" ? <Financial route={route} /> : <Social route={route}/>}
+        <Social
+          route={{
+            params: { coinName: "Bitcoin", coinColor: [251, 206, 177] },
+          }}
+        />
       </SafeAreaView>
+
+      <BubbleBarGraph bars={data.default.timelineData} />
     </View>
   );
 };
