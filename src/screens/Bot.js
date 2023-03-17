@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   Pressable,
@@ -14,31 +14,67 @@ import * as d3 from "d3";
 import Header from "../components/Header";
 import SwingCapitalText from "../components/SwingCapital";
 import { db } from "../config/firebase";
-import { ref, set, remove } from "firebase/database";
+import { get, child, ref, onValue, set,update} from "firebase/database";
 import { getAuth } from "firebase/auth";
-import {useAuth} from '../hooks/useAuth'
-
+import { useAuth } from "../hooks/useAuth";
 
 const screenWidth = Dimensions.get("window").width;
-const { auth } = getAuth();
+function BotScreen({ route }) {
+  const [isRegistered, setRegistered] = useState();
+  const [isRegistering, setIsRegistering] = useState(false);
+  useEffect(() => {
+    const userRegistered = ref(db, `users/${route.params.uid}`);
+    onValue(userRegistered, (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+      setRegistered(data.registered);
+    });
+  }, []);
 
-function BotScreen() {
-  const { user } = useAuth();
-  console.log(user)
-
+  const registerForBot = () => {
+    // set user data in database
+    setIsRegistering(true);
+    update(ref(db, `users/${route.params.uid}`), {
+      registered: true,
+    })
+      .then(() => {
+        // registered successfully!
+        setIsRegistering(false);
+        setRegistered(true);
+      })
+      .catch((error) => {
+        // The write failed...
+      });
+  };
 
   return (
     <View>
       <Header>{/* <SwingCapitalText text="Bots" /> */}</Header>
-      <TouchableOpacity disabled={false} style={style.register}>
+      <TouchableOpacity
+        disabled={isRegistered || isRegistered === undefined}
+        style={style.register}
+        onPress={registerForBot}
+      >
         <View style={style.activityWrapper}>
-          <Text style={style.registerText}>Register</Text>
-          {/* <ActivityIndicator color={"#FFF"} style={style.indicator} /> */}
-          {/* <Feather 
-           name={'check-square'} color={"#FFF"} 
-           size={"18"} 
-           style={style.indicator}
-           /> */}
+          <Text style={style.registerText}>
+            {isRegistered === undefined
+              ? "Loading"
+              : isRegistered
+              ? "Registered"
+              : "Register"}
+          </Text>
+          {isRegistering ||
+            (isRegistered === undefined && (
+              <ActivityIndicator color={"#FFF"} style={style.indicator} />
+            ))}
+          {isRegistered && (
+            <Feather
+              name={"check-square"}
+              color={"#FFF"}
+              size={"18"}
+              style={style.indicator}
+            />
+          )}
         </View>
       </TouchableOpacity>
     </View>

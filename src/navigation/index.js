@@ -59,7 +59,7 @@ export default function RootNavigation() {
 
   return (
     <ThemeContext.Provider value={{ theme, updateTheme }}>
-      {user ? <UserStack /> : <AuthStack />}
+      {user ? <UserStack user={user} /> : <AuthStack />}
     </ThemeContext.Provider>
   );
 }

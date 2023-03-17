@@ -13,7 +13,6 @@ export default function IFrame({ url, setIframeVisible }) {
   const getDomainName = (fullUrl) => {
     return fullUrl.replace(/^(https?:\/\/)?(www\.)?/i, "").split("/")[0];
   };
-  console.log(url)
   return (
     <View style={styles.container}>
       <View style={styles.header}>

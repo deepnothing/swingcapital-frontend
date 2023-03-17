@@ -11,7 +11,7 @@ import Feather from "react-native-vector-icons/Feather";
 
 const Tab = createBottomTabNavigator();
 
-export default function UserStack() {
+export default function UserStack({user}) {
   const [isTabBarShowing, setTabBarShowing] = useState(true);
   
   return (
@@ -90,6 +90,7 @@ export default function UserStack() {
           />
           <Tab.Screen
             name="Bot"
+            initialParams={user}
             component={BotScreen}
             options={{
               tabBarShowLabel: false,

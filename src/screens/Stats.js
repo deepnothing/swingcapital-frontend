@@ -23,7 +23,6 @@ import GoogleTrends from "../components/GoogleTrends";
 
 export default ({ route, navigation }) => {
   const [selectedMetric, setSelectedMetric] = useState("social");
-  console.log(route);
   const data = require("./dummy.json");
 
   return (

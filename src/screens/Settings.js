@@ -20,9 +20,8 @@ import { db } from "../config/firebase";
 
 const auth = getAuth();
 
-function Settings({ route }) {
+function Settings() {
   const { user } = useAuth();
-  console.log(auth);
   const { theme, updateTheme } = useContext(ThemeContext);
   const [isActive, setIsActive] = useState(theme.mode === "light");
   const toggleSwitch = () => {
@@ -117,10 +116,7 @@ function Settings({ route }) {
           />
           <Text>Logout</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.row}
-          onPress={() => deleteAccount(user)}
-        >
+        <TouchableOpacity style={styles.row} onPress={() => deleteAccount()}>
           <Feather
             name="x-octagon"
             color="red"
