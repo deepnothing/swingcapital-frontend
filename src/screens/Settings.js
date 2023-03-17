@@ -11,28 +11,28 @@ import {
   Alert,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
-import IonIcon from "react-native-vector-icons/Ionicons";
 import { useAuth } from "../hooks/useAuth";
 import { getAuth, signOut, deleteUser } from "firebase/auth";
 import Header from "../components/Header";
-import SwingCapitalText from "../components/SwingCapital";
-import ExchangePicker from "../components/ExchangePicker";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ThemeContext } from "../hooks/ThemeContext";
+import { ref, remove } from "firebase/database";
+import { db } from "../config/firebase";
 
 const auth = getAuth();
 
 function Settings({ route }) {
   const { user } = useAuth();
+  console.log(auth);
   const { theme, updateTheme } = useContext(ThemeContext);
   const [isActive, setIsActive] = useState(theme.mode === "light");
   const toggleSwitch = () => {
     updateTheme();
     setIsActive((prevstate) => !prevstate);
   };
+
   const deleteAccount = (user) => {
     Alert.alert(
-      "",
+      "Warning",
       "You are about to delete your account, this action cannot be undone",
       [
         {
@@ -41,7 +41,36 @@ function Settings({ route }) {
         },
         {
           text: "Delete",
-          onPress: () => deleteUser(user),
+          onPress: () => {
+            {
+              const userLocationInDB = ref(db, "users/" + auth.currentUser.uid);
+              remove(userLocationInDB)
+                .then(() => {
+                  console.log("User successfully removed from the database");
+                })
+                .catch((error) => {
+                  console.error("Error removing user: ", error);
+                });
+
+              // delete user from auth db
+              deleteUser(auth.currentUser)
+                .then(() => {
+                  console.log("user deleted from auth");
+                })
+                .catch((error) => {
+                  Alert.alert(
+                    "Error",
+                    "A recent sign in is required, log out and log back in to delete your account",
+                    [
+                      {
+                        text: "OK",
+                        style: "cancel",
+                      },
+                    ]
+                  );
+                });
+            }
+          },
           style: "destructive",
         },
       ]
@@ -90,7 +119,7 @@ function Settings({ route }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.row}
-          onPress={() => deleteAccount(auth)}
+          onPress={() => deleteAccount(user)}
         >
           <Feather
             name="x-octagon"

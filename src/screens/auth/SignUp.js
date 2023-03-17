@@ -1,34 +1,48 @@
-import React from 'react';
-import Icon from '@expo/vector-icons/MaterialCommunityIcons'
-import { Image, Pressable, StyleSheet, TextInput, Text, View } from 'react-native';
-//import Icon from 'react-native-vector-icons/FontAwesome';
+import React from "react";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { Pressable, StyleSheet, TextInput, Text, View } from "react-native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { db } from "../../config/firebase";
+import { set, ref } from "firebase/database";
+
 const auth = getAuth();
 
 function SignUpScreen({ navigation }) {
   const [value, setValue] = React.useState({
-    email: '',
-    password: '',
-    error: ''
-  })
+    email: "",
+    password: "",
+    error: "",
+  });
 
+ 
   async function signUp() {
-    if (value.email === '' || value.password === '') {
+    if (value.email === "" || value.password === "") {
       setValue({
         ...value,
-        error: 'Email and password are mandatory.'
-      })
+        error: "Email and password are mandatory.",
+      });
       return;
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, value.email, value.password);
-      navigation.navigate('Sign In');
+      const createUser = await createUserWithEmailAndPassword(
+        auth,
+        value.email,
+        value.password
+      );
+      // set user data in database
+      set(ref(db, "users/" + createUser.user.uid), {
+        email: createUser.user.email,
+        registered: false,
+        favCoins: "[]",
+      });
+      // navigate to home screen after creation
+      navigation.navigate("Sign In");
     } catch (error) {
       setValue({
         ...value,
         error: error.message,
-      })
+      });
     }
   }
 
@@ -40,12 +54,12 @@ function SignUpScreen({ navigation }) {
           Sign Up
         </Text>
 
-        <View className="space-y-6" >
+        <View className="space-y-6">
           <View className="mt-1 space-y-4">
             <View className="flex-1 font-main flex-row justify-center align-center rounded-xl px-1 py-1 bg-gray-100">
               <Icon style={styles.icon} name="email" size={18} color="gray" />
               <TextInput
-                placeholder='Email'
+                placeholder="Email"
                 value={value.email}
                 className="flex-1 pt-2.5 pr-2.5 pb-2.5 pl-0"
                 onChangeText={(text) => setValue({ ...value, email: text })}
@@ -62,20 +76,30 @@ function SignUpScreen({ navigation }) {
               />
             </View>
           </View>
-          <Pressable className="bg-[#ffc72c] rounded-3xl py-2 px-4 m-4" ><Text className="text-center text-black font-bold text-base" onPress={signUp}>Sign Up</Text></Pressable>
+          <Pressable className="bg-[#ffc72c] rounded-3xl py-2 px-4 m-4">
+            <Text
+              className="text-center text-black font-bold text-base"
+              onPress={signUp}
+            >
+              Sign Up
+            </Text>
+          </Pressable>
         </View>
-        <Text className="text-center text-black font-main text-base">Have an account? <Text className="text-[#ffc72c]" onPress={() => navigation.navigate('Sign In')}>Sign In</Text></Text>
+        <Text className="text-center text-black font-main text-base">
+          Have an account?{" "}
+          <Text
+            className="text-[#ffc72c]"
+            onPress={() => navigation.navigate("Sign In")}
+          >
+            Sign In
+          </Text>
+        </Text>
       </View>
     </View>
   );
 }
 
 export default SignUpScreen;
-
-
-
-
-
 
 const styles = StyleSheet.create({
   icon: {
@@ -87,7 +111,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingBottom: 10,
     paddingLeft: 0,
-    backgroundColor: '#fff',
-    color: '#424242',
+    backgroundColor: "#fff",
+    color: "#424242",
   },
 });
