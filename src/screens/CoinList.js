@@ -27,6 +27,11 @@ export default function CoinList({ navigation, route }) {
   const [favCoins, setFavCoins] = useState([]);
 
   useEffect(() => {
+    refreshCoins();
+  }, []);
+
+  const refreshCoins = () => {
+    setIsRefreshing(true);
     fetch(`${baseUrl}/home`)
       .then((res) => res.json())
       .then((response) => {
@@ -42,9 +47,16 @@ export default function CoinList({ navigation, route }) {
             setData(response);
             setDataCopyForSearch(response);
           }
+          setTimeout(() => {
+            setIsRefreshing(false);
+          }, 500);
         });
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsRefreshing(false);
       });
-  }, []);
+  };
 
   function arrangeItems(favorites, items) {
     const arrangedItems = [];
@@ -84,20 +96,7 @@ export default function CoinList({ navigation, route }) {
   };
 
   const onRefresh = () => {
-    //set isRefreshing to true
-    setIsRefreshing(true);
-    fetch(`${baseUrl}/home`)
-      .then((res) => res.json())
-      .then((response) => {
-        setData(response);
-        setTimeout(() => {
-          setIsRefreshing(false);
-        }, 500);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsRefreshing(false);
-      });
+    refreshCoins();
   };
 
   return (
