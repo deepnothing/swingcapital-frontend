@@ -28,6 +28,7 @@ export default function UserStack({user}) {
         >
           <Tab.Screen
             name="Home"
+            initialParams={user}
             component={HomeScreen}
             options={{
               tabBarShowLabel: false,

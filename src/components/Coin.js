@@ -1,14 +1,28 @@
-import { useCallback, useState } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { useCallback, useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  LogBox,
+} from "react-native";
 import Card from "./Card";
 import AllTimeChart from "./AllTimeChart";
 import Feather from "react-native-vector-icons/Feather";
 import IonIcon from "react-native-vector-icons/Ionicons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-
-export default function Coin({ data }) {
-  const [isFavourited, setFavourited] = useState(false);
-
+import { ref, onValue, update, set } from "firebase/database";
+import { db } from "../config/firebase";
+LogBox.ignoreLogs([
+  "Non-serializable values were found in the navigation state",
+]);
+export default function Coin({
+  coinData,
+  userId,
+  favCoins,
+  addOrRemoveFavCoin,
+}) {
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -26,6 +40,7 @@ export default function Coin({ data }) {
       return value.toFixed(2);
     }
   }
+
   return (
     <Card>
       <View style={styles.face}>
@@ -33,24 +48,24 @@ export default function Coin({ data }) {
           <Image
             style={styles.logo}
             source={{
-              uri: data.logo,
+              uri: coinData.logo,
             }}
           />
           <View style={{ height: 5 }} />
-          <Text style={styles.title}>{data.name.toUpperCase()}</Text>
+          <Text style={styles.title}>{coinData.name.toUpperCase()}</Text>
         </View>
         <View>
           <Text
             style={{
               fontSize: 14,
               fontWeight: "500",
-              color: Math.sign(data.priceChange) === 1 ? "green" : "red",
+              color: Math.sign(coinData.priceChange) === 1 ? "green" : "red",
             }}
           >
             $
-            {data.currentPrice > 1
-              ? numberWithCommas(data.currentPrice)
-              : data.currentPrice}
+            {coinData.currentPrice > 1
+              ? numberWithCommas(coinData.currentPrice)
+              : coinData.currentPrice}
           </Text>
         </View>
       </View>
@@ -89,29 +104,39 @@ export default function Coin({ data }) {
               style={{
                 fontSize: 13,
                 fontWeight: "500",
-                color: Math.sign(data.priceChange) === 1 ? "green" : "red",
+                color: Math.sign(coinData.priceChange) === 1 ? "green" : "red",
                 marginLeft: 9,
                 width: 60,
               }}
             >
-              {Math.sign(data.priceChange) === 1
+              {Math.sign(coinData.priceChange) === 1
                 ? "+" +
-                  Math.round((data.priceChange + Number.EPSILON) * 100) / 100
-                : Math.round((data.priceChange + Number.EPSILON) * 100) / 100}
+                  Math.round((coinData.priceChange + Number.EPSILON) * 100) /
+                    100
+                : Math.round((coinData.priceChange + Number.EPSILON) * 100) /
+                  100}
               %
             </Text>
           </View>
           <Text style={{ fontWeight: "400", fontSize: 12 }}>
-            ${abbreviateNumber(data.marketCap)}
+            ${abbreviateNumber(coinData.marketCap)}
           </Text>
         </View>
-        <AllTimeChart data={data} />
+        <AllTimeChart data={coinData} />
         <View style={{ width: 8 }} />
-        <TouchableOpacity onPress={() => setFavourited(!isFavourited)}>
+        <TouchableOpacity onPress={() => addOrRemoveFavCoin(coinData.name)}>
           <IonIcon
-            name={isFavourited ? "star" : "star-outline"}
+            name={
+              favCoins && favCoins.includes(coinData.name)
+                ? "star"
+                : "star-outline"
+            }
             size="16"
-            color={isFavourited ? "#ffc72c" : "#343434"}
+            color={
+              favCoins && favCoins.includes(coinData.name)
+                ? "#ffc72c"
+                : "#343434"
+            }
           />
         </TouchableOpacity>
       </View>

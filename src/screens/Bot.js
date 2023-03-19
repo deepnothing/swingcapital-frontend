@@ -14,7 +14,7 @@ import * as d3 from "d3";
 import Header from "../components/Header";
 import SwingCapitalText from "../components/SwingCapital";
 import { db } from "../config/firebase";
-import { get, child, ref, onValue, set,update} from "firebase/database";
+import { ref, onValue, update } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { useAuth } from "../hooks/useAuth";
 

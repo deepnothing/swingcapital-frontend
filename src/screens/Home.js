@@ -7,7 +7,7 @@ import HomeScreen from "./CoinList";
 import StatsScreen from "./Stats";
 const Stack = createStackNavigator();
 
-export default function AuthStack() {
+export default function AuthStack({ route }) {
   return (
     <NavigationContainer independent>
       <Stack.Navigator
@@ -18,7 +18,11 @@ export default function AuthStack() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          initialParams={route.params}
+        />
         <Stack.Screen name="Stats" component={StatsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
