@@ -23,7 +23,6 @@ import GoogleTrends from "../components/GoogleTrends";
 
 export default ({ route, navigation }) => {
   const [selectedMetric, setSelectedMetric] = useState("social");
-  const data = require("./dummy.json");
 
   return (
     <View style={styles.container}>
@@ -34,10 +33,8 @@ export default ({ route, navigation }) => {
           selectedMetric={selectedMetric}
           setSelectedMetric={setSelectedMetric}
         />
-        <Social route={route} />
+        <Social route={route}/>
       </SafeAreaView>
-
-      <GoogleTrends bars={data.default.timelineData} />
     </View>
   );
 };

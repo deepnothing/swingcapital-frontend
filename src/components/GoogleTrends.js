@@ -27,7 +27,7 @@ const TouchMove = (props) => {
 
 export default function GoogleTrends({ bars }) {
   function calculateAveragesAndChanges(data) {
-    const numPeriods = data.length / 24;
+    const numPeriods = data.length / 12;
     const output = [];
     for (let i = 0; i < numPeriods; i++) {
       const startIndex = i * 7;
@@ -56,16 +56,17 @@ export default function GoogleTrends({ bars }) {
       <View
         style={{
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           alignItems: "center",
-          borderWidth: 1,
+          height: "15%",
+          alignSelf: "flex-start",
         }}
       >
         <Image
-          style={{ aspectRatio: 3, height: "30%" }}
+          style={{ aspectRatio: 3, width: "15%" }}
           source={require("../../assets/google-logo.png")}
         />
-        <Text style={{ fontSize: "15%" }}>Search Trends</Text>
+        <Text style={{ fontSize: "12%" }}> Search Trends last 7 days</Text>
       </View>
       <View style={styles.barWrapper}>
         {calculateAveragesAndChanges(bars).map((i, index) => (
@@ -94,21 +95,20 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     position: "relative",
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-evenly",
     height: 100,
-    borderWidth: 1,
-    paddingHorizontal: 10,
+    // borderWidth: 1,
+    marginVertical: 10,
     // backgroundColor: "#FFF",
   },
   barWrapper: {
     position: "relative",
     display: "flex",
-    height: "100%",
-    width: "60%",
+    height: "85%",
+    width: "100%",
     borderBottomWidth: 3,
-    borderWidth: 1,
+    // borderWidth: 1,
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",

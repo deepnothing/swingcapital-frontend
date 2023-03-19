@@ -108,6 +108,7 @@ export default function CoinList({ navigation, route }) {
         <View style={styles.coinSearchWrapper}>
           <Feather name="search" color={"#000"} size={"20"} />
           <TextInput
+            placeholder="Search.."
             onChangeText={(e) => searchCoins(dataCopyForSearch, e)}
             style={styles.coinSearch}
           />
@@ -158,6 +159,6 @@ const styles = StyleSheet.create({
   },
   coinSearch: {
     width: "100%",
-    marginLeft: 5,
+    marginLeft: 8,
   },
 });
