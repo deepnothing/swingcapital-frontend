@@ -10,12 +10,18 @@ export default function StatsHeader({
   route,
   selectedMetric,
   setSelectedMetric,
+  setTabBarShowing,
 }) {
   // const { coinName, coinColor } = route.params;
   return (
     <View style={style.heading}>
       <View style={style.goBack}>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity
+          onPress={() => {
+            setTabBarShowing(true);
+            navigation.navigate("Home");
+          }}
+        >
           <Feather name="arrow-left" color={"#000"} size={"25"} />
         </TouchableOpacity>
         <Text style={{ fontSize: 15, fontWeight: "600", color: "#FFC72C" }}>

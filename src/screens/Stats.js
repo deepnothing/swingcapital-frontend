@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 // import { PanGestureHandler, State } from "react-native-gesture-handler";
 // import Animated, {
@@ -24,16 +24,21 @@ import GoogleTrends from "../components/GoogleTrends";
 export default ({ route, navigation }) => {
   const [selectedMetric, setSelectedMetric] = useState("social");
 
+  useEffect(() => {
+    route.params.setTabBarShowing(false);
+  }, []);
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <StatsHeader
           navigation={navigation}
+          setTabBarShowing={route.params.setTabBarShowing}
           route={route}
           selectedMetric={selectedMetric}
           setSelectedMetric={setSelectedMetric}
         />
-        <Social route={route}/>
+        <Social route={route} />
       </SafeAreaView>
     </View>
   );

@@ -11,148 +11,80 @@ import Feather from "react-native-vector-icons/Feather";
 
 const Tab = createBottomTabNavigator();
 
-export default function UserStack({user}) {
+export default function UserStack({ user }) {
   const [isTabBarShowing, setTabBarShowing] = useState(true);
-  
+
   return (
-      <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={{
-            headerShown: false,
-            tabBarStyle: {
-              backgroundColor: "#ffc72c",
-              display: isTabBarShowing ? "" : "none",
-            },
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: "#ffc72c",
+            display: isTabBarShowing ? "" : "none",
+          },
+        }}
+        sceneContainerStyle={{ backgroundColor: "#FFFFFF" }}
+      >
+        <Tab.Screen
+          name="Home"
+          initialParams={{ user: user, setTabBarShowing: setTabBarShowing }}
+          component={HomeScreen}
+          options={{
+            tabBarShowLabel: false,
+            tabBarIcon: ({ focused }) => (
+              <Feather
+                name="home"
+                color={focused ? "white" : "#343434"}
+                size={"24"}
+              />
+            ),
           }}
-          sceneContainerStyle={{ backgroundColor: "#FFFFFF" }}
-        >
-          <Tab.Screen
-            name="Home"
-            initialParams={user}
-            component={HomeScreen}
-            options={{
-              tabBarShowLabel: false,
-              tabBarIcon: ({ focused }) => (
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    marginTop: 10,
-                  }}
-                >
-                  <Feather
-                    name="home"
-                    color={focused ? "white" : "#343434"}
-                    size={"24"}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 10,
-                      color: `${focused ? "white" : "#343434"}`,
-                    }}
-                  >
-                    Home
-                  </Text>
-                </View>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="News"
-            component={NewsScreen}
-            options={{
-              tabBarShowLabel: false,
-              tabBarIcon: ({ focused }) => (
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    marginTop: 10,
-                  }}
-                >
-                  <Feather
-                    name="file-text"
-                    color={focused ? "white" : "#343434"}
-                    size={"24"}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 10,
-                      color: `${focused ? "white" : "#343434"}`,
-                    }}
-                  >
-                    News
-                  </Text>
-                </View>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Bot"
-            initialParams={user}
-            component={BotScreen}
-            options={{
-              tabBarShowLabel: false,
-              tabBarIcon: ({ focused }) => (
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    marginTop: 10,
-                  }}
-                >
-                  <Feather
-                    name="cpu"
-                    color={focused ? "white" : "#343434"}
-                    size={"24"}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 10,
-                      color: `${focused ? "white" : "#343434"}`,
-                    }}
-                  >
-                    Bots
-                  </Text>
-                </View>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Settings"
-            component={SettingsScreen}
-            options={{
-              tabBarShowLabel: false,
-              tabBarIcon: ({ focused }) => (
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    marginTop: 10,
-                  }}
-                >
-                  <Feather
-                    name="settings"
-                    color={focused ? "white" : "#343434"}
-                    size={"24"}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 10,
-                      color: `${focused ? "white" : "#343434"}`,
-                    }}
-                  >
-                    Settings
-                  </Text>
-                </View>
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
+        />
+        <Tab.Screen
+          name="News"
+          component={NewsScreen}
+          options={{
+            tabBarShowLabel: false,
+            tabBarIcon: ({ focused }) => (
+              <Feather
+                name="file-text"
+                color={focused ? "white" : "#343434"}
+                size={"24"}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Bot"
+          initialParams={{ user: user }}
+          component={BotScreen}
+          options={{
+            tabBarShowLabel: false,
+            tabBarIcon: ({ focused }) => (
+              <Feather
+                name="cpu"
+                color={focused ? "white" : "#343434"}
+                size={"24"}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{
+            tabBarShowLabel: false,
+            tabBarIcon: ({ focused }) => (
+              <Feather
+                name="settings"
+                color={focused ? "white" : "#343434"}
+                size={"24"}
+              />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }

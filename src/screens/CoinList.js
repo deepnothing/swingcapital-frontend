@@ -36,7 +36,7 @@ export default function CoinList({ navigation, route }) {
       .then((res) => res.json())
       .then((response) => {
         //get favourite coins fron database and change order of homescreen accordingly
-        const favCoins = ref(db, `users/${route.params.uid}`);
+        const favCoins = ref(db, `users/${route.params.user.uid}`);
         onValue(favCoins, (snapshot) => {
           const data = snapshot.val();
           setFavCoins(data.favCoins);
@@ -83,7 +83,7 @@ export default function CoinList({ navigation, route }) {
         : [...favCoins, coinName]
       : [coinName];
 
-    update(ref(db, `users/${route.params.uid}`), {
+    update(ref(db, `users/${route.params.user.uid}`), {
       favCoins: newArrayOfCoins,
     });
   };
@@ -121,6 +121,7 @@ export default function CoinList({ navigation, route }) {
               navigation.navigate("Stats", {
                 coinName: item.name,
                 coinColor: item.color,
+                setTabBarShowing: route.params.setTabBarShowing
               });
             }}
           >

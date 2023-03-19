@@ -24,7 +24,7 @@ function BotScreen({ route }) {
   const [isRegistered, setRegistered] = useState();
   const [isRegistering, setIsRegistering] = useState(false);
   useEffect(() => {
-    const userRegistered = ref(db, `users/${route.params.uid}`);
+    const userRegistered = ref(db, `users/${route.params.user.uid}`);
     onValue(userRegistered, (snapshot) => {
       const data = snapshot.val();
       console.log(data);
@@ -35,7 +35,7 @@ function BotScreen({ route }) {
   const registerForBot = () => {
     // set user data in database
     setIsRegistering(true);
-    update(ref(db, `users/${route.params.uid}`), {
+    update(ref(db, `users/${route.params.user.uid}`), {
       registered: true,
     })
       .then(() => {
