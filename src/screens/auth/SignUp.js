@@ -34,7 +34,6 @@ function SignUpScreen({ navigation }) {
       set(ref(db, "users/" + createUser.user.uid), {
         email: createUser.user.email,
         registered: false,
-        favCoins: "[]",
       });
       // navigate to home screen after creation
       navigation.navigate("Sign In");

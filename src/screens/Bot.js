@@ -19,6 +19,7 @@ import { getAuth } from "firebase/auth";
 import { useAuth } from "../hooks/useAuth";
 
 const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 function BotScreen({ route }) {
   const [isRegistered, setRegistered] = useState();
   const [isRegistering, setIsRegistering] = useState(false);
@@ -50,6 +51,10 @@ function BotScreen({ route }) {
   return (
     <View>
       <Header>{/* <SwingCapitalText text="Bots" /> */}</Header>
+      <View style={{ borderWidth: 3, height: screenHeight / 1.5, padding: 10 }}>
+        <Text>test trade 1</Text>
+        <Text>test trade 2</Text>
+      </View>
       <TouchableOpacity
         disabled={isRegistered || isRegistered === undefined}
         style={style.register}
@@ -89,6 +94,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
+    marginVertical: 10,
     borderRadius: 5,
     backgroundColor: "#FFC72C",
     shadowColor: "rgba(60, 64, 67, 0.3)",
