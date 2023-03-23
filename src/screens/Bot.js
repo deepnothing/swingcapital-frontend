@@ -8,6 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import * as d3 from "d3";
@@ -50,37 +51,45 @@ function BotScreen({ route }) {
   return (
     <View>
       <Header>{/* <SwingCapitalText text="Bots" /> */}</Header>
-      <View style={{ borderWidth: 3, height: screenHeight / 1.5, padding: 10 }}>
-        <Text>test trade 1</Text>
-        <Text>test trade 2</Text>
-      </View>
-      <TouchableOpacity
-        disabled={isRegistered || isRegistered === undefined}
-        style={style.register}
-        onPress={registerForBot}
+      <View
+        style={{
+          height:
+            Dimensions.get("window").height -
+            Dimensions.get("window").height / 5.2,
+        }}
       >
-        <View style={style.activityWrapper}>
-          <Text style={style.registerText}>
-            {isRegistered === undefined
-              ? "Loading"
-              : isRegistered
-              ? "Registered"
-              : "Register"}
-          </Text>
-          {isRegistering ||
-            (isRegistered === undefined && (
-              <ActivityIndicator color={"#FFF"} style={style.indicator} />
-            ))}
-          {isRegistered && (
-            <Feather
-              name={"check-square"}
-              color={"#FFF"}
-              size={"18"}
-              style={style.indicator}
-            />
-          )}
-        </View>
-      </TouchableOpacity>
+        <ScrollView style={{ padding: 10 }}>
+          <Text>test trade 1</Text>
+          <Text>test trade 2</Text>
+        </ScrollView>
+        <TouchableOpacity
+          disabled={isRegistered || isRegistered === undefined}
+          style={style.register}
+          onPress={registerForBot}
+        >
+          <View style={style.activityWrapper}>
+            <Text style={style.registerText}>
+              {isRegistered === undefined
+                ? "Loading"
+                : isRegistered
+                ? "Registered"
+                : "Register"}
+            </Text>
+            {isRegistering ||
+              (isRegistered === undefined && (
+                <ActivityIndicator color={"#FFF"} style={style.indicator} />
+              ))}
+            {isRegistered && (
+              <Feather
+                name={"check-square"}
+                color={"#FFF"}
+                size={"18"}
+                style={style.indicator}
+              />
+            )}
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
