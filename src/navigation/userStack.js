@@ -15,6 +15,44 @@ export default function UserStack({ user }) {
   const [isTabBarShowing, setTabBarShowing] = useState(true);
   const { theme } = useContext(ThemeContext);
 
+  const tabs = [
+    {
+      name: "Home",
+      iconName: "home",
+      component: HomeScreen,
+      initialParams: {
+        user: user,
+        setTabBarShowing: setTabBarShowing,
+        theme: theme,
+      },
+    },
+    {
+      name: "News",
+      iconName: "file-text",
+      component: NewsScreen,
+      initialParams: {
+        theme: theme,
+      },
+    },
+    {
+      name: "Bot",
+      iconName: "cpu",
+      component: BotScreen,
+      initialParams: {
+        user: user,
+        theme: theme,
+      },
+    },
+    {
+      name: "Settings",
+      iconName: "settings",
+      component: SettingsScreen,
+      initialParams: {
+        theme: theme,
+      },
+    },
+  ];
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -28,82 +66,27 @@ export default function UserStack({ user }) {
         }}
         sceneContainerStyle={{ backgroundColor: "#FFFFFF" }}
       >
-        <Tab.Screen
-          name="Home"
-          initialParams={{
-            user: user,
-            setTabBarShowing: setTabBarShowing,
-            theme: theme,
-          }}
-          component={HomeScreen}
-          options={{
-            tabBarActiveTintColor: "#FFF",
-            tabBarInactiveTintColor: "#000",
-            tabBarShowLabel: true,
-            tabBarLabelStyle: { marginBottom: 5 },
-            tabBarIcon: ({ focused }) => (
-              <Feather
-                name="home"
-                color={focused ? "white" : "#343434"}
-                size={"24"}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          initialParams={{ theme: theme }}
-          name="News"
-          component={NewsScreen}
-          options={{
-            tabBarActiveTintColor: "#FFF",
-            tabBarInactiveTintColor: "#000",
-            tabBarLabelStyle: { marginBottom: 5 },
-            tabBarShowLabel: true,
-            tabBarIcon: ({ focused }) => (
-              <Feather
-                name="file-text"
-                color={focused ? "white" : "#343434"}
-                size={"24"}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Bot"
-          initialParams={{ user: user, theme: theme }}
-          component={BotScreen}
-          options={{
-            tabBarActiveTintColor: "#FFF",
-            tabBarInactiveTintColor: "#000",
-            tabBarLabelStyle: { marginBottom: 5 },
-            tabBarShowLabel: true,
-            tabBarIcon: ({ focused }) => (
-              <Feather
-                name="cpu"
-                color={focused ? "white" : "#343434"}
-                size={"24"}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Settings"
-          initialParams={{ theme: theme }}
-          component={SettingsScreen}
-          options={{
-            tabBarActiveTintColor: "#FFF",
-            tabBarInactiveTintColor: "#000",
-            tabBarLabelStyle: { marginBottom: 5 },
-            tabBarShowLabel: true,
-            tabBarIcon: ({ focused }) => (
-              <Feather
-                name="settings"
-                color={focused ? "white" : "#343434"}
-                size={"24"}
-              />
-            ),
-          }}
-        />
+        {tabs.map((i, index) => (
+          <Tab.Screen
+            key={index}
+            name={i.name}
+            initialParams={i.initialParams}
+            component={i.component}
+            options={{
+              tabBarActiveTintColor: "#FFF",
+              tabBarInactiveTintColor: "#000",
+              tabBarShowLabel: true,
+              tabBarLabelStyle: { marginBottom: 5 },
+              tabBarIcon: ({ focused }) => (
+                <Feather
+                  name={i.iconName}
+                  color={focused ? "white" : "#343434"}
+                  size={"24"}
+                />
+              ),
+            }}
+          />
+        ))}
       </Tab.Navigator>
     </NavigationContainer>
   );
