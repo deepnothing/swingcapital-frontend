@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Text, View, Pressable, Appearance } from "react-native";
+import {
+  Modal,
+  Text,
+  View,
+  Pressable,
+  Appearance,
+  Dimensions,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -8,6 +15,7 @@ import NewsScreen from "../screens/News";
 import BotScreen from "../screens/Bot";
 import SettingsScreen from "../screens/Settings";
 import Feather from "react-native-vector-icons/Feather";
+import { bottomRight } from "@shopify/react-native-skia";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +29,8 @@ export default function UserStack({ user }) {
           headerShown: false,
           tabBarStyle: {
             backgroundColor: "#ffc72c",
-            display: isTabBarShowing ? "" : "none",
+            display: isTabBarShowing ? "flex" : "none",
+            height: Dimensions.get("window").height / 12,
           },
         }}
         sceneContainerStyle={{ backgroundColor: "#FFFFFF" }}
@@ -31,7 +40,10 @@ export default function UserStack({ user }) {
           initialParams={{ user: user, setTabBarShowing: setTabBarShowing }}
           component={HomeScreen}
           options={{
-            tabBarShowLabel: false,
+            tabBarActiveTintColor: "#FFF",
+            tabBarInactiveTintColor: "#000",
+            tabBarShowLabel: true,
+            tabBarLabelStyle: { marginBottom: 5 },
             tabBarIcon: ({ focused }) => (
               <Feather
                 name="home"
@@ -45,7 +57,10 @@ export default function UserStack({ user }) {
           name="News"
           component={NewsScreen}
           options={{
-            tabBarShowLabel: false,
+            tabBarActiveTintColor: "#FFF",
+            tabBarInactiveTintColor: "#000",
+            tabBarLabelStyle: { marginBottom: 5 },
+            tabBarShowLabel: true,
             tabBarIcon: ({ focused }) => (
               <Feather
                 name="file-text"
@@ -60,7 +75,10 @@ export default function UserStack({ user }) {
           initialParams={{ user: user }}
           component={BotScreen}
           options={{
-            tabBarShowLabel: false,
+            tabBarActiveTintColor: "#FFF",
+            tabBarInactiveTintColor: "#000",
+            tabBarLabelStyle: { marginBottom: 5 },
+            tabBarShowLabel: true,
             tabBarIcon: ({ focused }) => (
               <Feather
                 name="cpu"
@@ -74,7 +92,10 @@ export default function UserStack({ user }) {
           name="Settings"
           component={SettingsScreen}
           options={{
-            tabBarShowLabel: false,
+            tabBarActiveTintColor: "#FFF",
+            tabBarInactiveTintColor: "#000",
+            tabBarLabelStyle: { marginBottom: 5 },
+            tabBarShowLabel: true,
             tabBarIcon: ({ focused }) => (
               <Feather
                 name="settings"

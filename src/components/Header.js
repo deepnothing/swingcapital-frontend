@@ -1,4 +1,4 @@
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, View, Dimensions } from "react-native";
 
 export default function Header(props) {
   return (
@@ -11,18 +11,18 @@ export default function Header(props) {
         shadowRadius: 5,
         elevation: 10,
         zIndex: 1,
-        height:90,
+        height: Dimensions.get("window").height / 10,
       }}
     >
       <View
         style={{
-        display: "flex",
+          display: "flex",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          paddingHorizontal:20,
-          paddingTop:3,
-          paddingBottom:6
+          paddingHorizontal: 20,
+          paddingTop: 3,
+          paddingBottom: 6,
         }}
       >
         {props.children}
