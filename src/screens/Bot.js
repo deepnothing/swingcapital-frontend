@@ -27,7 +27,6 @@ function BotScreen({ route }) {
     const userRegistered = ref(db, `users/${route.params.user.uid}`);
     onValue(userRegistered, (snapshot) => {
       const data = snapshot.val();
-      console.log(data);
       setRegistered(data.registered);
     });
   }, []);

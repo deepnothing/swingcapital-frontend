@@ -44,7 +44,7 @@ export default function Coin({
   return (
     <Card>
       <View style={styles.face}>
-        <View style={styles.name}>
+        <View style={styles.symbol}>
           <Image
             style={styles.logo}
             source={{
@@ -52,7 +52,7 @@ export default function Coin({
             }}
           />
           <View style={{ height: 5 }} />
-          <Text style={styles.title}>{coinData.name.toUpperCase()}</Text>
+          <Text style={styles.title}>{coinData.symbol.toUpperCase()}</Text>
         </View>
         <View>
           <Text

@@ -3,18 +3,29 @@ import Map from "./Map/Map";
 import GoogleTrends from "./GoogleTrends";
 import Instagram from "./Instagram";
 import YouTube from "./Youtube";
+import { useEffect } from "react";
 
 const dimensions = Dimensions.get("window");
 
-export default function Social({ route }) {
+export default function Social({ route, googleData }) {
   const data = require("./dummy.json");
-
+  useEffect(() => {
+    console.log(googleData?.length);
+  }, [googleData]);
   return (
     <View>
-      <Map dimensions={dimensions} routeColor={route.params.coinColor} />
+      {googleData ? (
+        <Map dimensions={dimensions} routeColor={route.params.coinColor} />
+      ) : null}
       <ScrollView style={style.socialData}>
-        <GoogleTrends bars={data.default.timelineData} />
-        <View style={{ display: "flex", flexDirection: "row" ,justifyContent:'space-evenly'}}>
+        {googleData ? <GoogleTrends bars={data.default.timelineData} /> : null}
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-evenly",
+          }}
+        >
           <Instagram />
           <YouTube />
         </View>
@@ -24,7 +35,7 @@ export default function Social({ route }) {
 }
 const style = StyleSheet.create({
   socialData: {
-    height: 100,
+    height: "100%",
     borderWidth: 1,
     height: dimensions.height / 2.05,
     paddingHorizontal: 10,

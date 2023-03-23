@@ -7,7 +7,8 @@ import SvgPanZoom, { SvgPanZoomElement } from "react-native-svg-pan-zoom";
 import { COUNTRIES } from "./CountryShapes";
 
 const Map = (props) => {
-  const { dimensions, routeColor } = props;
+  const { dimensions, routeColor, data } = props;
+  console.log(data[0]);
   const [countryList, setCountryList] = useState([]);
   const mapExtent = useMemo(() => {
     return dimensions.width > dimensions.height / 2
@@ -23,9 +24,11 @@ const Map = (props) => {
     const svgPaths = COUNTRIES.map(geoPath);
     return svgPaths;
   }, [dimensions]);
+
   useEffect(() => {
     setCountryList(
       countryPaths.map((path, i) => {
+        console.log();
         return (
           <Path
             key={COUNTRIES[i].properties.name}
@@ -34,7 +37,14 @@ const Map = (props) => {
             strokeOpacity={0.3}
             strokeWidth={0.6}
             fill={`rgb(${routeColor})`}
-            opacity={1}
+            opacity={
+              data.find((item) => item.geoName === COUNTRIES[i].properties.name)
+                ?.geoName
+                ? data.find(
+                    (item) => item.geoName === COUNTRIES[i].properties.name
+                  ).value[0] / 100
+                : 0
+            }
           />
         );
       })

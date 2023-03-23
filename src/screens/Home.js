@@ -8,7 +8,6 @@ import StatsScreen from "./Stats";
 const Stack = createStackNavigator();
 
 export default function AuthStack({ route }) {
-  console.log(route.params);
   return (
     <NavigationContainer independent>
       <Stack.Navigator

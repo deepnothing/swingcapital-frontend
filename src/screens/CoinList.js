@@ -32,7 +32,7 @@ export default function CoinList({ navigation, route }) {
 
   const refreshCoins = () => {
     setIsRefreshing(true);
-    fetch(`${baseUrl}/home`)
+    fetch(`${baseUrl}/coins`)
       .then((res) => res.json())
       .then((response) => {
         //get favourite coins fron database and change order of homescreen accordingly
@@ -91,7 +91,14 @@ export default function CoinList({ navigation, route }) {
     if (input === "") {
       setData(items);
     } else {
-      setData(items.filter((item) => item.name.includes(input.toLowerCase())));
+      setData(
+        items.filter(
+          (item) =>
+            item.name.toLowerCase().includes(input.toLowerCase()) ||
+            (item.symbol &&
+              item.symbol.toLowerCase().includes(input.toLowerCase()))
+        )
+      );
     }
   };
 
@@ -121,7 +128,7 @@ export default function CoinList({ navigation, route }) {
               navigation.navigate("Stats", {
                 coinName: item.name,
                 coinColor: item.color,
-                setTabBarShowing: route.params.setTabBarShowing
+                setTabBarShowing: route.params.setTabBarShowing,
               });
             }}
           >

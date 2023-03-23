@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, StyleSheet, Text, Dimensions, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LineGraph } from "react-native-graph";
@@ -27,7 +27,7 @@ const TouchMove = (props) => {
 
 export default function GoogleTrends({ bars }) {
   function calculateAveragesAndChanges(data) {
-    const numPeriods = data.length / 12;
+    const numPeriods = data?.length / 12;
     const output = [];
     for (let i = 0; i < numPeriods; i++) {
       const startIndex = i * 7;

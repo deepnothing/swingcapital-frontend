@@ -15,20 +15,19 @@ export default function StatsHeader({
   // const { coinName, coinColor } = route.params;
   return (
     <View style={style.heading}>
-      <View style={style.goBack}>
-        <TouchableOpacity
-          onPress={() => {
-            setTabBarShowing(true);
-            navigation.navigate("Home");
-          }}
-        >
-          <Feather name="arrow-left" color={"#000"} size={"25"} />
-        </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          setTabBarShowing(true);
+          navigation.navigate("Home");
+        }}
+        style={style.goBack}
+      >
+        <Feather name="arrow-left" color={"#000"} size={"25"} />
         <Text style={{ fontSize: 15, fontWeight: "600", color: "#FFC72C" }}>
           &nbsp;Back
         </Text>
-      </View>
-      <Text style={{ fontSize: 15 }}>CoinName</Text>
+      </TouchableOpacity>
+      <Text style={{ fontSize: 15 }}>{route.params.coinName}</Text>
       <View style={style.titleContainer} />
     </View>
   );
@@ -38,7 +37,7 @@ const style = StyleSheet.create({
   heading: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "space-between",
     padding: 10,
   },
