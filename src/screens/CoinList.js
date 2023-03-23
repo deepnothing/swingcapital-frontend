@@ -8,8 +8,8 @@ import {
   ActivityIndicator,
   Pressable,
   TextInput,
+  Dimensions,
 } from "react-native";
-import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
 import Coin from "../components/Coin";
 import Feather from "react-native-vector-icons/Feather";
@@ -108,9 +108,7 @@ export default function CoinList({ navigation, route }) {
 
   return (
     <View>
-      <Header>
-        {/* <SwingCapital text="Swing Capital" /> */}
-        {/* <Feather name="search" color={"#343434"} size={"25"} /> */}
+      <Header justifyContent="center">
         <View style={styles.coinSearchWrapper}>
           <Feather name="search" color={"#000"} size={"20"} />
           <TextInput
@@ -156,8 +154,8 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   coinSearchWrapper: {
-    width: "100%",
     borderRadius: 5,
+    width:'90%',
     backgroundColor: "#FFF",
     display: "flex",
     flexDirection: "row",

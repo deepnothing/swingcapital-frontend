@@ -50,7 +50,13 @@ function BotScreen({ route }) {
 
   return (
     <View>
-      <Header>{/* <SwingCapitalText text="Bots" /> */}</Header>
+      <Header justifyContent="space-between">
+        <Text style={style.botHeaderText}>Win: 50% / Loss: 50%</Text>
+        <View style={{ display: "flex", flexDirection: "column" }}>
+          <Text style={style.botHeaderText}>Demo Pair: BTC/USD</Text>
+          <Text style={style.botHeaderText}>Exchange: Kraken</Text>
+        </View>
+      </Header>
       <View
         style={{
           height:
@@ -58,9 +64,12 @@ function BotScreen({ route }) {
             Dimensions.get("window").height / 5.2,
         }}
       >
-        <ScrollView style={{ padding: 10 }}>
+        <ScrollView style={{ padding: 15, paddingTop: 20 }}>
           <Text>test trade 1</Text>
           <Text>test trade 2</Text>
+          <Text>test trade 1</Text>
+          <Text>test trade 2</Text>
+          <View style={{ height: 50 }} />
         </ScrollView>
         <TouchableOpacity
           disabled={isRegistered || isRegistered === undefined}
@@ -127,6 +136,11 @@ const style = StyleSheet.create({
     position: "absolute",
     right: "-10%",
     top: "10%",
+  },
+  botHeaderText: {
+    fontSize: 12,
+    fontWeight:'600',
+    marginHorizontal:10
   },
 });
 

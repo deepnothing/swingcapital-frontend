@@ -1,26 +1,19 @@
-import React, { useState, useEffect } from "react";
-import {
-  Modal,
-  Text,
-  View,
-  Pressable,
-  Appearance,
-  Dimensions,
-} from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import { Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { ThemeContext } from "../hooks/ThemeContext";
 import HomeScreen from "../screens/Home";
 import NewsScreen from "../screens/News";
 import BotScreen from "../screens/Bot";
 import SettingsScreen from "../screens/Settings";
 import Feather from "react-native-vector-icons/Feather";
-import { bottomRight } from "@shopify/react-native-skia";
 
 const Tab = createBottomTabNavigator();
 
 export default function UserStack({ user }) {
   const [isTabBarShowing, setTabBarShowing] = useState(true);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <NavigationContainer>
@@ -37,7 +30,11 @@ export default function UserStack({ user }) {
       >
         <Tab.Screen
           name="Home"
-          initialParams={{ user: user, setTabBarShowing: setTabBarShowing }}
+          initialParams={{
+            user: user,
+            setTabBarShowing: setTabBarShowing,
+            theme: theme,
+          }}
           component={HomeScreen}
           options={{
             tabBarActiveTintColor: "#FFF",
@@ -54,6 +51,7 @@ export default function UserStack({ user }) {
           }}
         />
         <Tab.Screen
+          initialParams={{ theme: theme }}
           name="News"
           component={NewsScreen}
           options={{
@@ -72,7 +70,7 @@ export default function UserStack({ user }) {
         />
         <Tab.Screen
           name="Bot"
-          initialParams={{ user: user }}
+          initialParams={{ user: user, theme: theme }}
           component={BotScreen}
           options={{
             tabBarActiveTintColor: "#FFF",
@@ -90,6 +88,7 @@ export default function UserStack({ user }) {
         />
         <Tab.Screen
           name="Settings"
+          initialParams={{ theme: theme }}
           component={SettingsScreen}
           options={{
             tabBarActiveTintColor: "#FFF",
