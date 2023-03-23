@@ -8,7 +8,6 @@ import { COUNTRIES } from "./CountryShapes";
 
 const Map = (props) => {
   const { dimensions, routeColor, data } = props;
-  console.log(data[0]);
   const [countryList, setCountryList] = useState([]);
   const mapExtent = useMemo(() => {
     return dimensions.width > dimensions.height / 2
@@ -28,12 +27,17 @@ const Map = (props) => {
   useEffect(() => {
     setCountryList(
       countryPaths.map((path, i) => {
-        console.log();
+        if (
+          data.find((item) => item.geoName === COUNTRIES[i].properties.name)
+            ?.geoName == undefined
+        ) {
+          console.log(COUNTRIES[i].properties.name);
+        }
         return (
           <Path
             key={COUNTRIES[i].properties.name}
             d={path}
-            stroke={"#000"}
+            stroke={"#FFF"}
             strokeOpacity={0.3}
             strokeWidth={0.6}
             fill={`rgb(${routeColor})`}
@@ -42,7 +46,7 @@ const Map = (props) => {
                 ?.geoName
                 ? data.find(
                     (item) => item.geoName === COUNTRIES[i].properties.name
-                  ).value[0] / 100
+                  ).value[0] / 50
                 : 0
             }
           />

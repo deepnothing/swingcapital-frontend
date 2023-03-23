@@ -55,7 +55,7 @@
                     ],
                     "id": "732",
                     "properties": {
-                        "name": "W. Sahara"
+                        "name": "Western Sahara"
                     }
                 },
                 {
@@ -280,7 +280,7 @@
                     ],
                     "id": "840",
                     "properties": {
-                        "name": "United States of America"
+                        "name": "United States"
                     }
                 },
                 {
@@ -583,7 +583,7 @@
                     ],
                     "id": "214",
                     "properties": {
-                        "name": "Dominican Rep."
+                        "name": "Dominican Republic"
                     }
                 },
                 {
@@ -1893,7 +1893,7 @@
                     ],
                     "id": "104",
                     "properties": {
-                        "name": "Myanmar"
+                        "name": "Myanmar (Burma)"
                     }
                 },
                 {
@@ -3216,7 +3216,7 @@
                     ],
                     "id": "070",
                     "properties": {
-                        "name": "Bosnia and Herz."
+                        "name": "Bosnia & Herzegovina"
                     }
                 },
                 {
@@ -3232,7 +3232,7 @@
                     ],
                     "id": "807",
                     "properties": {
-                        "name": "Macedonia"
+                        "name": "North Macedonia"
                     }
                 },
                 {
@@ -3294,7 +3294,7 @@
                     ],
                     "id": "780",
                     "properties": {
-                        "name": "Trinidad and Tobago"
+                        "name": "Trinidad & Tobago"
                     }
                 },
                 {
@@ -3311,7 +3311,7 @@
                     ],
                     "id": "728",
                     "properties": {
-                        "name": "S. Sudan"
+                        "name": "South Sudan"
                     }
                 }
             ]
