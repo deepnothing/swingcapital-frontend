@@ -9,7 +9,7 @@ export default function SocialGraph({ color }) {
     backgroundGradientToOpacity: 0,
     fillShadowGradientFrom: color,
     fillShadowGradientT: color,
-    fillShadowGradientFromOpacity: 0.5,
+    fillShadowGradientFromOpacity: 0.5, 
     fillShadowGradientToOpacity: 0.5,
     decimalPlaces: 0,
     color: (opacity = 1) => color,
@@ -37,7 +37,7 @@ export default function SocialGraph({ color }) {
           labels: ["3pm", "4pm", "5pm", "6pm", "7pm", "8pm"],
           datasets: [
             {
-              data: [10, 9, 3, 7, 4, 5],
+              data: [10, 9, 3, 7, 4, 5,0],
             },
           ],
         }}

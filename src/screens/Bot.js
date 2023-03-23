@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ScrollView,
+  Image,
+  FlatList,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import * as d3 from "d3";
@@ -24,6 +26,7 @@ const screenHeight = Dimensions.get("window").height;
 function BotScreen({ route }) {
   const [isRegistered, setRegistered] = useState();
   const [isRegistering, setIsRegistering] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   useEffect(() => {
     const userRegistered = ref(db, `users/${route.params.user.uid}`);
     onValue(userRegistered, (snapshot) => {
@@ -48,13 +51,24 @@ function BotScreen({ route }) {
       });
   };
 
+  const data = ["trade1", "trade2"];
+
   return (
     <View>
       <Header justifyContent="space-between">
         <Text style={style.botHeaderText}>Win: 50% / Loss: 50%</Text>
-        <View style={{ display: "flex", flexDirection: "column" }}>
-          <Text style={style.botHeaderText}>Demo Pair: BTC/USD</Text>
-          <Text style={style.botHeaderText}>Exchange: Kraken</Text>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            style={{ width: 25, height: 25, borderRadius: 6 }}
+            source={require("../../assets/kraken.jpeg")}
+          />
+          <Text style={style.botHeaderText}>Demo : ETH/USD</Text>
         </View>
       </Header>
       <View
@@ -64,13 +78,15 @@ function BotScreen({ route }) {
             Dimensions.get("window").height / 5.2,
         }}
       >
-        <ScrollView style={{ padding: 15, paddingTop: 20 }}>
-          <Text>test trade 1</Text>
-          <Text>test trade 2</Text>
-          <Text>test trade 1</Text>
-          <Text>test trade 2</Text>
-          <View style={{ height: 50 }} />
-        </ScrollView>
+        <FlatList
+          data={data}
+          renderItem={({ item }) => <Text>{item}</Text>}
+          keyExtractor={(item) => item}
+          contentContainerStyle={{ padding: 15, paddingTop: 20 }}
+          // onRefresh={onRefresh}
+          // refreshing={isRefreshing}
+          ListFooterComponent={<View style={{ height: 50 }} />}
+        />
         <TouchableOpacity
           disabled={isRegistered || isRegistered === undefined}
           style={style.register}
@@ -139,8 +155,8 @@ const style = StyleSheet.create({
   },
   botHeaderText: {
     fontSize: 12,
-    fontWeight:'600',
-    marginHorizontal:10
+    fontWeight: "600",
+    marginHorizontal: 12,
   },
 });
 
