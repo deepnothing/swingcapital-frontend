@@ -7,7 +7,9 @@ export default function AllTimeChart({ data }) {
   // for performance reasons we are only taking the prices for every third day to use on the homescreen charts
   const [strippedArray, setNewArr] = useState(() => {
     const tempArr = [];
-    for (let i = 2; i < data.prices.length; i += 3) {
+    // use timeinterval to only get the graph data every X day to increase rendering speeds
+    const timeInterval = 25;
+    for (let i = 2; i < data.prices.length; i += timeInterval) {
       tempArr.push(data.prices[i][1]);
     }
     return tempArr;
