@@ -22,7 +22,7 @@ function WelcomeScreen({ navigation }) {
               style={styles.create}
               onPress={() => navigation.navigate("Sign Up")}
             >
-              <Text style={styles.createText}>Create an account</Text>
+              <Text style={styles.createText}>Sign Up</Text>
             </Pressable>
           </View>
         </View>
