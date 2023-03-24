@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, View, Text, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ThemeContext } from "../hooks/ThemeContext";
@@ -61,7 +61,8 @@ export default function UserStack({ user }) {
           tabBarStyle: {
             backgroundColor: "#ffc72c",
             display: isTabBarShowing ? "flex" : "none",
-            height: Dimensions.get("window").height / 12,
+            //height: Dimensions.get("window").height / 12,
+            //height: "9%",
           },
         }}
         sceneContainerStyle={{ backgroundColor: "#FFFFFF" }}
@@ -75,14 +76,24 @@ export default function UserStack({ user }) {
             options={{
               tabBarActiveTintColor: "#FFF",
               tabBarInactiveTintColor: "#000",
-              tabBarShowLabel: true,
-              tabBarLabelStyle: { marginBottom: 5 },
+              tabBarShowLabel: false,
               tabBarIcon: ({ focused }) => (
-                <Feather
-                  name={i.iconName}
-                  color={focused ? "white" : "#343434"}
-                  size={"24"}
-                />
+                <View style={style.tabIcon}>
+                  <Feather
+                    //style={{ paddingVertical: 5 }}
+                    name={i.iconName}
+                    color={focused ? "white" : "#343434"}
+                    size={"24"}
+                  />
+                  <Text
+                    style={[
+                      style.tabText,
+                      { color: focused ? "white" : "#343434" },
+                    ]}
+                  >
+                    {i.name}
+                  </Text>
+                </View>
               ),
             }}
           />
@@ -91,3 +102,15 @@ export default function UserStack({ user }) {
     </NavigationContainer>
   );
 }
+
+const style = StyleSheet.create({
+  tabIcon: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  tabText: {
+    fontSize: 10,
+    marginVertical: 3,
+  },
+});
