@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from "react";
 import {
   Text,
-  Pressable,
   View,
   StyleSheet,
-  SafeAreaView,
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
-  ScrollView,
   Image,
   FlatList,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
-import * as d3 from "d3";
 import Header from "../components/Header";
-import SwingCapitalText from "../components/SwingCapital";
+import BigButton from "../components/BigButton";
 import { db } from "../config/firebase";
 import { ref, onValue, update } from "firebase/database";
-import { getAuth } from "firebase/auth";
-import { useAuth } from "../hooks/useAuth";
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -87,9 +81,8 @@ function BotScreen({ route }) {
           // refreshing={isRefreshing}
           ListFooterComponent={<View style={{ height: 50 }} />}
         />
-        <TouchableOpacity
+        <BigButton
           disabled={isRegistered || isRegistered === undefined}
-          style={style.register}
           onPress={registerForBot}
         >
           <View style={style.activityWrapper}>
@@ -113,32 +106,13 @@ function BotScreen({ route }) {
               />
             )}
           </View>
-        </TouchableOpacity>
+        </BigButton>
       </View>
     </View>
   );
 }
 
 const style = StyleSheet.create({
-  register: {
-    width: "95%",
-    height: 60,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    marginVertical: 10,
-    borderRadius: 5,
-    backgroundColor: "#FFC72C",
-    shadowColor: "rgba(60, 64, 67, 0.3)",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 2,
-    elevation: 2,
-  },
   registerText: {
     color: "#FFFF",
     fontSize: 20,

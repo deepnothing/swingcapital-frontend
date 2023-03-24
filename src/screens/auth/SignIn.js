@@ -12,6 +12,7 @@ import {
 } from "react-native";
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import BigButton from "../../components/BigButton";
 
 const auth = getAuth();
 
@@ -29,7 +30,7 @@ function SignInScreen({ navigation }) {
         error: "Email and password are mandatory.",
       });
 
-      Alert.alert("Error", 'Email and password are mandatory.', [
+      Alert.alert("Error", "Email and password are mandatory.", [
         {
           text: "Cancel",
           onPress: () => console.log("Cancel Pressed"),
@@ -46,7 +47,7 @@ function SignInScreen({ navigation }) {
     } catch (error) {
       console.log(error);
 
-      Alert.alert("Error", error.message.replace('Firebase:',''), [
+      Alert.alert("Error", error.message.replace("Firebase:", ""), [
         {
           text: "Cancel",
           onPress: () => console.log("Cancel Pressed"),
@@ -95,14 +96,9 @@ function SignInScreen({ navigation }) {
               />
             </View>
           </View>
-          <Pressable className="bg-[#ffc72c] rounded-3xl py-2 px-4 m-4">
-            <Text
-              className="text-center text-black font-bold text-base"
-              onPress={signIn}
-            >
-              Sign In
-            </Text>
-          </Pressable>
+          <BigButton onPress={signIn}>
+            <Text style={styles.buttonText}>Sign In</Text>
+          </BigButton>
         </View>
         <Text className="text-center text-black font-main text-base">
           Don't Have an account?{" "}
@@ -132,5 +128,10 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     backgroundColor: "#fff",
     color: "#424242",
+  },
+  buttonText: {
+    color: "#FFFF",
+    fontSize: 20,
+    fontWeight: "600",
   },
 });

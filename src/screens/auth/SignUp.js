@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, TextInput, Text, View } from "react-native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "../../config/firebase";
 import { set, ref } from "firebase/database";
+import BigButton from "../../components/BigButton";
 
 const auth = getAuth();
 
@@ -14,7 +15,6 @@ function SignUpScreen({ navigation }) {
     error: "",
   });
 
- 
   async function signUp() {
     if (value.email === "" || value.password === "") {
       setValue({
@@ -75,14 +75,11 @@ function SignUpScreen({ navigation }) {
               />
             </View>
           </View>
-          <Pressable className="bg-[#ffc72c] rounded-3xl py-2 px-4 m-4">
-            <Text
-              className="text-center text-black font-bold text-base"
-              onPress={signUp}
-            >
+          <BigButton onPress={signUp}>
+            <Text style={styles.buttonText}>
               Sign Up
             </Text>
-          </Pressable>
+          </BigButton>
         </View>
         <Text className="text-center text-black font-main text-base">
           Have an account?{" "}
@@ -113,4 +110,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     color: "#424242",
   },
+  buttonText:{
+    color: "#FFFF",
+    fontSize: 20,
+    fontWeight: "600",
+  }
 });
