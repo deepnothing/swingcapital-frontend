@@ -15,8 +15,10 @@ import Feather from "react-native-vector-icons/Feather";
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import BigButton from "../../components/BigButton";
-import SwingCapitalText from "../../components/SwingCapital";
 import { SafeAreaView } from "react-native-safe-area-context";
+import WebView from "react-native-webview";
+
+import { html } from "./swingWebView";
 
 const auth = getAuth();
 
@@ -71,11 +73,13 @@ function SignInScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <View />
       <View style={styles.mainContent}>
-        <SwingCapitalText
-          text={"Sign In"}
-          rigthAnchorLength={13}
-          leftAnchorLength={9}
-        />
+        <View style={{ width: "100%", height: 70 }}>
+          <WebView
+            source={{
+              html: html("Sign In"),
+            }}
+          />
+        </View>
         <View style={styles.input}>
           <Feather name="mail" color={"#C3C3C3"} size={"19"} />
           <TextInput
@@ -96,7 +100,7 @@ function SignInScreen({ navigation }) {
         </View>
 
         <BigButton onPress={signIn} width="100%">
-          <Text style={styles.buttonText}>Sign In</Text>
+          <Feather name="log-in" color={"#FFFFFF"} size={"25"} />
         </BigButton>
       </View>
       <Text className="text-center text-black font-main text-base">

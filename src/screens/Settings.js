@@ -77,7 +77,7 @@ function Settings() {
   };
   return (
     <View>
-      <Header>{/* <SwingCapitalText text="Settings" /> */}</Header>
+      <Header></Header>
       <View style={styles.options}>
         <View style={styles.row}>
           <TouchableOpacity>

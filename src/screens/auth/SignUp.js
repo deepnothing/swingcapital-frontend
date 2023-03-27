@@ -13,7 +13,8 @@ import { db } from "../../config/firebase";
 import Feather from "react-native-vector-icons/Feather";
 import { set, ref } from "firebase/database";
 import BigButton from "../../components/BigButton";
-import SwingCapitalText from "../../components/SwingCapital";
+import WebView from "react-native-webview";
+import { html } from "./swingWebView";
 
 const auth = getAuth();
 
@@ -58,11 +59,13 @@ function SignUpScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <View />
       <View style={styles.mainContent}>
-        <SwingCapitalText
-          text={"Sign Up"}
-          rigthAnchorLength={13}
-          leftAnchorLength={9}
-        />
+        <View style={{ width: "100%", height: 70 }}>
+          <WebView
+            source={{
+              html: html("Sign Up"),
+            }}
+          />
+        </View>
         <View style={styles.input}>
           <Feather name="mail" color={"#C3C3C3"} size={"19"} />
           <TextInput
@@ -83,7 +86,7 @@ function SignUpScreen({ navigation }) {
         </View>
 
         <BigButton onPress={signUp} width="100%">
-          <Text style={styles.buttonText}>Sign Up</Text>
+          <Feather name="user-check" color={"#FFF"} size={"25"} />
         </BigButton>
       </View>
       <Text className="text-center text-black font-main text-base">
@@ -135,6 +138,6 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     justifyContent: "space-evenly",
-    marginHorizontal:20
+    marginHorizontal: 20,
   },
 });
