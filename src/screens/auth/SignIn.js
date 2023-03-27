@@ -10,9 +10,13 @@ import {
   View,
   Alert,
 } from "react-native";
+import Feather from "react-native-vector-icons/Feather";
+
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import BigButton from "../../components/BigButton";
+import SwingCapitalText from "../../components/SwingCapital";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const auth = getAuth();
 
@@ -64,62 +68,53 @@ function SignInScreen({ navigation }) {
   }
 
   return (
-    <View className="w-full h-full">
-      <View className="mx-4 h-5/6 flex justify-center align-center space-y-6">
-        {/* <Image
-          source={logo}
-          style={{ width: 100, height: 100, alignSelf: "center" }}
-        /> */}
-        <Text className="block  font-title text-2xl font-bold text-center text-black">
-          Sign In
-        </Text>
-
-        <View className="space-y-6">
-          <View className="mt-1 space-y-4">
-            <View className="flex-1 font-main flex-row justify-center align-center rounded-xl px-1 py-1 bg-gray-100">
-              <Icon style={styles.icon} name="email" size={18} color="gray" />
-              <TextInput
-                placeholder="Email"
-                value={value.email}
-                className="flex-1 pt-2.5 pr-2.5 pb-2.5 pl-0"
-                onChangeText={(text) => setValue({ ...value, email: text })}
-              />
-            </View>
-
-            <View className="flex-1 flex-row justify-center align-center rounded-xl px-1 py-1 bg-gray-100">
-              <Icon style={styles.icon} name="lock" size={18} color="gray" />
-              <TextInput
-                placeholder="Password"
-                className="flex-1 pt-2.5 pr-2.5 pb-2.5 pl-0"
-                onChangeText={(text) => setValue({ ...value, password: text })}
-                secureTextEntry={true}
-              />
-            </View>
-          </View>
-          <BigButton onPress={signIn}>
-            <Text style={styles.buttonText}>Sign In</Text>
-          </BigButton>
+    <SafeAreaView style={styles.container}>
+      <View />
+      <View style={styles.mainContent}>
+        <SwingCapitalText
+          text={"Sign In"}
+          rigthAnchorLength={13}
+          leftAnchorLength={9}
+        />
+        <View style={styles.input}>
+          <Feather name="mail" color={"#C3C3C3"} size={"19"} />
+          <TextInput
+            placeholder="Email"
+            value={value.email}
+            style={{ padding: 5 }}
+            onChangeText={(text) => setValue({ ...value, email: text })}
+          />
         </View>
-        <Text className="text-center text-black font-main text-base">
-          Don't Have an account?{" "}
-          <Text
-            className="text-[#ffc72c]"
-            onPress={() => navigation.navigate("Sign Up")}
-          >
-            Sign Up
-          </Text>
-        </Text>
+        <View style={styles.input}>
+          <Feather name="lock" color={"#C3C3C3"} size={"19"} />
+          <TextInput
+            style={{ padding: 5 }}
+            placeholder="Password"
+            onChangeText={(text) => setValue({ ...value, password: text })}
+            secureTextEntry={true}
+          />
+        </View>
+
+        <BigButton onPress={signIn} width="100%">
+          <Text style={styles.buttonText}>Sign In</Text>
+        </BigButton>
       </View>
-    </View>
+      <Text className="text-center text-black font-main text-base">
+        Don't Have an account?{" "}
+        <Text
+          className="text-[#ffc72c]"
+          onPress={() => navigation.navigate("Sign Up")}
+        >
+          Sign Up
+        </Text>
+      </Text>
+    </SafeAreaView>
   );
 }
 
 export default SignInScreen;
 
 const styles = StyleSheet.create({
-  icon: {
-    padding: 10,
-  },
   input: {
     flex: 1,
     paddingTop: 10,
@@ -133,5 +128,26 @@ const styles = StyleSheet.create({
     color: "#FFFF",
     fontSize: 20,
     fontWeight: "600",
+  },
+  input: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 15,
+    height: 60,
+    width: "100%",
+    borderRadius: 7,
+    backgroundColor: "#F5F5F5",
+  },
+  mainContent: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    height: "40%",
+  },
+  container: {
+    height: "100%",
+    justifyContent: "space-evenly",
+    marginHorizontal: 20,
   },
 });

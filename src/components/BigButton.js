@@ -5,7 +5,7 @@ export default function BigButton(props) {
     <Pressable
       disabled={props.disabled}
       onPress={props.onPress}
-      style={styles.button}
+      style={[styles.button, { width: props.width ? props.width : "95%" }]}
     >
       {props.children}
     </Pressable>
@@ -13,7 +13,6 @@ export default function BigButton(props) {
 }
 const styles = StyleSheet.create({
   button: {
-    width: "95%",
     height: 60,
     display: "flex",
     alignItems: "center",

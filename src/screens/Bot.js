@@ -67,16 +67,18 @@ function BotScreen({ route }) {
       </Header>
       <View
         style={{
-          height:
-            Dimensions.get("window").height -
-            Dimensions.get("window").height / 5.2,
+          height: "87%",
         }}
       >
         <FlatList
           data={data}
           renderItem={({ item }) => <Text>{item}</Text>}
           keyExtractor={(item) => item}
-          contentContainerStyle={{ padding: 15, paddingTop: 20 }}
+          contentContainerStyle={{
+            padding: 15,
+            paddingTop: 20,
+            height: "100%",
+          }}
           // onRefresh={onRefresh}
           // refreshing={isRefreshing}
           ListFooterComponent={<View style={{ height: 50 }} />}

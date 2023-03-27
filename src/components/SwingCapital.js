@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View, Animated, Easing } from "react-native";
 
-const SwingCapitalText = ({ text }) => {
+const SwingCapitalText = ({ text, leftAnchorLength, rigthAnchorLength }) => {
   const swingValue = React.useRef(new Animated.Value(-1)).current;
   const animationDuration = 850;
   const color = "#343434";
@@ -12,10 +12,9 @@ const SwingCapitalText = ({ text }) => {
   });
 
   const scale = swingValue.interpolate({
-    inputRange: [-1, 1,],
-    outputRange: [0.97, 1.03],
+    inputRange: [-1, 1],
+    outputRange: [0.98, 1.02],
   });
-
 
   const transformStyle = React.useMemo(
     () => ({
@@ -36,10 +35,7 @@ const SwingCapitalText = ({ text }) => {
 
   useEffect(() => {
     const animation = Animated.loop(
-      Animated.sequence([
-        swinging(1),
-        swinging(-1)
-      ])
+      Animated.sequence([swinging(1), swinging(-1)])
     );
     animation.start();
     return () => {
@@ -53,8 +49,18 @@ const SwingCapitalText = ({ text }) => {
       <View style={[styles.wallRight, { backgroundColor: color }]} />
       <View style={[styles.wallTop, { backgroundColor: color }]} />
       <Animated.View style={transformStyle}>
-        <View style={[styles.ropeLeft, { backgroundColor: color }]} />
-        <View style={[styles.ropeRight, { backgroundColor: color }]} />
+        <View
+          style={[
+            styles.ropeLeft,
+            { backgroundColor: color, height: leftAnchorLength },
+          ]}
+        />
+        <View
+          style={[
+            styles.ropeRight,
+            { backgroundColor: color, height: rigthAnchorLength },
+          ]}
+        />
         <Text style={[styles.brand, { color: color }]}>{text}</Text>
       </Animated.View>
     </View>
@@ -72,7 +78,6 @@ const styles = StyleSheet.create({
   },
   brandcontainer: {
     position: "relative",
-    alignSelf: "flex-start",
   },
   wallLeft: {
     position: "absolute",
@@ -104,14 +109,12 @@ const styles = StyleSheet.create({
   },
   ropeLeft: {
     position: "absolute",
-    height: 7.5,
     width: 4,
     left: 14,
   },
   ropeRight: {
     position: "absolute",
-    height: 7.5,
     width: 3.7,
-    right: 9.6,
+    right: 14,
   },
 });
