@@ -11,7 +11,7 @@ export default function Header(props) {
         shadowRadius: 5,
         elevation: 10,
         zIndex: 1,
-        height: Dimensions.get("window").height / 10,
+        height: Dimensions.get("window").height / 9,
         display: "flex",
         flexDirection: "row",
         alignItems: "center",

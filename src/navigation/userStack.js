@@ -61,8 +61,8 @@ export default function UserStack({ user }) {
           tabBarStyle: {
             backgroundColor: "#ffc72c",
             display: isTabBarShowing ? "flex" : "none",
-            //height: Dimensions.get("window").height / 12,
-            //height: "9%",
+            borderTopWidth: 3,
+            borderTopColor: "#ffc72c",
           },
         }}
         sceneContainerStyle={{ backgroundColor: "#FFFFFF" }}
@@ -76,24 +76,14 @@ export default function UserStack({ user }) {
             options={{
               tabBarActiveTintColor: "#FFF",
               tabBarInactiveTintColor: "#000",
-              tabBarShowLabel: false,
+              tabBarShowLabel: true,
+              tabBarLabelStyle: { top: -3},
               tabBarIcon: ({ focused }) => (
-                <View style={style.tabIcon}>
-                  <Feather
-                    //style={{ paddingVertical: 5 }}
-                    name={i.iconName}
-                    color={focused ? "white" : "#343434"}
-                    size={"24"}
-                  />
-                  <Text
-                    style={[
-                      style.tabText,
-                      { color: focused ? "white" : "#343434" },
-                    ]}
-                  >
-                    {i.name}
-                  </Text>
-                </View>
+                <Feather
+                  name={i.iconName}
+                  color={focused ? "white" : "#343434"}
+                  size={"24"}
+                />
               ),
             }}
           />
@@ -102,15 +92,3 @@ export default function UserStack({ user }) {
     </NavigationContainer>
   );
 }
-
-const style = StyleSheet.create({
-  tabIcon: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  tabText: {
-    fontSize: 10,
-    marginVertical: 3,
-  },
-});
