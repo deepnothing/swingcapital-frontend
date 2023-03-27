@@ -37,6 +37,7 @@
     "react-native-graph": "^1.0.1",
     "react-native-inset-shadow": "^1.0.3",
     "react-native-linear-gradient": "^2.6.2",
+    "react-native-maps": "^1.4.0",
     "react-native-palette": "^1.1.0",
     "react-native-paper": "^5.2.0",
     "react-native-pathjs-charts": "^0.0.34",

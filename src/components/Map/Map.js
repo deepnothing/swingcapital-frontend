@@ -37,7 +37,7 @@ const Map = (props) => {
           <Path
             key={COUNTRIES[i].properties.name}
             d={path}
-            stroke={"#FFF"}
+            stroke={"#000"}
             strokeOpacity={0.3}
             strokeWidth={0.6}
             fill={`rgb(${routeColor})`}

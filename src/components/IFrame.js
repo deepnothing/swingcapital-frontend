@@ -30,6 +30,7 @@ export default function IFrame({ url, setIframeVisible }) {
           <Text style={styles.close}>Exit</Text>
         </Pressable>
       </View>
+      
       <WebView
         source={{
           uri: url,

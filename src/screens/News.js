@@ -88,7 +88,7 @@ function News() {
 
   return (
     <View>
-      <Header>
+      <Header justifyContent="center">
         {/* <SwingCapital text="News" /> */}
         <View style={styles.percentWrapper}>
           <PercentBar color="#E10600" percent={negativePercent} left />
@@ -113,11 +113,13 @@ function News() {
         refreshing={isRefreshing}
       />
       <Modal animationType="slide" transparent={true} visible={isIframeVisible}>
-        <IFrame
-          visible={isIframeVisible}
-          setIframeVisible={setIframeVisible}
-          url={iFrameURL}
-        />
+        {isIframeVisible ? (
+          <IFrame
+            visible={isIframeVisible}
+            setIframeVisible={setIframeVisible}
+            url={iFrameURL}
+          />
+        ) : null}
       </Modal>
     </View>
   );
@@ -125,14 +127,13 @@ function News() {
 
 export default News;
 const styles = StyleSheet.create({
-  
   percentWrapper: {
-    width: '50%',
+    width: "90%",
     position: "relative",
     height: 8,
     display: "flex",
     flexDirection: "row",
-    top:25
+    top: "15%",
   },
   percentBar: {
     borderRadius: 10,
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   listStyle: {
-    paddingBottom: '25%',
+    paddingBottom: "25%",
     paddingHorizontal: 2,
     marginHorizontal: 15,
     paddingTop: 15,

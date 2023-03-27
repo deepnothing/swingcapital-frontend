@@ -59,7 +59,7 @@ export default function Article({ data, onPress }) {
         ? "Bullish"
         : data.sentiment < 0
         ? "Bearish"
-        : "Unkown",
+        : "Neutral",
   };
 
   return (

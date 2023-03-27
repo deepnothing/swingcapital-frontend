@@ -61,7 +61,10 @@ export default ({ route, navigation }) => {
           )}
           <ScrollView style={styles.socialData}>
             {googleData !== undefined ? (
-              <GoogleTrends bars={googleData[0].search} />
+              <GoogleTrends
+                routeColor={route.params.coinColor}
+                bars={googleData[0].search}
+              />
             ) : (
               <Text>Loading</Text>
             )}

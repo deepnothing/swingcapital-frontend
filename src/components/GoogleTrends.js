@@ -25,7 +25,7 @@ const TouchMove = (props) => {
   );
 };
 
-export default function GoogleTrends({ bars }) {
+export default function GoogleTrends({ bars, routeColor }) {
   function calculateAveragesAndChanges(data) {
     const numPeriods = data?.length / 12;
     const output = [];
@@ -69,17 +69,18 @@ export default function GoogleTrends({ bars }) {
         <Text style={{ fontSize: "12%" }}> Search Trends last 7 days</Text>
       </View>
       <View style={styles.barWrapper}>
-        {calculateAveragesAndChanges(bars).map((i, index) => (
+        {bars.map((i, index) => (
           <TouchMove
             key={index}
             time={i.time}
             style={[
               styles.bar,
               {
-                height: `${i.averageValue}%`,
-                width: 20,
+                height: `${i.value}%`,
+                width: 1,
                 // opacity: i.value / 80,
-                backgroundColor: i.changePercentage < 0 ? "red" : "#008000",
+                //backgroundColor: i.changePercentage < 0 ? "red" : "#008000",
+                backgroundColor: `rgb(${routeColor})`,
               },
             ]}
           />
