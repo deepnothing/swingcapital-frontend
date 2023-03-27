@@ -3,7 +3,7 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import bullImage from "../../assets/bull.png";
 import bearImage from "../../assets/bear.png";
-import questionImage from "../../assets/question.png";
+import neutralImage from "../../assets/neutral.png";
 
 export default function Article({ data, onPress }) {
   const formatDate = (input) => {
@@ -53,7 +53,7 @@ export default function Article({ data, onPress }) {
         ? bullImage
         : data.sentiment < 0
         ? bearImage
-        : questionImage,
+        : neutralImage,
     title:
       data.sentiment > 0
         ? "Bullish"
