@@ -16,8 +16,8 @@ const Map = (props) => {
   }, [dimensions]);
   const countryPaths = useMemo(() => {
     const projection = geoCylindricalStereographic()
-      .translate([dimensions.width / 2, dimensions.height / 5])
-      .scale(dimensions.width / 6);
+      .translate([dimensions.width / 2, dimensions.height / 8])
+      .scale(dimensions.width / 4);
 
     const geoPath = d3.geoPath().projection(projection);
     const svgPaths = COUNTRIES.map(geoPath);
@@ -34,92 +34,63 @@ const Map = (props) => {
           console.log(COUNTRIES[i].properties.name);
         }
         return (
-          <Path
-            key={COUNTRIES[i].properties.name}
-            d={path}
-            stroke={"#000"}
-            strokeOpacity={0.3}
-            strokeWidth={0.6}
-            fill={`rgb(${routeColor})`}
-            opacity={
-              data.find((item) => item.geoName === COUNTRIES[i].properties.name)
-                ?.geoName
-                ? data.find(
-                    (item) => item.geoName === COUNTRIES[i].properties.name
-                  ).value[0] / 50
-                : 0
-            }
-          />
+          <SvgPanZoomElement
+            // x={50}
+            // y={50}
+            onClick={() => {
+              console.log(COUNTRIES[i].properties.name);
+            }}
+            onClickRelease={() => {
+              console.log("onClickRelease!");
+            }}
+          >
+            <Path
+              key={COUNTRIES[i].properties.name}
+              d={path}
+              stroke={"#000"}
+              strokeOpacity={0.3}
+              strokeWidth={0.6}
+              fill={`rgb(${routeColor})`}
+              opacity={
+                data.find(
+                  (item) => item.geoName === COUNTRIES[i].properties.name
+                )?.geoName
+                  ? data.find(
+                      (item) => item.geoName === COUNTRIES[i].properties.name
+                    ).value[0] / 50
+                  : 0
+              }
+            />
+          </SvgPanZoomElement>
         );
       })
     );
   }, []);
   return (
-    <>
-      <View
-        style={{
-          borderWidth: 1,
-          height: dimensions.height / 3,
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <View
-          style={{
-            borderWidth: 1,
-            width: "100%",
-            transform: [{ scale: 0.95 }],
-          }}
-        >
-          <Svg width={"100%"} height={"100%"}>
-            <G>{countryList.map((x) => x)}</G>
-          </Svg>
-        </View>
-      </View>
-
-      {/* <SvgPanZoom
-        minScale={0.5}
-        initialZoom={1}
-        maxScale={100}
+    <View
+      style={{
+        borderWidth: 3,
+        height: dimensions.height / 3,
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <SvgPanZoom
+        canvasHeight={500}
+        canvasWidth={dimensions.width}
+        minScale={0.1}
+        initialZoom={0.7}
         onZoom={(zoom) => {
           console.log("onZoom:" + zoom);
         }}
-        canvasStyle={{
-          borderWidth: 1,
-          width: "100%",
-          height:dimensions.height / 3,
-        // transform: [{ scale: 0.95 }],
-        }}
-        viewStyle={{
-          borderWidth: 1,
-          borderColor:'red',
-          display: "flex",
-        //   justifyContent: "center",
-        //   alignItems: "center",
-          height:dimensions.height / 3
-        }}
+        canvasStyle={{ borderWidth: 2, height: "100%", width: "100%" }}
+        viewStyle={{ backgroundColor: "green", height: "100%", width: "100%" }}
       >
-        
-        <SvgPanZoomElement
-          onClick={() => {
-            console.log("onClick!");
-          }}
-          onClickCanceled={() => {
-            console.log("onClickCanceled!");
-          }}
-          onClickRelease={() => {
-            console.log("onClickRelease!");
-          }}
-          onDrag={() => {
-            console.log("onDrag!");
-          }}
-        >
-          <G>{countryList.map((x) => x)}</G>
-        </SvgPanZoomElement>
-      </SvgPanZoom> */}
-    </>
+        <G>{countryList.map((x) => x)}</G>
+      </SvgPanZoom>
+    </View>
   );
 };
 export default Map;

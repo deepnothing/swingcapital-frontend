@@ -12,6 +12,8 @@ import StatsHeader from "../components/StatsHeader";
 import GoogleTrends from "../components/GoogleTrends";
 import Map from "../components/Map/Map";
 import SocialCard from "../components/SocialCard";
+import TwitterCard from "../components/TwitterCard";
+import MapView, { Geojson } from "react-native-maps";
 
 const dimensions = Dimensions.get("window");
 
@@ -39,6 +41,20 @@ export default ({ route, navigation }) => {
       .finally(() => setGoogleDataLoading(false));
   }, []);
 
+  const myPlace = {
+    type: "FeatureCollection",
+    features: [
+      {
+        type: "Feature",
+        properties: {},
+        geometry: {
+          type: "Point",
+          coordinates: [64.165329, 48.844287],
+        },
+      },
+    ],
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
@@ -49,53 +65,51 @@ export default ({ route, navigation }) => {
           selectedMetric={selectedMetric}
           setSelectedMetric={setSelectedMetric}
         />
-        <View>
+        {googleData !== undefined ? (
+          <Map
+            dimensions={dimensions}
+            routeColor={route.params.coinColor}
+            data={googleData[0].map}
+          />
+        ) : (
+          <Text>Loading</Text>
+        )}
+        <ScrollView style={styles.socialData}>
           {googleData !== undefined ? (
-            <Map
-              dimensions={dimensions}
+            <GoogleTrends
               routeColor={route.params.coinColor}
-              data={googleData[0].map}
+              bars={googleData[0].search}
             />
           ) : (
             <Text>Loading</Text>
           )}
-          <ScrollView style={styles.socialData}>
-            {googleData !== undefined ? (
-              <GoogleTrends
-                routeColor={route.params.coinColor}
-                bars={googleData[0].search}
+          <View style={styles.column}>
+            <TwitterCard
+              color="rgba(29, 161, 242)"
+              name="Twitter"
+              image={require("../../assets/twitter.png")}
+            />
+            <View style={styles.socialRow}>
+              <SocialCard
+                color="rgba(193, 53, 132)"
+                name="Instagram"
+                image={require("../../assets/instagram.png")}
               />
-            ) : (
-              <Text>Loading</Text>
-            )}
-            <View style={styles.column}>
-              <View style={styles.socialRow}>
-                <SocialCard
-                  color="rgba(29, 161, 242)"
-                  name="Twitter"
-                  image={require("../../assets/twitter.png")}
-                />
-                <SocialCard
-                  color="rgba(193, 53, 132)"
-                  name="Instagram"
-                  image={require("../../assets/instagram.png")}
-                />
-              </View>
-              <View style={styles.socialRow}>
-                <SocialCard
-                  color="rgba(255, 86, 0)"
-                  name="Reddit"
-                  image={require("../../assets/reddit.png")}
-                />
-                <SocialCard
-                  color="rgba(255, 0, 0)"
-                  name="Youtube"
-                  image={require("../../assets/youtube.png")}
-                />
-              </View>
+              <SocialCard
+                color="rgba(255, 0, 0)"
+                name="Youtube"
+                image={require("../../assets/youtube.png")}
+              />
             </View>
-          </ScrollView>
-        </View>
+            <View style={styles.socialRow}>
+              <SocialCard
+                color="rgba(255, 86, 0)"
+                name="Reddit"
+                image={require("../../assets/reddit.png")}
+              />
+            </View>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     </View>
   );

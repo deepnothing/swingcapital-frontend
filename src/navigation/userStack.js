@@ -63,6 +63,7 @@ export default function UserStack({ user }) {
             display: isTabBarShowing ? "flex" : "none",
             borderTopWidth: 3,
             borderTopColor: "#ffc72c",
+            
           },
         }}
         sceneContainerStyle={{ backgroundColor: "#FFFFFF" }}
@@ -77,7 +78,7 @@ export default function UserStack({ user }) {
               tabBarActiveTintColor: "#FFF",
               tabBarInactiveTintColor: "#000",
               tabBarShowLabel: true,
-              tabBarLabelStyle: { top: -3},
+              tabBarLabelStyle: { top: -3 },
               tabBarIcon: ({ focused }) => (
                 <Feather
                   name={i.iconName}

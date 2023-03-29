@@ -100,27 +100,72 @@ export default function Coin({
               <Feather name="clock" color={"#343434"} size={"19"} />
               <Text style={{ fontSize: 10 }}>24hr</Text>
             </View>
-            <Text
-              style={{
-                fontSize: 13,
-                fontWeight: "500",
-                color: Math.sign(coinData.priceChange) === 1 ? "green" : "red",
-                marginLeft: 9,
-                width: 60,
-              }}
-            >
-              {Math.sign(coinData.priceChange) === 1
-                ? "+" +
-                  Math.round((coinData.priceChange + Number.EPSILON) * 100) /
-                    100
-                : Math.round((coinData.priceChange + Number.EPSILON) * 100) /
-                  100}
-              %
+            <View>
+              <Text
+                style={{
+                  fontSize: 10,
+                  fontWeight: "500",
+                  color:
+                    Math.sign(coinData.priceChange) === 1 ? "green" : "red",
+                  marginLeft: 9,
+                  width: 40,
+                }}
+              >
+                {Math.sign(coinData.priceChange) === 1
+                  ? "+" +
+                    Math.round((coinData.priceChange + Number.EPSILON) * 100) /
+                      100
+                  : Math.round((coinData.priceChange + Number.EPSILON) * 100) /
+                    100}
+                %
+              </Text>
+              <Text
+                style={{
+                  fontSize: 10,
+                  fontWeight: "500",
+                  color:
+                    Math.sign(coinData.priceChange) === 1 ? "green" : "red",
+                  marginLeft: 9,
+                  width: 40,
+                }}
+              >
+                + $100
+              </Text>
+            </View>
+            <View>
+              <Text
+                style={{
+                  fontSize: 10,
+                  fontWeight: "500",
+                  color:
+                    Math.sign(coinData.priceChange) === 1 ? "green" : "red",
+                  marginLeft: 9,
+                  width: 40,
+                }}
+              >
+                high:27
+              </Text>
+              <Text
+                style={{
+                  fontSize: 10,
+                  fontWeight: "500",
+                  color: "red",
+                  marginLeft: 9,
+                  width: 40,
+                }}
+              >
+                low:21
+              </Text>
+            </View>
+          </View>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Text style={{ fontWeight: "400", fontSize: 12 }}>
+              ${abbreviateNumber(coinData.marketCap)}
+            </Text>
+            <Text style={{ fontWeight: "400", fontSize: 12, color: "green" }}>
+              &nbsp;&nbsp;&nbsp;&nbsp;+0.01%
             </Text>
           </View>
-          <Text style={{ fontWeight: "400", fontSize: 12 }}>
-            ${abbreviateNumber(coinData.marketCap)}
-          </Text>
         </View>
         <AllTimeChart data={coinData} />
         <View style={{ width: 8 }} />

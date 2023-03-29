@@ -2,6 +2,7 @@ export const html = (text) => `
 <head>
     <style>
         body{
+            background-color:#FFFF;
             display: flex;
             align-items: center;
             justify-content: center;
