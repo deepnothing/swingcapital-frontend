@@ -85,14 +85,14 @@ function SignInScreen({ navigation }) {
           <TextInput
             placeholder="Email"
             value={value.email}
-            style={{ padding: 5 }}
+            style={{ padding: 5, width: "100%", height: "100%" }}
             onChangeText={(text) => setValue({ ...value, email: text })}
           />
         </View>
         <View style={styles.input}>
           <Feather name="lock" color={"#C3C3C3"} size={"19"} />
           <TextInput
-            style={{ padding: 5 }}
+            style={{ padding: 5, width: "100%", height: "100%" }}
             placeholder="Password"
             onChangeText={(text) => setValue({ ...value, password: text })}
             secureTextEntry={true}
@@ -147,11 +147,12 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
-    height: "40%",
+    height: 400,
   },
   container: {
     height: "100%",
     justifyContent: "space-evenly",
     marginHorizontal: 20,
+    maxWidth:500
   },
 });
