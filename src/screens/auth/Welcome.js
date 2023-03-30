@@ -10,17 +10,26 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import BigButton from "../../components/BigButton";
 import { rotate } from "@shopify/react-native-skia";
+import WebView from "react-native-webview";
+import { logoHtml } from "./swingLogoView";
 
 function WelcomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View />
       <View style={styles.mainContent}>
-        <Image
+        {/* <Image
           source={require("../../../assets/logo-500.png")}
-          style={{ width: 70, height: 70, alignSelf: "center" }}
+          style={{ width: 70, height: 70, alignSelf: "center" ,borderWidth:1}}
+        /> */}
+        <View style={{ width: "100%", height: 80}}>
+        <WebView 
+        source={{
+          html: logoHtml,
+        }}
         />
-
+        </View>
+        
         <BigButton onPress={() => navigation.navigate("Sign In")}>
           <Text style={styles.registerText}>Sign In</Text>
         </BigButton>
