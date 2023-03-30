@@ -1,33 +1,38 @@
 import React from "react";
-import { Text, Pressable, Image, View, StyleSheet } from "react-native";
+import {
+  Text,
+  Pressable,
+  Image,
+  View,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import BigButton from "../../components/BigButton";
+import { rotate } from "@shopify/react-native-skia";
 
 function WelcomeScreen({ navigation }) {
   return (
-    <View className="w-full h-full">
-      <View style={{ flex: 1, borderRadius: 20 }}>
-        <View className="mx-4 h-full flex justify-center align-center space-y-6">
-          <View>
-            <Image
-              source={require("../../../assets/logo-500.png")}
-              style={{ width: 70, height: 70, alignSelf: "center" }}
-            />
-          </View>
-          <View>
-            <BigButton onPress={() => navigation.navigate("Sign In")}>
-              <Text style={styles.registerText}>Sign In</Text>
-            </BigButton>
-            <Pressable
-              style={styles.create}
-              onPress={() => navigation.navigate("Sign Up")}
-            >
-              <Text style={styles.createText}>Sign Up</Text>
-            </Pressable>
-          </View>
-        </View>
+    <SafeAreaView style={styles.container}>
+      <View />
+      <View style={styles.mainContent}>
+        <Image
+          source={require("../../../assets/logo-500.png")}
+          style={{ width: 70, height: 70, alignSelf: "center" }}
+        />
+
+        <BigButton onPress={() => navigation.navigate("Sign In")}>
+          <Text style={styles.registerText}>Sign In</Text>
+        </BigButton>
+        <Pressable
+          style={styles.create}
+          onPress={() => navigation.navigate("Sign Up")}
+        >
+          <Text style={styles.createText}>Sign Up</Text>
+        </Pressable>
       </View>
-    </View>
+      <View />
+    </SafeAreaView>
   );
 }
 
@@ -46,7 +51,7 @@ const styles = StyleSheet.create({
   },
   create: {
     width: "95%",
-    height: 45,
+    height: 55,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -62,5 +67,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 2,
     elevation: 2,
+  },
+  mainContent: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    height: 300,
+  },
+  container: {
+    height: "100%",
+    justifyContent: "space-evenly",
+    marginHorizontal: 20,
+    maxWidth: 500,
   },
 });
