@@ -5,29 +5,22 @@ import * as d3 from "d3";
 import { geoCylindricalStereographic } from "d3-geo-projection";
 import SvgPanZoom, { SvgPanZoomElement } from "react-native-svg-pan-zoom";
 import { COUNTRIES } from "./CountryShapes";
-
 const Map = (props) => {
   const { dimensions, routeColor, data } = props;
   const [countryList, setCountryList] = useState([]);
   const [clickedCountry, setClickedCountry] = useState();
-  const mapExtent = useMemo(() => {
-    return dimensions.width > dimensions.height / 2
-      ? dimensions.height / 2
-      : dimensions.width;
-  }, [dimensions]);
-  const countryPaths = useMemo(() => {
+  const countryPaths = () => {
     const projection = geoCylindricalStereographic()
-      .translate([dimensions.width / 0.31, dimensions.height / 1])
-      .scale(dimensions.width);
+      .translate([1335, 896])
+      .scale(414);
 
     const geoPath = d3.geoPath().projection(projection);
     const svgPaths = COUNTRIES.map(geoPath);
     return svgPaths;
-  }, [dimensions]);
-
+  };
   useEffect(() => {
     setCountryList(
-      countryPaths.map((path, i) => {
+      countryPaths().map((path, i) => {
         if (
           data.find((item) => item.geoName === COUNTRIES[i].properties.name)
             ?.geoName == undefined
@@ -73,12 +66,13 @@ const Map = (props) => {
     <View
       style={{
         borderWidth: 3,
-        height: dimensions.height / 3.5,
-        width: "100%",
+        height: 250,
+        width: 400,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 8,
+        transform: [{ scale: dimensions.width / 430 }],
       }}
     >
       {clickedCountry ? (
@@ -87,7 +81,7 @@ const Map = (props) => {
             position: "absolute",
             height: 20,
             backgroundColor: "#fff",
-            paddingHorizontal:10,
+            paddingHorizontal: 10,
             top: 0,
             left: 0,
             zIndex: 1,
@@ -106,17 +100,15 @@ const Map = (props) => {
         canvasWidth={2700}
         canvasHeight={1500}
         minScale={0.1}
-        initialZoom={0.143}
+        initialZoom={0.13}
         onZoom={(zoom) => {
           console.log("onZoom:" + zoom);
         }}
         canvasStyle={{
           backgroundColor: "yellow",
           position: "absolute",
-          left: "2%",
-          top: "5%",
-          // height: "100%",
-          //height: dimensions.height / 2,
+          left: 20,
+          top: 25,
         }}
         viewStyle={{
           backgroundColor: "green",

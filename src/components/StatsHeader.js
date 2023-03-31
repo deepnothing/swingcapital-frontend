@@ -40,6 +40,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     padding: 10,
+    width: "100%",
   },
   relative: {
     position: "relative",

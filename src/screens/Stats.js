@@ -56,71 +56,66 @@ export default ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView>
-        <StatsHeader
-          navigation={navigation}
-          setTabBarShowing={route.params.setTabBarShowing}
-          route={route}
-          selectedMetric={selectedMetric}
-          setSelectedMetric={setSelectedMetric}
+    <SafeAreaView style={{ display: "flex", alignItems: "center",flex:1 }}>
+      <StatsHeader
+        navigation={navigation}
+        setTabBarShowing={route.params.setTabBarShowing}
+        route={route}
+        selectedMetric={selectedMetric}
+        setSelectedMetric={setSelectedMetric}
+      />
+      {googleData !== undefined ? (
+        <Map
+          dimensions={dimensions}
+          routeColor={route.params.coinColor}
+          data={googleData[0].map}
         />
+      ) : (
+        <Text>Loading</Text>
+      )}
+      <ScrollView style={styles.socialData}>
         {googleData !== undefined ? (
-          <Map
-            dimensions={dimensions}
+          <GoogleTrends
             routeColor={route.params.coinColor}
-            data={googleData[0].map}
+            bars={googleData[0].search}
           />
         ) : (
           <Text>Loading</Text>
         )}
-        <ScrollView style={styles.socialData}>
-          {googleData !== undefined ? (
-            <GoogleTrends
-              routeColor={route.params.coinColor}
-              bars={googleData[0].search}
+        <View style={styles.column}>
+          <TwitterCard
+            color="rgba(29, 161, 242)"
+            name="Twitter"
+            image={require("../../assets/twitter.png")}
+          />
+          <View style={styles.socialRow}>
+            <SocialCard
+              color="rgba(193, 53, 132)"
+              name="Instagram"
+              image={require("../../assets/instagram.png")}
             />
-          ) : (
-            <Text>Loading</Text>
-          )}
-          <View style={styles.column}>
-            <TwitterCard
-              color="rgba(29, 161, 242)"
-              name="Twitter"
-              image={require("../../assets/twitter.png")}
+            <SocialCard
+              color="rgba(255, 0, 0)"
+              name="Youtube"
+              image={require("../../assets/youtube.png")}
             />
-            <View style={styles.socialRow}>
-              <SocialCard
-                color="rgba(193, 53, 132)"
-                name="Instagram"
-                image={require("../../assets/instagram.png")}
-              />
-              <SocialCard
-                color="rgba(255, 0, 0)"
-                name="Youtube"
-                image={require("../../assets/youtube.png")}
-              />
-            </View>
-            <View style={styles.socialRow}>
-              <SocialCard
-                color="rgba(255, 86, 0)"
-                name="Reddit"
-                image={require("../../assets/reddit.png")}
-              />
-            </View>
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+          <View style={styles.socialRow}>
+            <SocialCard
+              color="rgba(255, 86, 0)"
+              name="Reddit"
+              image={require("../../assets/reddit.png")}
+            />
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   socialData: {
-    height: dimensions.height / 2,
+    //height: dimensions.height / 2,
     borderWidth: 3,
     paddingHorizontal: "4%",
     paddingBottom: 20,
