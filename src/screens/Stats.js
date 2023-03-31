@@ -56,7 +56,7 @@ export default ({ route, navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ display: "flex", alignItems: "center",flex:1 }}>
+    <SafeAreaView style={{ display: "flex", alignItems: "center", flex: 1 }}>
       <StatsHeader
         navigation={navigation}
         setTabBarShowing={route.params.setTabBarShowing}
@@ -65,11 +65,7 @@ export default ({ route, navigation }) => {
         setSelectedMetric={setSelectedMetric}
       />
       {googleData !== undefined ? (
-        <Map
-          dimensions={dimensions}
-          routeColor={route.params.coinColor}
-          data={googleData[0].map}
-        />
+        <Map routeColor={route.params.coinColor} data={googleData[0].map} />
       ) : (
         <Text>Loading</Text>
       )}
@@ -115,7 +111,6 @@ export default ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   socialData: {
-    //height: dimensions.height / 2,
     borderWidth: 3,
     paddingHorizontal: "4%",
     paddingBottom: 20,
