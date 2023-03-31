@@ -52,7 +52,7 @@ const Map = (props) => {
             }}
             onClickRelease={() => {
               console.log("onClickRelease!");
-              setClickedCountry(null);
+              // setClickedCountry(null);
             }}
           >
             <Path
@@ -60,7 +60,7 @@ const Map = (props) => {
               d={path}
               stroke={"#000"}
               strokeOpacity={0.3}
-              strokeWidth={0.6}
+              strokeWidth={1}
               fill={`rgb(${routeColor})`}
               opacity={calculatedOpacity()}
             />
@@ -86,7 +86,7 @@ const Map = (props) => {
           canvasWidth={2700}
           canvasHeight={1500}
           minScale={0.1}
-          initialZoom={0.13}
+          initialZoom={0.14}
           onZoom={(zoom) => {
             console.log("onZoom:" + zoom);
           }}
@@ -111,21 +111,23 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 8,
+    borderRadius: 11,
     transform: [{ scale: dimensions.width / 430 }],
   },
   svgCanvasStyle: {
-    backgroundColor: "yellow",
+    // backgroundColor: "yellow",
     position: "absolute",
-    left: 20,
-    top: 25,
+    left: 8,
+    top: 18,
   },
   svgCanvasContainer: {
-    backgroundColor: "green",
+    // backgroundColor: "green",
     position: "relative",
     height: "100%",
     width: "100%",
     overflow: "hidden",
+    borderRadius: 8,
+
   },
   clickedBanner: {
     position: "absolute",
@@ -134,6 +136,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     top: 0,
     left: 0,
-    zIndex: 1,
   },
 });

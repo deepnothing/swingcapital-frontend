@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import SocialGraph from "./SocialGraph";
 export default function TwitterCard({ color, name, image }) {
@@ -19,9 +19,9 @@ export default function TwitterCard({ color, name, image }) {
         <View style={{ borderWidth: 1, width: "50%", height: 120 }}>
           <Text>GRAPH</Text>
         </View>
-        <View style={{ borderWidth: 1, width: "50%", height: 120 }}>
+        <ScrollView style={{ borderWidth: 1, width: "50%", height: 120 }}>
           <Text>SCROLLABLE TWEET LIST</Text>
-        </View>
+        </ScrollView>
       </View>
     </View>
   );

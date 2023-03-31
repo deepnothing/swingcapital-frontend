@@ -68,7 +68,7 @@ export default ({ route, navigation }) => {
         routeColor={route.params.coinColor}
         data={googleData ? googleData[0].map : []}
       />
-      <ScrollView style={styles.socialData}>
+      <ScrollView style={styles.socialData} nestedScrollEnabled={true}>
         {googleData !== undefined ? (
           <GoogleTrends
             routeColor={route.params.coinColor}
