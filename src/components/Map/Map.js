@@ -39,7 +39,7 @@ const Map = (props) => {
           data.find((item) => item.geoName === COUNTRIES[i].properties.name)
             ?.geoName
             ? data.find((item) => item.geoName === COUNTRIES[i].properties.name)
-                .value[0] / 50
+                .value[0] / 30
             : 0;
 
         return (
@@ -68,7 +68,7 @@ const Map = (props) => {
         );
       })
     );
-  }, []);
+  }, [data]);
   return (
     <View style={styles.container}>
       {clickedCountry ? (
@@ -81,20 +81,23 @@ const Map = (props) => {
           </Text>
         </View>
       ) : null}
-
-      <SvgPanZoom
-        canvasWidth={2700}
-        canvasHeight={1500}
-        minScale={0.1}
-        initialZoom={0.13}
-        onZoom={(zoom) => {
-          console.log("onZoom:" + zoom);
-        }}
-        canvasStyle={styles.svgCanvasStyle}
-        viewStyle={styles.svgCanvasContainer}
-      >
-        <G>{countryList.map((x) => x)}</G>
-      </SvgPanZoom>
+      {data.length > 0 ? (
+        <SvgPanZoom
+          canvasWidth={2700}
+          canvasHeight={1500}
+          minScale={0.1}
+          initialZoom={0.13}
+          onZoom={(zoom) => {
+            console.log("onZoom:" + zoom);
+          }}
+          canvasStyle={styles.svgCanvasStyle}
+          viewStyle={styles.svgCanvasContainer}
+        >
+          <G>{countryList.map((x) => x)}</G>
+        </SvgPanZoom>
+      ) : (
+        <ActivityIndicator size="large" color={`rgb(${routeColor})`} />
+      )}
     </View>
   );
 };

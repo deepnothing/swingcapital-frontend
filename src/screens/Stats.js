@@ -64,11 +64,10 @@ export default ({ route, navigation }) => {
         selectedMetric={selectedMetric}
         setSelectedMetric={setSelectedMetric}
       />
-      {googleData !== undefined ? (
-        <Map routeColor={route.params.coinColor} data={googleData[0].map} />
-      ) : (
-        <Text>Loading</Text>
-      )}
+      <Map
+        routeColor={route.params.coinColor}
+        data={googleData ? googleData[0].map : []}
+      />
       <ScrollView style={styles.socialData}>
         {googleData !== undefined ? (
           <GoogleTrends
