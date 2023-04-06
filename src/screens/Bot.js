@@ -14,6 +14,8 @@ import Header from "../components/Header";
 import BigButton from "../components/BigButton";
 import { db } from "../config/firebase";
 import { ref, onValue, update } from "firebase/database";
+import ScreenContainer from "../components/ScreenContainer";
+import ThemeText from "../components/ThemeText";
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -48,7 +50,7 @@ function BotScreen({ route }) {
   const data = ["trade1", "trade2"];
 
   return (
-    <View>
+    <ScreenContainer>
       <Header justifyContent="space-between">
         <Text style={style.botHeaderText}>Win: 50% / Loss: 50%</Text>
         <View
@@ -72,7 +74,7 @@ function BotScreen({ route }) {
       >
         <FlatList
           data={data}
-          renderItem={({ item }) => <Text>{item}</Text>}
+          renderItem={({ item }) => <ThemeText>{item}</ThemeText>}
           keyExtractor={(item) => item}
           contentContainerStyle={{
             padding: 15,
@@ -88,13 +90,13 @@ function BotScreen({ route }) {
           onPress={registerForBot}
         >
           <View style={style.activityWrapper}>
-            <Text style={style.registerText}>
+            <ThemeText style={style.registerText}>
               {isRegistered === undefined
                 ? "Loading"
                 : isRegistered
                 ? "Registered"
                 : "Register"}
-            </Text>
+            </ThemeText>
             {isRegistering ||
               (isRegistered === undefined && (
                 <ActivityIndicator color={"#FFF"} style={style.indicator} />
@@ -110,7 +112,7 @@ function BotScreen({ route }) {
           </View>
         </BigButton>
       </View>
-    </View>
+    </ScreenContainer>
   );
 }
 

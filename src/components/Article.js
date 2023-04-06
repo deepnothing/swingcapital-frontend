@@ -4,6 +4,7 @@ import Feather from "react-native-vector-icons/Feather";
 import bullImage from "../../assets/bull.png";
 import bearImage from "../../assets/bear.png";
 import neutralImage from "../../assets/neutral.png";
+import ThemeText from "./ThemeText";
 
 export default function Article({ data, onPress }) {
   const formatDate = (input) => {
@@ -77,25 +78,25 @@ export default function Article({ data, onPress }) {
             }
           />
           <View style={{ height: 3 }} />
-          <Text style={{ fontSize: 10.5, fontWeight: "500" }}>
+          <ThemeText style={{ fontSize: 10.5, fontWeight: "500" }}>
             {formatDate(data.publishedAt)}
-          </Text>
+          </ThemeText>
         </View>
         <View style={style.articleText}>
-          <Text
+          <ThemeText
             style={{ fontSize: 12, fontWeight: "600" }}
             numberOfLines={2}
             ellipsizeMode="tail"
           >
             {data.title}
-          </Text>
-          <Text
+          </ThemeText>
+          <ThemeText
             style={{ fontSize: 9, fontWeight: "400" }}
             numberOfLines={4}
             ellipsizeMode="tail"
           >
             {data.description}
-          </Text>
+          </ThemeText>
         </View>
       </View>
       <View style={style.determinationWrapper}>
@@ -104,9 +105,9 @@ export default function Article({ data, onPress }) {
           style={{ height: 25, width: 25, tintColor: trend.color }}
           source={trend.source}
         />
-        <Text style={{ fontSize: 11, fontWeight: "600", color: trend.color }}>
+        <ThemeText style={{ fontSize: 11, fontWeight: "600", color: trend.color }}>
           {trend.title}
-        </Text>
+        </ThemeText>
         <View
           style={[
             style.trendBar,

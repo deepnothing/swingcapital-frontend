@@ -1,5 +1,8 @@
+import { useContext } from "react";
+import { ThemeContext } from "../hooks/ThemeContext";
 import { View } from "react-native";
 export default function Card(props) {
+  const { theme } = useContext(ThemeContext);
   return (
     <View
       onPress={props.onPress}
@@ -18,7 +21,7 @@ export default function Card(props) {
         shadowOpacity: 0.8,
         shadowRadius: 2,
         elevation: 3,
-        backgroundColor: "#FFFF",
+        backgroundColor: theme.mode === "light" ? "#FFFF" : "#161c29",
       }}
     >
       {props.children}

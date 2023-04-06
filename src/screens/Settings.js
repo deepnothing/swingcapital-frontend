@@ -17,6 +17,8 @@ import Header from "../components/Header";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { ref, remove } from "firebase/database";
 import { db } from "../config/firebase";
+import ScreenContainer from "../components/ScreenContainer";
+import ThemeText from "../components/ThemeText";
 
 const auth = getAuth();
 
@@ -76,28 +78,28 @@ function Settings() {
     );
   };
   return (
-    <View>
+    <ScreenContainer>
       <Header></Header>
       <View style={styles.options}>
         <View style={styles.row}>
           <TouchableOpacity>
             <Feather
               name="user"
-              color="black"
+              color={theme.mode === "light" ? "#000" : "#FFF"}
               size={"25"}
               style={{ marginRight: 10 }}
             />
           </TouchableOpacity>
-          <Text style={{ fontWeight: "600" }}>{user?.email}</Text>
+          <ThemeText style={{ fontWeight: "600" }}>{user?.email}</ThemeText>
         </View>
         <View style={styles.row}>
           <Feather
             name={theme.mode === "light" ? "sun" : "moon"}
-            color="black"
+            color={theme.mode === "light" ? "#000" : "#FFF"}
             size={"25"}
             style={{ marginRight: 10 }}
           />
-          <Text>Theme </Text>
+          <ThemeText>Theme </ThemeText>
           <Switch
             style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
             trackColor={{ false: "#767577", true: "#81b0ff" }}
@@ -110,11 +112,11 @@ function Settings() {
         <TouchableOpacity style={styles.row} onPress={() => signOut(auth)}>
           <Feather
             name="log-out"
-            color="black"
+            color={theme.mode === "light" ? "#000" : "#FFF"}
             size={"25"}
             style={{ marginRight: 10 }}
           />
-          <Text>Logout</Text>
+          <ThemeText>Logout</ThemeText>
         </TouchableOpacity>
         <TouchableOpacity style={styles.row} onPress={() => deleteAccount()}>
           <Feather
@@ -124,10 +126,10 @@ function Settings() {
             style={{ marginRight: 10 }}
           />
 
-          <Text>Delete Account</Text>
+          <ThemeText>Delete Account</ThemeText>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScreenContainer>
   );
 }
 
@@ -136,7 +138,7 @@ export default Settings;
 const styles = StyleSheet.create({
   options: {
     paddingVertical: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
   },
   row: {
     display: "flex",

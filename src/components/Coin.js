@@ -14,6 +14,7 @@ import IonIcon from "react-native-vector-icons/Ionicons";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { ref, onValue, update, set } from "firebase/database";
 import { db } from "../config/firebase";
+import ThemeText from "./ThemeText";
 LogBox.ignoreLogs([
   "Non-serializable values were found in the navigation state",
 ]);
@@ -52,10 +53,10 @@ export default function Coin({
             }}
           />
           <View style={{ height: 5 }} />
-          <Text style={styles.title}>{coinData.symbol.toUpperCase()}</Text>
+          <ThemeText style={styles.title}>{coinData.symbol.toUpperCase()}</ThemeText>
         </View>
         <View>
-          <Text
+          <ThemeText
             style={{
               fontSize: 14,
               fontWeight: "500",
@@ -66,7 +67,7 @@ export default function Coin({
             {coinData.currentPrice > 1
               ? numberWithCommas(coinData.currentPrice)
               : coinData.currentPrice}
-          </Text>
+          </ThemeText>
         </View>
       </View>
 
@@ -98,10 +99,10 @@ export default function Coin({
               }}
             >
               <Feather name="clock" color={"#343434"} size={"19"} />
-              <Text style={{ fontSize: 10 }}>24hr</Text>
+              <ThemeText style={{ fontSize: 10 }}>24hr</ThemeText>
             </View>
             <View>
-              <Text
+              <ThemeText
                 style={{
                   fontSize: 10,
                   fontWeight: "500",
@@ -118,8 +119,8 @@ export default function Coin({
                   : Math.round((coinData.priceChange + Number.EPSILON) * 100) /
                     100}
                 %
-              </Text>
-              <Text
+              </ThemeText>
+              <ThemeText
                 style={{
                   fontSize: 10,
                   fontWeight: "500",
@@ -130,10 +131,10 @@ export default function Coin({
                 }}
               >
                 + $100
-              </Text>
+              </ThemeText>
             </View>
             <View>
-              <Text
+              <ThemeText
                 style={{
                   fontSize: 10,
                   fontWeight: "500",
@@ -144,8 +145,8 @@ export default function Coin({
                 }}
               >
                 high:27
-              </Text>
-              <Text
+              </ThemeText>
+              <ThemeText
                 style={{
                   fontSize: 10,
                   fontWeight: "500",
@@ -155,16 +156,16 @@ export default function Coin({
                 }}
               >
                 low:21
-              </Text>
+              </ThemeText>
             </View>
           </View>
           <View style={{ display: "flex", flexDirection: "row" }}>
-            <Text style={{ fontWeight: "400", fontSize: 12 }}>
+            <ThemeText style={{ fontWeight: "400", fontSize: 12 }}>
               ${abbreviateNumber(coinData.marketCap)}
-            </Text>
-            <Text style={{ fontWeight: "400", fontSize: 12, color: "green" }}>
+            </ThemeText>
+            <ThemeText style={{ fontWeight: "400", fontSize: 12, color: "green" }}>
               &nbsp;&nbsp;&nbsp;&nbsp;+0.01%
-            </Text>
+            </ThemeText>
           </View>
         </View>
         <AllTimeChart data={coinData} />

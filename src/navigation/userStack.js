@@ -63,10 +63,8 @@ export default function UserStack({ user }) {
             display: isTabBarShowing ? "flex" : "none",
             borderTopWidth: 3,
             borderTopColor: "#ffc72c",
-            
           },
         }}
-        sceneContainerStyle={{ backgroundColor: "#FFFFFF" }}
       >
         {tabs.map((i, index) => (
           <Tab.Screen

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Text,
   View,
@@ -10,6 +10,7 @@ import {
   TextInput,
   Dimensions,
 } from "react-native";
+import { ThemeContext } from "../hooks/ThemeContext";
 import { baseUrl } from "../config/api";
 import Coin from "../components/Coin";
 import Feather from "react-native-vector-icons/Feather";
@@ -17,6 +18,7 @@ import Header from "../components/Header";
 import { ref, onValue, update, set } from "firebase/database";
 import { db } from "../config/firebase";
 import { useAuth } from "../hooks/useAuth";
+import ScreenContainer from "../components/ScreenContainer";
 
 export default function CoinList({ navigation, route }) {
   const { user } = useAuth();
@@ -25,6 +27,7 @@ export default function CoinList({ navigation, route }) {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [favCoins, setFavCoins] = useState([]);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     refreshCoins();
@@ -107,7 +110,7 @@ export default function CoinList({ navigation, route }) {
   };
 
   return (
-    <View>
+    <ScreenContainer >
       <Header justifyContent="center">
         <View style={styles.coinSearchWrapper}>
           <Feather name="search" color={"#000"} size={"20"} />
@@ -142,7 +145,7 @@ export default function CoinList({ navigation, route }) {
         onRefresh={onRefresh}
         refreshing={isRefreshing}
       />
-    </View>
+    </ScreenContainer>
   );
 }
 
@@ -155,7 +158,7 @@ const styles = StyleSheet.create({
   },
   coinSearchWrapper: {
     borderRadius: 5,
-    width:'90%',
+    width: "90%",
     backgroundColor: "#FFF",
     display: "flex",
     flexDirection: "row",

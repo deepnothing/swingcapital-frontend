@@ -16,6 +16,7 @@ import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Header from "../components/Header";
+import ScreenContainer from "../components/ScreenContainer";
 
 function PercentBar(props) {
   return (
@@ -87,7 +88,7 @@ function News() {
     (positiveSentiment.length / filteredSentiment.length) * 100;
 
   return (
-    <View>
+    <ScreenContainer>
       <Header justifyContent="center">
         {/* <SwingCapital text="News" /> */}
         <View style={styles.percentWrapper}>
@@ -121,7 +122,7 @@ function News() {
           />
         ) : null}
       </Modal>
-    </View>
+    </ScreenContainer>
   );
 }
 
