@@ -59,10 +59,10 @@ export default function UserStack({ user }) {
         screenOptions={{
           headerShown: false,
           tabBarStyle: {
-            backgroundColor: "#ffc72c",
+            backgroundColor: theme.mode === "light" ? "#ffc72c" : "#000",
             display: isTabBarShowing ? "flex" : "none",
             borderTopWidth: 3,
-            borderTopColor: "#ffc72c",
+            borderTopColor: theme.mode === "light" ? "#ffc72c" : "#000",
           },
         }}
       >
@@ -73,14 +73,23 @@ export default function UserStack({ user }) {
             initialParams={i.initialParams}
             component={i.component}
             options={{
-              tabBarActiveTintColor: "#FFF",
-              tabBarInactiveTintColor: "#000",
+              tabBarActiveTintColor:
+                theme.mode === "light" ? "#FFF" : "#ffc72c",
+              tabBarInactiveTintColor: theme.mode === "light" ? "#000" : "#fff",
               tabBarShowLabel: true,
               tabBarLabelStyle: { top: -3 },
               tabBarIcon: ({ focused }) => (
                 <Feather
                   name={i.iconName}
-                  color={focused ? "white" : "#343434"}
+                  color={
+                    focused
+                      ? theme.mode === "light"
+                        ? "white"
+                        : "#ffc72c"
+                      : theme.mode === "light"
+                      ? "#000"
+                      : "#FFF"
+                  }
                   size={"24"}
                 />
               ),

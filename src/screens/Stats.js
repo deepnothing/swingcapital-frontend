@@ -65,7 +65,7 @@ export default ({ route, navigation }) => {
         display: "flex",
         alignItems: "center",
         flex: 1,
-        backgroundColor: theme.mode === "light" ? "#FFF" : "#161c29",
+        backgroundColor: theme.mode === "light" ? "#efedf3" : "#161c29",
       }}
     >
       <StatsHeader

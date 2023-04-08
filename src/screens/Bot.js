@@ -52,7 +52,7 @@ function BotScreen({ route }) {
   return (
     <ScreenContainer>
       <Header justifyContent="space-between">
-        <Text style={style.botHeaderText}>Win: 50% / Loss: 50%</Text>
+        <ThemeText style={style.botHeaderText}>Win: 50% / Loss: 50%</ThemeText>
         <View
           style={{
             display: "flex",
@@ -64,7 +64,7 @@ function BotScreen({ route }) {
             style={{ width: 25, height: 25, borderRadius: 6 }}
             source={require("../../assets/kraken.jpeg")}
           />
-          <Text style={style.botHeaderText}>Demo : ETH/USD</Text>
+          <ThemeText style={style.botHeaderText}>Demo : ETH/USD</ThemeText>
         </View>
       </Header>
       <View
@@ -90,13 +90,13 @@ function BotScreen({ route }) {
           onPress={registerForBot}
         >
           <View style={style.activityWrapper}>
-            <ThemeText style={style.registerText}>
+            <Text style={style.registerText}>
               {isRegistered === undefined
                 ? "Loading"
                 : isRegistered
                 ? "Registered"
                 : "Register"}
-            </ThemeText>
+            </Text>
             {isRegistering ||
               (isRegistered === undefined && (
                 <ActivityIndicator color={"#FFF"} style={style.indicator} />

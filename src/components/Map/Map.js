@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   ActivityIndicator,
   StyleSheet,
@@ -11,9 +11,11 @@ import * as d3 from "d3";
 import { geoCylindricalStereographic } from "d3-geo-projection";
 import SvgPanZoom, { SvgPanZoomElement } from "react-native-svg-pan-zoom";
 import { COUNTRIES } from "./CountryShapes";
+import { ThemeContext } from "../../hooks/ThemeContext";
 const dimensions = Dimensions.get("window");
 
 const Map = (props) => {
+  const { theme } = useContext(ThemeContext);
   const { routeColor, data } = props;
   const [countryList, setCountryList] = useState([]);
   const [clickedCountry, setClickedCountry] = useState();
@@ -69,7 +71,14 @@ const Map = (props) => {
     );
   }, [data]);
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: theme.mode === "light" ? "#FFFF" : "#222c40",
+        },
+      ]}
+    >
       {clickedCountry ? (
         <View style={styles.clickedBanner}>
           <Text>
@@ -104,7 +113,6 @@ export default Map;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 3,
     height: 250,
     width: 400,
     display: "flex",

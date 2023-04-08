@@ -4,6 +4,7 @@ import { LineChart, AreaChart } from "react-native-svg-charts";
 import { LinearGradient, Stop } from "react-native-svg";
 
 import { Palette } from "react-native-palette";
+import ThemeText from "./ThemeText";
 
 export default function AllTimeChart({ data }) {
   // for performance reasons we are only taking the prices for every third day to use on the homescreen charts
@@ -19,27 +20,21 @@ export default function AllTimeChart({ data }) {
   const fill = `rgb(${data.color},0.3)`;
 
   const chartHeight = 45;
-  // Define your gradient colors
-  const gradientColors = [
-    { offset: "0%", color: "rgba(255, 0, 0, 1)" },
-    { offset: "50%", color: "rgba(255, 0, 0, 0.5)" },
-    { offset: "100%", color: "rgba(255, 0, 0, 0)" },
-  ];
 
   return (
     <View
       style={{
         display: "flex",
         flexDirection: "column",
+        width: "85%",
       }}
     >
       <View
         style={{
           overflow: "hidden",
           borderColor: "#BABABA",
-          borderRadius: 6,
+          // borderRadius: 6,
           height: chartHeight,
-          width: 120,
           paddingTop: 2,
         }}
       >
@@ -47,13 +42,13 @@ export default function AllTimeChart({ data }) {
           style={{ height: chartHeight }}
           data={strippedArray}
           svg={{ fill }}
-          contentInset={{ top: 0, bottom: 0 }}
+          contentInset={{ top: 0, bottom: 5 }}
         >
           <LineChart
             style={{ height: chartHeight }}
             data={strippedArray}
             svg={{ stroke: `rgb(${data.color})`, strokeWidth: 1 }}
-            contentInset={{ top: 0, bottom: 0 }}
+            contentInset={{ top: 0, bottom: 5 }}
           ></LineChart>
         </AreaChart>
       </View>
@@ -66,12 +61,12 @@ export default function AllTimeChart({ data }) {
           paddingTop: 2,
         }}
       >
-        <Text style={{ color: "#000", fontSize: 7 }}>
+        <ThemeText style={{ fontSize: 7 }}>
           {new Date(data.prices[0][0]).getFullYear()}
-        </Text>
-        <Text style={{ color: "#000", fontSize: 7 }}>
+        </ThemeText>
+        <ThemeText style={{ fontSize: 7 }}>
           {new Date(data.prices[data.prices.length - 1][0]).getFullYear()}
-        </Text>
+        </ThemeText>
       </View>
     </View>
   );

@@ -46,51 +46,132 @@ export default function Coin({
 
   return (
     <Card style={styles.flexColumn}>
-      <View style={[styles.flexRow, { width: "100%" }]}>
-        <View style={styles.flexRow}>
+      <View
+        style={[
+          styles.flexRow,
+          {
+            width: "100%",
+            justifyContent: "space-between",
+          },
+        ]}
+      >
+        <View style={[styles.flexRow, { width: "50%", height: "100%" }]}>
           <Image
             style={styles.logo}
             source={{
               uri: coinData.logo,
             }}
           />
-          <View style={styles.flexColumn}>
+          <View style={[styles.flexColumn, { marginLeft: 10 }]}>
             <View style={styles.flexRow}>
-              <ThemeText>{coinData.symbol.toUpperCase()}</ThemeText>
-              <ThemeText>${numberWithCommas(coinData.currentPrice)}</ThemeText>
+              <ThemeText style={{ fontSize: 15, fontWeight: "700" }}>
+                {coinData.symbol.toUpperCase()}
+              </ThemeText>
+              <View style={styles.dot} />
+              <ThemeText
+                style={{
+                  fontWeight: "700",
+                  color:
+                    coinData.priceChange > 0
+                      ? "#33c269"
+                      : coinData.priceChange < 0
+                      ? "#fd1c25"
+                      : "black",
+                }}
+              >
+                ${numberWithCommas(coinData.currentPrice)}
+              </ThemeText>
             </View>
-            <ThemeText>Cap:{abbreviateNumber(coinData.marketCap)}</ThemeText>
+            <ThemeText
+              style={[
+                { fontSize: 12 },
+                theme.mode === "light" ? { color: "#9da6ae" } : null,
+              ]}
+            >
+              Cap: {abbreviateNumber(coinData.marketCap)}
+            </ThemeText>
           </View>
         </View>
-
-        <AllTimeChart data={coinData} />
-        <View style={{ width: 8 }} />
-        <TouchableOpacity onPress={() => addOrRemoveFavCoin(coinData.name)}>
-          <IonIcon
-            name={
-              favCoins && favCoins.includes(coinData.name)
-                ? "star"
-                : "star-outline"
-            }
-            size="16"
-            color={
-              favCoins && favCoins.includes(coinData.name)
-                ? "#ffc72c"
-                : "#343434"
-            }
-          />
-        </TouchableOpacity>
+        <View
+          style={[
+            styles.flexRow,
+            { width: "50%", justifyContent: "space-between" },
+          ]}
+        >
+          <AllTimeChart data={coinData} />
+          <TouchableOpacity onPress={() => addOrRemoveFavCoin(coinData.name)}>
+            <IonIcon
+              name={
+                favCoins && favCoins.includes(coinData.name)
+                  ? "star"
+                  : "star-outline"
+              }
+              size="16"
+              color={
+                favCoins && favCoins.includes(coinData.name)
+                  ? "#ffc72c"
+                  : theme.mode === "light"
+                  ? "#686d72"
+                  : "#fff"
+              }
+            />
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={[styles.flexRow, { width: "100%" }]}>
-        <Feather
-          name="clock"
-          size="18"
-          color={theme.mode === "light" ? "#000" : "#FFF"}
-        />
-        <ThemeText>24 Hours</ThemeText>
-        <ThemeText>{coinData.priceChange}</ThemeText>
-        <ThemeText>High:27,000</ThemeText>
-        <ThemeText>Low:27,000</ThemeText>
+      <View
+        style={[
+          styles.flexRow,
+          {
+            width: "100%",
+            justifyContent: "space-between",
+          },
+        ]}
+      >
+        <View style={styles.flexRow}>
+          <Feather
+            name="clock"
+            size="18"
+            color={theme.mode === "light" ? "#686d72" : "#FFF"}
+          />
+          <ThemeText
+            style={[
+              { fontSize: 13 },
+              theme.mode === "light" ? { color: "#686d72" } : null,
+            ]}
+          >
+            {" "}
+            24 Hours
+          </ThemeText>
+        </View>
+
+        <ThemeText
+          style={{
+            fontWeight: "600",
+            color:
+              coinData.priceChange > 0
+                ? "#33c269"
+                : coinData.priceChange < 0
+                ? "#fd1c25"
+                : "black",
+          }}
+        >
+          {coinData.priceChange > 0 ? "+" : coinData.priceChange < 0 ? "-" : ""}
+          {coinData.priceChange.toFixed(2)}%
+        </ThemeText>
+        <View
+          style={{ backgroundColor: "#cbf1da", borderRadius: 6, padding: 4 }}
+        >
+          <Text style={{ color: "#33c269", fontSize: 11, fontWeight: "600" }}>
+            High:$27,000
+          </Text>
+        </View>
+        <View
+          style={{ backgroundColor: "#ffdede", borderRadius: 6, padding: 4 }}
+        >
+          <Text style={{ color: "#fd1c25", fontSize: 11, fontWeight: "600" }}>
+            Low:$27,000
+          </Text>
+        </View>
       </View>
     </Card>
   );
@@ -100,17 +181,24 @@ const styles = StyleSheet.create({
   logo: {
     height: 30,
     width: 30,
-    borderWidth: 1,
+    borderRadius: 200,
+    backgroundColor: "#efedf3",
   },
   flexRow: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   flexColumn: {
     display: "flex",
     flexDirection: "column",
-    borderWidth: 1,
+  },
+  dot: {
+    backgroundColor: "grey",
+    borderRadius: 200,
+    height: 3,
+    width: 3,
+    marginHorizontal: 3,
   },
 });

@@ -17,6 +17,7 @@ import { baseUrl } from "../config/api";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Header from "../components/Header";
 import ScreenContainer from "../components/ScreenContainer";
+import ThemeText from "../components/ThemeText";
 
 function PercentBar(props) {
   return (
@@ -26,11 +27,11 @@ function PercentBar(props) {
         { backgroundColor: props.color, width: `${props.percent}%` },
       ]}
     >
-      <Text
+      <ThemeText
         style={[styles.percentText, props.left ? { left: 0 } : { right: 0 }]}
       >
         {Math.round(props.percent)}%
-      </Text>
+      </ThemeText>
     </View>
   );
 }

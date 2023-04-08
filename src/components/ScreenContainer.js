@@ -8,7 +8,7 @@ export default function ScreenContainer(props) {
     <View
       style={{
         flex: 1,
-        backgroundColor: theme.mode === "light" ? "#FFF" : "#0e1321",
+        backgroundColor: theme.mode === "light" ? "#efedf3" : "#0e1321",
       }}
     >
       {props.children}
