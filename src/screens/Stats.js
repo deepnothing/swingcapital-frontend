@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -14,10 +14,14 @@ import Map from "../components/Map/Map";
 import SocialCard from "../components/SocialCard";
 import TwitterCard from "../components/TwitterCard";
 import MapView, { Geojson } from "react-native-maps";
+import { ThemeContext } from "../hooks/ThemeContext";
+import ThemeText from "../components/ThemeText";
 
 const dimensions = Dimensions.get("window");
 
 export default ({ route, navigation }) => {
+  const { theme } = useContext(ThemeContext);
+
   const [selectedMetric, setSelectedMetric] = useState("social");
   const [googleData, setGoogleData] = useState();
   const [isGoogleDataLoading, setGoogleDataLoading] = useState(true);
@@ -56,7 +60,14 @@ export default ({ route, navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ display: "flex", alignItems: "center", flex: 1 }}>
+    <SafeAreaView
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flex: 1,
+        backgroundColor: theme.mode === "light" ? "#FFF" : "#161c29",
+      }}
+    >
       <StatsHeader
         navigation={navigation}
         setTabBarShowing={route.params.setTabBarShowing}
@@ -75,7 +86,7 @@ export default ({ route, navigation }) => {
             bars={googleData[0].search}
           />
         ) : (
-          <Text>Loading</Text>
+          <ThemeText>Loading</ThemeText>
         )}
         <View style={styles.column}>
           <TwitterCard

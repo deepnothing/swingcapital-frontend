@@ -5,10 +5,10 @@ import {
   SafeAreaView,
   StyleSheet,
   FlatList,
-  ActivityIndicator,
   Pressable,
   TextInput,
   Dimensions,
+  RefreshControl,
 } from "react-native";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { baseUrl } from "../config/api";
@@ -110,13 +110,23 @@ export default function CoinList({ navigation, route }) {
   };
 
   return (
-    <ScreenContainer >
+    <ScreenContainer>
       <Header justifyContent="center">
-        <View style={styles.coinSearchWrapper}>
-          <Feather name="search" color={"#000"} size={"20"} />
+        <View
+          style={[
+            styles.coinSearchWrapper,
+            { backgroundColor: theme.mode === "light" ? "#FFF" : "#161c29" },
+          ]}
+        >
+          <Feather
+            name="search"
+            color={theme.mode === "light" ? "#000" : "#FFF"}
+            size={"20"}
+          />
           <TextInput
             placeholder="Search.."
             onChangeText={(e) => searchCoins(dataCopyForSearch, e)}
+            placeholderTextColor={theme.mode === "light" ? "#000" : "#FFF"}
             style={styles.coinSearch}
           />
         </View>
@@ -142,8 +152,13 @@ export default function CoinList({ navigation, route }) {
         )}
         keyExtractor={(item) => item.name}
         contentContainerStyle={styles.listStyle}
-        onRefresh={onRefresh}
-        refreshing={isRefreshing}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+            tintColor={theme.mode === "light" ? "#000" : "#FFF"} // set the activity indicator color to blue
+          />
+        }
       />
     </ScreenContainer>
   );
@@ -159,7 +174,6 @@ const styles = StyleSheet.create({
   coinSearchWrapper: {
     borderRadius: 5,
     width: "90%",
-    backgroundColor: "#FFF",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
