@@ -47,7 +47,6 @@ const Map = (props) => {
             // x={50}
             // y={50}
             onClick={() => {
-              console.log(COUNTRIES[i].properties.name);
               setClickedCountry(COUNTRIES[i].properties.name);
             }}
             onClickRelease={() => {
@@ -62,7 +61,7 @@ const Map = (props) => {
               strokeOpacity={0.3}
               strokeWidth={1}
               fill={`rgb(${routeColor})`}
-              opacity={calculatedOpacity()}
+              opacity={1}
             />
           </SvgPanZoomElement>
         );
@@ -127,7 +126,6 @@ const styles = StyleSheet.create({
     width: "100%",
     overflow: "hidden",
     borderRadius: 8,
-
   },
   clickedBanner: {
     position: "absolute",
