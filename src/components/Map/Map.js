@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 11,
-    transform: [{ scale: dimensions.width / 430 }],
+    transform: [{ scale: dimensions.width / 436 }],
   },
   svgCanvasStyle: {
     // backgroundColor: "yellow",

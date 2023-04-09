@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginVertical: 10,
+    marginBottom: 10,
     backgroundColor: "#FFF",
     borderRadius: 11,
   },
