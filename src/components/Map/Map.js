@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 11,
     transform: [{ scale: dimensions.width / 436 }],
+    marginVertical:10
   },
   svgCanvasStyle: {
     // backgroundColor: "yellow",
