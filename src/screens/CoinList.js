@@ -139,6 +139,7 @@ export default function CoinList({ navigation, route }) {
               navigation.navigate("Stats", {
                 coinName: item.name,
                 coinColor: item.color,
+                coinLogo:item.logo,
                 setTabBarShowing: route.params.setTabBarShowing,
               });
             }}

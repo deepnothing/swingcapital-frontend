@@ -16,12 +16,14 @@ import TwitterCard from "../components/TwitterCard";
 import MapView, { Geojson } from "react-native-maps";
 import { ThemeContext } from "../hooks/ThemeContext";
 import ThemeText from "../components/ThemeText";
+import Header from "../components/Header";
+import ScreenContainer from "../components/ScreenContainer";
 
 const dimensions = Dimensions.get("window");
 
 export default ({ route, navigation }) => {
   const { theme } = useContext(ThemeContext);
-
+  const [isScrollEnabled, setScrollEnabled] = useState(true);
   const [selectedMetric, setSelectedMetric] = useState("social");
   const [googleData, setGoogleData] = useState();
   const [isGoogleDataLoading, setGoogleDataLoading] = useState(true);
@@ -36,38 +38,18 @@ export default ({ route, navigation }) => {
     fetch(`${baseUrl}/social/google`)
       .then((res) => res.json())
       .then((response) => {
-        const filteredData = response.filter(
-          (item) => item.coin === route.params.coinName.toLowerCase()
+        const filteredData = response.find(
+          (obj) => obj.coin === route.params.coinName.toLowerCase()
         );
+
         setGoogleData(filteredData);
       })
       .catch(() => setGoogleData(null))
       .finally(() => setGoogleDataLoading(false));
   }, []);
 
-  const myPlace = {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        properties: {},
-        geometry: {
-          type: "Point",
-          coordinates: [64.165329, 48.844287],
-        },
-      },
-    ],
-  };
-
   return (
-    <SafeAreaView
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flex: 1,
-        backgroundColor: theme.mode === "light" ? "#efedf3" : "#161c29",
-      }}
-    >
+    <ScreenContainer>
       <StatsHeader
         navigation={navigation}
         setTabBarShowing={route.params.setTabBarShowing}
@@ -75,19 +57,22 @@ export default ({ route, navigation }) => {
         selectedMetric={selectedMetric}
         setSelectedMetric={setSelectedMetric}
       />
-      <Map
-        routeColor={route.params.coinColor}
-        data={googleData ? googleData[0].map : []}
-      />
-      <ScrollView style={styles.socialData} nestedScrollEnabled={true}>
-        {googleData !== undefined ? (
-          <GoogleTrends
-            routeColor={route.params.coinColor}
-            bars={googleData[0].search}
-          />
-        ) : (
-          <ThemeText>Loading</ThemeText>
-        )}
+
+      <ScrollView
+        style={styles.socialData}
+        nestedScrollEnabled={true}
+        scrollEnabled={isScrollEnabled}
+      >
+        <Map
+          routeColor={route.params.coinColor}
+          data={googleData ? googleData.map : []}
+          setScrollEnabled={setScrollEnabled}
+        />
+
+        <GoogleTrends
+          routeColor={route.params.coinColor}
+          data={googleData ? googleData.search : []}
+        />
         <View style={styles.column}>
           <TwitterCard
             color="rgba(29, 161, 242)"
@@ -114,14 +99,14 @@ export default ({ route, navigation }) => {
             />
           </View>
         </View>
+        <SafeAreaView />
       </ScrollView>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
 const styles = StyleSheet.create({
   socialData: {
-    borderWidth: 3,
     paddingHorizontal: "4%",
     paddingBottom: 20,
   },

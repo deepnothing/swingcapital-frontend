@@ -6,7 +6,8 @@ export default function Header(props) {
   const { theme } = useContext(ThemeContext);
   return (
     <SafeAreaView
-      style={{
+      {...props}
+      style={[{
         backgroundColor: theme.mode === "light" ? "#ffc72c" : "#000",
         shadowColor: "rgba(0, 0, 0, 0.45)",
         shadowOffset: { width: 0, height: 5 },
@@ -19,7 +20,7 @@ export default function Header(props) {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: props.justifyContent,
-      }}
+      },props.style]}
     >
       {props.children}
     </SafeAreaView>

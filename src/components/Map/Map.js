@@ -35,7 +35,7 @@ const Map = (props) => {
           data.find((item) => item.geoName === COUNTRIES[i].properties.name)
             ?.geoName == undefined
         ) {
-          console.log(COUNTRIES[i].properties.name);
+          // console.log(COUNTRIES[i].properties.name);
         }
         const calculatedOpacity = () =>
           data.find((item) => item.geoName === COUNTRIES[i].properties.name)
@@ -53,7 +53,7 @@ const Map = (props) => {
             }}
             onClickRelease={() => {
               console.log("onClickRelease!");
-              // setClickedCountry(null);
+              //setClickedCountry(null);
             }}
           >
             <Path
@@ -63,7 +63,7 @@ const Map = (props) => {
               strokeOpacity={0.3}
               strokeWidth={1}
               fill={`rgb(${routeColor})`}
-              opacity={1}
+              opacity={calculatedOpacity()}
             />
           </SvgPanZoomElement>
         );
@@ -71,41 +71,45 @@ const Map = (props) => {
     );
   }, [data]);
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: theme.mode === "light" ? "#FFFF" : "#222c40",
-        },
-      ]}
-    >
-      {clickedCountry ? (
-        <View style={styles.clickedBanner}>
-          <Text>
-            {clickedCountry}:
-            {data.find((item) => item.geoName === clickedCountry)?.geoName
-              ? data.find((item) => item.geoName === clickedCountry).value[0]
-              : 0}
-          </Text>
-        </View>
-      ) : null}
-      {data.length > 0 ? (
-        <SvgPanZoom
-          canvasWidth={2700}
-          canvasHeight={1500}
-          minScale={0.1}
-          initialZoom={0.14}
-          onZoom={(zoom) => {
-            console.log("onZoom:" + zoom);
-          }}
-          canvasStyle={styles.svgCanvasStyle}
-          viewStyle={styles.svgCanvasContainer}
-        >
-          <G>{countryList.map((x) => x)}</G>
-        </SvgPanZoom>
-      ) : (
-        <ActivityIndicator size="large" color={`rgb(${routeColor})`} />
-      )}
+    <View style={{ width: "100%", display: "flex", alignItems: "center" }}>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: theme.mode === "light" ? "#FFFF" : "#222c40",
+          },
+        ]}
+        onTouchStart={() => props.setScrollEnabled(false)}
+        onTouchEnd={() => props.setScrollEnabled(true)}
+      >
+        {clickedCountry ? (
+          <View style={styles.clickedBanner}>
+            <Text>
+              {clickedCountry}:
+              {data.find((item) => item.geoName === clickedCountry)?.geoName
+                ? data.find((item) => item.geoName === clickedCountry).value[0]
+                : 0}
+            </Text>
+          </View>
+        ) : null}
+        {data.length > 0 ? (
+          <SvgPanZoom
+            canvasWidth={2700}
+            canvasHeight={1500}
+            minScale={0.1}
+            initialZoom={0.14}
+            onZoom={(zoom) => {
+              console.log("onZoom:" + zoom);
+            }}
+            canvasStyle={styles.svgCanvasStyle}
+            viewStyle={styles.svgCanvasContainer}
+          >
+            <G>{countryList.map((x) => x)}</G>
+          </SvgPanZoom>
+        ) : (
+          <ActivityIndicator size="large" color={`rgb(${routeColor})`} />
+        )}
+      </View>
     </View>
   );
 };

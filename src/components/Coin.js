@@ -122,7 +122,7 @@ export default function Coin({
         style={[
           styles.flexRow,
           {
-            width: "100%",
+            width: "97%",
             justifyContent: "space-between",
           },
         ]}
