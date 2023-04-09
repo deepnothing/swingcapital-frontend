@@ -68,7 +68,6 @@ export default ({ route, navigation }) => {
           data={googleData ? googleData.map : []}
           setScrollEnabled={setScrollEnabled}
         />
-
         <GoogleTrends
           routeColor={route.params.coinColor}
           data={googleData ? googleData.search : []}
