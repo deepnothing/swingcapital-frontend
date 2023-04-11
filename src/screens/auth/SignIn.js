@@ -94,7 +94,7 @@ function SignInScreen({ navigation }) {
       <Text className="text-center text-black font-main text-base">
         Don't Have an account?{" "}
         <Text
-          className={`text-[${colors.swing}]`}
+          style={{ color: colors.swing }}
           onPress={() => navigation.navigate("Sign Up")}
         >
           Sign Up

@@ -15,6 +15,7 @@ import {
 } from "react-native-svg";
 import * as shape from "d3-shape";
 import { ThemeContext } from "../../hooks/ThemeContext";
+import { colors } from "../../styles/colors";
 export default function SocialChart({ data, routeColor }) {
   const { theme } = useContext(ThemeContext);
   const apx = (size = 0) => {
@@ -125,7 +126,12 @@ export default function SocialChart({ data, routeColor }) {
             }`}
           />
 
-          <SvgText x={apx(20)} fill="#617485" opacity={0.65} fontSize={apx(24)}>
+          <SvgText
+            x={apx(20)}
+            fill={theme.mode === "light" ? "#617485" : colors.light.base}
+            opacity={0.65}
+            fontSize={apx(24)}
+          >
             {date}
           </SvgText>
           <SvgText
