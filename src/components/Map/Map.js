@@ -5,6 +5,7 @@ import {
   View,
   Text,
   Dimensions,
+  Image,
 } from "react-native";
 import Svg, { G, Path, Circle } from "react-native-svg";
 import * as d3 from "d3";
@@ -12,6 +13,7 @@ import { geoCylindricalStereographic } from "d3-geo-projection";
 import SvgPanZoom, { SvgPanZoomElement } from "react-native-svg-pan-zoom";
 import { COUNTRIES } from "./CountryShapes";
 import { ThemeContext } from "../../hooks/ThemeContext";
+import ThemeText from "../ThemeText";
 const dimensions = Dimensions.get("window");
 
 const Map = (props) => {
@@ -28,6 +30,7 @@ const Map = (props) => {
     const svgPaths = COUNTRIES.map(geoPath);
     return svgPaths;
   };
+
   useEffect(() => {
     setCountryList(
       countryPaths().map((path, i) => {
@@ -48,7 +51,8 @@ const Map = (props) => {
           <SvgPanZoomElement
             // x={50}
             // y={50}
-            onClick={() => {
+            key={COUNTRIES[i].properties.name}
+            onClick={(e) => {
               setClickedCountry(COUNTRIES[i].properties.name);
             }}
             onClickRelease={() => {
@@ -70,6 +74,7 @@ const Map = (props) => {
       })
     );
   }, [data]);
+
   return (
     <View style={{ width: "100%", display: "flex", alignItems: "center" }}>
       <View
@@ -79,17 +84,29 @@ const Map = (props) => {
             backgroundColor: theme.mode === "light" ? "#FFFF" : "#222c40",
           },
         ]}
-        onTouchStart={() => props.setScrollEnabled(false)}
+        key="root"
+        onTouchStart={(e) => {
+          props.setScrollEnabled(false);
+          if (e.target._children.length > 0) {
+            setClickedCountry(null);
+          }
+        }}
         onTouchEnd={() => props.setScrollEnabled(true)}
       >
         {clickedCountry ? (
           <View style={styles.clickedBanner}>
-            <Text>
-              {clickedCountry}:
+            <Image
+              style={styles.flagBubble}
+              source={require(`../../../assets/flags/fiji.png`)}
+            />
+            <ThemeText style={{ fontSize: 14, fontWeight: "400" }}>
+              {" "}
+              {clickedCountry}{" "}
               {data.find((item) => item.geoName === clickedCountry)?.geoName
                 ? data.find((item) => item.geoName === clickedCountry).value[0]
                 : 0}
-            </Text>
+              {"   "}
+            </ThemeText>
           </View>
         ) : null}
         {data.length > 0 ? (
@@ -100,6 +117,7 @@ const Map = (props) => {
             initialZoom={0.14}
             onZoom={(zoom) => {
               console.log("onZoom:" + zoom);
+              setClickedCountry(null);
             }}
             canvasStyle={styles.svgCanvasStyle}
             viewStyle={styles.svgCanvasContainer}
@@ -124,7 +142,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 11,
     transform: [{ scale: dimensions.width / 436 }],
-    marginVertical:10
+    marginVertical: 10,
   },
   svgCanvasStyle: {
     // backgroundColor: "yellow",
@@ -142,10 +160,20 @@ const styles = StyleSheet.create({
   },
   clickedBanner: {
     position: "absolute",
-    height: 20,
     backgroundColor: "#fff",
-    paddingHorizontal: 10,
     top: 0,
-    left: 0,
+    right: 0,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 100,
+    margin: 10,
+    backgroundColor: "#efedf3",
+  },
+  flagBubble: {
+    height: 25,
+    width: 25,
+    margin: 4,
+    borderRadius: 200,
   },
 });
