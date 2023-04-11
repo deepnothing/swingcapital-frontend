@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { SafeAreaView, View, Dimensions } from "react-native";
 import { ThemeContext } from "../hooks/ThemeContext";
+import { colors } from "../styles/colors";
 
 export default function Header(props) {
   const { theme } = useContext(ThemeContext);
@@ -8,7 +9,7 @@ export default function Header(props) {
     <SafeAreaView
       {...props}
       style={[{
-        backgroundColor: theme.mode === "light" ? "#ffc72c" : "#000",
+        backgroundColor: theme.mode === "light" ? colors.swing : "#000",
         shadowColor: "rgba(0, 0, 0, 0.45)",
         shadowOffset: { width: 0, height: 5 },
         shadowOpacity: 1,

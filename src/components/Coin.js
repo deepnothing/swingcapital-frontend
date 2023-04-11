@@ -16,6 +16,7 @@ import { ref, onValue, update, set } from "firebase/database";
 import { db } from "../config/firebase";
 import ThemeText from "./ThemeText";
 import { ThemeContext } from "../hooks/ThemeContext";
+import { colors } from "../styles/colors";
 LogBox.ignoreLogs([
   "Non-serializable values were found in the navigation state",
 ]);
@@ -109,10 +110,10 @@ export default function Coin({
               size="16"
               color={
                 favCoins && favCoins.includes(coinData.name)
-                  ? "#ffc72c"
+                  ? colors.swing
                   : theme.mode === "light"
                   ? "#686d72"
-                  : "#fff"
+                  : colors.light.base
               }
             />
           </TouchableOpacity>
@@ -131,7 +132,7 @@ export default function Coin({
           <Feather
             name="clock"
             size="18"
-            color={theme.mode === "light" ? "#686d72" : "#FFF"}
+            color={theme.mode === "light" ? "#686d72" : colors.light.base}
           />
           <ThemeText
             style={[

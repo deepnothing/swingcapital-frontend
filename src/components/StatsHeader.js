@@ -13,6 +13,7 @@ import ThemeText from "./ThemeText";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "./Header";
+import { colors } from "../styles/colors";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -27,7 +28,7 @@ export default function StatsHeader({
   return (
     <Header
       style={{
-        backgroundColor: theme.mode === "light" ? "#fff" : "#000",
+        backgroundColor: theme.mode === "light" ? colors.light.base : colors.dark.base,
         shadowOpacity: 0,
       }}
       justifyContent="space-around"
@@ -41,10 +42,10 @@ export default function StatsHeader({
       >
         <Feather
           name="arrow-left"
-          color={theme.mode === "dark" ? "#FFF" : "#000"}
+          color={theme.mode === "dark" ? colors.light.base : colors.dark.base}
           size={"20"}
         />
-        <Text style={{ fontSize: 15, fontWeight: "600", color: "#FFC72C" }}>
+        <Text style={{ fontSize: 15, fontWeight: "600", color: colors.swing }}>
           &nbsp;Back
         </Text>
       </TouchableOpacity>

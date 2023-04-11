@@ -1,10 +1,15 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { colors } from "../styles/colors";
+import ThemeText from "./ThemeText";
+import { useContext } from "react";
+import { ThemeContext } from "../hooks/ThemeContext";
 
 export default function IntervalPicker({
   interval,
   intervalLabels,
   onIntervalChange,
 }) {
+  const { theme } = useContext(ThemeContext);
   return (
     <View style={styles.trendSelectContainer}>
       {intervalLabels.map((i) => (
@@ -12,17 +17,24 @@ export default function IntervalPicker({
           onPress={() => onIntervalChange(i)}
           style={[
             styles.trendSelect,
-            { backgroundColor: interval === i ? "#FFC72c" : "#FFF" },
+            { backgroundColor: interval === i ? colors.swing : "transparent" },
           ]}
         >
-          <Text
+          <ThemeText
             style={[
               styles.trendText,
-              { color: interval === i ? "#FFF" : "#000" },
+              interval === i
+                ? {
+                    color:
+                      theme.mode === "light"
+                        ? colors.light.base
+                        : colors.dark.base,
+                  }
+                : {},
             ]}
           >
             {i}
-          </Text>
+          </ThemeText>
         </TouchableOpacity>
       ))}
     </View>

@@ -12,6 +12,7 @@ import BigButton from "../../components/BigButton";
 import WebView from "react-native-webview";
 import { logoHtml } from "./swingLogoView";
 import { storeData } from "../../hooks/asyncStorage";
+import { colors } from "../../styles/colors";
 
 function WelcomeScreen({ navigation }) {
   return (
@@ -24,7 +25,7 @@ function WelcomeScreen({ navigation }) {
           }}
         >
           <Text style={{ fontSize: 19, fontWeight: "600" }}>Skip </Text>
-          <Feather name="arrow-right" color={"#ffc72c"} size={"28"} />
+          <Feather name="arrow-right" color={colors.swing} size={"28"} />
         </TouchableOpacity>
       </View>
       <View />
@@ -56,12 +57,12 @@ export default WelcomeScreen;
 
 const styles = StyleSheet.create({
   registerText: {
-    color: "#FFFF",
+    color: colors.light.base,
     fontSize: 20,
     fontWeight: "600",
   },
   createText: {
-    color: "#ffc72c",
+    color: colors.swing,
     fontSize: 15,
     fontWeight: "600",
   },

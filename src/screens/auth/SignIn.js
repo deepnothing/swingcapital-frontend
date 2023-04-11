@@ -6,6 +6,7 @@ import BigButton from "../../components/BigButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import WebView from "react-native-webview";
 import { html } from "./swingWebView";
+import { colors } from "../../styles/colors";
 
 const auth = getAuth();
 
@@ -87,13 +88,13 @@ function SignInScreen({ navigation }) {
         </View>
 
         <BigButton onPress={signIn} width="100%">
-          <Feather name="log-in" color={"#FFFFFF"} size={"25"} />
+          <Feather name="log-in" color={colors.light.base} size={"25"} />
         </BigButton>
       </View>
       <Text className="text-center text-black font-main text-base">
         Don't Have an account?{" "}
         <Text
-          className="text-[#ffc72c]"
+          className={`text-[${colors.swing}]`}
           onPress={() => navigation.navigate("Sign Up")}
         >
           Sign Up

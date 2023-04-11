@@ -1,8 +1,6 @@
 import { View, Text } from "react-native";
+import { colors } from "../styles/colors";
 
 export default function LoadingScreen() {
-  return (
-    <View style={{ flex: 1, backgroundColor: "#ffc72c" }}>
-    </View>
-  );
+  return <View style={{ flex: 1, backgroundColor: colors.swing }}></View>;
 }

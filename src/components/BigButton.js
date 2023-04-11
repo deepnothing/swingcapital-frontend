@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet } from "react-native";
+import { colors } from "../styles/colors";
 
 export default function BigButton(props) {
   return (
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 10,
     borderRadius: 5,
-    backgroundColor: "#FFC72C",
+    backgroundColor: colors.swing,
     shadowColor: "rgba(60, 64, 67, 0.3)",
     shadowOffset: {
       width: 0,

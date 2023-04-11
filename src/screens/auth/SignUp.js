@@ -15,6 +15,7 @@ import { set, ref } from "firebase/database";
 import BigButton from "../../components/BigButton";
 import WebView from "react-native-webview";
 import { html } from "./swingWebView";
+import { colors } from "../../styles/colors";
 
 const auth = getAuth();
 
@@ -86,13 +87,13 @@ function SignUpScreen({ navigation }) {
         </View>
 
         <BigButton onPress={signUp} width="100%">
-          <Feather name="user-plus" color={"#FFF"} size={"25"} />
+          <Feather name="user-plus" color={colors.light.base} size={"25"} />
         </BigButton>
       </View>
       <Text className="text-center text-black font-main text-base">
         Have an account?{" "}
         <Text
-          className="text-[#ffc72c]"
+          className={`text-[${colors.swing}]`}
           onPress={() => navigation.navigate("Sign In")}
         >
           Sign In
@@ -111,11 +112,11 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingBottom: 10,
     paddingLeft: 0,
-    backgroundColor: "#fff",
+    backgroundColor: colors.light.base,
     color: "#424242",
   },
   buttonText: {
-    color: "#FFFF",
+    color: colors.light.base,
     fontSize: 20,
     fontWeight: "600",
   },
@@ -139,6 +140,6 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "space-evenly",
     marginHorizontal: 20,
-    maxWidth:500
+    maxWidth: 500,
   },
 });

@@ -7,8 +7,7 @@ import {
 } from "react-native";
 import { WebView } from "react-native-webview";
 import Feather from "react-native-vector-icons/Feather";
-import { TouchableOpacity } from "react-native-gesture-handler";
-
+import { colors } from "../styles/colors";
 export default function IFrame({ url, setIframeVisible }) {
   const getDomainName = (fullUrl) => {
     return fullUrl.replace(/^(https?:\/\/)?(www\.)?/i, "").split("/")[0];
@@ -30,7 +29,7 @@ export default function IFrame({ url, setIframeVisible }) {
           <Text style={styles.close}>Exit</Text>
         </Pressable>
       </View>
-      
+
       <WebView
         source={{
           uri: url,
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#FFF",
+    backgroundColor: colors.light.base,
     borderTopRightRadius: 15,
     borderTopLeftRadius: 15,
     shadowColor: "#000",
@@ -76,7 +75,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   close: {
-    color: "#ffc72c",
+    color: colors.swing,
     fontWeight: "700",
     fontSize: 18,
   },

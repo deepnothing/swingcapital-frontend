@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { View } from "react-native";
+import { colors } from "../styles/colors";
 export default function Card(props) {
   const { theme } = useContext(ThemeContext);
   return (
@@ -16,13 +17,8 @@ export default function Card(props) {
           borderRadius: 10,
           padding: 10,
           marginVertical: 7,
-          // borderColor: "gray",
-          // shadowColor: "rgba(60, 64, 67, 0.3)",
-          // shadowOffset: { width: 0, height: 2 },
-          // shadowOpacity: 0.8,
-          // shadowRadius: 2,
-          // elevation: 3,
-          backgroundColor: theme.mode === "light" ? "#FFFF" : "#222c40",
+          backgroundColor:
+            theme.mode === "light" ? colors.light.base : colors.dark.high,
         },
         props.style,
       ]}

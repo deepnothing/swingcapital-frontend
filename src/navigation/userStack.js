@@ -8,6 +8,7 @@ import NewsScreen from "../screens/News";
 import BotScreen from "../screens/Bot";
 import SettingsScreen from "../screens/Settings";
 import Feather from "react-native-vector-icons/Feather";
+import { colors } from "../styles/colors";
 
 const Tab = createBottomTabNavigator();
 
@@ -63,10 +64,12 @@ export default function UserStack({ user, isGuestUser, setGuestUser }) {
         screenOptions={{
           headerShown: false,
           tabBarStyle: {
-            backgroundColor: theme.mode === "light" ? "#ffc72c" : "#000",
+            backgroundColor:
+              theme.mode === "light" ? colors.swing : colors.dark.base,
             display: isTabBarShowing ? "flex" : "none",
             borderTopWidth: 3,
-            borderTopColor: theme.mode === "light" ? "#ffc72c" : "#000",
+            borderTopColor:
+              theme.mode === "light" ? colors.swing : colors.dark.base,
           },
         }}
       >
@@ -78,8 +81,9 @@ export default function UserStack({ user, isGuestUser, setGuestUser }) {
             component={i.component}
             options={{
               tabBarActiveTintColor:
-                theme.mode === "light" ? "#FFF" : "#ffc72c",
-              tabBarInactiveTintColor: theme.mode === "light" ? "#000" : "#fff",
+                theme.mode === "light" ? colors.light.base : colors.swing,
+              tabBarInactiveTintColor:
+                theme.mode === "light" ? colors.dark.base : colors.light.base,
               tabBarShowLabel: true,
               tabBarLabelStyle: { top: -3 },
               tabBarIcon: ({ focused }) => (
@@ -88,11 +92,11 @@ export default function UserStack({ user, isGuestUser, setGuestUser }) {
                   color={
                     focused
                       ? theme.mode === "light"
-                        ? "white"
-                        : "#ffc72c"
+                        ? colors.light.base
+                        : colors.swing
                       : theme.mode === "light"
-                      ? "#000"
-                      : "#FFF"
+                      ? colors.dark.base
+                      : colors.light.base
                   }
                   size={"24"}
                 />

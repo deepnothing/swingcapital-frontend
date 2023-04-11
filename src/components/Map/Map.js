@@ -14,6 +14,7 @@ import SvgPanZoom, { SvgPanZoomElement } from "react-native-svg-pan-zoom";
 import { COUNTRIES } from "./CountryShapes";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import ThemeText from "../ThemeText";
+import { colors } from "../../styles/colors";
 const dimensions = Dimensions.get("window");
 
 const Map = (props) => {
@@ -81,7 +82,8 @@ const Map = (props) => {
         style={[
           styles.container,
           {
-            backgroundColor: theme.mode === "light" ? "#FFFF" : "#222c40",
+            backgroundColor:
+              theme.mode === "light" ? colors.light.base : colors.dark.high,
           },
         ]}
         key="root"
@@ -94,7 +96,17 @@ const Map = (props) => {
         onTouchEnd={() => props.setScrollEnabled(true)}
       >
         {clickedCountry ? (
-          <View style={styles.clickedBanner}>
+          <View
+            style={[
+              styles.clickedBanner,
+              {
+                backgroundColor:
+                  theme.mode === "light"
+                    ? colors.light.medium
+                    : colors.dark.medium,
+              },
+            ]}
+          >
             <Image
               style={styles.flagBubble}
               source={require(`../../../assets/flags/fiji.png`)}
@@ -160,7 +172,6 @@ const styles = StyleSheet.create({
   },
   clickedBanner: {
     position: "absolute",
-    backgroundColor: "#fff",
     top: 0,
     right: 0,
     display: "flex",
@@ -168,7 +179,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 100,
     margin: 10,
-    backgroundColor: "#efedf3",
   },
   flagBubble: {
     height: 25,
