@@ -12,6 +12,9 @@ export default function RootNavigation() {
   const [isThemeLoading, setThemeLoading] = useState(true);
 
   const [theme, setTheme] = useState({ mode: "light" });
+
+  const [isGuestUser, setGuestUser] = useState(false);
+
   const updateTheme = (newTheme) => {
     let mode;
     if (!newTheme) {
@@ -51,6 +54,10 @@ export default function RootNavigation() {
 
   useEffect(() => {
     fetchStoredTheme();
+    (async () => {
+      const guestState = await getData("guest");
+      setGuestUser(guestState);
+    })();
   }, []);
 
   if (user === null) {
@@ -59,7 +66,15 @@ export default function RootNavigation() {
 
   return (
     <ThemeContext.Provider value={{ theme, updateTheme }}>
-      {user ? <UserStack user={user} /> : <AuthStack />}
+      {user || isGuestUser ? (
+        <UserStack
+          user={user}
+          isGuestUser={isGuestUser}
+          setGuestUser={setGuestUser}
+        />
+      ) : (
+        <AuthStack />
+      )}
     </ThemeContext.Provider>
   );
 }

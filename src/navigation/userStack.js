@@ -11,7 +11,7 @@ import Feather from "react-native-vector-icons/Feather";
 
 const Tab = createBottomTabNavigator();
 
-export default function UserStack({ user }) {
+export default function UserStack({ user, isGuestUser, setGuestUser }) {
   const [isTabBarShowing, setTabBarShowing] = useState(true);
   const { theme } = useContext(ThemeContext);
 
@@ -24,6 +24,7 @@ export default function UserStack({ user }) {
         user: user,
         setTabBarShowing: setTabBarShowing,
         theme: theme,
+        isGuestUser: isGuestUser,
       },
     },
     {
@@ -41,6 +42,7 @@ export default function UserStack({ user }) {
       initialParams: {
         user: user,
         theme: theme,
+        isGuestUser: isGuestUser,
       },
     },
     {
@@ -49,6 +51,8 @@ export default function UserStack({ user }) {
       component: SettingsScreen,
       initialParams: {
         theme: theme,
+        isGuestUser: isGuestUser,
+        setGuestUser: setGuestUser,
       },
     },
   ];

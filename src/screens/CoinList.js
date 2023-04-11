@@ -1,14 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import {
-  Text,
   View,
-  SafeAreaView,
   StyleSheet,
   FlatList,
   Pressable,
   TextInput,
-  Dimensions,
   RefreshControl,
+  Alert,
 } from "react-native";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { baseUrl } from "../config/api";
@@ -38,22 +36,30 @@ export default function CoinList({ navigation, route }) {
     fetch(`${baseUrl}/coins`)
       .then((res) => res.json())
       .then((response) => {
-        //get favourite coins fron database and change order of homescreen accordingly
-        const favCoins = ref(db, `users/${route.params.user.uid}`);
-        onValue(favCoins, (snapshot) => {
-          const data = snapshot.val();
-          setFavCoins(data.favCoins);
-          if (data.favCoins) {
-            setData(arrangeItems(data.favCoins, response));
-            setDataCopyForSearch(arrangeItems(data.favCoins, response));
-          } else {
-            setData(response);
-            setDataCopyForSearch(response);
-          }
+        if (route.params.user) {
+          //get favourite coins from database and change order of homescreen accordingly
+          const favCoins = ref(db, `users/${route.params.user.uid}`);
+          onValue(favCoins, (snapshot) => {
+            const data = snapshot.val();
+            setFavCoins(data.favCoins);
+            if (data.favCoins) {
+              setData(arrangeItems(data.favCoins, response));
+              setDataCopyForSearch(arrangeItems(data.favCoins, response));
+            } else {
+              setData(response);
+              setDataCopyForSearch(response);
+            }
+            setTimeout(() => {
+              setIsRefreshing(false);
+            }, 500);
+          });
+        } else {
+          setData(response);
+          setDataCopyForSearch(response);
           setTimeout(() => {
             setIsRefreshing(false);
           }, 500);
-        });
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -61,6 +67,7 @@ export default function CoinList({ navigation, route }) {
       });
   };
 
+  // arrange the coin array based on user favourite if signed in
   function arrangeItems(favorites, items) {
     const arrangedItems = [];
 
@@ -80,15 +87,19 @@ export default function CoinList({ navigation, route }) {
   }
 
   const addOrRemoveFavCoin = (coinName) => {
-    const newArrayOfCoins = favCoins
-      ? favCoins.includes(coinName)
-        ? favCoins.filter((item) => item !== coinName)
-        : [...favCoins, coinName]
-      : [coinName];
+    if (route.params.user) {
+      const newArrayOfCoins = favCoins
+        ? favCoins.includes(coinName)
+          ? favCoins.filter((item) => item !== coinName)
+          : [...favCoins, coinName]
+        : [coinName];
 
-    update(ref(db, `users/${route.params.user.uid}`), {
-      favCoins: newArrayOfCoins,
-    });
+      update(ref(db, `users/${route.params.user.uid}`), {
+        favCoins: newArrayOfCoins,
+      });
+    } else {
+      Alert.alert("", "You must sign in to add favourites", [{ text: "OK" }]);
+    }
   };
   const searchCoins = (items, input) => {
     if (input === "") {
@@ -139,7 +150,7 @@ export default function CoinList({ navigation, route }) {
               navigation.navigate("Stats", {
                 coinName: item.name,
                 coinColor: item.color,
-                coinLogo:item.logo,
+                coinLogo: item.logo,
                 setTabBarShowing: route.params.setTabBarShowing,
               });
             }}

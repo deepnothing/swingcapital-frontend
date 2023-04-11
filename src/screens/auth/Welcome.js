@@ -2,21 +2,16 @@ import React from "react";
 import {
   Text,
   Pressable,
-  Image,
   View,
   StyleSheet,
   SafeAreaView,
-  Touchable,
   TouchableOpacity,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import Feather from "react-native-vector-icons/Feather";
-
 import BigButton from "../../components/BigButton";
-import { rotate } from "@shopify/react-native-skia";
 import WebView from "react-native-webview";
 import { logoHtml } from "./swingLogoView";
-// import { TouchableOpacity } from "react-native-gesture-handler";
+import { storeData } from "../../hooks/asyncStorage";
 
 function WelcomeScreen({ navigation }) {
   return (
@@ -24,7 +19,9 @@ function WelcomeScreen({ navigation }) {
       <View style={styles.skip}>
         <TouchableOpacity
           style={styles.skipButton}
-          onPress={() => console.log("ll")}
+          onPress={() => {
+            storeData("guest", true);
+          }}
         >
           <Text style={{ fontSize: 19, fontWeight: "600" }}>Skip </Text>
           <Feather name="arrow-right" color={"#ffc72c"} size={"28"} />
@@ -32,10 +29,6 @@ function WelcomeScreen({ navigation }) {
       </View>
       <View />
       <View style={styles.mainContent}>
-        {/* <Image
-          source={require("../../../assets/logo-500.png")}
-          style={{ width: 70, height: 70, alignSelf: "center" ,borderWidth:1}}
-        /> */}
         <View style={{ width: "100%", height: 80 }}>
           <WebView
             source={{
@@ -43,7 +36,6 @@ function WelcomeScreen({ navigation }) {
             }}
           />
         </View>
-
         <BigButton onPress={() => navigation.navigate("Sign In")}>
           <Text style={styles.registerText}>Sign In</Text>
         </BigButton>

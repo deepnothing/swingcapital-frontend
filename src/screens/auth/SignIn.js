@@ -1,23 +1,10 @@
 import React from "react";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  Text,
-  View,
-  Alert,
-} from "react-native";
+import { StyleSheet, TextInput, Text, View, Alert } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
-
-//import Icon from 'react-native-vector-icons/FontAwesome';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import BigButton from "../../components/BigButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import WebView from "react-native-webview";
-
 import { html } from "./swingWebView";
 
 const auth = getAuth();
@@ -153,6 +140,6 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "space-evenly",
     marginHorizontal: 20,
-    maxWidth:500
+    maxWidth: 500,
   },
 });

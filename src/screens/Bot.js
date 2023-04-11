@@ -4,10 +4,10 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  TouchableOpacity,
   ActivityIndicator,
   Image,
   FlatList,
+  Alert,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import Header from "../components/Header";
@@ -24,27 +24,35 @@ function BotScreen({ route }) {
   const [isRegistering, setIsRegistering] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   useEffect(() => {
-    const userRegistered = ref(db, `users/${route.params.user.uid}`);
-    onValue(userRegistered, (snapshot) => {
-      const data = snapshot.val();
-      setRegistered(data.registered);
-    });
+    if (route.params.user) {
+      const userRegistered = ref(db, `users/${route.params.user.uid}`);
+      onValue(userRegistered, (snapshot) => {
+        const data = snapshot.val();
+        setRegistered(data.registered);
+      });
+    } else {
+      setRegistered(false);
+    }
   }, []);
 
   const registerForBot = () => {
-    // set user data in database
-    setIsRegistering(true);
-    update(ref(db, `users/${route.params.user.uid}`), {
-      registered: true,
-    })
-      .then(() => {
-        // registered successfully!
-        setIsRegistering(false);
-        setRegistered(true);
+    if (route.params.user) {
+      // set user data in database
+      setIsRegistering(true);
+      update(ref(db, `users/${route.params.user.uid}`), {
+        registered: true,
       })
-      .catch((error) => {
-        // The write failed...
-      });
+        .then(() => {
+          // registered successfully!
+          setIsRegistering(false);
+          setRegistered(true);
+        })
+        .catch((error) => {
+          // The write failed...
+        });
+    } else {
+      Alert.alert("", "You must sign in to register", [{ text: "OK" }]);
+    }
   };
 
   const data = ["trade1", "trade2"];
