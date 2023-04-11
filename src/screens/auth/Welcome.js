@@ -6,30 +6,44 @@ import {
   View,
   StyleSheet,
   SafeAreaView,
+  Touchable,
+  TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import Feather from "react-native-vector-icons/Feather";
+
 import BigButton from "../../components/BigButton";
 import { rotate } from "@shopify/react-native-skia";
 import WebView from "react-native-webview";
 import { logoHtml } from "./swingLogoView";
+// import { TouchableOpacity } from "react-native-gesture-handler";
 
 function WelcomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.skip}>
+        <TouchableOpacity
+          style={styles.skipButton}
+          onPress={() => console.log("ll")}
+        >
+          <Text style={{ fontSize: 19, fontWeight: "600" }}>Skip </Text>
+          <Feather name="arrow-right" color={"#ffc72c"} size={"28"} />
+        </TouchableOpacity>
+      </View>
       <View />
       <View style={styles.mainContent}>
         {/* <Image
           source={require("../../../assets/logo-500.png")}
           style={{ width: 70, height: 70, alignSelf: "center" ,borderWidth:1}}
         /> */}
-        <View style={{ width: "100%", height: 80}}>
-        <WebView 
-        source={{
-          html: logoHtml,
-        }}
-        />
+        <View style={{ width: "100%", height: 80 }}>
+          <WebView
+            source={{
+              html: logoHtml,
+            }}
+          />
         </View>
-        
+
         <BigButton onPress={() => navigation.navigate("Sign In")}>
           <Text style={styles.registerText}>Sign In</Text>
         </BigButton>
@@ -39,6 +53,7 @@ function WelcomeScreen({ navigation }) {
         >
           <Text style={styles.createText}>Sign Up</Text>
         </Pressable>
+        <View></View>
       </View>
       <View />
     </SafeAreaView>
@@ -88,5 +103,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     marginHorizontal: 20,
     maxWidth: 500,
+  },
+  skip: {
+    position: "absolute",
+    right: 0,
+    margin: 20,
+    top: 50,
+  },
+  skipButton: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
