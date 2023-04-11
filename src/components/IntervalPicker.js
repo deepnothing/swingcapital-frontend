@@ -12,8 +12,9 @@ export default function IntervalPicker({
   const { theme } = useContext(ThemeContext);
   return (
     <View style={styles.trendSelectContainer}>
-      {intervalLabels.map((i) => (
+      {intervalLabels.map((i, index) => (
         <TouchableOpacity
+          key={index}
           onPress={() => onIntervalChange(i)}
           style={[
             styles.trendSelect,

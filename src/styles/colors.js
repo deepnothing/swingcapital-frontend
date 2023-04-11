@@ -5,7 +5,7 @@ export const colors = {
     medium: "#efedf3",
   },
   dark: {
-    base: "#000000",
+    base: "#121212",
     medium: "#0e1321",
     high: "#222c40",
   },
