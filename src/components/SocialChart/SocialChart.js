@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Dimensions } from "react-native";
 import { View, PanResponder } from "react-native";
 import { AreaChart, YAxis } from "react-native-svg-charts";
@@ -14,7 +14,9 @@ import {
   Text as SvgText,
 } from "react-native-svg";
 import * as shape from "d3-shape";
+import { ThemeContext } from "../../hooks/ThemeContext";
 export default function SocialChart({ data, routeColor }) {
+  const { theme } = useContext(ThemeContext);
   const apx = (size = 0) => {
     let width = Dimensions.get("window").width;
     return (width / 750) * size;
@@ -116,7 +118,11 @@ export default function SocialChart({ data, routeColor }) {
             width={apx(250)}
             height={apx(96)}
             stroke={`rgb(${routeColor})`}
-            fill="rgba(255, 255, 255, 0.9)"
+            fill={`${
+              theme.mode === "light"
+                ? "rgba(255,255,255,0.9)"
+                : "rgba(14, 19, 33,0.9)"
+            }`}
           />
 
           <SvgText x={apx(20)} fill="#617485" opacity={0.65} fontSize={apx(24)}>
