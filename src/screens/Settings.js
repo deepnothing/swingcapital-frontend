@@ -1,11 +1,7 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import {
-  Modal,
   TouchableOpacity,
-  Text,
-  Pressable,
   View,
-  SafeAreaView,
   StyleSheet,
   Switch,
   Alert,
@@ -22,7 +18,7 @@ import ThemeText from "../components/ThemeText";
 
 const auth = getAuth();
 
-function Settings() {
+function Settings({ route }) {
   const { user } = useAuth();
   const { theme, updateTheme } = useContext(ThemeContext);
   const [isActive, setIsActive] = useState(theme.mode === "light");
@@ -90,7 +86,9 @@ function Settings() {
               style={{ marginRight: 10 }}
             />
           </TouchableOpacity>
-          <ThemeText style={{ fontWeight: "600" }}>{user?.email}</ThemeText>
+          <ThemeText style={{ fontWeight: "600" }}>
+            {user ? user?.email : "Guest User"}
+          </ThemeText>
         </View>
         <View style={styles.row}>
           <Feather
@@ -109,25 +107,59 @@ function Settings() {
             value={isActive ? true : false}
           />
         </View>
-        <TouchableOpacity style={styles.row} onPress={() => signOut(auth)}>
-          <Feather
-            name="log-out"
-            color={theme.mode === "light" ? "#000" : "#FFF"}
-            size={"25"}
-            style={{ marginRight: 10 }}
-          />
-          <ThemeText>Logout</ThemeText>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.row} onPress={() => deleteAccount()}>
-          <Feather
-            name="x-octagon"
-            color="red"
-            size={"25"}
-            style={{ marginRight: 10 }}
-          />
+        {user ? (
+          <>
+            <TouchableOpacity style={styles.row} onPress={() => signOut(auth)}>
+              <Feather
+                name="log-out"
+                color={theme.mode === "light" ? "#000" : "#FFF"}
+                size={"25"}
+                style={{ marginRight: 10 }}
+              />
+              <ThemeText>Logout</ThemeText>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.row}
+              onPress={() => deleteAccount()}
+            >
+              <Feather
+                name="x-octagon"
+                color="red"
+                size={"25"}
+                style={{ marginRight: 10 }}
+              />
 
-          <ThemeText>Delete Account</ThemeText>
-        </TouchableOpacity>
+              <ThemeText>Delete Account</ThemeText>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <>
+            <TouchableOpacity
+              style={styles.row}
+              onPress={() => route.params.setGuestUser(false)}
+            >
+              <Feather
+                name="log-in"
+                color={theme.mode === "light" ? "#000" : "#FFF"}
+                size={"25"}
+                style={{ marginRight: 10 }}
+              />
+              <ThemeText>Sign In</ThemeText>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.row}
+              onPress={() => route.params.setGuestUser(false)}
+            >
+              <Feather
+                name="user-plus"
+                color={theme.mode === "light" ? "#000" : "#FFF"}
+                size={"25"}
+                style={{ marginRight: 10 }}
+              />
+              <ThemeText>Sign Up</ThemeText>
+            </TouchableOpacity>
+          </>
+        )}
       </View>
     </ScreenContainer>
   );
