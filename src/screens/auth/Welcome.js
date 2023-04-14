@@ -14,7 +14,8 @@ import { logoHtml } from "./swingLogoView";
 import { storeData } from "../../hooks/asyncStorage";
 import { colors } from "../../styles/colors";
 
-function WelcomeScreen({ navigation }) {
+function WelcomeScreen({ navigation, setGuestUser }) {
+  console.log(setGuestUser)
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.skip}>
@@ -22,6 +23,7 @@ function WelcomeScreen({ navigation }) {
           style={styles.skipButton}
           onPress={() => {
             storeData("guest", true);
+            setGuestUser(true);
           }}
         >
           <Text style={{ fontSize: 19, fontWeight: "600" }}>Skip </Text>

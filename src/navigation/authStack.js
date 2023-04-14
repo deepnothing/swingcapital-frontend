@@ -7,7 +7,7 @@ import SignOutScreen from "../screens/auth/SignUp";
 
 const Stack = createStackNavigator();
 
-export default function AuthStack() {
+export default function AuthStack({ setGuestUser }) {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -18,7 +18,9 @@ export default function AuthStack() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="Welcome">
+          {(props) => <WelcomeScreen {...props} setGuestUser={setGuestUser} />}
+        </Stack.Screen>
         <Stack.Screen name="Sign In" component={SignInScreen} />
         <Stack.Screen name="Sign Up" component={SignOutScreen} />
       </Stack.Navigator>

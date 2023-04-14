@@ -73,7 +73,7 @@ export default function RootNavigation() {
           setGuestUser={setGuestUser}
         />
       ) : (
-        <AuthStack />
+        <AuthStack setGuestUser={setGuestUser} />
       )}
     </ThemeContext.Provider>
   );
