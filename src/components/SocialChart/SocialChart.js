@@ -1,23 +1,14 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Dimensions } from "react-native";
 import { View, PanResponder } from "react-native";
 import { AreaChart, YAxis } from "react-native-svg-charts";
-import {
-  Circle,
-  Defs,
-  G,
-  Line,
-  LinearGradient,
-  Path,
-  Rect,
-  Stop,
-  Text as SvgText,
-} from "react-native-svg";
+import { Circle, G, Path, Rect, Text as SvgText } from "react-native-svg";
 import * as shape from "d3-shape";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { colors } from "../../styles/colors";
-export default function SocialChart({ data, routeColor }) {
+export default function SocialChart({ data, routeColor, interval }) {
   const { theme } = useContext(ThemeContext);
+
   const apx = (size = 0) => {
     let width = Dimensions.get("window").width;
     return (width / 750) * size;
@@ -43,7 +34,7 @@ export default function SocialChart({ data, routeColor }) {
 
   const panResponder = useRef(
     PanResponder.create({
-      // 要求成为响应者：
+      // Ask to be a responder:
       onStartShouldSetPanResponder: (evt, gestureState) => true,
       onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
       onMoveShouldSetPanResponder: (evt, gestureState) => true,
@@ -109,7 +100,7 @@ export default function SocialChart({ data, routeColor }) {
     return (
       <G x={x(positionX)} key="tooltip">
         <G
-          x={positionX > size.current / 2 ? -apx(300 + 10) : apx(10)}
+          x={positionX > size.current / 2 ? -apx(270 + 10) : apx(30)}
           y={y(priceList[positionX]) - apx(10)}
         >
           <Rect

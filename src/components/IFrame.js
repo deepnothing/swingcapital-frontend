@@ -1,14 +1,13 @@
-import {
-  View,
-  StyleSheet,
-  Text,
-  Pressable,
-  ActivityIndicator,
-} from "react-native";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 import { WebView } from "react-native-webview";
 import Feather from "react-native-vector-icons/Feather";
 import { colors } from "../styles/colors";
+import ThemeText from "./ThemeText";
+import { useContext } from "react";
+import { ThemeContext } from "../hooks/ThemeContext";
+
 export default function IFrame({ url, setIframeVisible }) {
+  const { theme } = useContext(ThemeContext);
   const getDomainName = (fullUrl) => {
     return fullUrl.replace(/^(https?:\/\/)?(www\.)?/i, "").split("/")[0];
   };
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
     display: "flex",
     flexDirection: "column",
-    backgroundColor: colors.light.base,
+    backgroundColor: "#FFF",
     borderTopRightRadius: 15,
     borderTopLeftRadius: 15,
     shadowColor: "#000",

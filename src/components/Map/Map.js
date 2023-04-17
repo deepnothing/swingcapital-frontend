@@ -57,7 +57,7 @@ const Map = (props) => {
               setClickedCountry(COUNTRIES[i].properties.name);
             }}
             onClickRelease={() => {
-              console.log("onClickRelease!");
+              console.log("MapClickRelease!");
               //setClickedCountry(null);
             }}
           >
@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 100,
     margin: 10,
+    zIndex:3
   },
   flagBubble: {
     height: 25,

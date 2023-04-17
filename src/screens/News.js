@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Text,
   Pressable,
@@ -8,6 +8,7 @@ import {
   FlatList,
   Modal,
   Image,
+  RefreshControl,
 } from "react-native";
 import SearchBar from "../components/SearchBar";
 import Article from "../components/Article";
@@ -18,6 +19,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Header from "../components/Header";
 import ScreenContainer from "../components/ScreenContainer";
 import ThemeText from "../components/ThemeText";
+import { ThemeContext } from "../hooks/ThemeContext";
 
 function PercentBar(props) {
   return (
@@ -37,6 +39,8 @@ function PercentBar(props) {
 }
 
 function News() {
+  const { theme } = useContext(ThemeContext);
+
   const [data, setData] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -111,8 +115,13 @@ function News() {
         )}
         keyExtractor={(item, index) => index}
         contentContainerStyle={styles.listStyle}
-        onRefresh={onRefresh}
-        refreshing={isRefreshing}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+            tintColor={theme.mode === "light" ? "#000" : "#FFF"} // set the activity indicator color to blue
+          />
+        }
       />
       <Modal animationType="slide" transparent={true} visible={isIframeVisible}>
         {isIframeVisible ? (

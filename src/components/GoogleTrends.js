@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -9,7 +9,6 @@ import {
 import SocialChart from "./SocialChart/SocialChart";
 import ThemeText from "./ThemeText";
 import { ThemeContext } from "../hooks/ThemeContext";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import IntervalPicker from "./IntervalPicker";
 import { colors } from "../styles/colors";
 
@@ -17,13 +16,15 @@ export default function GoogleTrends(props) {
   const { theme } = useContext(ThemeContext);
 
   const { data, routeColor } = props;
-  const [interval, onIntervalChange] = useState("Week");
+
+  const [interval, setInterval] = useState("Week");
+
   const apx = (size = 0) => {
     let width = Dimensions.get("window").width;
     return (width / 750) * size;
   };
 
-  const interValLabels = ["Day", "Week", "Month"];
+  const interValLabels = ["Day", "Week"];
 
   return (
     <View
@@ -49,7 +50,7 @@ export default function GoogleTrends(props) {
         <IntervalPicker
           interval={interval}
           intervalLabels={interValLabels}
-          onIntervalChange={onIntervalChange}
+          setInterval={setInterval}
         />
       </View>
       <View style={styles.charContainer}>

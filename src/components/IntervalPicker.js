@@ -7,7 +7,7 @@ import { ThemeContext } from "../hooks/ThemeContext";
 export default function IntervalPicker({
   interval,
   intervalLabels,
-  onIntervalChange,
+  setInterval,
 }) {
   const { theme } = useContext(ThemeContext);
   return (
@@ -15,7 +15,7 @@ export default function IntervalPicker({
       {intervalLabels.map((i, index) => (
         <TouchableOpacity
           key={index}
-          onPress={() => onIntervalChange(i)}
+          onPress={() => setInterval(i)}
           style={[
             styles.trendSelect,
             { backgroundColor: interval === i ? colors.swing : "transparent" },

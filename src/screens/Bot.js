@@ -16,6 +16,7 @@ import { db } from "../config/firebase";
 import { ref, onValue, update } from "firebase/database";
 import ScreenContainer from "../components/ScreenContainer";
 import ThemeText from "../components/ThemeText";
+import Card from "../components/Card";
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -55,7 +56,64 @@ function BotScreen({ route }) {
     }
   };
 
-  const data = ["trade1", "trade2"];
+  const data = [
+    {
+      entryPrice: 27001,
+      exitPrice: 27004,
+      stopLoss: 27003,
+      takeProfit: 27004,
+      accountBalanceBefore: 95.01,
+      accountbalanceAfter: 95.03,
+      fees: 0.001,
+      startDate: "April 5 2021",
+      endDate: "April 5 2021",
+    },
+    {
+      entryPrice: 27001,
+      exitPrice: 27000,
+      stopLoss: 27003,
+      takeProfit: 27004,
+      accountBalanceBefore: 95.01,
+      accountbalanceAfter: 95.03,
+      fees: 0.001,
+      startDate: "April 6 2021",
+      endDate: "April 5 2021",
+    },
+  ];
+
+  const TradeCard = ({ item }) => {
+    const color =
+      item.exitPrice - item.entryPrice - item.fees > 0 ? "green" : "red";
+    return (
+      <Card>
+        <View style={style.column}>
+          <ThemeText>Position type: LONG</ThemeText>
+          <View style={style.row}>
+            <ThemeText>Entry Price: ${item.entryPrice} </ThemeText>
+            <ThemeText>{item.startDate}</ThemeText>
+          </View>
+          <View style={style.row}>
+            <ThemeText>Exit Price: ${item.entryPrice} </ThemeText>
+            <ThemeText>{item.startDate}</ThemeText>
+          </View>
+          <ThemeText>Stop loss: $27,001</ThemeText>
+          <ThemeText>Take Profit: $27,001</ThemeText>
+        </View>
+        <View style={style.column}>
+          <ThemeText style={{ color: color }}>
+            {item.exitPrice - item.entryPrice - item.fees > 0 ? "WIN" : "LOSS"}
+          </ThemeText>
+          <ThemeText>Fee:{item.fees}</ThemeText>
+          <ThemeText>
+            P/L:{" "}
+            <ThemeText style={{ color: color }}>
+              {item.exitPrice - item.entryPrice - item.fees}
+            </ThemeText>{" "}
+          </ThemeText>
+        </View>
+      </Card>
+    );
+  };
 
   return (
     <ScreenContainer>
@@ -75,22 +133,15 @@ function BotScreen({ route }) {
           <ThemeText style={style.botHeaderText}>Demo : ETH/USD</ThemeText>
         </View>
       </Header>
-      <View
-        style={{
-          height: "87%",
-        }}
-      >
+      <View style={{ height: "87%" }}>
         <FlatList
           data={data}
-          renderItem={({ item }) => <ThemeText>{item}</ThemeText>}
-          keyExtractor={(item) => item}
+          renderItem={({ item }) => <TradeCard item={item} />}
           contentContainerStyle={{
             padding: 15,
             paddingTop: 20,
             height: "100%",
           }}
-          // onRefresh={onRefresh}
-          // refreshing={isRefreshing}
           ListFooterComponent={<View style={{ height: 50 }} />}
         />
         <BigButton
@@ -143,6 +194,14 @@ const style = StyleSheet.create({
     fontSize: 12,
     fontWeight: "600",
     marginHorizontal: 12,
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  column: {
+    display: "flex",
+    flexDirection: "column",
   },
 });
 

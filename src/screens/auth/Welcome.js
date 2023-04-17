@@ -15,7 +15,6 @@ import { storeData } from "../../hooks/asyncStorage";
 import { colors } from "../../styles/colors";
 
 function WelcomeScreen({ navigation, setGuestUser }) {
-  console.log(setGuestUser)
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.skip}>

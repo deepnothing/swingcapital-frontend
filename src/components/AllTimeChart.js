@@ -1,9 +1,12 @@
-import { useState, useEffect, lazy, suspense } from "react";
+import { useEffect, useState } from "react";
 import { View, Text } from "react-native";
-import { LineChart, AreaChart } from "react-native-svg-charts";
-import { LinearGradient, Stop } from "react-native-svg";
-
-import { Palette } from "react-native-palette";
+import {
+  LineChart,
+  AreaChart,
+  Defs,
+  LinearGradient,
+  Stop,
+} from "react-native-svg-charts";
 import ThemeText from "./ThemeText";
 
 export default function AllTimeChart({ data }) {
@@ -17,7 +20,7 @@ export default function AllTimeChart({ data }) {
     }
     return tempArr;
   });
-  const fill = `rgb(${data.color},0.3)`;
+  const fill = `rgb(${data.color},0.25)`;
 
   const chartHeight = 45;
 
@@ -32,8 +35,6 @@ export default function AllTimeChart({ data }) {
       <View
         style={{
           overflow: "hidden",
-          borderColor: "#BABABA",
-          // borderRadius: 6,
           height: chartHeight,
           paddingTop: 2,
         }}
@@ -41,13 +42,14 @@ export default function AllTimeChart({ data }) {
         <AreaChart
           style={{ height: chartHeight }}
           data={strippedArray}
-          svg={{ fill }}
+          //svg={{ fill: "url(#gradient)" }}
+          // svg={{ fill }}
           contentInset={{ top: 0, bottom: 5 }}
         >
           <LineChart
             style={{ height: chartHeight }}
             data={strippedArray}
-            svg={{ stroke: `rgb(${data.color})`, strokeWidth: 1 }}
+            svg={{ stroke: `rgb(${data.color})`, strokeWidth: 2 }}
             contentInset={{ top: 0, bottom: 5 }}
           ></LineChart>
         </AreaChart>
@@ -61,10 +63,10 @@ export default function AllTimeChart({ data }) {
           paddingTop: 2,
         }}
       >
-        <ThemeText style={{ fontSize: 7 }}>
+        <ThemeText style={{ fontSize: 8 }}>
           {new Date(data.prices[0][0]).getFullYear()}
         </ThemeText>
-        <ThemeText style={{ fontSize: 7 }}>
+        <ThemeText style={{ fontSize: 8 }}>
           {new Date(data.prices[data.prices.length - 1][0]).getFullYear()}
         </ThemeText>
       </View>
