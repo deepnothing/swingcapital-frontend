@@ -12,7 +12,6 @@ import StatsHeader from "../components/StatsHeader";
 import GoogleTrends from "../components/GoogleTrends";
 import Map from "../components/Map/Map";
 import SocialCard from "../components/SocialCard";
-import TwitterCard from "../components/TwitterCard";
 import MapView, { Geojson } from "react-native-maps";
 import { ThemeContext } from "../hooks/ThemeContext";
 import ThemeText from "../components/ThemeText";
@@ -57,7 +56,6 @@ export default ({ route, navigation }) => {
         selectedMetric={selectedMetric}
         setSelectedMetric={setSelectedMetric}
       />
-
       <ScrollView
         style={styles.socialData}
         nestedScrollEnabled={true}
@@ -72,32 +70,32 @@ export default ({ route, navigation }) => {
           routeColor={route.params.coinColor}
           data={googleData ? googleData.search : []}
         />
-        <View style={styles.column}>
-          <TwitterCard
-            color="rgba(29, 161, 242)"
-            name="Twitter"
-            image={require("../../assets/twitter.png")}
+        <SocialCard
+          color="29, 161, 242"
+          name="Twitter"
+          image={require("../../assets/twitter.png")}
+        >
+          <Text>GGG</Text>
+        </SocialCard>
+
+        {/* <SocialCard
+            color="rgba(193, 53, 132)"
+            name="Instagram"
+            image={require("../../assets/instagram.png")}
           />
-          <View style={styles.socialRow}>
-            <SocialCard
-              color="rgba(193, 53, 132)"
-              name="Instagram"
-              image={require("../../assets/instagram.png")}
-            />
-            <SocialCard
-              color="rgba(255, 0, 0)"
-              name="Youtube"
-              image={require("../../assets/youtube.png")}
-            />
-          </View>
-          <View style={styles.socialRow}>
-            <SocialCard
-              color="rgba(255, 86, 0)"
-              name="Reddit"
-              image={require("../../assets/reddit.png")}
-            />
-          </View>
-        </View>
+          <SocialCard
+            color="rgba(255, 0, 0)"
+            name="Youtube"
+            image={require("../../assets/youtube.png")}
+          />
+     
+        
+          <SocialCard
+            color="rgba(255, 86, 0)"
+            name="Reddit"
+            image={require("../../assets/reddit.png")}
+          /> */}
+
         <SafeAreaView />
       </ScrollView>
     </ScreenContainer>

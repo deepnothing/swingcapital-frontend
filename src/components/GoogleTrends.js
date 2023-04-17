@@ -59,6 +59,8 @@ export default function GoogleTrends(props) {
             data={interval === "Week" ? data : data.slice(-24)}
             routeColor={routeColor}
             interval={interval}
+            gridMax={100}
+            gridMin={0}
           />
         ) : (
           <View

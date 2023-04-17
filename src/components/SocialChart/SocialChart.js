@@ -6,7 +6,7 @@ import * as shape from "d3-shape";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { colors } from "../../styles/colors";
 
-export default function SocialChart({ data, routeColor, interval }) {
+export default function SocialChart({ data, routeColor, gridMin, gridMax }) {
   const { theme } = useContext(ThemeContext);
   const [positionX, setPositionX] = useState(-1); // The currently selected X coordinate position
 
@@ -165,7 +165,7 @@ export default function SocialChart({ data, routeColor, interval }) {
     >
       <YAxis
         style={{ width: apx(55) }}
-        data={[0, ...priceList, 100]}
+        data={[gridMin, ...priceList, gridMax]}
         contentInset={verticalContentInset}
         svg={{ fontSize: apx(20), fill: "#617485" }}
         numberOfTicks={4}
@@ -176,8 +176,8 @@ export default function SocialChart({ data, routeColor, interval }) {
           data={priceList}
           curve={shape.curveNatural}
           contentInset={{ ...verticalContentInset }}
-          gridMax={100}
-          gridMin={0}
+          gridMax={gridMax}
+          gridMin={gridMin}
         >
           <CustomLine />
           <ToolTip />
