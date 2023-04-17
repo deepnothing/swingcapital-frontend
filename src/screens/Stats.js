@@ -17,6 +17,7 @@ import { ThemeContext } from "../hooks/ThemeContext";
 import ThemeText from "../components/ThemeText";
 import Header from "../components/Header";
 import ScreenContainer from "../components/ScreenContainer";
+import TwitterFeed from "../components/TwitterFeed";
 
 const dimensions = Dimensions.get("window");
 
@@ -74,27 +75,30 @@ export default ({ route, navigation }) => {
           color="29, 161, 242"
           name="Twitter"
           image={require("../../assets/twitter.png")}
+          chartStyle={styles.twitterChart}
         >
-          <Text>GGG</Text>
+          <TwitterFeed />
         </SocialCard>
 
+        <SocialCard
+          color="193, 53, 132"
+          name="Instagram"
+          image={require("../../assets/instagram.png")}
+          chartStyle={styles.instagramChart}
+        />
+        <SocialCard
+          color="255, 0, 0"
+          name="Youtube"
+          image={require("../../assets/youtube.png")}
+          chartStyle={styles.youtubeChart}
+        />
+
         {/* <SocialCard
-            color="rgba(193, 53, 132)"
-            name="Instagram"
-            image={require("../../assets/instagram.png")}
-          />
-          <SocialCard
-            color="rgba(255, 0, 0)"
-            name="Youtube"
-            image={require("../../assets/youtube.png")}
-          />
-     
-        
-          <SocialCard
-            color="rgba(255, 86, 0)"
-            name="Reddit"
-            image={require("../../assets/reddit.png")}
-          /> */}
+          color="rgba(255, 86, 0)"
+          name="Reddit"
+          image={require("../../assets/reddit.png")}
+          chartStyle={styles.twitterChart}
+        /> */}
 
         <SafeAreaView />
       </ScrollView>
@@ -114,4 +118,20 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   column: { display: "flex", flexDirection: "column" },
+  twitterChart: {
+    backgroundColor: "rgb(249,249,250)",
+    borderRadius: 7,
+    width: "100%",
+    padding: 8,
+  },
+  instagramChart: {
+    borderRadius: 8,
+    width: "100%",
+    padding: 8,
+  },
+  youtubeChart: {
+    borderRadius: 8,
+    width: "100%",
+    padding: 8,
+  },
 });

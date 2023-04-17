@@ -11,6 +11,7 @@ export default function SocialCard({
   name,
   image,
   routeColor,
+  chartStyle,
   ...props
 }) {
   const { theme } = useContext(ThemeContext);
@@ -32,11 +33,18 @@ export default function SocialCard({
           {name}
         </ThemeText>
       </View>
-      <ThemeText style={{ marginTop: 3, fontSize: 12 }}>
-        Total:
+      <ThemeText style={{ marginTop: 6, marginBottom: 17, fontSize: 12 }}>
+        {" "}
+        Total:{" "}
         <ThemeText style={{ fontWeight: "700", fontSize: 15 }}>19M</ThemeText>
       </ThemeText>
-      <SocialChart routeColor={""} data={[]} gridMin={0} gridMax={60} />
+      <SocialChart
+        routeColor={""}
+        data={[]}
+        gridMin={0}
+        gridMax={60}
+        chartStyle={chartStyle}
+      />
       {props.children}
     </View>
   );
@@ -49,5 +57,6 @@ const styles = StyleSheet.create({
     padding: 10,
     display: "flex",
     flexDirection: "column",
+    marginBottom:15
   },
 });

@@ -53,7 +53,7 @@ export default function GoogleTrends(props) {
           setInterval={setInterval}
         />
       </View>
-      <View style={styles.charContainer}>
+      <View style={styles.chartContainer}>
         {data.length > 0 ? (
           <SocialChart
             data={interval === "Week" ? data : data.slice(-24)}
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: "100%",
   },
-  charContainer: {
+  chartContainer: {
     width: "100%",
     display: "flex",
     flexDirection: "row",

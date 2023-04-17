@@ -1,12 +1,18 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { View, PanResponder, Dimensions, Text } from "react-native";
-import { AreaChart, YAxis } from "react-native-svg-charts";
+import { AreaChart, YAxis, XAxis } from "react-native-svg-charts";
 import { Circle, G, Path, Rect, Text as SvgText } from "react-native-svg";
 import * as shape from "d3-shape";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { colors } from "../../styles/colors";
 
-export default function SocialChart({ data, routeColor, gridMin, gridMax }) {
+export default function SocialChart({
+  data,
+  routeColor,
+  gridMin,
+  gridMax,
+  chartStyle,
+}) {
   const { theme } = useContext(ThemeContext);
   const [positionX, setPositionX] = useState(-1); // The currently selected X coordinate position
 
@@ -156,12 +162,15 @@ export default function SocialChart({ data, routeColor, gridMin, gridMax }) {
 
   return (
     <View
-      style={{
-        flexDirection: "row",
-        width: "95%",
-        height: apx(280),
-        alignSelf: "stretch",
-      }}
+      style={[
+        {
+          flexDirection: "row",
+          width: "95%",
+          height: apx(280),
+          alignSelf: "stretch",
+        },
+        chartStyle,
+      ]}
     >
       <YAxis
         style={{ width: apx(55) }}
@@ -183,6 +192,26 @@ export default function SocialChart({ data, routeColor, gridMin, gridMax }) {
           <ToolTip />
         </AreaChart>
       </View>
+      {/* <XAxis
+        style={{
+          // alignSelf: "stretch",
+          marginTop: apx(240),
+          width: apx(600),
+          position: "absolute",
+          // borderWidth: 1,
+          height: apx(60),
+          left:apx(60)
+        }}
+        numberOfTicks={5}
+        data={priceList}
+        formatLabel={(value, index) => dateList[value]}
+        svg={{
+          fontSize: apx(20),
+          fill: "#617485",
+          y: apx(20),
+          originY: 30,
+        }}
+      /> */}
     </View>
   );
 }

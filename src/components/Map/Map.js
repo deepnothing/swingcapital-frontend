@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 100,
     margin: 10,
-    zIndex:3
+    zIndex: 3,
   },
   flagBubble: {
     height: 25,
