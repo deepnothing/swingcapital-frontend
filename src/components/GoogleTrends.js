@@ -55,7 +55,11 @@ export default function GoogleTrends(props) {
       </View>
       <View style={styles.charContainer}>
         {data.length > 0 ? (
-          <SocialChart data={data} routeColor={routeColor} />
+          <SocialChart
+            data={interval === "Week" ? data : data.slice(-24)}
+            routeColor={routeColor}
+            interval={interval}
+          />
         ) : (
           <View
             style={{

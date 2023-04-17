@@ -1,13 +1,18 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Dimensions } from "react-native";
-import { View, PanResponder } from "react-native";
+import { View, PanResponder, Dimensions, Text } from "react-native";
 import { AreaChart, YAxis } from "react-native-svg-charts";
 import { Circle, G, Path, Rect, Text as SvgText } from "react-native-svg";
 import * as shape from "d3-shape";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { colors } from "../../styles/colors";
+
 export default function SocialChart({ data, routeColor, interval }) {
   const { theme } = useContext(ThemeContext);
+  const [positionX, setPositionX] = useState(-1); // The currently selected X coordinate position
+
+  useEffect(() => {
+    size.current = data.length;
+  }, [data]);
 
   const apx = (size = 0) => {
     let width = Dimensions.get("window").width;
@@ -29,8 +34,6 @@ export default function SocialChart({ data, routeColor, interval }) {
 
   const priceList = data.map((i) => i.value[0]);
   const size = useRef(dateList.length);
-
-  const [positionX, setPositionX] = useState(-1); // The currently selected X coordinate position
 
   const panResponder = useRef(
     PanResponder.create({
