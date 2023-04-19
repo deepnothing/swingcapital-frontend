@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import {
   View,
   Text,
@@ -11,9 +11,6 @@ import Card from "./Card";
 import AllTimeChart from "./AllTimeChart";
 import Feather from "react-native-vector-icons/Feather";
 import IonIcon from "react-native-vector-icons/Ionicons";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { ref, onValue, update, set } from "firebase/database";
-import { db } from "../config/firebase";
 import ThemeText from "./ThemeText";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { colors } from "../styles/colors";
@@ -28,7 +25,11 @@ export default function Coin({
 }) {
   const { theme } = useContext(ThemeContext);
   const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if (x > 1) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    } else {
+      return x;
+    }
   };
 
   function abbreviateNumber(value) {
@@ -72,6 +73,7 @@ export default function Coin({
               <ThemeText
                 style={{
                   fontWeight: "700",
+                  fontSize: 14,
                   color:
                     coinData.priceChange > 0
                       ? "#33c269"
@@ -148,6 +150,7 @@ export default function Coin({
         <ThemeText
           style={{
             fontWeight: "600",
+            fontSize: 12,
             color:
               coinData.priceChange > 0
                 ? "#33c269"
@@ -156,21 +159,39 @@ export default function Coin({
                 : "black",
           }}
         >
-          {coinData.priceChange > 0 ? "+" : coinData.priceChange < 0 ? "-" : ""}
+          {coinData.priceChange > 0 ? "+" : ""}
           {coinData.priceChange.toFixed(2)}%
         </ThemeText>
         <View
-          style={{ backgroundColor: "#cbf1da", borderRadius: 6, padding: 4 }}
+          style={[
+            {
+              backgroundColor: "#cbf1da",
+            },
+            styles.price24h,
+          ]}
         >
-          <Text style={{ color: "#33c269", fontSize: 11, fontWeight: "600" }}>
-            High:$27,000
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="clip"
+            style={{ color: "#33c269", fontSize: 10, fontWeight: "600" }}
+          >
+            High:${numberWithCommas(coinData.high)}
           </Text>
         </View>
         <View
-          style={{ backgroundColor: "#ffdede", borderRadius: 6, padding: 4 }}
+          style={[
+            {
+              backgroundColor: "#ffdede",
+            },
+            styles.price24h,
+          ]}
         >
-          <Text style={{ color: "#fd1c25", fontSize: 11, fontWeight: "600" }}>
-            Low:$27,000
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="clip"
+            style={{ color: "#fd1c25", fontSize: 10, fontWeight: "600" }}
+          >
+            Low:${numberWithCommas(coinData.low)}
           </Text>
         </View>
       </View>
@@ -201,5 +222,10 @@ const styles = StyleSheet.create({
     height: 3,
     width: 3,
     marginHorizontal: 3,
+  },
+  price24h: {
+    borderRadius: 3,
+    padding: 4,
+    width: 80,
   },
 });
