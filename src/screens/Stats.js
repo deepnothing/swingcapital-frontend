@@ -79,6 +79,14 @@ export default ({ route, navigation }) => {
       });
   }, []);
 
+  const chartStyle = [
+    styles.twitterChart,
+    {
+      backgroundColor:
+        theme.mode === "light" ? "rgb(249,249,250)" : colors.dark.superhigh,
+    },
+  ];
+
   return (
     <ScreenContainer>
       <StatsHeader
@@ -90,7 +98,7 @@ export default ({ route, navigation }) => {
       />
       <ScrollView
         style={styles.socialData}
-        nestedScrollEnabled={true}
+        nestedScrollEnabled
         scrollEnabled={isScrollEnabled}
       >
         <Map
@@ -110,15 +118,7 @@ export default ({ route, navigation }) => {
           total={twitterData?.tweet_counts.meta.total_tweet_count}
           image={require("../../assets/twitter.png")}
           error={twitterError}
-          chartStyle={[
-            styles.twitterChart,
-            {
-              backgroundColor:
-                theme.mode === "light"
-                  ? "rgb(249,249,250)"
-                  : colors.dark.superhigh,
-            },
-          ]}
+          chartStyle={chartStyle}
           data={twitterData ? formatTweetCount(twitterData) : null}
         >
           <TwitterFeed

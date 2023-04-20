@@ -61,7 +61,7 @@ export default function SocialCard({
             ],
           ]}
         >
-          <Text>{errorMessage}</Text>
+          <ThemeText>{errorMessage}</ThemeText>
         </View>
       ) : (
         <SocialChart

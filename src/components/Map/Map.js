@@ -138,7 +138,7 @@ const Map = (props) => {
             <G>{countryList.map((x) => x)}</G>
           </SvgPanZoom>
         ) : props.error ? (
-          <Text>{errorMessage}</Text>
+          <ThemeText>{errorMessage}</ThemeText>
         ) : (
           <ActivityIndicator size="large" color={`rgb(${routeColor})`} />
         )}

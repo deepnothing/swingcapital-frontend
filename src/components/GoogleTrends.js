@@ -68,7 +68,7 @@ export default function GoogleTrends(props) {
             }}
           >
             {props.error ? (
-              <Text>{errorMessage}</Text>
+              <ThemeText>{errorMessage}</ThemeText>
             ) : (
               <ActivityIndicator size="small" color={`rgb(${routeColor})`} />
             )}
