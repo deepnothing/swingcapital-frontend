@@ -12,6 +12,7 @@ import ThemeText from "./ThemeText";
 import { useContext } from "react";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { colors } from "../styles/colors";
+import { errorMessage } from "../config/text";
 
 function formatDate(dateStr) {
   const date = new Date(dateStr);
@@ -69,36 +70,36 @@ const Tweet = ({ item, authorInfo }) => {
     </View>
   );
 };
-export default function TwitterFeed({ tweets }) {
+export default function TwitterFeed({ tweets, error }) {
   const { theme } = useContext(ThemeContext);
   return (
-    <>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor:
+            theme.mode === "light" ? "rgb(249,249,250)" : colors.dark.superhigh,
+        },
+      ]}
+    >
       {tweets ? (
-        <View
-          style={[
-            styles.container,
-            {
-              backgroundColor:
-                theme.mode === "light" ? "rgb(249,249,250)" : colors.dark.superhigh,
-            },
-          ]}
-        >
-          <ScrollView>
-            {tweets.data.map((i, index) => {
-              return (
-                <Tweet
-                  key={index}
-                  item={i}
-                  authorInfo={tweets.includes.users[index]}
-                />
-              );
-            })}
-          </ScrollView>
-        </View>
+        <ScrollView>
+          {tweets.data.map((i, index) => {
+            return (
+              <Tweet
+                key={index}
+                item={i}
+                authorInfo={tweets.includes.users[index]}
+              />
+            );
+          })}
+        </ScrollView>
+      ) : error ? (
+        <Text>{errorMessage}</Text>
       ) : (
-        <ActivityIndicator />
+        <ActivityIndicator color="#1DA1F2" />
       )}
-    </>
+    </View>
   );
 }
 
@@ -108,6 +109,9 @@ const styles = StyleSheet.create({
     height: 170,
     marginTop: 10,
     borderRadius: 8,
+    display: "flex",
+    justifyContent: "center",
+    alignItems:'center'
   },
   tweet: {
     width: "100%",

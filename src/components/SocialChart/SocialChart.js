@@ -6,6 +6,7 @@ import * as shape from "d3-shape";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { colors } from "../../styles/colors";
 import { abbreviateNumber } from "../../utilities/utilities";
+import { apx } from "../../utilities/utilities";
 
 export default function SocialChart({
   data,
@@ -21,10 +22,6 @@ export default function SocialChart({
     size.current = data.length;
   }, [data]);
 
-  const apx = (size = 0) => {
-    let width = Dimensions.get("window").width;
-    return (width / 750) * size;
-  };
   function formatUnixDate(unixTimestamp) {
     const date = new Date(unixTimestamp * 1000);
     const formattedDate = new Intl.DateTimeFormat("en-US", {

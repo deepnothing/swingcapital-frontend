@@ -15,6 +15,7 @@ import { COUNTRIES } from "./CountryShapes";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import ThemeText from "../ThemeText";
 import { colors } from "../../styles/colors";
+import { errorMessage } from "../../config/text";
 const dimensions = Dimensions.get("window");
 
 const Map = (props) => {
@@ -136,6 +137,8 @@ const Map = (props) => {
           >
             <G>{countryList.map((x) => x)}</G>
           </SvgPanZoom>
+        ) : props.error ? (
+          <Text>{errorMessage}</Text>
         ) : (
           <ActivityIndicator size="large" color={`rgb(${routeColor})`} />
         )}

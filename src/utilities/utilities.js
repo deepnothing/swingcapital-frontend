@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native";
+
 export const numberWithCommas = (x) => {
   if (x > 1) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -18,4 +20,9 @@ export const abbreviateNumber = (value,fixed) => {
   } else {
     return value.toFixed(fixed);
   }
+};
+
+export const apx = (size = 0) => {
+  let width = Dimensions.get("window").width;
+  return (width / 750) * size;
 };

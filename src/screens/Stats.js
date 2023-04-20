@@ -27,7 +27,9 @@ export default ({ route, navigation }) => {
   const [isScrollEnabled, setScrollEnabled] = useState(true);
   const [selectedMetric, setSelectedMetric] = useState("social");
   const [googleData, setGoogleData] = useState();
+  const [googleError, setGoogleError] = useState();
   const [twitterData, setTwitterData] = useState();
+  const [twitterError, setTwittterError] = useState();
   const [instagramData, setinstagramData] = useState();
   const [youtubeData, setYoutubeData] = useState();
   const [redditData, setRedditData] = useState();
@@ -63,12 +65,17 @@ export default ({ route, navigation }) => {
       .then((response) => {
         setGoogleData(filteredData(response));
       })
-      .catch(() => setGoogleData(null));
+      .catch(() => {
+        setGoogleError(true);
+      });
     // Twitter
     fetch(`${baseUrl}/social/twitter`)
       .then((res) => res.json())
       .then((response) => {
         setTwitterData(filteredData(response));
+      })
+      .catch((error) => {
+        setTwittterError(true);
       });
   }, []);
 
@@ -90,16 +97,19 @@ export default ({ route, navigation }) => {
           routeColor={route.params.coinColor}
           data={googleData ? googleData.map : []}
           setScrollEnabled={setScrollEnabled}
+          error={googleError}
         />
         <GoogleTrends
           routeColor={route.params.coinColor}
           data={googleData ? formatGoogleValues(googleData.search) : []}
+          error={googleError}
         />
         <SocialCard
           color="29,161,242"
           name="Twitter"
           total={twitterData?.tweet_counts.meta.total_tweet_count}
           image={require("../../assets/twitter.png")}
+          error={twitterError}
           chartStyle={[
             styles.twitterChart,
             {
@@ -111,7 +121,10 @@ export default ({ route, navigation }) => {
           ]}
           data={twitterData ? formatTweetCount(twitterData) : null}
         >
-          <TwitterFeed tweets={twitterData ? twitterData.tweets : null} />
+          <TwitterFeed
+            tweets={twitterData ? twitterData.tweets : null}
+            error={twitterError}
+          />
         </SocialCard>
 
         <SocialCard

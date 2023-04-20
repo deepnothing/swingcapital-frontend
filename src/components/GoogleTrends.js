@@ -11,6 +11,8 @@ import ThemeText from "./ThemeText";
 import { ThemeContext } from "../hooks/ThemeContext";
 import IntervalPicker from "./IntervalPicker";
 import { colors } from "../styles/colors";
+import { apx } from "../utilities/utilities";
+import { errorMessage } from "../config/text";
 
 export default function GoogleTrends(props) {
   const { theme } = useContext(ThemeContext);
@@ -18,11 +20,6 @@ export default function GoogleTrends(props) {
   const { data, routeColor } = props;
 
   const [interval, setInterval] = useState("Week");
-
-  const apx = (size = 0) => {
-    let width = Dimensions.get("window").width;
-    return (width / 750) * size;
-  };
 
   const interValLabels = ["Day", "Week"];
 
@@ -70,7 +67,11 @@ export default function GoogleTrends(props) {
               justifyContent: "center",
             }}
           >
-            <ActivityIndicator size="small" color={`rgb(${routeColor})`} />
+            {props.error ? (
+              <Text>{errorMessage}</Text>
+            ) : (
+              <ActivityIndicator size="small" color={`rgb(${routeColor})`} />
+            )}
           </View>
         )}
       </View>

@@ -6,7 +6,8 @@ import { ThemeContext } from "../hooks/ThemeContext";
 import { colors } from "../styles/colors";
 import ThemeText from "./ThemeText";
 import SocialChart from "./SocialChart/SocialChart";
-import { numberWithCommas } from "../utilities/utilities";
+import { apx, numberWithCommas } from "../utilities/utilities";
+import { errorMessage } from "../config/text";
 
 export default function SocialCard({
   color,
@@ -15,6 +16,7 @@ export default function SocialCard({
   data,
   total,
   chartStyle,
+  error,
   ...props
 }) {
   const { theme } = useContext(ThemeContext);
@@ -45,13 +47,32 @@ export default function SocialCard({
           {numberWithCommas(total)}
         </ThemeText>
       </ThemeText>
-      <SocialChart
-        routeColor={color}
-        data={data ? data : []}
-        gridMin={0}
-        gridMax={60}
-        chartStyle={chartStyle}
-      />
+      {error ? (
+        <View
+          style={[
+            [
+              chartStyle,
+              {
+                height: apx(280),
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              },
+            ],
+          ]}
+        >
+          <Text>{errorMessage}</Text>
+        </View>
+      ) : (
+        <SocialChart
+          routeColor={color}
+          data={data ? data : []}
+          gridMin={0}
+          gridMax={60}
+          chartStyle={chartStyle}
+        />
+      )}
+
       {props.children}
     </View>
   );
