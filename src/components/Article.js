@@ -1,12 +1,18 @@
 import Card from "./Card";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import bullImage from "../../assets/bull.png";
 import bearImage from "../../assets/bear.png";
 import neutralImage from "../../assets/neutral.png";
 import ThemeText from "./ThemeText";
+import { colors } from "../styles/colors";
+import { useContext } from "react";
+import { ThemeContext } from "../hooks/ThemeContext";
+
+const innerWidth = Dimensions.get("window").width;
 
 export default function Article({ data, onPress }) {
+  const { theme } = useContext(ThemeContext);
   const formatDate = (input) => {
     const date = new Date(input);
     let time = date.toLocaleTimeString();
@@ -27,8 +33,7 @@ export default function Article({ data, onPress }) {
     }
     return (
       date.toLocaleDateString("en-US", options) +
-      "," +
-      " " +
+      " • " +
       hour +
       ":" +
       minute +
@@ -45,10 +50,10 @@ export default function Article({ data, onPress }) {
         : "activity",
     color:
       data.sentiment > 0
-        ? "#008000"
+        ? "#34be62"
         : data.sentiment < 0
         ? "#E10600"
-        : "#BABABA",
+        : "#83868B",
     source:
       data.sentiment > 0
         ? bullImage
@@ -63,69 +68,134 @@ export default function Article({ data, onPress }) {
         : "Neutral",
   };
 
+  const TrendBar = () => {
+    return (
+      <View
+        style={[
+          style.trendBar,
+          {
+            backgroundColor: data.sentiment === 0 ? "#EDEDF3" : null,
+            borderColor: trend.color,
+            backgroundColor: theme.mode==='light'?"#EDEDF3":colors.dark.medium,
+          },
+        ]}
+      >
+        <View
+          style={[
+            style.trendBarPercentage,
+            {
+              right: `${100 - Math.abs(data.sentiment) * 10}%`,
+              backgroundColor: trend.color,
+            },
+          ]}
+        />
+      </View>
+    );
+  };
+
   return (
-    <Card onPress={onPress}>
-      <View style={{ display: "flex", flexDirection: "row" }}>
-        <View style={style.imageAndDate}>
-          <Image
-            style={style.newsImage}
-            source={
-              data.urlToImage
-                ? {
-                    uri: data.urlToImage,
-                  }
-                : require("../../assets/newsDefault.png")
-            }
-          />
-          <View style={{ height: 3 }} />
-          <ThemeText style={{ fontSize: 10.5, fontWeight: "500" }}>
-            {formatDate(data.publishedAt)}
-          </ThemeText>
-        </View>
-        <View style={style.articleText}>
+    <Card onPress={onPress} style={[style.flexColumn, { height: 140 }]}>
+      <View style={[style.flexRow, { width: "100%" }]}>
+        <Image style={style.newsImage} source={{ uri: data.urlToImage }} />
+        <View
+          style={[
+            style.flexColumn,
+            {
+              paddingTop: 5,
+              paddingLeft: 20,
+              paddingRight: 12,
+              width: innerWidth / 1.4,
+            },
+          ]}
+        >
           <ThemeText
-            style={{ fontSize: 12, fontWeight: "600" }}
+            style={{ fontSize: 13, fontWeight: "700" }}
             numberOfLines={2}
             ellipsizeMode="tail"
           >
             {data.title}
           </ThemeText>
+          <View style={{ height: 5 }} />
           <ThemeText
-            style={{ fontSize: 9, fontWeight: "400" }}
-            numberOfLines={4}
+            numberOfLines={2}
             ellipsizeMode="tail"
+            style={{ fontSize: 10, color: "#777a7d" }}
           >
             {data.description}
           </ThemeText>
         </View>
       </View>
-      <View style={style.determinationWrapper}>
-        <Feather name={trend.icon} color={trend.color} size={"18"} />
-        <Image
-          style={{ height: 25, width: 25, tintColor: trend.color }}
-          source={trend.source}
-        />
-        <ThemeText style={{ fontSize: 11, fontWeight: "600", color: trend.color }}>
-          {trend.title}
-        </ThemeText>
+      <View
+        style={[
+          style.bar,
+          {
+            backgroundColor:
+              theme.mode === "light" ? colors.light.medium : colors.dark.medium,
+          },
+        ]}
+      />
+      <View
+        style={[
+          style.flexRow,
+          { width: "100%", justifyContent: "space-evenly" },
+        ]}
+      >
+        <View
+          style={[style.flexRow, { width: "50%", justifyContent: "center" }]}
+        >
+          <Feather
+            name="clock"
+            color={theme.mode === "light" ? "#83868B" : colors.light.base}
+            size={"18"}
+            style={{ marginRight: 8 }}
+          />
+
+          <ThemeText
+            style={{
+              color: theme.mode === "light" ? "#83868B" : colors.light.base,
+              fontSize: 13,
+            }}
+          >
+            {formatDate(data.publishedAt)}
+          </ThemeText>
+        </View>
         <View
           style={[
-            style.trendBar,
+            style.wall,
             {
-              backgroundColor: data.sentiment === 0 ? "#BABABA" : null,
-              borderColor: trend.color,
+              backgroundColor:
+                theme.mode === "light"
+                  ? colors.light.medium
+                  : colors.dark.medium,
             },
           ]}
+        />
+        <View
+          style={[
+            style.flexRow,
+            { width: "50%", justifyContent: "space-evenly" },
+          ]}
         >
-          <View
-            style={[
-              style.trendBarPercentage,
-              {
-                right: `${100 - Math.abs(data.sentiment) * 10}%`,
-                backgroundColor: trend.color,
-              },
-            ]}
+          <Feather
+            name={trend.icon}
+            color={trend.color}
+            size={"12"}
+            style={{
+              borderWidth: 1,
+              borderRadius: 5,
+              padding: 2,
+              borderColor: trend.color,
+            }}
           />
+          <View>
+            <Text
+              style={{ color: trend.color, fontSize: 12, fontWeight: "500" }}
+            >
+              {trend.title}
+            </Text>
+          </View>
+
+          <TrendBar />
         </View>
       </View>
     </Card>
@@ -147,8 +217,8 @@ const style = StyleSheet.create({
   },
   newsImage: {
     borderRadius: 10,
-    height: 60,
-    width: 110,
+    height: 70,
+    width: 70,
   },
   articleText: {
     display: "flex",
@@ -159,19 +229,37 @@ const style = StyleSheet.create({
     height: 75,
   },
   trendBar: {
-    height: 7,
-    width: 50,
-    borderWidth: 1,
-    borderRadius: 5,
+    height: 6,
+    width: "45%",
+    borderRadius: 20,
     position: "relative",
     overflow: "hidden",
   },
   trendBarPercentage: {
     zIndex: 0,
-    height: 7,
+    height: 8,
     width: 500,
-    borderRadius: 5,
+    borderRadius: 20,
     position: "absolute",
     top: -1,
+  },
+  flexRow: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  flexColumn: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  bar: {
+    width: "110%",
+    height: 3,
+    borderRadius: 10,
+  },
+  wall: {
+    width: 2,
+    height: "140%",
+    borderRadius: 10,
   },
 });

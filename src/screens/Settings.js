@@ -5,7 +5,9 @@ import {
   StyleSheet,
   Switch,
   Alert,
+  Image,
 } from "react-native";
+import Constants from "expo-constants";
 import Feather from "react-native-vector-icons/Feather";
 import { useAuth } from "../hooks/useAuth";
 import { getAuth, signOut, deleteUser } from "firebase/auth";
@@ -15,6 +17,7 @@ import { ref, remove } from "firebase/database";
 import { db } from "../config/firebase";
 import ScreenContainer from "../components/ScreenContainer";
 import ThemeText from "../components/ThemeText";
+import { colors } from "../styles/colors";
 
 const auth = getAuth();
 
@@ -73,9 +76,20 @@ function Settings({ route }) {
       ]
     );
   };
+
   return (
     <ScreenContainer>
-      <Header></Header>
+      <Header>
+        <Image
+          style={{
+            tintColor: theme.mode === "light" ? '#1b1b1b' : colors.swing,
+            marginLeft: 15,
+            width: 30,
+            aspectRatio: 1 / 1,
+          }}
+          source={require("../../assets/logo-500.png")}
+        />
+      </Header>
       <View style={styles.options}>
         <View style={styles.row}>
           <TouchableOpacity>
@@ -160,6 +174,9 @@ function Settings({ route }) {
             </TouchableOpacity>
           </>
         )}
+        <ThemeText style={{ marginTop: 20, alignSelf: "center" }}>
+          SwingCapital {Constants.manifest.version}
+        </ThemeText>
       </View>
     </ScreenContainer>
   );
@@ -169,13 +186,13 @@ export default Settings;
 
 const styles = StyleSheet.create({
   options: {
-    paddingVertical: 20,
+    paddingVertical: 30,
     paddingHorizontal: 15,
   },
   row: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: 15,
   },
 });

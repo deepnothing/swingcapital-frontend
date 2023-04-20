@@ -18,6 +18,7 @@ import ThemeText from "../components/ThemeText";
 import Header from "../components/Header";
 import ScreenContainer from "../components/ScreenContainer";
 import TwitterFeed from "../components/TwitterFeed";
+import { colors } from "../styles/colors";
 
 const dimensions = Dimensions.get("window");
 
@@ -26,26 +27,31 @@ export default ({ route, navigation }) => {
   const [isScrollEnabled, setScrollEnabled] = useState(true);
   const [selectedMetric, setSelectedMetric] = useState("social");
   const [googleData, setGoogleData] = useState();
-  const [isGoogleDataLoading, setGoogleDataLoading] = useState(true);
+  const [twitterData, setTwitterData] = useState();
   const [instagramData, setinstagramData] = useState();
   const [youtubeData, setYoutubeData] = useState();
   const [redditData, setRedditData] = useState();
 
+  const filteredData = (res) => {
+    return res.find((obj) => obj.coin === route.params.coinName);
+  };
+
   useEffect(() => {
+    // hide bottom tab bar
     route.params.setTabBarShowing(false);
     // Google
-    setGoogleDataLoading(true);
     fetch(`${baseUrl}/social/google`)
       .then((res) => res.json())
       .then((response) => {
-        const filteredData = response.find(
-          (obj) => obj.coin === route.params.coinName.toLowerCase()
-        );
-
-        setGoogleData(filteredData);
+        setGoogleData(filteredData(response));
       })
-      .catch(() => setGoogleData(null))
-      .finally(() => setGoogleDataLoading(false));
+      .catch(() => setGoogleData(null));
+    // Twitter
+    fetch(`${baseUrl}/social/twitter`)
+      .then((res) => res.json())
+      .then((response) => {
+        setTwitterData(filteredData(response));
+      });
   }, []);
 
   return (
@@ -75,9 +81,17 @@ export default ({ route, navigation }) => {
           color="29, 161, 242"
           name="Twitter"
           image={require("../../assets/twitter.png")}
-          chartStyle={styles.twitterChart}
+          chartStyle={[
+            styles.twitterChart,
+            {
+              backgroundColor:
+                theme.mode === "light"
+                  ? "rgb(249,249,250)"
+                  : colors.dark.superhigh,
+            },
+          ]}
         >
-          <TwitterFeed />
+          <TwitterFeed tweets={twitterData ? twitterData.tweets : null} />
         </SocialCard>
 
         <SocialCard
@@ -119,7 +133,6 @@ const styles = StyleSheet.create({
   },
   column: { display: "flex", flexDirection: "column" },
   twitterChart: {
-    backgroundColor: "rgb(249,249,250)",
     borderRadius: 7,
     width: "100%",
     padding: 8,

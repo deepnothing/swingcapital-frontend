@@ -8,5 +8,6 @@ export const colors = {
     base: "#121212",
     medium: "#0e1321",
     high: "#222c40",
+    superhigh: "#374154",
   },
 };
