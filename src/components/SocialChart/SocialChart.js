@@ -5,6 +5,7 @@ import { Circle, G, Path, Rect, Text as SvgText } from "react-native-svg";
 import * as shape from "d3-shape";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { colors } from "../../styles/colors";
+import { abbreviateNumber } from "../../utilities/utilities";
 
 export default function SocialChart({
   data,
@@ -38,7 +39,8 @@ export default function SocialChart({
 
   const dateList = data.map((i) => formatUnixDate(i.time));
 
-  const priceList = data.map((i) => i.value[0]);
+  const priceList = data.map((i) => i.value);
+
   const size = useRef(dateList.length);
 
   const panResponder = useRef(
@@ -160,6 +162,8 @@ export default function SocialChart({
 
   const verticalContentInset = { top: apx(20), bottom: apx(20) };
 
+  const formatLabel = (value) => abbreviateNumber(value, 0).replace(/\s/g, "");
+
   return (
     <View
       style={[
@@ -175,6 +179,7 @@ export default function SocialChart({
       <YAxis
         style={{ width: apx(55) }}
         data={[gridMin, ...priceList, gridMax]}
+        formatLabel={formatLabel}
         contentInset={verticalContentInset}
         svg={{ fontSize: apx(20), fill: "#617485" }}
         numberOfTicks={4}

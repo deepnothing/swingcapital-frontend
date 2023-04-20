@@ -36,6 +36,24 @@ export default ({ route, navigation }) => {
     return res.find((obj) => obj.coin === route.params.coinName);
   };
 
+  const formatTweetCount = (tweets) =>
+    tweets.tweet_counts.data.map((i) => {
+      // format data
+      const unixTimestamp = Date.parse(i.end) / 1000;
+      return {
+        value: i.tweet_count,
+        time: unixTimestamp,
+      };
+    });
+
+  const formatGoogleValues = (data) =>
+    data.map((i) => {
+      return {
+        value: i.value[0],
+        time: i.time,
+      };
+    });
+
   useEffect(() => {
     // hide bottom tab bar
     route.params.setTabBarShowing(false);
@@ -75,11 +93,12 @@ export default ({ route, navigation }) => {
         />
         <GoogleTrends
           routeColor={route.params.coinColor}
-          data={googleData ? googleData.search : []}
+          data={googleData ? formatGoogleValues(googleData.search) : []}
         />
         <SocialCard
-          color="29, 161, 242"
+          color="29,161,242"
           name="Twitter"
+          total={twitterData?.tweet_counts.meta.total_tweet_count}
           image={require("../../assets/twitter.png")}
           chartStyle={[
             styles.twitterChart,
@@ -90,6 +109,7 @@ export default ({ route, navigation }) => {
                   : colors.dark.superhigh,
             },
           ]}
+          data={twitterData ? formatTweetCount(twitterData) : null}
         >
           <TwitterFeed tweets={twitterData ? twitterData.tweets : null} />
         </SocialCard>

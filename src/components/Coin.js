@@ -14,6 +14,9 @@ import IonIcon from "react-native-vector-icons/Ionicons";
 import ThemeText from "./ThemeText";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { colors } from "../styles/colors";
+import { numberWithCommas } from "../utilities/utilities";
+import { abbreviateNumber } from "../utilities/utilities";
+
 LogBox.ignoreLogs([
   "Non-serializable values were found in the navigation state",
 ]);
@@ -24,27 +27,6 @@ export default function Coin({
   addOrRemoveFavCoin,
 }) {
   const { theme } = useContext(ThemeContext);
-  const numberWithCommas = (x) => {
-    if (x > 1) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    } else {
-      return x;
-    }
-  };
-
-  function abbreviateNumber(value) {
-    if (value >= 1e12) {
-      return (value / 1e12).toFixed(2) + " T";
-    } else if (value >= 1e9) {
-      return (value / 1e9).toFixed(2) + " B";
-    } else if (value >= 1e6) {
-      return (value / 1e6).toFixed(2) + " M";
-    } else if (value >= 1e3) {
-      return (value / 1e3).toFixed(2) + " K";
-    } else {
-      return value.toFixed(2);
-    }
-  }
 
   return (
     <Card style={styles.flexColumn}>
@@ -91,7 +73,7 @@ export default function Coin({
                 theme.mode === "light" ? { color: "#9da6ae" } : null,
               ]}
             >
-              Cap: {abbreviateNumber(coinData.marketCap)}
+              Cap: {abbreviateNumber(coinData.marketCap, 2)}
             </ThemeText>
           </View>
         </View>

@@ -6,15 +6,19 @@ import { ThemeContext } from "../hooks/ThemeContext";
 import { colors } from "../styles/colors";
 import ThemeText from "./ThemeText";
 import SocialChart from "./SocialChart/SocialChart";
+import { numberWithCommas } from "../utilities/utilities";
+
 export default function SocialCard({
   color,
   name,
   image,
-  routeColor,
+  data,
+  total,
   chartStyle,
   ...props
 }) {
   const { theme } = useContext(ThemeContext);
+
   return (
     <View
       style={[
@@ -29,18 +33,21 @@ export default function SocialCard({
         style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
       >
         <Image style={{ width: 30, height: 30 }} source={image} />
-        <ThemeText style={{ fontWeight: "500", fontSize: 15, marginLeft: 5 }}>
+        <ThemeText style={{ fontWeight: "700", fontSize: 15, marginLeft: 5 }}>
+          {" "}
           {name}
         </ThemeText>
       </View>
       <ThemeText style={{ marginTop: 6, marginBottom: 17, fontSize: 12 }}>
         {" "}
         Total:{" "}
-        <ThemeText style={{ fontWeight: "700", fontSize: 15 }}>19M</ThemeText>
+        <ThemeText style={{ fontWeight: "500", color: "grey", fontSize: 13 }}>
+          {numberWithCommas(total)}
+        </ThemeText>
       </ThemeText>
       <SocialChart
-        routeColor={""}
-        data={[]}
+        routeColor={color}
+        data={data ? data : []}
         gridMin={0}
         gridMax={60}
         chartStyle={chartStyle}
