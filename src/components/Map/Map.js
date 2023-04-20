@@ -110,7 +110,7 @@ const Map = (props) => {
           >
             <Image
               style={styles.flagBubble}
-              source={require(`../../../assets/flags/fiji.png`)}
+              source={require(`./flags/fiji.png`)}
             />
             <ThemeText style={{ fontSize: 14, fontWeight: "400" }}>
               {" "}
