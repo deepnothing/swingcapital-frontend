@@ -17,7 +17,7 @@ import { ThemeContext } from "../hooks/ThemeContext";
 import ThemeText from "../components/ThemeText";
 import Header from "../components/Header";
 import ScreenContainer from "../components/ScreenContainer";
-import TwitterFeed from "../components/TwitterFeed";
+import TwitterFeed from "../components//Twitter/TwitterFeed";
 import { colors } from "../styles/colors";
 
 const dimensions = Dimensions.get("window");

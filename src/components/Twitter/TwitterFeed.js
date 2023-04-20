@@ -8,11 +8,11 @@ import {
   Linking,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
-import ThemeText from "./ThemeText";
+import ThemeText from "../ThemeText";
 import { useContext } from "react";
-import { ThemeContext } from "../hooks/ThemeContext";
-import { colors } from "../styles/colors";
-import { errorMessage } from "../config/text";
+import { ThemeContext } from "../../hooks/ThemeContext";
+import { colors } from "../../styles/colors";
+import { errorMessage } from "../../config/text";
 import Tweet from "./Tweet";
 
 

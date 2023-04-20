@@ -1,6 +1,6 @@
 import { View, Image, Linking } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
-import ThemeText from "./ThemeText";
+import ThemeText from "../ThemeText";
 
 function formatDate(dateStr) {
   const date = new Date(dateStr);
