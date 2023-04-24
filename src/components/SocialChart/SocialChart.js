@@ -6,7 +6,7 @@ import * as shape from "d3-shape";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { colors } from "../../styles/colors";
 import { abbreviateNumber } from "../../utilities/utilities";
-import { apx } from "../../utilities/utilities";
+import { apx, formatDate } from "../../utilities/utilities";
 
 export default function SocialChart({
   data,
@@ -22,19 +22,7 @@ export default function SocialChart({
     size.current = data.length;
   }, [data]);
 
-  function formatUnixDate(unixTimestamp) {
-    const date = new Date(unixTimestamp * 1000);
-    const formattedDate = new Intl.DateTimeFormat("en-US", {
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    }).format(date);
-    return formattedDate;
-  }
-
-  const dateList = data.map((i) => formatUnixDate(i.time));
+  const dateList = data.map((i) => formatDate(i.time));
 
   const priceList = data.map((i) => i.value);
 
@@ -105,14 +93,12 @@ export default function SocialChart({
 
     const date = dateList[positionX];
 
-    console.log(y(priceList[positionX]));
-
     return (
       <G x={x(positionX)} key="tooltip">
         <G
           x={positionX > size.current / 2 ? -apx(270 + 10) : apx(30)}
           y={
-            // make sure the tooltip doesnt go above or below the edges of the chart 
+            // make sure the tooltip doesnt go above or below the edges of the chart
             y(priceList[positionX]) < 100
               ? y(priceList[positionX]) > 25
                 ? y(priceList[positionX]) - apx(10)

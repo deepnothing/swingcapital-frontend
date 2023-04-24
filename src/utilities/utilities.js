@@ -28,7 +28,12 @@ export const apx = (size = 0) => {
 };
 
 export const formatDate = (dateStr) => {
-  const date = new Date(dateStr);
+  let date;
+  if (typeof dateStr === "number") {
+    date = new Date(dateStr * 1000);
+  } else {
+    date = new Date(dateStr);
+  }
   let time = date.toLocaleTimeString();
   time = time.slice(0, -3);
   const options = { month: "long", day: "numeric" };
@@ -47,7 +52,7 @@ export const formatDate = (dateStr) => {
   }
   return (
     date.toLocaleDateString("en-US", options) +
-    " • " +
+    " at " +
     hour +
     ":" +
     minute +
