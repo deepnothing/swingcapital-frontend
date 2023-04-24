@@ -1,4 +1,4 @@
-import { View, Image, Linking, StyleSheet } from "react-native";
+import { View, Image, Linking, StyleSheet, Dimensions } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import ThemeText from "../ThemeText";
 import { formatDate } from "../../utilities/utilities";
@@ -56,15 +56,18 @@ const styles = StyleSheet.create({
     height: 170,
     marginTop: 10,
     borderRadius: 8,
+    borderWidth: 1,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    // maxWidth: Dimensions.get("window").width / 1.2
   },
   tweet: {
     width: "100%",
     padding: 15,
     display: "flex",
     flexDirection: "column",
+    maxWidth: Dimensions.get("window").width / 1.16,
   },
   row: {
     display: "flex",

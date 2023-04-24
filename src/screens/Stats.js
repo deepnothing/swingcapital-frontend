@@ -42,8 +42,8 @@ export default ({ route, navigation }) => {
   const filteredData = (res) => {
     return res.find(
       (obj) =>
-        obj.coin === route.params.coinName ||
-        obj.name === route.params.coinName.toLowerCase()
+        obj.coin?.toLowerCase() === route.params.coinName.toLowerCase() ||
+        obj.name?.toLowerCase() === route.params.coinName.toLowerCase()
     );
   };
 
