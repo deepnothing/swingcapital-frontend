@@ -21,7 +21,7 @@ export default function InstagramFeed({ data, error }) {
       {data ? (
         <ScrollView>
           {data.topPosts.map((i, index) => {
-            return <InstagramPost item={i} />;
+            return <InstagramPost key={index} item={i} />;
           })}
         </ScrollView>
       ) : error ? (

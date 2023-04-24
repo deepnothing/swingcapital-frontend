@@ -36,7 +36,7 @@ export const formatDate = (dateStr) => {
   }
   let time = date.toLocaleTimeString();
   time = time.slice(0, -3);
-  const options = { month: "long", day: "numeric" };
+  const options = { month: "short", day: "numeric" };
   let hour = date.getHours();
   let minute = date.getMinutes();
   let ampm = "AM";

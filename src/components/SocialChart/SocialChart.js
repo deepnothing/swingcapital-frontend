@@ -6,7 +6,7 @@ import * as shape from "d3-shape";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { colors } from "../../styles/colors";
 import { abbreviateNumber } from "../../utilities/utilities";
-import { apx, formatDate } from "../../utilities/utilities";
+import { apx, formatDate,numberWithCommas} from "../../utilities/utilities";
 
 export default function SocialChart({
   data,
@@ -135,7 +135,7 @@ export default function SocialChart({
             fontWeight="bold"
             fill={`rgb(${routeColor})`}
           >
-            {priceList[positionX]}
+            {numberWithCommas(priceList[positionX])}
           </SvgText>
         </G>
 

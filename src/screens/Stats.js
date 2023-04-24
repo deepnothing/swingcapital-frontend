@@ -92,12 +92,7 @@ export default ({ route, navigation }) => {
       ref(db, `coins/${route.params.coinName.toLowerCase()}/instagram`),
       (snapshot) => {
         const data = snapshot.val();
-        const dataArray = Object.values(data).map(({ date, value }) => ({
-          time: Date.parse(JSON.parse(date)) / 1000,
-          value,
-        }));
-        setInstagramGraphData(dataArray);
-        console.log(dataArray);
+        setInstagramGraphData(data)
       }
     );
     fetch(`${baseUrl}/social/instagram`)
