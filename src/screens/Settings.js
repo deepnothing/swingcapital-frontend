@@ -79,7 +79,7 @@ function Settings({ route }) {
 
   return (
     <ScreenContainer>
-      <Header>
+      <Header justifyContent="center">
         <Image
           style={{
             tintColor: theme.mode === "light" ? '#1b1b1b' : colors.swing,

@@ -6,7 +6,7 @@ import { colors } from "../../styles/colors";
 import { errorMessage } from "../../config/text";
 import Tweet from "./Tweet";
 
-export default function TwitterFeed({ data, error }) {
+export default function SocialFeed({ data, error }) {
   const { theme } = useContext(ThemeContext);
   return (
     <View
@@ -18,14 +18,14 @@ export default function TwitterFeed({ data, error }) {
         },
       ]}
     >
-      {data ? (
+      {tweets ? (
         <ScrollView>
-          {data.data.map((i, index) => {
+          {tweets.data.map((i, index) => {
             return (
               <Tweet
                 key={index}
                 item={i}
-                authorInfo={data.includes.users[index]}
+                authorInfo={tweets.includes.users[index]}
               />
             );
           })}
@@ -41,7 +41,6 @@ export default function TwitterFeed({ data, error }) {
 
 const styles = StyleSheet.create({
   container: {
-    position:'relative',
     width: "100%",
     height: 170,
     marginTop: 10,

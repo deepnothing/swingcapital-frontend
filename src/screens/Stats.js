@@ -19,6 +19,9 @@ import Header from "../components/Header";
 import ScreenContainer from "../components/ScreenContainer";
 import TwitterFeed from "../components//Twitter/TwitterFeed";
 import { colors } from "../styles/colors";
+import InstagramFeed from "../components/Instagram/InstagramFeed";
+import { ref, onValue, update } from "firebase/database";
+import { db } from "../config/firebase";
 
 const dimensions = Dimensions.get("window");
 
@@ -31,11 +34,17 @@ export default ({ route, navigation }) => {
   const [twitterData, setTwitterData] = useState();
   const [twitterError, setTwittterError] = useState();
   const [instagramData, setinstagramData] = useState();
+  const [instagramGraphData, setInstagramGraphData] = useState();
+  const [instagramError, setInstagramError] = useState();
   const [youtubeData, setYoutubeData] = useState();
   const [redditData, setRedditData] = useState();
 
   const filteredData = (res) => {
-    return res.find((obj) => obj.coin === route.params.coinName);
+    return res.find(
+      (obj) =>
+        obj.coin === route.params.coinName ||
+        obj.name === route.params.coinName.toLowerCase()
+    );
   };
 
   const formatTweetCount = (tweets) =>
@@ -57,6 +66,7 @@ export default ({ route, navigation }) => {
     });
 
   useEffect(() => {
+    console.log("focused: Stats");
     // hide bottom tab bar
     route.params.setTabBarShowing(false);
     // Google
@@ -76,6 +86,28 @@ export default ({ route, navigation }) => {
       })
       .catch((error) => {
         setTwittterError(true);
+      });
+    // Instagram
+    onValue(
+      ref(db, `coins/${route.params.coinName.toLowerCase()}/instagram`),
+      (snapshot) => {
+        const data = snapshot.val();
+        const dataArray = Object.values(data).map(({ date, value }) => ({
+          time: Date.parse(JSON.parse(date)) / 1000,
+          value,
+        }));
+        setInstagramGraphData(dataArray);
+        console.log(dataArray);
+      }
+    );
+    fetch(`${baseUrl}/social/instagram`)
+      .then((res) => res.json())
+      .then((response) => {
+        setinstagramData(filteredData(response));
+      })
+      .catch((error) => {
+        console.log(error);
+        setInstagramError(true);
       });
   }, []);
 
@@ -111,6 +143,8 @@ export default ({ route, navigation }) => {
           routeColor={route.params.coinColor}
           data={googleData ? formatGoogleValues(googleData.search) : []}
           error={googleError}
+          gridMin={0}
+          gridMax={60}
         />
         <SocialCard
           color="29,161,242"
@@ -122,7 +156,7 @@ export default ({ route, navigation }) => {
           data={twitterData ? formatTweetCount(twitterData) : null}
         >
           <TwitterFeed
-            tweets={twitterData ? twitterData.tweets : null}
+            data={twitterData ? twitterData.tweets : null}
             error={twitterError}
           />
         </SocialCard>
@@ -131,8 +165,14 @@ export default ({ route, navigation }) => {
           color="193, 53, 132"
           name="Instagram"
           image={require("../../assets/instagram.png")}
-          chartStyle={styles.instagramChart}
-        />
+          chartStyle={chartStyle}
+          data={instagramGraphData}
+        >
+          <InstagramFeed
+            data={instagramData ? instagramData : null}
+            error={instagramError}
+          />
+        </SocialCard>
         <SocialCard
           color="255, 0, 0"
           name="Youtube"

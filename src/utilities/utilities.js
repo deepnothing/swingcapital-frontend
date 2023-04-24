@@ -8,7 +8,7 @@ export const numberWithCommas = (x) => {
   }
 };
 
-export const abbreviateNumber = (value,fixed) => {
+export const abbreviateNumber = (value, fixed) => {
   if (value >= 1e12) {
     return (value / 1e12).toFixed(fixed) + " T";
   } else if (value >= 1e9) {
@@ -25,4 +25,33 @@ export const abbreviateNumber = (value,fixed) => {
 export const apx = (size = 0) => {
   let width = Dimensions.get("window").width;
   return (width / 750) * size;
+};
+
+export const formatDate = (dateStr) => {
+  const date = new Date(dateStr);
+  let time = date.toLocaleTimeString();
+  time = time.slice(0, -3);
+  const options = { month: "long", day: "numeric" };
+  let hour = date.getHours();
+  let minute = date.getMinutes();
+  let ampm = "AM";
+  if (hour >= 12) {
+    ampm = "PM";
+    hour = hour - 12;
+  }
+  if (hour === 0) {
+    hour = 12;
+  }
+  if (minute < 10) {
+    minute = "0" + minute;
+  }
+  return (
+    date.toLocaleDateString("en-US", options) +
+    " • " +
+    hour +
+    ":" +
+    minute +
+    " " +
+    ampm
+  );
 };

@@ -1,15 +1,7 @@
-import { View, Image, Linking } from "react-native";
+import { View, Image, Linking, StyleSheet } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import ThemeText from "../ThemeText";
-
-function formatDate(dateStr) {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "numeric",
-    year: "numeric",
-  });
-}
+import { formatDate } from "../../utilities/utilities";
 
 export default function Tweet({ item, authorInfo }) {
   return (
@@ -58,3 +50,41 @@ export default function Tweet({ item, authorInfo }) {
     </View>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    height: 170,
+    marginTop: 10,
+    borderRadius: 8,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  tweet: {
+    width: "100%",
+    padding: 15,
+    display: "flex",
+    flexDirection: "column",
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  column: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  pic: {
+    height: 50,
+    width: 50,
+    borderRadius: 200,
+  },
+  name: {
+    fontSize: 15,
+    fontWeight: "700",
+  },
+  username: {
+    fontSize: 12,
+  },
+});

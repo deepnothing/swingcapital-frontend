@@ -16,6 +16,8 @@ export default function SocialCard({
   data,
   total,
   chartStyle,
+  gridMin,
+  gridMax,
   error,
   ...props
 }) {
@@ -67,8 +69,8 @@ export default function SocialCard({
         <SocialChart
           routeColor={color}
           data={data ? data : []}
-          gridMin={0}
-          gridMax={60}
+          gridMin={gridMin}
+          gridMax={gridMax}
           chartStyle={chartStyle}
         />
       )}
