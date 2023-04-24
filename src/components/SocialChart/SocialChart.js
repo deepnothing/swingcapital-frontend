@@ -114,9 +114,9 @@ export default function SocialChart({
           y={
             // make sure the tooltip doesnt go above or below the edges of the chart 
             y(priceList[positionX]) < 100
-              ? y(priceList[positionX]) > 19
+              ? y(priceList[positionX]) > 25
                 ? y(priceList[positionX]) - apx(10)
-                : 19
+                : 25
               : 100
           }
         >
