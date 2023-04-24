@@ -112,6 +112,7 @@ export default function SocialChart({
         <G
           x={positionX > size.current / 2 ? -apx(270 + 10) : apx(30)}
           y={
+            // make sure the tooltip doesnt go above or below the edges of the chart 
             y(priceList[positionX]) < 100
               ? y(priceList[positionX]) > 19
                 ? y(priceList[positionX]) - apx(10)
