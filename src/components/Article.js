@@ -8,39 +8,13 @@ import ThemeText from "./ThemeText";
 import { colors } from "../styles/colors";
 import { useContext } from "react";
 import { ThemeContext } from "../hooks/ThemeContext";
+import { formatDate } from "../utilities/utilities";
 
 const innerWidth = Dimensions.get("window").width;
 
 export default function Article({ data, onPress }) {
   const { theme } = useContext(ThemeContext);
-  const formatDate = (input) => {
-    const date = new Date(input);
-    let time = date.toLocaleTimeString();
-    time = time.slice(0, -3);
-    const options = { month: "long", day: "numeric" };
-    let hour = date.getHours();
-    let minute = date.getMinutes();
-    let ampm = "AM";
-    if (hour >= 12) {
-      ampm = "PM";
-      hour = hour - 12;
-    }
-    if (hour === 0) {
-      hour = 12;
-    }
-    if (minute < 10) {
-      minute = "0" + minute;
-    }
-    return (
-      date.toLocaleDateString("en-US", options) +
-      " • " +
-      hour +
-      ":" +
-      minute +
-      " " +
-      ampm
-    );
-  };
+ 
   const trend = {
     icon:
       data.sentiment > 0
