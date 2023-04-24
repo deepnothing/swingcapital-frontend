@@ -105,11 +105,19 @@ export default function SocialChart({
 
     const date = dateList[positionX];
 
+    console.log(y(priceList[positionX]));
+
     return (
       <G x={x(positionX)} key="tooltip">
         <G
           x={positionX > size.current / 2 ? -apx(270 + 10) : apx(30)}
-          y={y(priceList[positionX]) - apx(10)}
+          y={
+            y(priceList[positionX]) < 100
+              ? y(priceList[positionX]) > 19
+                ? y(priceList[positionX]) - apx(10)
+                : 19
+              : 100
+          }
         >
           <Rect
             y={-apx(24 + 24 + 20) / 2}
