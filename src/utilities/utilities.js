@@ -4,7 +4,7 @@ export const numberWithCommas = (x) => {
   if (x > 1) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   } else {
-    return x;
+    return x?.toFixed(4);
   }
 };
 
@@ -32,7 +32,7 @@ export const formatDate = (dateStr) => {
   if (typeof dateStr === "number") {
     date = new Date(dateStr * 1000);
   } else {
-    date = new Date(dateStr);
+    date = new Date(parseInt(dateStr) * 1000);
   }
   let time = date.toLocaleTimeString();
   time = time.slice(0, -3);

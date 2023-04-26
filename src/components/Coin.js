@@ -61,7 +61,7 @@ export default function Coin({
                       ? "#33c269"
                       : coinData.priceChange < 0
                       ? "#fd1c25"
-                      : "black",
+                      : "#686d72",
                 }}
               >
                 ${numberWithCommas(coinData.currentPrice)}
@@ -138,11 +138,11 @@ export default function Coin({
                 ? "#33c269"
                 : coinData.priceChange < 0
                 ? "#fd1c25"
-                : "black",
+                : "#686d72",
           }}
         >
           {coinData.priceChange > 0 ? "+" : ""}
-          {coinData.priceChange.toFixed(2)}%
+          {coinData.priceChange ? coinData.priceChange?.toFixed(2) : 0}%
         </ThemeText>
         <View
           style={[
@@ -157,7 +157,7 @@ export default function Coin({
             ellipsizeMode="clip"
             style={{ color: "#33c269", fontSize: 10, fontWeight: "600" }}
           >
-            High:${numberWithCommas(coinData.high)}
+            High:${coinData.high ? numberWithCommas(coinData.high) : "???"}
           </Text>
         </View>
         <View
@@ -173,7 +173,7 @@ export default function Coin({
             ellipsizeMode="clip"
             style={{ color: "#fd1c25", fontSize: 10, fontWeight: "600" }}
           >
-            Low:${numberWithCommas(coinData.low)}
+            Low:${coinData.low ? numberWithCommas(coinData.low) : "???"}
           </Text>
         </View>
       </View>
