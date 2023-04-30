@@ -22,6 +22,7 @@ import { colors } from "../styles/colors";
 import InstagramFeed from "../components/Instagram/InstagramFeed";
 import { ref, onValue, update } from "firebase/database";
 import { db } from "../config/firebase";
+import { formatTweetCount, formatGoogleValues } from "../utilities/utilities";
 
 const dimensions = Dimensions.get("window");
 
@@ -37,6 +38,7 @@ export default ({ route, navigation }) => {
   const [instagramGraphData, setInstagramGraphData] = useState();
   const [instagramError, setInstagramError] = useState();
   const [youtubeData, setYoutubeData] = useState();
+  const [youtubeGraphData, setYoutubeGraphData] = useState();
   const [redditData, setRedditData] = useState();
 
   const filteredData = (res) => {
@@ -47,26 +49,8 @@ export default ({ route, navigation }) => {
     );
   };
 
-  const formatTweetCount = (tweets) =>
-    tweets.tweet_counts.data.map((i) => {
-      // format data
-      const unixTimestamp = Date.parse(i.end) / 1000;
-      return {
-        value: i.tweet_count,
-        time: unixTimestamp,
-      };
-    });
-
-  const formatGoogleValues = (data) =>
-    data.map((i) => {
-      return {
-        value: i.value[0],
-        time: i.time,
-      };
-    });
-
   useEffect(() => {
-    console.log("focused: Stats");
+    console.log("focused: Stats.js");
     // hide bottom tab bar
     route.params.setTabBarShowing(false);
     // Google
@@ -92,7 +76,7 @@ export default ({ route, navigation }) => {
       ref(db, `coins/${route.params.coinName.toLowerCase()}/instagram`),
       (snapshot) => {
         const data = snapshot.val();
-        setInstagramGraphData(data)
+        setInstagramGraphData(data);
       }
     );
     fetch(`${baseUrl}/social/instagram`)
@@ -101,8 +85,20 @@ export default ({ route, navigation }) => {
         setinstagramData(filteredData(response));
       })
       .catch((error) => {
-        console.log(error);
         setInstagramError(true);
+      });
+    // Youtube
+    onValue(
+      ref(db, `coins/${route.params.coinName.toLowerCase()}/youtube`),
+      (snapshot) => {
+        const data = snapshot.val();
+        setYoutubeGraphData(data);
+      }
+    );
+    fetch(`${baseUrl}/social/youtube`)
+      .then((res) => res.json())
+      .then((response) => {
+        setYoutubeData(response);
       });
   }, []);
 
@@ -173,6 +169,7 @@ export default ({ route, navigation }) => {
           name="Youtube"
           image={require("../../assets/youtube.png")}
           chartStyle={styles.youtubeChart}
+          data={youtubeGraphData}
         />
 
         {/* <SocialCard

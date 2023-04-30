@@ -60,3 +60,21 @@ export const formatDate = (dateStr) => {
     ampm
   );
 };
+
+export const formatTweetCount = (tweets) =>
+tweets.tweet_counts.data.map((i) => {
+  // format data
+  const unixTimestamp = Date.parse(i.end) / 1000;
+  return {
+    value: i.tweet_count,
+    time: unixTimestamp,
+  };
+});
+
+export const formatGoogleValues = (data) =>
+data.map((i) => {
+  return {
+    value: i.value[0],
+    time: i.time,
+  };
+});

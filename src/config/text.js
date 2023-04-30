@@ -1,1 +1,1 @@
-export const errorMessage = 'Something Went Wrong...'
+export const errorMessage = "Something Went Wrong...";
