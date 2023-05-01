@@ -90,7 +90,7 @@ function SignUpScreen({ navigation }) {
           <Feather name="user-plus" color={colors.light.base} size={"25"} />
         </BigButton>
       </View>
-      <Text className="text-center text-black font-main text-base">
+      <Text style={{ alignSelf: "center" }}>
         Have an account?{" "}
         <Text
           style={{ color: colors.swing }}

@@ -91,7 +91,7 @@ function SignInScreen({ navigation }) {
           <Feather name="log-in" color={colors.light.base} size={"25"} />
         </BigButton>
       </View>
-      <Text className="text-center text-black font-main text-base">
+      <Text style={{ alignSelf: "center" }}>
         Don't Have an account?{" "}
         <Text
           style={{ color: colors.swing }}
