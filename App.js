@@ -1,12 +1,9 @@
 /// <reference types="nativewind/types" />
-import React, { useEffect, useState } from "react";
 import "./src/config/firebase";
 import RootNavigation from "./src/navigation";
 import { useFonts } from "expo-font";
 
-
 export default function App() {
-  
   const [loaded] = useFonts({
     "Montserrat-Black": require("./assets/fonts/Montserrat-Black.ttf"),
     "Montserrat-Black-Italic": require("./assets/fonts/Montserrat-BlackItalic.ttf"),
@@ -33,7 +30,5 @@ export default function App() {
     return null;
   }
 
-  return (
-      <RootNavigation />
-  );
+  return <RootNavigation />;
 }

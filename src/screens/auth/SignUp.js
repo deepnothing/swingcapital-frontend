@@ -1,12 +1,11 @@
 import React from "react";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import {
-  Pressable,
   StyleSheet,
   TextInput,
   Text,
   View,
   SafeAreaView,
+  Platform,
 } from "react-native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "../../config/firebase";
@@ -60,7 +59,7 @@ function SignUpScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <View />
       <View style={styles.mainContent}>
-        <View style={{ width: "100%", height: 70 }}>
+        <View style={{ width: "100%", height: Platform.isPad ? 220 : 70 }}>
           <WebView
             source={{
               html: html("Sign Up"),
@@ -138,12 +137,11 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
-    height: 400,
+    height: Platform.isPad ? 500 : 400,
   },
   container: {
     height: "100%",
     justifyContent: "space-evenly",
     marginHorizontal: 20,
-    maxWidth: 500,
   },
 });

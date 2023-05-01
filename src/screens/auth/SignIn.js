@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, TextInput, Text, View, Alert } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  Text,
+  View,
+  Alert,
+  Platform,
+} from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import BigButton from "../../components/BigButton";
@@ -61,7 +68,7 @@ function SignInScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <View />
       <View style={styles.mainContent}>
-        <View style={{ width: "100%", height: 70 }}>
+        <View style={{ width: "100%", height: Platform.isPad ? 220 : 70 }}>
           <WebView
             source={{
               html: html("Sign In"),
@@ -139,12 +146,11 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
-    height: 400,
+    height: Platform.isPad ? 500 : 400,
   },
   container: {
     height: "100%",
     justifyContent: "space-evenly",
     marginHorizontal: 20,
-    maxWidth: 500,
   },
 });

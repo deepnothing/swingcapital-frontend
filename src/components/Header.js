@@ -22,6 +22,8 @@ export default function Header(props) {
           height:
             Platform.OS === "android"
               ? Dimensions.get("window").height / 13
+              : Platform.isPad
+              ? Dimensions.get("window").height / 15
               : Dimensions.get("window").height / 9,
           display: "flex",
           flexDirection: "row",

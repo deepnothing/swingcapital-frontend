@@ -6,7 +6,8 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  StatusBar
+  StatusBar,
+  Platform,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import BigButton from "../../components/BigButton";
@@ -37,7 +38,7 @@ function WelcomeScreen({ navigation, setGuestUser }) {
       </View>
       <View />
       <View style={styles.mainContent}>
-        <View style={{ width: "100%", height: 80 }}>
+        <View style={{ width: "100%", height: Platform.isPad ? 220 : 80 }}>
           <WebView
             source={{
               html: logoHtml,
@@ -96,13 +97,11 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
-    height: 300,
   },
   container: {
     height: "100%",
     justifyContent: "space-evenly",
     marginHorizontal: 20,
-    maxWidth: 500,
   },
   skip: {
     position: "absolute",

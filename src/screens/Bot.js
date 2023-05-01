@@ -23,7 +23,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 function BotScreen({ route }) {
   const [isRegistered, setRegistered] = useState();
   const [isRegistering, setIsRegistering] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   useEffect(() => {
     if (route.params.user) {
       const userRegistered = ref(db, `users/${route.params.user.uid}`);
@@ -143,7 +142,7 @@ function BotScreen({ route }) {
               source={require("../../assets/kraken.jpeg")}
             />
           </TouchableOpacity>
-          <ThemeText style={style.botHeaderText}>BTC / USD</ThemeText>
+          <ThemeText style={style.botHeaderText}>BTC - USD</ThemeText>
         </View>
       </Header>
       <View style={{ height: "87%" }}>
@@ -207,14 +206,14 @@ const style = StyleSheet.create({
     fontSize: 18,
   },
   botHeaderText: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: "600",
     marginHorizontal: 12,
   },
   row: {
     display: "flex",
     flexDirection: "row",
-    alignItems:'center'
+    alignItems: "center",
   },
   column: {
     display: "flex",
