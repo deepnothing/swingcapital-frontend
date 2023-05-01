@@ -66,15 +66,15 @@ export default function RootNavigation() {
 
   return (
     <ThemeContext.Provider value={{ theme, updateTheme }}>
-      {/* {user || isGuestUser ? (
+      {user || isGuestUser ? (
         <UserStack
           user={user}
           isGuestUser={isGuestUser}
           setGuestUser={setGuestUser}
         />
-      ) : ( */}
+      ) : (
         <AuthStack setGuestUser={setGuestUser} />
-      {/* )} */}
+      )}
     </ThemeContext.Provider>
   );
 }
