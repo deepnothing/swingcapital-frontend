@@ -13,8 +13,7 @@ export default function IFrame({ url, setIframeVisible }) {
         <Feather
           name="globe"
           color={"#000"}
-          size={"20"}
-          style={{ position: "absolute", left: 10 }}
+          style={{ position: "absolute", left: 10, fontSize: 20 }}
         />
         <Text style={styles.siteName}>{getDomainName(url)}</Text>
         <Pressable

@@ -82,7 +82,7 @@ function Settings({ route }) {
       <Header justifyContent="center">
         <Image
           style={{
-            tintColor: theme.mode === "light" ? '#1b1b1b' : colors.swing,
+            tintColor: theme.mode === "light" ? "#1b1b1b" : colors.swing,
             marginLeft: 15,
             width: 30,
             aspectRatio: 1 / 1,
@@ -96,8 +96,7 @@ function Settings({ route }) {
             <Feather
               name="user"
               color={theme.mode === "light" ? "#000" : "#FFF"}
-              size={"25"}
-              style={{ marginRight: 10 }}
+              style={styles.settingsIcon}
             />
           </TouchableOpacity>
           <ThemeText style={{ fontWeight: "600" }}>
@@ -108,8 +107,7 @@ function Settings({ route }) {
           <Feather
             name={theme.mode === "light" ? "sun" : "moon"}
             color={theme.mode === "light" ? "#000" : "#FFF"}
-            size={"25"}
-            style={{ marginRight: 10 }}
+            style={styles.settingsIcon}
           />
           <ThemeText>Theme </ThemeText>
           <Switch
@@ -127,8 +125,7 @@ function Settings({ route }) {
               <Feather
                 name="log-out"
                 color={theme.mode === "light" ? "#000" : "#FFF"}
-                size={"25"}
-                style={{ marginRight: 10 }}
+                style={styles.settingsIcon}
               />
               <ThemeText>Logout</ThemeText>
             </TouchableOpacity>
@@ -139,8 +136,7 @@ function Settings({ route }) {
               <Feather
                 name="x-octagon"
                 color="red"
-                size={"25"}
-                style={{ marginRight: 10 }}
+                style={styles.settingsIcon}
               />
 
               <ThemeText>Delete Account</ThemeText>
@@ -155,8 +151,7 @@ function Settings({ route }) {
               <Feather
                 name="log-in"
                 color={theme.mode === "light" ? "#000" : "#FFF"}
-                size={"25"}
-                style={{ marginRight: 10 }}
+                style={styles.settingsIcon}
               />
               <ThemeText>Sign In</ThemeText>
             </TouchableOpacity>
@@ -167,8 +162,7 @@ function Settings({ route }) {
               <Feather
                 name="user-plus"
                 color={theme.mode === "light" ? "#000" : "#FFF"}
-                size={"25"}
-                style={{ marginRight: 10 }}
+                style={styles.settingsIcon}
               />
               <ThemeText>Sign Up</ThemeText>
             </TouchableOpacity>
@@ -194,5 +188,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 15,
+  },
+  settingsIcon: {
+    marginRight: 10,
+    fontSize: 25,
   },
 });

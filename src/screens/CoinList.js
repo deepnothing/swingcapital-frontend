@@ -132,7 +132,7 @@ export default function CoinList({ navigation, route }) {
           <Feather
             name="search"
             color={theme.mode === "light" ? "#000" : "#FFF"}
-            size={"20"}
+            style={{ fontSize: 20 }}
           />
           <TextInput
             placeholder="Search.."

@@ -14,7 +14,7 @@ const innerWidth = Dimensions.get("window").width;
 
 export default function Article({ data, onPress }) {
   const { theme } = useContext(ThemeContext);
- 
+
   const trend = {
     icon:
       data.sentiment > 0
@@ -50,7 +50,8 @@ export default function Article({ data, onPress }) {
           {
             backgroundColor: data.sentiment === 0 ? "#EDEDF3" : null,
             borderColor: trend.color,
-            backgroundColor: theme.mode==='light'?"#EDEDF3":colors.dark.medium,
+            backgroundColor:
+              theme.mode === "light" ? "#EDEDF3" : colors.dark.medium,
           },
         ]}
       >
@@ -120,8 +121,7 @@ export default function Article({ data, onPress }) {
           <Feather
             name="clock"
             color={theme.mode === "light" ? "#83868B" : colors.light.base}
-            size={"18"}
-            style={{ marginRight: 8 }}
+            style={{ marginRight: 8, fontSize: 18 }}
           />
 
           <ThemeText
@@ -153,11 +153,11 @@ export default function Article({ data, onPress }) {
           <Feather
             name={trend.icon}
             color={trend.color}
-            size={"12"}
             style={{
               borderWidth: 1,
               borderRadius: 5,
               padding: 2,
+              fontSize: 12,
               borderColor: trend.color,
             }}
           />

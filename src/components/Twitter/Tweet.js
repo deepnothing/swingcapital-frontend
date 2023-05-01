@@ -31,7 +31,7 @@ export default function Tweet({ item, authorInfo }) {
           <Feather
             name="external-link"
             color={"#1DA1F2"}
-            size={"18"}
+            style={{ fontSize: 18 }}
             onPress={() =>
               Linking.openURL(
                 `https://twitter.com/swingcapitalapp/status/${item.id}`

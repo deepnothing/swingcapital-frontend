@@ -26,7 +26,11 @@ function WelcomeScreen({ navigation, setGuestUser }) {
           }}
         >
           <Text style={{ fontSize: 19, fontWeight: "600" }}>Skip </Text>
-          <Feather name="arrow-right" color={colors.swing} size={"28"} />
+          <Feather
+            name="arrow-right"
+            color={colors.swing}
+            style={{ fontSize: 28 }}
+          />
         </TouchableOpacity>
       </View>
       <View />

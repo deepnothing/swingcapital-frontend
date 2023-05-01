@@ -124,7 +124,7 @@ export default function UserStack({ user, isGuestUser, setGuestUser }) {
                       ? colors.dark.base
                       : colors.light.base
                   }
-                  size={"24"}
+                  style={{ fontSize: 24 }}
                 />
               ),
             }}

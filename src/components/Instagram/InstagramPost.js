@@ -15,7 +15,9 @@ export default function InstagramPost({ item }) {
   const { theme } = useContext(ThemeContext);
   return (
     <View style={styles.container}>
-      <View style={theme.mode === "light"
+      <View
+        style={
+          theme.mode === "light"
             ? {
                 shadowColor: "rgba(0, 0, 0, 0.45)",
                 shadowOffset: { width: 0, height: 5 },
@@ -23,7 +25,9 @@ export default function InstagramPost({ item }) {
                 shadowRadius: 5,
                 elevation: 10,
               }
-            : null}>
+            : null
+        }
+      >
         <Image style={[styles.image]} source={{ uri: item.displayUrl }} />
       </View>
 
@@ -35,7 +39,7 @@ export default function InstagramPost({ item }) {
           <Feather
             name="heart"
             color={theme.mode === "light" ? "#000" : "#FFF"}
-            size={"25"}
+            style={{ fontSize: 25 }}
           />
           <ThemeText style={styles.text}> {item.likesCount}</ThemeText>
         </View>
@@ -43,7 +47,7 @@ export default function InstagramPost({ item }) {
           <Feather
             name="message-circle"
             color={theme.mode === "light" ? "#000" : "#FFF"}
-            size={"25"}
+            style={{ fontSize: 25 }}
           />
           <ThemeText style={styles.text}> {item.commentsCount}</ThemeText>
         </View>
@@ -55,8 +59,7 @@ export default function InstagramPost({ item }) {
           <Feather
             name="external-link"
             color={"#C13584"}
-            size={"18"}
-            style={{ marginLeft: 10 }}
+            style={{ marginLeft: 10, fontSize: 18 }}
             onPress={() => Linking.openURL(item.url)}
           />
         </View>
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
     height: 150,
     width: 150,
     borderRadius: 8,
-    margin:5
+    margin: 5,
   },
   column: {
     display: "flex",

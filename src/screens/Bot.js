@@ -161,7 +161,6 @@ function BotScreen({ route }) {
               <Feather
                 name={"check-square"}
                 color={"#FFF"}
-                size={"18"}
                 style={style.indicator}
               />
             )}
@@ -186,6 +185,7 @@ const style = StyleSheet.create({
     position: "absolute",
     right: "-10%",
     top: "10%",
+    fontSize: 18,
   },
   botHeaderText: {
     fontSize: 12,

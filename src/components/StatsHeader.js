@@ -30,7 +30,7 @@ export default function StatsHeader({ navigation, route, setTabBarShowing }) {
         <Feather
           name="arrow-left"
           color={theme.mode === "dark" ? colors.light.base : colors.dark.base}
-          size={"20"}
+          style={{ fontSize: 20 }}
         />
         <Text style={style.backText}>&nbsp;Back</Text>
       </TouchableOpacity>

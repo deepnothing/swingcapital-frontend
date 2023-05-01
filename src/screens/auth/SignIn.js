@@ -69,7 +69,7 @@ function SignInScreen({ navigation }) {
           />
         </View>
         <View style={styles.input}>
-          <Feather name="mail" color={"#C3C3C3"} size={"19"} />
+          <Feather name="mail" color={"#C3C3C3"} style={{ fontSize: 19 }} />
           <TextInput
             placeholder="Email"
             value={value.email}
@@ -78,7 +78,7 @@ function SignInScreen({ navigation }) {
           />
         </View>
         <View style={styles.input}>
-          <Feather name="lock" color={"#C3C3C3"} size={"19"} />
+          <Feather name="lock" color={"#C3C3C3"} style={{ fontSize: 19 }} />
           <TextInput
             style={{ padding: 5, width: "100%", height: "100%" }}
             placeholder="Password"
@@ -88,7 +88,11 @@ function SignInScreen({ navigation }) {
         </View>
 
         <BigButton onPress={signIn} width="100%">
-          <Feather name="log-in" color={colors.light.base} size={"25"} />
+          <Feather
+            name="log-in"
+            color={colors.light.base}
+            style={{ fontSize: 25 }}
+          />
         </BigButton>
       </View>
       <Text style={{ alignSelf: "center" }}>
