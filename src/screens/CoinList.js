@@ -168,7 +168,7 @@ export default function CoinList({ navigation, route }) {
           <RefreshControl
             refreshing={isRefreshing}
             onRefresh={onRefresh}
-            tintColor={theme.mode === "light" ? "#000" : "#FFF"} // set the activity indicator color to blue
+            tintColor={theme.mode === "light" ? "#000" : "#FFF"}
           />
         }
       />
