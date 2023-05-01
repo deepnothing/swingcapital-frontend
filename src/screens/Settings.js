@@ -6,6 +6,7 @@ import {
   Switch,
   Alert,
   Image,
+  Platform,
 } from "react-native";
 import Constants from "expo-constants";
 import Feather from "react-native-vector-icons/Feather";
@@ -77,13 +78,14 @@ function Settings({ route }) {
     );
   };
 
+  const switchSize = Platform.OS === "android" ? 1.2 : 0.8;
+
   return (
     <ScreenContainer>
       <Header justifyContent="center">
         <Image
           style={{
             tintColor: theme.mode === "light" ? "#1b1b1b" : colors.swing,
-            marginLeft: 15,
             width: 30,
             aspectRatio: 1 / 1,
           }}
@@ -111,7 +113,9 @@ function Settings({ route }) {
           />
           <ThemeText>Theme </ThemeText>
           <Switch
-            style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
+            style={{
+              transform: [{ scaleX: switchSize }, { scaleY: switchSize }],
+            }}
             trackColor={{ false: "#767577", true: "#81b0ff" }}
             thumbColor={isActive ? "#f5dd4b" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e"

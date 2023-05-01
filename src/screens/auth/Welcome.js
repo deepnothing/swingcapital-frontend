@@ -6,6 +6,7 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  StatusBar
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import BigButton from "../../components/BigButton";
@@ -17,6 +18,7 @@ import { colors } from "../../styles/colors";
 function WelcomeScreen({ navigation, setGuestUser }) {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="#FFF" barStyle="dark-content" />
       <View style={styles.skip}>
         <TouchableOpacity
           style={styles.skipButton}

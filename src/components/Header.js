@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SafeAreaView, Dimensions, StatusBar } from "react-native";
+import { SafeAreaView, Dimensions, StatusBar, Platform } from "react-native";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { colors } from "../styles/colors";
 
@@ -19,7 +19,10 @@ export default function Header(props) {
           shadowRadius: 5,
           elevation: 10,
           zIndex: 1,
-          height: Dimensions.get("window").height / 9,
+          height:
+            Platform.OS === "android"
+              ? Dimensions.get("window").height / 13
+              : Dimensions.get("window").height / 9,
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
@@ -29,7 +32,9 @@ export default function Header(props) {
       ]}
     >
       <StatusBar
-        backgroundColor={theme.mode == "light" ? "#fff" : "#000"}
+        backgroundColor={
+          theme.mode == "light" ? colors.swing : colors.dark.base
+        }
         barStyle={theme.mode == "light" ? "dark-content" : "light-content"}
       />
       {props.children}
