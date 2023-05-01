@@ -7,6 +7,7 @@ import {
   Image,
   FlatList,
   Alert,
+  Linking,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import Header from "../components/Header";
@@ -16,6 +17,8 @@ import { ref, onValue, update } from "firebase/database";
 import ScreenContainer from "../components/ScreenContainer";
 import ThemeText from "../components/ThemeText";
 import Card from "../components/Card";
+import PercentBar from "../components/PercentBar";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 function BotScreen({ route }) {
   const [isRegistered, setRegistered] = useState();
@@ -82,20 +85,33 @@ function BotScreen({ route }) {
     const color =
       item.exitPrice - item.entryPrice - item.fees > 0 ? "green" : "red";
     return (
-      <Card>
+      <Card style={{ height: 150 }}>
         <View style={style.column}>
-          <ThemeText>Position type: LONG</ThemeText>
+          <ThemeText style={style.tradeText}>
+            Position Type: <Text style={{ color: "#A4AEB3" }}>LONG</Text>
+          </ThemeText>
           <View style={style.row}>
-            <ThemeText>Entry Price: ${item.entryPrice} </ThemeText>
-            <ThemeText>{item.startDate}</ThemeText>
+            <ThemeText style={style.tradeText}>
+              Entry Price:{" "}
+              <Text style={{ color: "#A4AEB3" }}> ${item.entryPrice} </Text>
+            </ThemeText>
+            <Text style={{ color: "#A4AEB3" }}>{item.startDate}</Text>
           </View>
           <View style={style.row}>
-            <ThemeText>Exit Price: ${item.entryPrice} </ThemeText>
-            <ThemeText>{item.startDate}</ThemeText>
+            <ThemeText style={style.tradeText}>
+              Exit Price:{" "}
+              <Text style={{ color: "#A4AEB3" }}>${item.entryPrice} </Text>
+            </ThemeText>
+            <Text style={{ color: "#A4AEB3" }}>{item.startDate}</Text>
           </View>
-          <ThemeText>Stop loss: $27,001</ThemeText>
-          <ThemeText>Take Profit: $27,001</ThemeText>
+          <ThemeText style={style.tradeText}>
+            Stop loss: <Text style={{ color: "#A4AEB3" }}>$27,001</Text>
+          </ThemeText>
+          <ThemeText style={style.tradeText}>
+            Take Profit:<Text style={{ color: "#A4AEB3" }}>$27,001</Text>
+          </ThemeText>
         </View>
+        <View style={style.seperator} />
         <View style={style.column}>
           <ThemeText style={{ color: color }}>
             {item.exitPrice - item.entryPrice - item.fees > 0 ? "WIN" : "LOSS"}
@@ -114,31 +130,27 @@ function BotScreen({ route }) {
 
   return (
     <ScreenContainer>
-      <Header justifyContent="space-between">
-        <ThemeText style={style.botHeaderText}>Win: 50% / Loss: 50%</ThemeText>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Image
-            style={{ width: 25, height: 25, borderRadius: 6 }}
-            source={require("../../assets/kraken.jpeg")}
-          />
-          <ThemeText style={style.botHeaderText}>Demo : ETH/USD</ThemeText>
+      <Header justifyContent="space-evenly">
+        <PercentBar negativePercent={20} positivePercent={80} width="45%" />
+        <View style={style.headerDemo}>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL("https://pro.kraken.com/app/trade/btc-usd")
+            }
+          >
+            <Image
+              style={{ width: 25, height: 25, borderRadius: 6 }}
+              source={require("../../assets/kraken.jpeg")}
+            />
+          </TouchableOpacity>
+          <ThemeText style={style.botHeaderText}>BTC / USD</ThemeText>
         </View>
       </Header>
       <View style={{ height: "87%" }}>
         <FlatList
           data={data}
           renderItem={({ item }) => <TradeCard item={item} />}
-          contentContainerStyle={{
-            padding: 15,
-            paddingTop: 20,
-            height: "100%",
-          }}
+          contentContainerStyle={style.tradeList}
           ListFooterComponent={<View style={{ height: 50 }} />}
         />
         <BigButton
@@ -181,6 +193,13 @@ const style = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
   },
+  headerDemo: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    width: "45%",
+  },
   indicator: {
     position: "absolute",
     right: "-10%",
@@ -188,17 +207,33 @@ const style = StyleSheet.create({
     fontSize: 18,
   },
   botHeaderText: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "600",
     marginHorizontal: 12,
   },
   row: {
     display: "flex",
     flexDirection: "row",
+    alignItems:'center'
   },
   column: {
     display: "flex",
     flexDirection: "column",
+  },
+  tradeText: {
+    fontSize: 16,
+    fontWeight: "500",
+    marginVertical: 3,
+  },
+  seperator: {
+    height: "120%",
+    backgroundColor: "#EBEBF0",
+    width: 2,
+  },
+  tradeList: {
+    padding: 15,
+    paddingTop: 20,
+    height: "100%",
   },
 });
 

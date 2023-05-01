@@ -14,23 +14,7 @@ import Header from "../components/Header";
 import ScreenContainer from "../components/ScreenContainer";
 import ThemeText from "../components/ThemeText";
 import { ThemeContext } from "../hooks/ThemeContext";
-
-function PercentBar(props) {
-  return (
-    <View
-      style={[
-        styles.percentBar,
-        { backgroundColor: props.color, width: `${props.percent}%` },
-      ]}
-    >
-      <ThemeText
-        style={[styles.percentText, props.left ? { left: 0 } : { right: 0 }]}
-      >
-        {Math.round(props.percent)}%
-      </ThemeText>
-    </View>
-  );
-}
+import PercentBar from "../components/PercentBar";
 
 function News() {
   const { theme } = useContext(ThemeContext);
@@ -85,11 +69,11 @@ function News() {
   return (
     <ScreenContainer>
       <Header justifyContent="center">
-        {/* <SwingCapital text="News" /> */}
-        <View style={styles.percentWrapper}>
-          <PercentBar color="#E10600" percent={negativePercent} left />
-          <PercentBar color="#008000" percent={positivePercent} />
-        </View>
+        <PercentBar
+          negativePercent={negativePercent}
+          positivePercent={positivePercent}
+          width="90%"
+        />
       </Header>
       <FlatList
         data={data}
@@ -128,25 +112,6 @@ function News() {
 
 export default News;
 const styles = StyleSheet.create({
-  percentWrapper: {
-    width: "90%",
-    position: "relative",
-    height: 8,
-    display: "flex",
-    flexDirection: "row",
-    top: "15%",
-  },
-  percentBar: {
-    borderRadius: 10,
-    height: "100%",
-    position: "relative",
-    marginHorizontal: 1,
-  },
-  percentText: {
-    position: "absolute",
-    bottom: 8,
-    fontWeight: "600",
-  },
   listStyle: {
     paddingBottom: "25%",
     paddingHorizontal: 2,
