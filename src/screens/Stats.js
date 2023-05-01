@@ -1,21 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-  ScrollView,
-  Dimensions,
-  Text,
-} from "react-native";
+import { StyleSheet, SafeAreaView, ScrollView, Dimensions } from "react-native";
 import { baseUrl } from "../config/api";
 import StatsHeader from "../components/StatsHeader";
 import GoogleTrends from "../components/GoogleTrends";
 import Map from "../components/Map/Map";
 import SocialCard from "../components/SocialCard";
-import MapView, { Geojson } from "react-native-maps";
 import { ThemeContext } from "../hooks/ThemeContext";
-import ThemeText from "../components/ThemeText";
-import Header from "../components/Header";
 import ScreenContainer from "../components/ScreenContainer";
 import TwitterFeed from "../components//Twitter/TwitterFeed";
 import { colors } from "../styles/colors";
@@ -23,8 +13,7 @@ import InstagramFeed from "../components/Instagram/InstagramFeed";
 import { ref, onValue, update } from "firebase/database";
 import { db } from "../config/firebase";
 import { formatTweetCount, formatGoogleValues } from "../utilities/utilities";
-
-const dimensions = Dimensions.get("window");
+import YoutubeFeed from "../components/Youtube/YoutubeFeed";
 
 export default ({ route, navigation }) => {
   const { theme } = useContext(ThemeContext);
@@ -39,7 +28,7 @@ export default ({ route, navigation }) => {
   const [instagramError, setInstagramError] = useState();
   const [youtubeData, setYoutubeData] = useState();
   const [youtubeGraphData, setYoutubeGraphData] = useState();
-  const [redditData, setRedditData] = useState();
+  const [youtubeError, setYoutTubeError] = useState();
 
   const filteredData = (res) => {
     return res.find(
@@ -99,7 +88,8 @@ export default ({ route, navigation }) => {
       .then((res) => res.json())
       .then((response) => {
         setYoutubeData(response);
-      });
+      })
+      .catch((error) => setYoutTubeError(true));
   }, []);
 
   const chartStyle = [
@@ -155,9 +145,15 @@ export default ({ route, navigation }) => {
         <SocialCard
           color="193, 53, 132"
           name="Instagram"
+          total={
+            instagramGraphData
+              ? instagramGraphData[instagramGraphData.length - 1].value
+              : "???"
+          }
           image={require("../../assets/instagram.png")}
           chartStyle={chartStyle}
           data={instagramGraphData}
+          error={instagramGraphData === null}
         >
           <InstagramFeed
             data={instagramData ? instagramData : null}
@@ -168,16 +164,16 @@ export default ({ route, navigation }) => {
           color="255, 0, 0"
           name="Youtube"
           image={require("../../assets/youtube.png")}
-          chartStyle={styles.youtubeChart}
+          chartStyle={chartStyle}
           data={youtubeGraphData}
-        />
-
-        {/* <SocialCard
-          color="rgba(255, 86, 0)"
-          name="Reddit"
-          image={require("../../assets/reddit.png")}
-          chartStyle={styles.twitterChart}
-        /> */}
+          error={youtubeGraphData === null}
+        >
+          <YoutubeFeed
+            coinName={route.params.coinName}
+            data={youtubeData ? youtubeData : null}
+            error={youtubeError}
+          />
+        </SocialCard>
 
         <SafeAreaView />
       </ScrollView>

@@ -4,12 +4,14 @@ import { useContext } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { colors } from "../../styles/colors";
 import { errorMessage } from "../../config/text";
-import Tweet from "./Tweet";
+import YoutubeVideo from "./YoutubeVideo";
 
-
-// not being used anywhere a the moment 
-export default function SocialFeed({ data, error }) {
+export default function YoutubeFeed({ data, error, coinName }) {
   const { theme } = useContext(ThemeContext);
+
+  const filteredData = data?.filter((item) =>
+    item.title.toLowerCase().includes(coinName?.toLowerCase())
+  );
   return (
     <View
       style={[
@@ -20,22 +22,16 @@ export default function SocialFeed({ data, error }) {
         },
       ]}
     >
-      {tweets ? (
+      {filteredData ? (
         <ScrollView>
-          {tweets.data.map((i, index) => {
-            return (
-              <Tweet
-                key={index}
-                item={i}
-                authorInfo={tweets.includes.users[index]}
-              />
-            );
+          {filteredData.map((i, index) => {
+            return <YoutubeVideo key={index} item={i} />;
           })}
         </ScrollView>
       ) : error ? (
         <ThemeText>{errorMessage}</ThemeText>
       ) : (
-        <ActivityIndicator color="#1DA1F2" />
+        <ActivityIndicator color="#FF0000" />
       )}
     </View>
   );

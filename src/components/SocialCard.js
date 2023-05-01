@@ -45,7 +45,7 @@ export default function SocialCard({
       <ThemeText style={{ marginTop: 6, marginBottom: 17, fontSize: 12 }}>
         {" "}
         Total:{" "}
-        <ThemeText style={{ fontWeight: "500", color: "grey", fontSize: 13 }}>
+        <ThemeText style={{ fontWeight: "500", fontSize: 13 }}>
           {numberWithCommas(total)}
         </ThemeText>
       </ThemeText>
