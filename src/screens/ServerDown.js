@@ -17,7 +17,7 @@ function ServerDown() {
       <View style={styles.container}>
         <Feather
           name="server"
-          size="60"
+          style={{fontSize:60}}
           color={theme.mode === "light" ? colors.dark.base : colors.light.base}
         />
         <View style={styles.spacer} />

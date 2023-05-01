@@ -28,7 +28,11 @@ export default function YoutubeVideo({ item }) {
             ]}
             onPress={() => Linking.openURL(item.url)}
           >
-            <Feather name="play-circle" size="25" color={"#FF0000"} />
+            <Feather
+              name="play-circle"
+              style={{ fontSize: 25 }}
+              color={"#FF0000"}
+            />
           </TouchableOpacity>
 
           <View style={styles.spacer} />
@@ -46,7 +50,7 @@ export default function YoutubeVideo({ item }) {
           <View style={styles.row}>
             <Feather
               name="calendar"
-              size="18"
+              style={{ fontSize: 18 }}
               color={theme.mode === "light" ? "#000" : "#FFF"}
             />
             <ThemeText style={{ color: "#777a7d" }}>
@@ -58,7 +62,7 @@ export default function YoutubeVideo({ item }) {
           <View style={styles.row}>
             <Feather
               name="eye"
-              size="18"
+              style={{ fontSize: 18 }}
               color={theme.mode === "light" ? "#000" : "#FFF"}
             />
             <ThemeText style={{ color: "#777a7d" }}>
@@ -76,7 +80,7 @@ export default function YoutubeVideo({ item }) {
           <View style={styles.spacer} />
           <Feather
             name="external-link"
-            size="18"
+            style={{ fontSize: 18 }}
             color={"#FF0000"}
             onPress={() => Linking.openURL(item.channel_link)}
           />

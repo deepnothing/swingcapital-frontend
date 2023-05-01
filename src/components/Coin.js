@@ -86,7 +86,7 @@ export default function Coin({ coinData, favCoins, addOrRemoveFavCoin }) {
                   ? "star"
                   : "star-outline"
               }
-              size="16"
+              style={{ fontSize: 16 }}
               color={
                 favCoins && favCoins.includes(coinData.name)
                   ? colors.swing
@@ -110,7 +110,7 @@ export default function Coin({ coinData, favCoins, addOrRemoveFavCoin }) {
         <View style={styles.flexRow}>
           <Feather
             name="clock"
-            size="18"
+            style={{ fontSize: 18 }}
             color={theme.mode === "light" ? "#686d72" : colors.light.base}
           />
           <ThemeText

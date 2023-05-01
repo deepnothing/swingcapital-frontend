@@ -17,7 +17,7 @@ function NoInternet() {
       <View style={styles.container}>
         <Feather
           name="wifi-off"
-          size="60"
+          style={{fontSize:60}}
           color={theme.mode === "light" ? colors.dark.base : colors.light.base}
         />
         <View style={styles.spacer} />
