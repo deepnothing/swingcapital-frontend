@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  Dimensions,
   ActivityIndicator,
   Image,
   FlatList,
@@ -18,8 +17,6 @@ import ScreenContainer from "../components/ScreenContainer";
 import ThemeText from "../components/ThemeText";
 import Card from "../components/Card";
 
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
 function BotScreen({ route }) {
   const [isRegistered, setRegistered] = useState();
   const [isRegistering, setIsRegistering] = useState(false);

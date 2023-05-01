@@ -1,19 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  Text,
-  Pressable,
   View,
-  SafeAreaView,
   StyleSheet,
   FlatList,
   Modal,
-  Image,
   RefreshControl,
 } from "react-native";
-import SearchBar from "../components/SearchBar";
 import Article from "../components/Article";
 import IFrame from "../components/IFrame";
-import SwingCapital from "../components/SwingCapital";
 import { baseUrl } from "../config/api";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Header from "../components/Header";
@@ -46,10 +40,6 @@ function News() {
 
   const [iFrameURL, setIframeUrl] = useState("");
   const [isIframeVisible, setIframeVisible] = useState(false);
-
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const onChangeSearch = (query) => setSearchQuery(query);
 
   useEffect(() => {
     fetch(`${baseUrl}/news`)

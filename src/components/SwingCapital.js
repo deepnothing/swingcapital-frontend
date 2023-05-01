@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View, Animated, Easing } from "react-native";
 
+//animated text not in use at the moment
 const SwingCapitalText = ({ text, leftAnchorLength, rigthAnchorLength }) => {
   const swingValue = React.useRef(new Animated.Value(-1)).current;
   const animationDuration = 850;

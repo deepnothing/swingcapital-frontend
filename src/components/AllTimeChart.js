@@ -1,12 +1,6 @@
-import { useEffect, useState } from "react";
-import { View, Text } from "react-native";
-import {
-  LineChart,
-  AreaChart,
-  Defs,
-  LinearGradient,
-  Stop,
-} from "react-native-svg-charts";
+import { useState } from "react";
+import { View } from "react-native";
+import { LineChart, AreaChart } from "react-native-svg-charts";
 import ThemeText from "./ThemeText";
 
 export default function AllTimeChart({ data }) {
@@ -20,7 +14,6 @@ export default function AllTimeChart({ data }) {
     }
     return tempArr;
   });
-  const fill = `rgb(${data.color},0.25)`;
 
   const chartHeight = 45;
 

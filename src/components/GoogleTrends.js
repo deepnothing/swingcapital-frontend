@@ -1,11 +1,5 @@
-import { useState, useContext, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  ActivityIndicator,
-  Dimensions,
-} from "react-native";
+import { useState, useContext } from "react";
+import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import SocialChart from "./SocialChart/SocialChart";
 import ThemeText from "./ThemeText";
 import { ThemeContext } from "../hooks/ThemeContext";

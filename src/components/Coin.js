@@ -20,12 +20,7 @@ import { abbreviateNumber } from "../utilities/utilities";
 LogBox.ignoreLogs([
   "Non-serializable values were found in the navigation state",
 ]);
-export default function Coin({
-  coinData,
-  userId,
-  favCoins,
-  addOrRemoveFavCoin,
-}) {
+export default function Coin({ coinData, favCoins, addOrRemoveFavCoin }) {
   const { theme } = useContext(ThemeContext);
 
   return (

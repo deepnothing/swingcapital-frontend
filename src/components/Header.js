@@ -1,5 +1,5 @@
-import { useContext, useEffect } from "react";
-import { SafeAreaView, View, Dimensions, StatusBar } from "react-native";
+import { useContext } from "react";
+import { SafeAreaView, Dimensions, StatusBar } from "react-native";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { colors } from "../styles/colors";
 

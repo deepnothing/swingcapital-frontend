@@ -1,34 +1,21 @@
 import { useContext } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  Dimensions,
-  Image,
-} from "react-native";
+import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Feather from "react-native-vector-icons/Feather";
 import ThemeText from "./ThemeText";
 import { ThemeContext } from "../hooks/ThemeContext";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "./Header";
 import { colors } from "../styles/colors";
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function StatsHeader({
-  navigation,
-  route,
-  selectedMetric,
-  setSelectedMetric,
-  setTabBarShowing,
-}) {
+export default function StatsHeader({ navigation, route, setTabBarShowing }) {
   const { theme } = useContext(ThemeContext);
   return (
     <Header
       style={{
-        backgroundColor: theme.mode === "light" ? colors.light.base : colors.dark.base,
+        backgroundColor:
+          theme.mode === "light" ? colors.light.base : colors.dark.base,
         shadowOpacity: 0,
       }}
       justifyContent="space-around"
@@ -45,18 +32,13 @@ export default function StatsHeader({
           color={theme.mode === "dark" ? colors.light.base : colors.dark.base}
           size={"20"}
         />
-        <Text style={{ fontSize: 15, fontWeight: "600", color: colors.swing }}>
-          &nbsp;Back
-        </Text>
+        <Text style={style.backText}>&nbsp;Back</Text>
       </TouchableOpacity>
       <View style={{ display: "flex", flexDirection: "row" }}>
         <ThemeText style={{ fontSize: 16, fontWeight: "600" }}>
           {route.params.coinName}{" "}
         </ThemeText>
-        <Image
-          source={{ uri: route.params.coinLogo }}
-          style={{ height: 20, width: 20, position: "absolute", right: -20 }}
-        />
+        <Image source={{ uri: route.params.coinLogo }} style={style.coinLogo} />
       </View>
 
       <View style={style.titleContainer} />
@@ -85,6 +67,11 @@ const style = StyleSheet.create({
     alignItems: "center",
     width: windowWidth / 3,
   },
+  backText: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: colors.swing,
+  },
   titleContainer: {
     width: windowWidth / 3,
     display: "flex",
@@ -93,5 +80,11 @@ const style = StyleSheet.create({
   },
   titleInfo: {
     width: "85%",
+  },
+  coinLogo: {
+    height: 20,
+    width: 20,
+    position: "absolute",
+    right: -20,
   },
 });

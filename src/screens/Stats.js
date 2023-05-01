@@ -10,7 +10,7 @@ import ScreenContainer from "../components/ScreenContainer";
 import TwitterFeed from "../components//Twitter/TwitterFeed";
 import { colors } from "../styles/colors";
 import InstagramFeed from "../components/Instagram/InstagramFeed";
-import { ref, onValue, update } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import { db } from "../config/firebase";
 import { formatTweetCount, formatGoogleValues } from "../utilities/utilities";
 import YoutubeFeed from "../components/Youtube/YoutubeFeed";

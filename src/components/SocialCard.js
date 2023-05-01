@@ -1,6 +1,4 @@
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
-import { LineChart } from "react-native-chart-kit";
-import SocialGraph from "./SocialGraph";
+import { View, Image, StyleSheet } from "react-native";
 import { useContext } from "react";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { colors } from "../styles/colors";

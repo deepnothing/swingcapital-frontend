@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "./CoinList";
-// import StatsScreen from './Stats';
 import StatsScreen from "./Stats";
 const Stack = createStackNavigator();
 
