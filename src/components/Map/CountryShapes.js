@@ -20,7 +20,7 @@ export const COUNTRIES = feature(
   "Indonesia",//
   "Argentina",//
   "Chile",//
-  "Congo - Kinshasa",
+  "Congo - Kinshasa",//
   "Somalia",//
   "Kenya",//
   "Sudan",//
@@ -29,11 +29,11 @@ export const COUNTRIES = feature(
   "Dominican Republic",//
   "Russia",//
   "Bahamas",//
-  "Falkland Islands (Islas Malvinas)",
+  "Falkland Islands (Islas Malvinas)",//
   "Norway",//
   "Greenland",//
-  "Fr. S. Antarctic Lands",
-  "Timor-Leste",
+  "Fr. S. Antarctic Lands",//
+  "Timor-Leste",//
   "South Africa",//
   "Lesotho",//
   "Mexico",//
@@ -183,6 +183,6 @@ export const COUNTRIES = feature(
   "Serbia",//
   "Montenegro",//
   "Kosovo",//
-  "Trinidad & Tobago",
-  "South Sudan",
+  "Trinidad & Tobago",//
+  "South Sudan",//
 ];
