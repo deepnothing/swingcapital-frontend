@@ -2,7 +2,9 @@ import { Dimensions } from "react-native";
 
 export const numberWithCommas = (x) => {
   if (x > 1) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    let [whole, decimal] = x.toString().split(".");
+    whole = whole.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return decimal ? `${whole}.${decimal}` : whole;
   } else {
     if (typeof x === "number") {
       return x?.toFixed(4);

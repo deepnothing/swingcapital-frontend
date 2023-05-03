@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -19,11 +19,25 @@ import ThemeText from "../components/ThemeText";
 import Card from "../components/Card";
 import PercentBar from "../components/PercentBar";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { numberWithCommas } from "../utilities/utilities";
+import { ThemeContext } from "../hooks/ThemeContext";
 
 function BotScreen({ route }) {
+  const { theme } = useContext(ThemeContext);
   const [isRegistered, setRegistered] = useState();
   const [isRegistering, setIsRegistering] = useState(false);
+  const [trades, setTrades] = useState([]);
   useEffect(() => {
+    console.log("focused:Bot.js");
+    // get bot trades
+    const trades = ref(db, `bots/demobot/trades`);
+
+    onValue(trades, (snapshot) => {
+      const data = snapshot.val();
+      setTrades(data);
+    });
+
+    // check if user is registered for bot
     if (route.params.user) {
       const userRegistered = ref(db, `users/${route.params.user.uid}`);
       onValue(userRegistered, (snapshot) => {
@@ -55,82 +69,123 @@ function BotScreen({ route }) {
     }
   };
 
-  const data = [
-    {
-      entryPrice: 27001,
-      exitPrice: 27004,
-      stopLoss: 27003,
-      takeProfit: 27004,
-      accountBalanceBefore: 95.01,
-      accountbalanceAfter: 95.03,
-      fees: 0.001,
-      startDate: "April 5 2021",
-      endDate: "April 5 2021",
-    },
-    {
-      entryPrice: 27001,
-      exitPrice: 27000,
-      stopLoss: 27003,
-      takeProfit: 27004,
-      accountBalanceBefore: 95.01,
-      accountbalanceAfter: 95.03,
-      fees: 0.001,
-      startDate: "April 6 2021",
-      endDate: "April 5 2021",
-    },
-  ];
+  const Label = ({ type }) => {
+    return (
+      <View
+        style={[
+          style.label,
+          { backgroundColor: type > 0 ? "#CAF1DA" : "#FCD4D6" },
+        ]}
+      >
+        <Text
+          style={[style.labelText, { color: type > 0 ? "#00BA51" : "#e84a4f" }]}
+        >
+          {type > 0 ? "WIN" : "LOSS"}
+        </Text>
+      </View>
+    );
+  };
 
   const TradeCard = ({ item }) => {
+    const textColor = theme.mode === "light" ? "#88959c" : "#c0c7ca";
     const color =
-      item.exitPrice - item.entryPrice - item.fees > 0 ? "green" : "red";
+      item.accountbalanceAfter - item.accountBalanceBefore > 0
+        ? "#00BA51"
+        : "#e84a4f";
     return (
-      <Card style={{ height: 150 }}>
+      <Card style={{ height: 180 }}>
         <View style={style.column}>
-          <ThemeText style={style.tradeText}>
-            Position Type: <Text style={{ color: "#A4AEB3" }}>LONG</Text>
-          </ThemeText>
           <View style={style.row}>
             <ThemeText style={style.tradeText}>
-              Entry Price:{" "}
-              <Text style={{ color: "#A4AEB3" }}> ${item.entryPrice} </Text>
+              Position Type:{" "}
+              <Text
+                style={{ color: "#8ca88e", fontSize: 16, fontWeight: "600" }}
+              >
+                Long
+              </Text>
             </ThemeText>
-            <Text style={{ color: "#A4AEB3" }}>{item.startDate}</Text>
+            <Feather
+              name="arrow-up-right"
+              color={"#8ca88e"}
+              style={{ marginLeft: 3, fontSize: 18 }}
+            />
           </View>
           <View style={style.row}>
             <ThemeText style={style.tradeText}>
-              Exit Price:{" "}
-              <Text style={{ color: "#A4AEB3" }}>${item.entryPrice} </Text>
+              Entry:{" "}
+              <Text style={{ color: textColor }}>
+                {" "}
+                ${numberWithCommas(item.entryPrice.toFixed(0))}
+                {"  -  "}
+              </Text>
             </ThemeText>
-            <Text style={{ color: "#A4AEB3" }}>{item.startDate}</Text>
+            <Text style={{ color: textColor }}>
+              <Feather
+                name="calendar"
+                color={textColor}
+                style={{ marginLeft: 3, fontSize: 18 }}
+              />{" "}
+              {item.startDate}
+            </Text>
+          </View>
+          <View style={style.row}>
+            <ThemeText style={style.tradeText}>
+              Exit:{" "}
+              <Text style={{ color: textColor }}>
+                ${numberWithCommas(item.exitPrice.toFixed(0))}
+                {"  -  "}
+              </Text>
+            </ThemeText>
+            <Text style={{ color: textColor }}>
+              <Feather
+                name="calendar"
+                color={textColor}
+                style={{ marginLeft: 3, fontSize: 18 }}
+              />{" "}
+              {item.endDate}
+            </Text>
           </View>
           <ThemeText style={style.tradeText}>
-            Stop loss: <Text style={{ color: "#A4AEB3" }}>$27,001</Text>
+            Stop Loss:{" "}
+            <Text style={{ color: textColor }}>
+              ${numberWithCommas(item.stopLoss.toFixed(0))}
+            </Text>
           </ThemeText>
           <ThemeText style={style.tradeText}>
-            Take Profit:<Text style={{ color: "#A4AEB3" }}>$27,001</Text>
+            Take Profit:{" "}
+            <Text style={{ color: textColor }}>
+              ${numberWithCommas(item.takeProfit.toFixed(0))}
+            </Text>
           </ThemeText>
-        </View>
-        <View style={style.seperator} />
-        <View style={style.column}>
-          <ThemeText style={{ color: color }}>
-            {item.exitPrice - item.entryPrice - item.fees > 0 ? "WIN" : "LOSS"}
-          </ThemeText>
-          <ThemeText>Fee:{item.fees}</ThemeText>
-          <ThemeText>
+
+          <ThemeText style={[style.tradeText, { fontSize: 18 }]}>
             P/L:{" "}
-            <ThemeText style={{ color: color }}>
-              {item.exitPrice - item.entryPrice - item.fees}
+            <ThemeText style={{ color: color, fontSize: 15 }}>
+              ${item.accountbalanceAfter - item.accountBalanceBefore}
             </ThemeText>{" "}
           </ThemeText>
         </View>
+
+        <Label type={item.accountbalanceAfter - item.accountBalanceBefore} />
       </Card>
     );
   };
 
+  const wins = trades?.filter(
+    (item) => item.accountbalanceAfter > item.accountBalanceBefore
+  ).length;
+  const losses = trades?.filter(
+    (item) => item.accountbalanceAfter < item.accountBalanceBefore
+  ).length;
+
   return (
     <ScreenContainer>
       <Header justifyContent="space-evenly">
-        <PercentBar negativePercent={20} positivePercent={80} width="45%" />
+        <PercentBar
+          negativePercent={(losses / trades.length) * 100}
+          positivePercent={(wins / trades.length) * 100}
+          width="45%"
+        />
         <View style={style.headerDemo}>
           <TouchableOpacity
             onPress={() =>
@@ -147,7 +202,7 @@ function BotScreen({ route }) {
       </Header>
       <View style={{ height: "87%" }}>
         <FlatList
-          data={data}
+          data={trades}
           renderItem={({ item }) => <TradeCard item={item} />}
           contentContainerStyle={style.tradeList}
           ListFooterComponent={<View style={{ height: 50 }} />}
@@ -233,6 +288,18 @@ const style = StyleSheet.create({
     padding: 15,
     paddingTop: 20,
     height: "100%",
+  },
+  label: {
+    position: "absolute",
+    top: 8,
+    right: 8,
+    borderRadius: 4,
+    paddingHorizontal: 7,
+    paddingVertical: 3,
+  },
+  labelText: {
+    fontSize: 15,
+    fontWeight: "600",
   },
 });
 

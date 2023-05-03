@@ -8,11 +8,13 @@ function Bar(props) {
         { backgroundColor: props.color, width: `${props.percent}%` },
       ]}
     >
-      <ThemeText
-        style={[styles.percentText, props.left ? { left: 0 } : { right: 0 }]}
-      >
-        {Math.round(props.percent)}%
-      </ThemeText>
+      {Math.round(props.percent) > 0 ? (
+        <ThemeText
+          style={[styles.percentText, props.left ? { left: 0 } : { right: 0 }]}
+        >
+          {Math.round(props.percent)}%
+        </ThemeText>
+      ) : null}
     </View>
   );
 }
