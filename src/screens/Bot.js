@@ -87,8 +87,6 @@ function BotScreen({ route }) {
   };
 
   const TradeCard = ({ item }) => {
-    console.log(item.endDate)
-
     const textColor = theme.mode === "light" ? "#88959c" : "#c0c7ca";
     const color =
       item.accountbalanceAfter - item.accountBalanceBefore > 0
