@@ -13,7 +13,7 @@ export default function Header(props) {
         {
           backgroundColor:
             theme.mode === "light" ? colors.swing : colors.dark.base,
-          shadowColor: "rgba(0, 0, 0, 0.45)",
+          shadowColor: `rgba(0, 0, 0, ${Platform.OS === "ios" ? "0.45" : "1"})`,
           shadowOffset: { width: 0, height: 5 },
           shadowOpacity: 1,
           shadowRadius: 5,

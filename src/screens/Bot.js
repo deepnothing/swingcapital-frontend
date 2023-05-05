@@ -8,7 +8,10 @@ import {
   FlatList,
   Alert,
   Linking,
+  Platform,
+  Dimensions,
 } from "react-native";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import Feather from "react-native-vector-icons/Feather";
 import Header from "../components/Header";
 import BigButton from "../components/BigButton";
@@ -27,6 +30,8 @@ function BotScreen({ route }) {
   const [isRegistered, setRegistered] = useState();
   const [isRegistering, setIsRegistering] = useState(false);
   const [trades, setTrades] = useState([]);
+  const tabBarHeight = useBottomTabBarHeight();
+
   useEffect(() => {
     console.log("focused:Bot.js");
     // get bot trades
@@ -200,38 +205,46 @@ function BotScreen({ route }) {
           <ThemeText style={style.botHeaderText}>BTC - USD</ThemeText>
         </View>
       </Header>
-      <View style={{ height: "87%" }}>
+      <View style={{ height: "100%" }}>
         <FlatList
-          data={trades}
+          data={[...trades, ...trades]}
           renderItem={({ item }) => <TradeCard item={item} />}
           contentContainerStyle={style.tradeList}
           ListFooterComponent={<View style={{ height: 50 }} />}
         />
-        <BigButton
-          disabled={isRegistered || isRegistered === undefined}
-          onPress={registerForBot}
+        <View
+          style={{
+            position: "absolute",
+            width: "100%",
+            bottom: tabBarHeight + (Platform.OS === "ios" ? 15 : 5),
+          }}
         >
-          <View style={style.activityWrapper}>
-            <Text style={style.registerText}>
-              {isRegistered === undefined
-                ? "Loading"
-                : isRegistered
-                ? "Registered"
-                : "Register"}
-            </Text>
-            {isRegistering ||
-              (isRegistered === undefined && (
-                <ActivityIndicator color={"#FFF"} style={style.indicator} />
-              ))}
-            {isRegistered && (
-              <Feather
-                name={"check-square"}
-                color={"#FFF"}
-                style={style.indicator}
-              />
-            )}
-          </View>
-        </BigButton>
+          <BigButton
+            disabled={isRegistered || isRegistered === undefined}
+            onPress={registerForBot}
+          >
+            <View style={style.activityWrapper}>
+              <Text style={style.registerText}>
+                {isRegistered === undefined
+                  ? "Loading"
+                  : isRegistered
+                  ? "Registered"
+                  : "Register"}
+              </Text>
+              {isRegistering ||
+                (isRegistered === undefined && (
+                  <ActivityIndicator color={"#FFF"} style={style.indicator} />
+                ))}
+              {isRegistered && (
+                <Feather
+                  name={"check-square"}
+                  color={"#FFF"}
+                  style={style.indicator}
+                />
+              )}
+            </View>
+          </BigButton>
+        </View>
       </View>
     </ScreenContainer>
   );
