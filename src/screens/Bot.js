@@ -19,7 +19,7 @@ import ThemeText from "../components/ThemeText";
 import Card from "../components/Card";
 import PercentBar from "../components/PercentBar";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { numberWithCommas } from "../utilities/utilities";
+import { numberWithCommas, formatDateString } from "../utilities/utilities";
 import { ThemeContext } from "../hooks/ThemeContext";
 
 function BotScreen({ route }) {
@@ -87,6 +87,8 @@ function BotScreen({ route }) {
   };
 
   const TradeCard = ({ item }) => {
+    console.log(item.endDate)
+
     const textColor = theme.mode === "light" ? "#88959c" : "#c0c7ca";
     const color =
       item.accountbalanceAfter - item.accountBalanceBefore > 0
@@ -125,7 +127,7 @@ function BotScreen({ route }) {
                 color={textColor}
                 style={{ marginLeft: 3, fontSize: 18 }}
               />{" "}
-              {item.startDate}
+              {formatDateString(item.startDate)}
             </Text>
           </View>
           <View style={style.row}>
@@ -142,7 +144,7 @@ function BotScreen({ route }) {
                 color={textColor}
                 style={{ marginLeft: 3, fontSize: 18 }}
               />{" "}
-              {item.endDate}
+              {formatDateString(item.endDate)}
             </Text>
           </View>
           <ThemeText style={style.tradeText}>
