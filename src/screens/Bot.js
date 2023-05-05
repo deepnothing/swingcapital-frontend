@@ -4,12 +4,12 @@ import {
   View,
   StyleSheet,
   ActivityIndicator,
+  TouchableOpacity,
   Image,
   FlatList,
   Alert,
   Linking,
   Platform,
-  Dimensions,
 } from "react-native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import Feather from "react-native-vector-icons/Feather";
@@ -21,9 +21,9 @@ import ScreenContainer from "../components/ScreenContainer";
 import ThemeText from "../components/ThemeText";
 import Card from "../components/Card";
 import PercentBar from "../components/PercentBar";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { numberWithCommas, formatDateString } from "../utilities/utilities";
 import { ThemeContext } from "../hooks/ThemeContext";
+import { ScrollView } from "react-native-gesture-handler";
 
 function BotScreen({ route }) {
   const { theme } = useContext(ThemeContext);
@@ -207,16 +207,15 @@ function BotScreen({ route }) {
       </Header>
       <View style={{ height: "100%" }}>
         <FlatList
-          data={[...trades, ...trades]}
+          data={trades}
           renderItem={({ item }) => <TradeCard item={item} />}
           contentContainerStyle={style.tradeList}
-          ListFooterComponent={<View style={{ height: 50 }} />}
         />
         <View
           style={{
             position: "absolute",
             width: "100%",
-            bottom: tabBarHeight + (Platform.OS === "ios" ? 15 : 5),
+            bottom: tabBarHeight + (Platform.OS === "ios" ? 25 : 5),
           }}
         >
           <BigButton
@@ -300,7 +299,7 @@ const style = StyleSheet.create({
   tradeList: {
     padding: 15,
     paddingTop: 20,
-    height: "100%",
+    paddingBottom: 200,
   },
   label: {
     position: "absolute",
