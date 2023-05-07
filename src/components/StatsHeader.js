@@ -6,8 +6,8 @@ import {
   Dimensions,
   Image,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import Feather from "react-native-vector-icons/Feather";
 import ThemeText from "./ThemeText";
 import { ThemeContext } from "../hooks/ThemeContext";

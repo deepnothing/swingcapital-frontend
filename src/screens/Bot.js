@@ -23,7 +23,6 @@ import Card from "../components/Card";
 import PercentBar from "../components/PercentBar";
 import { numberWithCommas, formatDateString } from "../utilities/utilities";
 import { ThemeContext } from "../hooks/ThemeContext";
-import { ScrollView } from "react-native-gesture-handler";
 
 function BotScreen({ route }) {
   const { theme } = useContext(ThemeContext);
