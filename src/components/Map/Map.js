@@ -16,13 +16,17 @@ import { ThemeContext } from "../../hooks/ThemeContext";
 import ThemeText from "../ThemeText";
 import { colors } from "../../styles/colors";
 import { errorMessage } from "../../config/text";
+import { publicWebsiteUrl } from "../../config/api";
+
 const dimensions = Dimensions.get("window");
 
 const Map = (props) => {
   const { theme } = useContext(ThemeContext);
   const { routeColor, data } = props;
   const [countryList, setCountryList] = useState([]);
-  const [clickedCountry, setClickedCountry] = useState();
+  const [clickedCountry, setClickedCountry] = useState(null);
+  const [clickedCountryImage, setClickedCountryImage] = useState(null);
+
   const countryPaths = () => {
     const projection = geoCylindricalStereographic()
       .translate([1335, 896])
@@ -110,8 +114,13 @@ const Map = (props) => {
           >
             <Image
               style={styles.flagBubble}
-              source={require(`./flags/fiji.png`)}
+              source={{
+                uri: `${publicWebsiteUrl}/flags/${clickedCountry
+                  ?.toLowerCase()
+                  .replace(/\s/g, "")}.png`,
+              }}
             />
+
             <ThemeText style={{ fontSize: 14, fontWeight: "400" }}>
               {" "}
               {clickedCountry}{" "}

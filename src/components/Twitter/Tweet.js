@@ -18,12 +18,12 @@ export default function Tweet({ item, authorInfo }) {
         <View style={styles.row}>
           <Image
             style={styles.pic}
-            source={{ uri: authorInfo.profile_image_url }}
+            source={{ uri: authorInfo?.profile_image_url }}
           />
           <View style={[styles.column, { marginLeft: 10 }]}>
-            <ThemeText style={styles.name}>{authorInfo.name}</ThemeText>
+            <ThemeText style={styles.name}>{authorInfo?.name}</ThemeText>
             <ThemeText style={styles.username}>
-              @{authorInfo.username}
+              @{authorInfo?.username}
             </ThemeText>
           </View>
         </View>
