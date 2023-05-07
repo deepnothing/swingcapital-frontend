@@ -17,7 +17,6 @@ import YoutubeFeed from "../components/Youtube/YoutubeFeed";
 
 export default ({ route, navigation }) => {
   const { theme } = useContext(ThemeContext);
-  const [isScrollEnabled, setScrollEnabled] = useState(true);
   const [selectedMetric, setSelectedMetric] = useState("social");
   const [googleData, setGoogleData] = useState();
   const [googleError, setGoogleError] = useState();
@@ -109,11 +108,10 @@ export default ({ route, navigation }) => {
         selectedMetric={selectedMetric}
         setSelectedMetric={setSelectedMetric}
       />
-      <ScrollView style={styles.socialData} scrollEnabled={isScrollEnabled}>
+      <ScrollView style={styles.socialData} scrollEnabled>
         <Map
           routeColor={route.params.coinColor}
           data={googleData ? googleData.map : []}
-          setScrollEnabled={setScrollEnabled}
           error={googleError}
         />
         <GoogleTrends

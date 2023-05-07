@@ -6,9 +6,11 @@ import {
   Text,
   Dimensions,
   Image,
+  Platform,
 } from "react-native";
 import Svg, { G, Path, Circle } from "react-native-svg";
 import * as d3 from "d3";
+import IonIcon from "react-native-vector-icons/Ionicons";
 import { geoCylindricalStereographic } from "d3-geo-projection";
 import SvgPanZoom, { SvgPanZoomElement } from "react-native-svg-pan-zoom";
 import { COUNTRIES } from "./CountryShapes";
@@ -59,6 +61,8 @@ const Map = (props) => {
             key={COUNTRIES[i].properties.name}
             onClick={(e) => {
               setClickedCountry(COUNTRIES[i].properties.name);
+
+              console.log(COUNTRIES[i].properties.name);
             }}
             onClickRelease={() => {
               console.log("MapClickRelease!");
@@ -92,13 +96,27 @@ const Map = (props) => {
         ]}
         key="root"
         onTouchStart={(e) => {
-          props.setScrollEnabled(false);
-          if (e.target._children.length > 0) {
+          if (e.target._children.length > 0 && Platform.OS === "ios") {
             setClickedCountry(null);
           }
         }}
-        onTouchEnd={() => props.setScrollEnabled(true)}
+        onTouchEnd={() => {
+          console.log("touchend");
+        }}
       >
+        <View style={styles.instructions}>
+          <IonIcon
+            name={"finger-print-outline"}
+            style={{ marginRight: 3, fontSize: 16 }}
+            color={theme.mode === "light" ? "#686d72" : colors.light.base}
+          />
+          <ThemeText style={styles.instructionText}>Press and Hold</ThemeText>
+        </View>
+        <IonIcon
+          name={"expand-outline"}
+          style={styles.pinchIcon}
+          color={theme.mode === "light" ? "#686d72" : colors.light.base}
+        />
         {clickedCountry ? (
           <View
             style={[
@@ -197,5 +215,26 @@ const styles = StyleSheet.create({
     width: 25,
     margin: 4,
     borderRadius: 200,
+  },
+  instructions: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    marginVertical: 5,
+    marginHorizontal: 7,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  instructionText: {
+    fontSize: 12,
+  },
+  pinchIcon: {
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    fontSize: 16,
+    marginVertical: 5,
+    marginHorizontal: 7,
   },
 });
