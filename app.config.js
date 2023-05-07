@@ -21,6 +21,7 @@ export default {
     ios: {
       supportsTablet: true,
       buildNumber: "1",
+      bundleIdentifier:"com.deepnothing.swingcapital"
     },
     android: {
       adaptiveIcon: {
