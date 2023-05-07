@@ -25,7 +25,6 @@ const Map = (props) => {
   const { routeColor, data } = props;
   const [countryList, setCountryList] = useState([]);
   const [clickedCountry, setClickedCountry] = useState(null);
-  const [clickedCountryImage, setClickedCountryImage] = useState(null);
 
   const countryPaths = () => {
     const projection = geoCylindricalStereographic()

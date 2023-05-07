@@ -23,7 +23,7 @@ export default function YoutubeFeed({ data, error, coinName }) {
       ]}
     >
       {filteredData ? (
-        <ScrollView>
+        <ScrollView nestedScrollEnabled>
           {filteredData.map((i, index) => {
             return <YoutubeVideo key={index} item={i} />;
           })}

@@ -19,7 +19,7 @@ export default function TwitterFeed({ data, error }) {
       ]}
     >
       {data ? (
-        <ScrollView>
+        <ScrollView nestedScrollEnabled>
           {data.data.map((i, index) => {
             return (
               <Tweet

@@ -1,5 +1,12 @@
 import { useContext } from "react";
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  StatusBar,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Feather from "react-native-vector-icons/Feather";
 import ThemeText from "./ThemeText";
@@ -20,6 +27,12 @@ export default function StatsHeader({ navigation, route, setTabBarShowing }) {
       }}
       justifyContent="space-around"
     >
+      <StatusBar
+        backgroundColor={
+          theme.mode == "light" ? colors.light.base : colors.dark.base
+        }
+        barStyle={theme.mode == "light" ? "dark-content" : "light-content"}
+      />
       <TouchableOpacity
         onPress={() => {
           setTabBarShowing(true);

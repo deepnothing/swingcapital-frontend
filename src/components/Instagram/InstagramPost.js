@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
     maxWidth: Dimensions.get("window").width / 1.2,
   },
   image: {
-    height: 150,
-    width: 150,
+    height: Dimensions.get("window").width / 3,
+    width: Dimensions.get("window").width / 3,
     borderRadius: 8,
     margin: 5,
   },

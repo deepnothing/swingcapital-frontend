@@ -5,11 +5,11 @@ import {
   FlatList,
   Modal,
   RefreshControl,
+  TouchableOpacity,
 } from "react-native";
 import Article from "../components/Article";
 import IFrame from "../components/IFrame";
 import { baseUrl } from "../config/api";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import Header from "../components/Header";
 import ScreenContainer from "../components/ScreenContainer";
 import ThemeText from "../components/ThemeText";
