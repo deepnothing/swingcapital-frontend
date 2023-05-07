@@ -1,2 +1,2 @@
-export const baseUrl = "https://king-prawn-app-okbit.ondigitalocean.app";
+export const baseUrl = "https://seal-app-3dq6z.ondigitalocean.app";
 export const publicWebsiteUrl = "https://swingcapital.app"

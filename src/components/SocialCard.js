@@ -34,7 +34,7 @@ export default function SocialCard({
       <View
         style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
       >
-        <Image style={{ width: 30, height: 30 }} source={image} />
+        {image}
         <ThemeText style={{ fontWeight: "700", fontSize: 15, marginLeft: 5 }}>
           {" "}
           {name}

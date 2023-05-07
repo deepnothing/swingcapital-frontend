@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { StyleSheet, SafeAreaView, ScrollView, Dimensions } from "react-native";
+import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
 import { baseUrl } from "../config/api";
 import StatsHeader from "../components/StatsHeader";
 import GoogleTrends from "../components/GoogleTrends";
+import IonIcon from "react-native-vector-icons/Ionicons";
 import Map from "../components/Map/Map";
 import SocialCard from "../components/SocialCard";
 import { ThemeContext } from "../hooks/ThemeContext";
@@ -125,7 +126,21 @@ export default ({ route, navigation }) => {
           color="29,161,242"
           name="Twitter"
           total={twitterData?.tweet_counts.meta.total_tweet_count}
-          image={require("../../assets/twitter.png")}
+          image={
+            <View
+              style={{
+                backgroundColor: "rgb(29,161,242)",
+                borderRadius: 100,
+                padding: 7,
+              }}
+            >
+              <IonIcon
+                name={"logo-twitter"}
+                color={"#FFF"}
+                style={{ fontSize: 20 }}
+              />
+            </View>
+          }
           error={twitterError}
           chartStyle={chartStyle}
           data={twitterData ? formatTweetCount(twitterData) : null}
@@ -144,7 +159,13 @@ export default ({ route, navigation }) => {
               ? instagramGraphData[instagramGraphData.length - 1].value
               : "???"
           }
-          image={require("../../assets/instagram.png")}
+          image={
+            <IonIcon
+              name={"logo-instagram"}
+              color={"rgb(193, 53, 132)"}
+              style={{ fontSize: 35 }}
+            />
+          }
           chartStyle={chartStyle}
           data={instagramGraphData}
           error={instagramGraphData === null}
@@ -157,7 +178,13 @@ export default ({ route, navigation }) => {
         <SocialCard
           color="255, 0, 0"
           name="Youtube"
-          image={require("../../assets/youtube.png")}
+          image={
+            <IonIcon
+              name={"logo-youtube"}
+              color={"rgb(255, 0, 0)"}
+              style={{ fontSize: 30 }}
+            />
+          }
           total={
             youtubeGraphData
               ? youtubeGraphData[youtubeGraphData.length - 1].value

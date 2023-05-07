@@ -18,6 +18,7 @@ import { ref, remove } from "firebase/database";
 import { db } from "../config/firebase";
 import ScreenContainer from "../components/ScreenContainer";
 import ThemeText from "../components/ThemeText";
+import SVGLogo from "../components/SVGLogo";
 import { colors } from "../styles/colors";
 
 const auth = getAuth();
@@ -83,14 +84,7 @@ function Settings({ route }) {
   return (
     <ScreenContainer>
       <Header justifyContent="center">
-        <Image
-          style={{
-            tintColor: theme.mode === "light" ? "#1b1b1b" : colors.swing,
-            width: 30,
-            aspectRatio: 1 / 1,
-          }}
-          source={require("../../assets/logo-500.png")}
-        />
+        <SVGLogo color={theme.mode === "light" ? "#1b1b1b" : colors.swing} />
       </Header>
       <View style={styles.options}>
         <View style={styles.row}>
