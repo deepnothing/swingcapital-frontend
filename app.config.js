@@ -2,8 +2,8 @@ import "dotenv/config";
 
 export default {
   expo: {
-    name: "swingcapital",
-    slug: "swingcapital",
+    name: "Swing Capital",
+    slug: "SwingCapital",
     privacy: "public",
     version: "1.0.0",
     orientation: "portrait",
@@ -38,6 +38,9 @@ export default {
       firebaseStorageBucket: process.env.FIREBASE_STORAGE_BUCKET,
       firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
       firebaseAppId: process.env.FIREBASE_APP_ID,
+      eas: {
+        projectId: "147a7083-1f35-4dba-83b1-46ae332bed9a",
+      },
     },
   },
 };
