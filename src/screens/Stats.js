@@ -109,7 +109,7 @@ export default ({ route, navigation }) => {
         selectedMetric={selectedMetric}
         setSelectedMetric={setSelectedMetric}
       />
-      <ScrollView style={styles.socialData} scrollEnabled>
+      <ScrollView style={styles.socialData} scrollEnabled bounces={false}>
         <Map
           routeColor={route.params.coinColor}
           data={googleData ? googleData.map : []}

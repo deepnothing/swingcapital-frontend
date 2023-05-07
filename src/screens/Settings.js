@@ -147,22 +147,11 @@ function Settings({ route }) {
               onPress={() => route.params.setGuestUser(false)}
             >
               <Feather
-                name="log-in"
+                name="unlock"
                 color={theme.mode === "light" ? "#000" : "#FFF"}
                 style={styles.settingsIcon}
               />
-              <ThemeText>Sign In</ThemeText>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.row}
-              onPress={() => route.params.setGuestUser(false)}
-            >
-              <Feather
-                name="user-plus"
-                color={theme.mode === "light" ? "#000" : "#FFF"}
-                style={styles.settingsIcon}
-              />
-              <ThemeText>Sign Up</ThemeText>
+              <ThemeText>Sign In / Sign Up</ThemeText>
             </TouchableOpacity>
           </>
         )}

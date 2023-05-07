@@ -12,7 +12,9 @@ import Svg, { G, Path, Circle } from "react-native-svg";
 import * as d3 from "d3";
 import IonIcon from "react-native-vector-icons/Ionicons";
 import { geoCylindricalStereographic } from "d3-geo-projection";
-import SvgPanZoom, { SvgPanZoomElement } from "react-native-svg-pan-zoom";
+import SvgPanZoom, {
+  SvgPanZoomElement,
+} from "react-native-svg-pan-zoom-native-evt-patch";
 import { COUNTRIES } from "./CountryShapes";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import ThemeText from "../ThemeText";
@@ -72,7 +74,7 @@ const Map = (props) => {
             <Path
               key={COUNTRIES[i].properties.name}
               d={path}
-              stroke={"#000"}
+              stroke={theme.mode === "light" ? "#000" : "#FFF"}
               strokeOpacity={0.3}
               strokeWidth={1}
               fill={`rgb(${routeColor})`}

@@ -7277,10 +7277,10 @@ react-native-svg-charts@^5.4.0:
     d3-shape "^1.0.6"
     prop-types "^15.6.0"
 
-react-native-svg-pan-zoom@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/react-native-svg-pan-zoom/-/react-native-svg-pan-zoom-0.1.2.tgz#d86ff1b25e8dabdd75439d77dc55060bb413d9de"
-  integrity sha512-tut65E3e/+SQJHaSta5KadUFT22gtwYxGQHNZw7SEFN8LhFDnwOWtUelC8gOi4NAVu9TcgKkPCfwVeQ9pqHniw==
+react-native-svg-pan-zoom-native-evt-patch@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/react-native-svg-pan-zoom-native-evt-patch/-/react-native-svg-pan-zoom-native-evt-patch-0.1.3.tgz#d436507baebaf784884d43491646eba55fab673d"
+  integrity sha512-GILq7XmPT8s6u5oiugAu8//JwPK3BbG5D8nWPvzB/YsBNOZahqPHw1Sx++EDOQQrLvjgmTMf1A2h7VNNIXeYEg==
 
 react-native-svg@9.13.3:
   version "9.13.3"

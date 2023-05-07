@@ -6,6 +6,7 @@ import {
   View,
   Alert,
   Platform,
+  TouchableOpacity,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -14,10 +15,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import WebView from "react-native-webview";
 import { html } from "./swingWebView";
 import { colors } from "../../styles/colors";
+import { storeData } from "../../hooks/asyncStorage";
 
 const auth = getAuth();
 
-function SignInScreen({ navigation }) {
+function SignInScreen({ navigation, setGuestUser }) {
   const [value, setValue] = React.useState({
     email: "",
     password: "",
@@ -67,6 +69,22 @@ function SignInScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View />
+      <View style={styles.skip}>
+        <TouchableOpacity
+          style={styles.skipButton}
+          onPress={() => {
+            storeData("guest", true);
+            setGuestUser(true);
+          }}
+        >
+          <Text style={{ fontSize: 19, fontWeight: "600" }}>Skip </Text>
+          <Feather
+            name="arrow-right"
+            color={colors.swing}
+            style={{ fontSize: 28 }}
+          />
+        </TouchableOpacity>
+      </View>
       <View style={styles.mainContent}>
         <View style={{ width: "100%", height: Platform.isPad ? 220 : 70 }}>
           <WebView
@@ -152,5 +170,16 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "space-evenly",
     marginHorizontal: 20,
+  },
+  skip: {
+    position: "absolute",
+    right: 0,
+    margin: 20,
+    top: 50,
+  },
+  skipButton: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });

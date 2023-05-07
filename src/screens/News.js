@@ -26,6 +26,7 @@ function News() {
   const [isIframeVisible, setIframeVisible] = useState(false);
 
   useEffect(() => {
+    console.log("focused: News.js")
     fetch(`${baseUrl}/news`)
       .then((res) => res.json())
       .then((response) => {
