@@ -164,7 +164,11 @@ export default ({ route, navigation }) => {
           color="255, 0, 0"
           name="Youtube"
           image={require("../../assets/youtube.png")}
-          total={youtubeGraphData[youtubeGraphData.length - 1].value}
+          total={
+            youtubeGraphData
+              ? youtubeGraphData[youtubeGraphData.length - 1].value
+              : null
+          }
           chartStyle={chartStyle}
           data={youtubeGraphData}
           error={youtubeGraphData === null}
