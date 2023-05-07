@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Svg, Path } from "react-native-svg";
 import {
   Text,
   View,
@@ -196,10 +197,27 @@ function BotScreen({ route }) {
               Linking.openURL("https://pro.kraken.com/app/trade/btc-usd")
             }
           >
-            <Image
-              style={{ width: 25, height: 25, borderRadius: 6 }}
-              source={require("../../assets/kraken.jpeg")}
-            />
+            {/* bundling images not working on builds so this is a workaround att he moment */}
+            <View
+              style={{
+                backgroundColor: "#FFF",
+                borderRadius: 5,
+                overflow: "hidden",
+              }}
+            >
+              <Svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 400.000000 400.000000"
+              >
+                <Path
+                  d="M0 2000V0h4000v4000H0V2000zm2222 1270c143-24 216-48 353-115 147-71 268-159 378-275 150-157 248-320 312-514 64-197 69-245 70-681 0-433 2-421-69-482-91-81-222-61-287 44-24 38-24 41-29 388-5 318-7 353-24 388-49 100-198 129-282 55-69-61-68-55-74-443-5-377-6-380-62-432-28-26-89-53-120-53-73 0-145 45-178 111-19 36-20 60-20 361 0 197-4 338-11 361-14 50-71 113-116 128-82 27-174-6-224-80l-24-36-5-355c-6-402-4-396-89-455-35-24-52-30-99-30-67 0-110 22-156 78l-31 39-5 351c-6 375-8 387-58 441-79 84-226 71-290-27l-27-40-5-356c-5-351-5-357-28-393-65-105-197-126-288-46-71 63-69 49-69 483 1 437 6 487 71 682 107 323 345 607 644 770 247 134 555 183 842 133z"
+                  transform="matrix(.1 0 0 -.1 0 400)"
+                  fill="#5848d5"
+                />
+              </Svg>
+            </View>
           </TouchableOpacity>
           <ThemeText style={style.botHeaderText}>BTC - USD</ThemeText>
         </View>

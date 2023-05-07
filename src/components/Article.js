@@ -1,8 +1,6 @@
 import Card from "./Card";
 import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
-import bullImage from "../../assets/bull.png";
-import bearImage from "../../assets/bear.png";
 import neutralImage from "../../assets/neutral.png";
 import ThemeText from "./ThemeText";
 import { colors } from "../styles/colors";
@@ -28,12 +26,6 @@ export default function Article({ data, onPress }) {
         : data.sentiment < 0
         ? "#E10600"
         : "#83868B",
-    source:
-      data.sentiment > 0
-        ? bullImage
-        : data.sentiment < 0
-        ? bearImage
-        : neutralImage,
     title:
       data.sentiment > 0
         ? "Bullish"
