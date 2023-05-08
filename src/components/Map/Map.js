@@ -47,13 +47,25 @@ const Map = (props) => {
           // console.log(COUNTRIES[i].properties.name);
         }
         const calculatedOpacity = () =>
-          data.find((item) => item.geoName === COUNTRIES[i].properties.name)?.geoName
-            ? data.find((item) => item.geoName === COUNTRIES[i].properties.name).value[0] / 30 === 0? 1: data.find((item) => item.geoName === COUNTRIES[i].properties.name).value[0] / 30
+          data.find((item) => item.geoName === COUNTRIES[i].properties.name)
+            ?.geoName
+            ? data.find((item) => item.geoName === COUNTRIES[i].properties.name)
+                .value[0] /
+                30 ===
+              0
+              ? 1
+              : data.find(
+                  (item) => item.geoName === COUNTRIES[i].properties.name
+                ).value[0] / 30
             : 0;
 
         const fill = () => {
           if (calculatedOpacity() === 1) {
-            return "255,255,255";
+            if (theme.mode === "light") {
+              return "255,255,255";
+            } else {
+              return "34,44,64";
+            }
           } else {
             return routeColor;
           }
@@ -226,6 +238,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    zIndex: 1,
   },
   instructionText: {
     fontSize: 12,
