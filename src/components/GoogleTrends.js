@@ -39,6 +39,7 @@ export default function GoogleTrends(props) {
           </ThemeText>
         </View>
         <IntervalPicker
+          highlightColor={colors.swing}
           interval={interval}
           intervalLabels={interValLabels}
           setInterval={setInterval}

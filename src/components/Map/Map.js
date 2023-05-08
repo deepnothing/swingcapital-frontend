@@ -3,7 +3,6 @@ import {
   ActivityIndicator,
   StyleSheet,
   View,
-  Text,
   Dimensions,
   Image,
   Platform,
@@ -14,7 +13,7 @@ import IonIcon from "react-native-vector-icons/Ionicons";
 import { geoCylindricalStereographic } from "d3-geo-projection";
 import SvgPanZoom, {
   SvgPanZoomElement,
-} from "react-native-svg-pan-zoom-native-evt-patch";
+} from "./react-native-svg-pan-zoom";
 import { COUNTRIES } from "./CountryShapes";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import ThemeText from "../ThemeText";

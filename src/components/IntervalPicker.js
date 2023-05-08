@@ -8,6 +8,7 @@ export default function IntervalPicker({
   interval,
   intervalLabels,
   setInterval,
+  highlightColor
 }) {
   const { theme } = useContext(ThemeContext);
   return (
@@ -18,7 +19,7 @@ export default function IntervalPicker({
           onPress={() => setInterval(i)}
           style={[
             styles.trendSelect,
-            { backgroundColor: interval === i ? colors.swing : "transparent" },
+            { backgroundColor: interval === i ? highlightColor : "transparent" },
           ]}
         >
           <ThemeText
