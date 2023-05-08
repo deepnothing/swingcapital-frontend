@@ -11,9 +11,7 @@ import Svg, { G, Path, Circle } from "react-native-svg";
 import * as d3 from "d3";
 import IonIcon from "react-native-vector-icons/Ionicons";
 import { geoCylindricalStereographic } from "d3-geo-projection";
-import SvgPanZoom, {
-  SvgPanZoomElement,
-} from "./react-native-svg-pan-zoom";
+import SvgPanZoom, { SvgPanZoomElement } from "./react-native-svg-pan-zoom";
 import { COUNTRIES } from "./CountryShapes";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import ThemeText from "../ThemeText";
@@ -107,17 +105,13 @@ const Map = (props) => {
       >
         <View style={styles.instructions}>
           <IonIcon
-            name={"finger-print-outline"}
+            name={"expand-outline"}
             style={{ marginRight: 3, fontSize: 16 }}
             color={theme.mode === "light" ? "#686d72" : colors.light.base}
           />
-          <ThemeText style={styles.instructionText}>Press and Hold</ThemeText>
+          <ThemeText style={styles.instructionText}>Pinch to Zoom</ThemeText>
         </View>
-        <IonIcon
-          name={"expand-outline"}
-          style={styles.pinchIcon}
-          color={theme.mode === "light" ? "#686d72" : colors.light.base}
-        />
+
         {clickedCountry ? (
           <View
             style={[
