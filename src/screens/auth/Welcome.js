@@ -38,7 +38,7 @@ function WelcomeScreen({ navigation, setGuestUser }) {
       </View>
       <View />
       <View style={styles.mainContent}>
-        <View style={{ width: "100%", height: Platform.isPad ? 220 : 80 }}>
+        <View style={{ width: "100%", height: Platform.isPad ? 150 : 90 }}>
           <WebView
             source={{
               html: logoHtml,

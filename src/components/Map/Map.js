@@ -47,11 +47,17 @@ const Map = (props) => {
           // console.log(COUNTRIES[i].properties.name);
         }
         const calculatedOpacity = () =>
-          data.find((item) => item.geoName === COUNTRIES[i].properties.name)
-            ?.geoName
-            ? data.find((item) => item.geoName === COUNTRIES[i].properties.name)
-                .value[0] / 30
+          data.find((item) => item.geoName === COUNTRIES[i].properties.name)?.geoName
+            ? data.find((item) => item.geoName === COUNTRIES[i].properties.name).value[0] / 30 === 0? 1: data.find((item) => item.geoName === COUNTRIES[i].properties.name).value[0] / 30
             : 0;
+
+        const fill = () => {
+          if (calculatedOpacity() === 1) {
+            return "255,255,255";
+          } else {
+            return routeColor;
+          }
+        };
 
         return (
           <SvgPanZoomElement
@@ -73,8 +79,8 @@ const Map = (props) => {
               d={path}
               stroke={theme.mode === "light" ? "#000" : "#FFF"}
               strokeOpacity={0.3}
-              strokeWidth={1}
-              fill={`rgb(${routeColor})`}
+              strokeWidth={2}
+              fill={`rgb(${fill()})`}
               opacity={calculatedOpacity()}
             />
           </SvgPanZoomElement>
