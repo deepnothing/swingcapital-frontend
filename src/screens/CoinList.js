@@ -28,7 +28,7 @@ export default function CoinList({ navigation, route }) {
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
-    console.log("focused: CoinList.js")
+    console.log("focused: CoinList.js");
     refreshCoins();
   }, []);
 
@@ -139,7 +139,10 @@ export default function CoinList({ navigation, route }) {
             placeholder="Search.."
             onChangeText={(e) => searchCoins(dataCopyForSearch, e)}
             placeholderTextColor={theme.mode === "light" ? "#000" : "#FFF"}
-            style={styles.coinSearch}
+            style={[
+              styles.coinSearch,
+              { color: theme.mode === "light" ? "#000" : "#FFF" },
+            ]}
           />
         </View>
       </Header>
