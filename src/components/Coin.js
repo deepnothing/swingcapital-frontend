@@ -78,7 +78,11 @@ export default function Coin({ coinData, favCoins, addOrRemoveFavCoin }) {
             { width: "50%", justifyContent: "space-between" },
           ]}
         >
-          <AllTimeChart data={coinData} />
+          <AllTimeChart
+            data={coinData.prices}
+            color={coinData.color}
+            timeGap={25}
+          />
           <TouchableOpacity onPress={() => addOrRemoveFavCoin(coinData.name)}>
             <IonIcon
               name={

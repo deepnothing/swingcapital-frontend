@@ -1,4 +1,10 @@
-import { View, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+  Platform,
+} from "react-native";
 import ThemeText from "../ThemeText";
 import { useContext } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
@@ -36,7 +42,7 @@ export default function InstagramFeed({ data, error }) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 170,
+    height: Platform.isPad ? 380 : 170,
     marginTop: 10,
     borderRadius: 8,
     display: "flex",

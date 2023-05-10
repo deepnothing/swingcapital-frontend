@@ -3,14 +3,14 @@ import { View } from "react-native";
 import { LineChart, AreaChart } from "react-native-svg-charts";
 import ThemeText from "./ThemeText";
 
-export default function AllTimeChart({ data }) {
+export default function AllTimeChart({ data, color, timeGap }) {
   // for performance reasons we are only taking the prices for every third day to use on the homescreen charts
   const [strippedArray, setNewArr] = useState(() => {
     const tempArr = [];
     // use timeinterval to only get the graph data every X day to increase rendering speeds
-    const timeInterval = 25;
-    for (let i = 2; i < data.prices.length; i += timeInterval) {
-      tempArr.push(data.prices[i][1]);
+    const timeInterval = timeGap;
+    for (let i = 0; i < data.length; i += timeInterval) {
+      tempArr.push(data[i][1]);
     }
     return tempArr;
   });
@@ -42,7 +42,7 @@ export default function AllTimeChart({ data }) {
           <LineChart
             style={{ height: chartHeight }}
             data={strippedArray}
-            svg={{ stroke: `rgb(${data.color})`, strokeWidth: 2 }}
+            svg={{ stroke: `rgb(${color})`, strokeWidth: 2 }}
             contentInset={{ top: 0, bottom: 5 }}
           ></LineChart>
         </AreaChart>
@@ -57,10 +57,10 @@ export default function AllTimeChart({ data }) {
         }}
       >
         <ThemeText style={{ fontSize: 8 }}>
-          {new Date(data.prices[0][0]).getFullYear()}
+          {new Date(data[0][0]).getFullYear()}
         </ThemeText>
         <ThemeText style={{ fontSize: 8 }}>
-          {new Date(data.prices[data.prices.length - 1][0]).getFullYear()}
+          {new Date(data[data.length - 1][0]).getFullYear()}
         </ThemeText>
       </View>
     </View>

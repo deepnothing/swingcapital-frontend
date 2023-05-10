@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Platform } from "react-native";
 import { useContext } from "react";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { colors } from "../styles/colors";
@@ -35,16 +35,30 @@ export default function SocialCard({
         style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
       >
         {image}
-        <ThemeText style={{ fontWeight: "700", fontSize: 15, marginLeft: 5 }}>
+        <ThemeText
+          style={{
+            fontWeight: "700",
+            fontSize: Platform.isPad ? 28 : 15,
+            marginLeft: 5,
+          }}
+        >
           {" "}
           {name}
         </ThemeText>
       </View>
-      <ThemeText style={{ marginTop: 6, marginBottom: 17, fontSize: 12 }}>
+      <ThemeText
+        style={{
+          marginTop: 6,
+          marginBottom: 17,
+          fontSize: Platform.isPad ? 25: 12,
+        }}
+      >
         {" "}
         Total:{" "}
-        <ThemeText style={{ fontWeight: "500", fontSize: 13 }}>
-          {numberWithCommas(total)}
+        <ThemeText
+          style={{ fontWeight: "500", fontSize: Platform.isPad ? 22 : 13 }}
+        >
+          {total}
         </ThemeText>
       </ThemeText>
       {error ? (

@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Platform } from "react-native";
 import { colors } from "../styles/colors";
 import ThemeText from "./ThemeText";
 import { useContext } from "react";
@@ -8,7 +8,7 @@ export default function IntervalPicker({
   interval,
   intervalLabels,
   setInterval,
-  highlightColor
+  highlightColor,
 }) {
   const { theme } = useContext(ThemeContext);
   return (
@@ -19,7 +19,9 @@ export default function IntervalPicker({
           onPress={() => setInterval(i)}
           style={[
             styles.trendSelect,
-            { backgroundColor: interval === i ? highlightColor : "transparent" },
+            {
+              backgroundColor: interval === i ? highlightColor : "transparent",
+            },
           ]}
         >
           <ThemeText
@@ -67,6 +69,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   trendText: {
-    fontSize: 12,
+    fontSize: Platform.isPad ? 25 : 12,
   },
 });

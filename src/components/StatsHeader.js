@@ -7,6 +7,7 @@ import {
   Image,
   StatusBar,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import ThemeText from "./ThemeText";
@@ -43,12 +44,14 @@ export default function StatsHeader({ navigation, route, setTabBarShowing }) {
         <Feather
           name="arrow-left"
           color={theme.mode === "dark" ? colors.light.base : colors.dark.base}
-          style={{ fontSize: 20 }}
+          style={{ fontSize: Platform.isPad ? 30 : 20 }}
         />
         <Text style={style.backText}>&nbsp;Back</Text>
       </TouchableOpacity>
       <View style={{ display: "flex", flexDirection: "row" }}>
-        <ThemeText style={{ fontSize: 16, fontWeight: "600" }}>
+        <ThemeText
+          style={{ fontSize: Platform.isPad ? 25 : 16, fontWeight: "600" }}
+        >
           {route.params.coinName}{" "}
         </ThemeText>
         <Image source={{ uri: route.params.coinLogo }} style={style.coinLogo} />
@@ -81,7 +84,7 @@ const style = StyleSheet.create({
     width: windowWidth / 3,
   },
   backText: {
-    fontSize: 15,
+    fontSize: Platform.isPad ? 25 : 15,
     fontWeight: "600",
     color: colors.swing,
   },
@@ -95,9 +98,9 @@ const style = StyleSheet.create({
     width: "85%",
   },
   coinLogo: {
-    height: 20,
-    width: 20,
+    height: Platform.isPad ? 32 : 20,
+    width: Platform.isPad ? 32 : 20,
     position: "absolute",
-    right: -20,
+    right: Platform.isPad ? -35 : -20,
   },
 });

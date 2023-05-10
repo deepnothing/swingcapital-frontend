@@ -155,6 +155,7 @@ export default function CoinList({ navigation, route }) {
                 coinName: item.name,
                 coinColor: item.color,
                 coinLogo: item.logo,
+                coinPriceData: item.prices,
                 setTabBarShowing: route.params.setTabBarShowing,
               });
             }}

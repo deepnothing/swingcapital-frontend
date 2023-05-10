@@ -1,5 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  View,
+  Platform,
+} from "react-native";
 import { baseUrl } from "../config/api";
 import StatsHeader from "../components/StatsHeader";
 import GoogleTrends from "../components/GoogleTrends";
@@ -15,6 +21,7 @@ import { ref, onValue } from "firebase/database";
 import { db } from "../config/firebase";
 import { formatTweetCount, formatGoogleValues } from "../utilities/utilities";
 import YoutubeFeed from "../components/Youtube/YoutubeFeed";
+import { numberWithCommas } from "../utilities/utilities";
 
 export default ({ route, navigation }) => {
   const { theme } = useContext(ThemeContext);
@@ -115,6 +122,10 @@ export default ({ route, navigation }) => {
         bounces={false}
         showsVerticalScrollIndicator={false}
       >
+        {/* <Price
+          data={route.params.coinPriceData}
+          color={route.params.coinColor}
+        /> */}
         <Map
           routeColor={route.params.coinColor}
           data={googleData ? googleData.map : []}
@@ -130,19 +141,21 @@ export default ({ route, navigation }) => {
         <SocialCard
           color="29,161,242"
           name="Twitter"
-          total={twitterData?.tweet_counts.meta.total_tweet_count}
+          total={`${numberWithCommas(
+            twitterData?.tweet_counts.meta.total_tweet_count
+          )} Tweets `}
           image={
             <View
               style={{
                 backgroundColor: "rgb(29,161,242)",
                 borderRadius: 100,
-                padding: 7,
+                padding: Platform.isPad ? 10 : 7,
               }}
             >
               <IonIcon
                 name={"logo-twitter"}
                 color={"#FFF"}
-                style={{ fontSize: 20 }}
+                style={{ fontSize: Platform.isPad ? 35 : 30 }}
               />
             </View>
           }
@@ -161,14 +174,16 @@ export default ({ route, navigation }) => {
           name="Instagram"
           total={
             instagramGraphData
-              ? instagramGraphData[instagramGraphData.length - 1].value
+              ? `${numberWithCommas(
+                  instagramGraphData[instagramGraphData.length - 1].value
+                )} Posts`
               : "???"
           }
           image={
             <IonIcon
               name={"logo-instagram"}
               color={"rgb(193, 53, 132)"}
-              style={{ fontSize: 35 }}
+              style={{ fontSize: Platform.isPad ? 50 : 30 }}
             />
           }
           chartStyle={chartStyle}
@@ -187,12 +202,14 @@ export default ({ route, navigation }) => {
             <IonIcon
               name={"logo-youtube"}
               color={"rgb(255, 0, 0)"}
-              style={{ fontSize: 30 }}
+              style={{ fontSize: Platform.isPad ? 50 : 30 }}
             />
           }
           total={
             youtubeGraphData
-              ? youtubeGraphData[youtubeGraphData.length - 1].value
+              ? `${numberWithCommas(
+                  youtubeGraphData[youtubeGraphData.length - 1].value
+                )} Videos`
               : null
           }
           chartStyle={chartStyle}

@@ -1,5 +1,11 @@
 import { useState, useContext } from "react";
-import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  ActivityIndicator,
+  Platform,
+} from "react-native";
 import SocialChart from "./SocialChart/SocialChart";
 import ThemeText from "./ThemeText";
 import { ThemeContext } from "../hooks/ThemeContext";
@@ -29,7 +35,9 @@ export default function GoogleTrends(props) {
     >
       <View style={styles.googleHeader}>
         <View>
-          <ThemeText style={{ fontSize: 16, fontWeight: "600" }}>
+          <ThemeText
+            style={{ fontSize: Platform.isPad ? 30 : 16, fontWeight: "600" }}
+          >
             <Text style={{ color: "#4285F4" }}>G</Text>
             <Text style={{ color: "#DB4437" }}>o</Text>
             <Text style={{ color: "#F4B400" }}>o</Text>

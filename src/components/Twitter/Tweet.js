@@ -1,4 +1,11 @@
-import { View, Image, Linking, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Image,
+  Linking,
+  StyleSheet,
+  Dimensions,
+  Platform,
+} from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import ThemeText from "../ThemeText";
 import { formatDate } from "../../utilities/utilities";
@@ -31,20 +38,25 @@ export default function Tweet({ item, authorInfo }) {
           <Feather
             name="external-link"
             color={"#1DA1F2"}
-            style={{ fontSize: 18 }}
+            style={{ fontSize: Platform.isPad ? 30 : 18 }}
             onPress={() =>
               Linking.openURL(
                 `https://twitter.com/swingcapitalapp/status/${item.id}`
               )
             }
           />
-          <ThemeText style={{ fontSize: 10, marginTop: 5 }}>
+          <ThemeText
+            style={{ fontSize: Platform.isPad ? 20 : 10, marginTop: 5 }}
+          >
             {formatDate(item.created_at)}
           </ThemeText>
         </View>
       </View>
       <View style={{ height: 10 }} />
-      <ThemeText numberOfLines={3} style={{ fontSize: 12 }}>
+      <ThemeText
+        numberOfLines={3}
+        style={{ fontSize: Platform.isPad ? 20 : 12 }}
+      >
         {item.text}
       </ThemeText>
     </View>
@@ -79,15 +91,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   pic: {
-    height: 50,
-    width: 50,
+    height: Platform.isPad ? 80 : 50,
+    width: Platform.isPad ? 80 : 50,
     borderRadius: 200,
   },
   name: {
-    fontSize: 15,
+    fontSize: Platform.isPad ? 22 : 15,
     fontWeight: "700",
   },
   username: {
-    fontSize: 12,
+    fontSize: Platform.isPad ? 19 : 12,
   },
 });

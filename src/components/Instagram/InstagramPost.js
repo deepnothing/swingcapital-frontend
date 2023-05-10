@@ -5,6 +5,7 @@ import {
   Linking,
   StyleSheet,
   Dimensions,
+  Platform,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import ThemeText from "../ThemeText";
@@ -93,6 +94,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    fontSize: 12,
+    fontSize: Platform.isPad ? 28 : 12,
   },
 });
