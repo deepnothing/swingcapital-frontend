@@ -1,5 +1,5 @@
 import { Dimensions } from "react-native";
-import moment from 'moment';
+import moment from "moment";
 
 export const numberWithCommas = (x) => {
   if (x > 1) {
@@ -37,35 +37,13 @@ export const apx = (size = 0) => {
 export const formatDate = (dateStr) => {
   let date;
   if (typeof dateStr === "number") {
-    date = new Date(dateStr * 1000);
+    date = moment.unix(dateStr);
   } else {
-    date = new Date(parseInt(dateStr) * 1000);
+    date = moment(parseInt(dateStr));
   }
-  let time = date.toLocaleTimeString();
-  time = time.slice(0, -3);
-  const options = { month: "short", day: "numeric" };
-  let hour = date.getHours();
-  let minute = date.getMinutes();
-  let ampm = "AM";
-  if (hour >= 12) {
-    ampm = "PM";
-    hour = hour - 12;
-  }
-  if (hour === 0) {
-    hour = 12;
-  }
-  if (minute < 10) {
-    minute = "0" + minute;
-  }
-  return (
-    date.toLocaleDateString("en-US", options) +
-    " at " +
-    hour +
-    ":" +
-    minute +
-    " " +
-    ampm
-  );
+  
+  const formattedDate = date.format("MMM D [at] h:mmA");
+  return formattedDate;
 };
 
 export const formatDateString = (dateString) => {
@@ -77,8 +55,7 @@ export const formatDateString = (dateString) => {
   const ampm = date.format("A");
 
   return `${month} ${day} at ${hour}:${minute} ${ampm}`;
-}
-
+};
 
 export const formatTweetCount = (tweets) =>
   tweets.tweet_counts.data.map((i) => {

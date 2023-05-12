@@ -148,25 +148,29 @@ export default function CoinList({ navigation, route }) {
       </Header>
       <FlatList
         data={data}
-        renderItem={({ item }) => (
-          <Pressable
-            onPress={() => {
-              navigation.navigate("Stats", {
-                coinName: item.name,
-                coinColor: item.color,
-                coinLogo: item.logo,
-                coinPriceData: item.prices,
-                setTabBarShowing: route.params.setTabBarShowing,
-              });
-            }}
-          >
-            <Coin
-              coinData={item}
-              favCoins={favCoins}
-              addOrRemoveFavCoin={addOrRemoveFavCoin}
-            />
-          </Pressable>
-        )}
+        renderItem={({ item }) => {
+          return (
+            <Pressable
+              onPress={() => {
+                navigation.navigate("Stats", {
+                  coinName: item.name,
+                  coinSymbol: item.symbol,
+                  coinColor: item.color,
+                  coinLogo: item.logo,
+                  coinPriceData: item.prices,
+                  coinPriceChange: item.priceChange,
+                  setTabBarShowing: route.params.setTabBarShowing,
+                });
+              }}
+            >
+              <Coin
+                coinData={item}
+                favCoins={favCoins}
+                addOrRemoveFavCoin={addOrRemoveFavCoin}
+              />
+            </Pressable>
+          );
+        }}
         keyExtractor={(item) => item.name}
         contentContainerStyle={styles.listStyle}
         refreshControl={

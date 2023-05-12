@@ -23,6 +23,8 @@ export default function GoogleTrends(props) {
 
   const interValLabels = ["Day", "Week"];
 
+  console.log(data)
+
   return (
     <View
       style={[

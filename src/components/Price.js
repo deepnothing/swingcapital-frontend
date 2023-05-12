@@ -1,23 +1,26 @@
 import { useContext, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { colors } from "../styles/colors";
 import SocialChart from "./SocialChart/SocialChart";
+import ThemeText from "./ThemeText";
 
-export default function Price({ data, color }) {
+export default function Price({ data, color, symbol }) {
   const { theme } = useContext(ThemeContext);
 
-//   const [formattedArr, setFormattedArr] = useState(() => {
-//     const tempArr = [];
-//     for (let i = 0; i < data.length; i++) {
-//       tempArr.push({
-//         time: data[i][0],
-//         value: data[i][1],
-//       });
-//     }
-//     return tempArr;
-//   });
-  //   console.log(fo, "data");
+  const [price, setPrice] = useState(data.slice(-30));
+
+  const formattedArr = () => {
+    const tempArr = [];
+    for (let i = 0; i < price.length; i++) {
+      tempArr.push({
+        time: price[i][0] / 1000,
+        value: price[i][1],
+      });
+    }
+    return tempArr;
+  };
+
   return (
     <View
       style={[
@@ -28,15 +31,22 @@ export default function Price({ data, color }) {
         },
       ]}
     >
-      <Text>hello</Text>
-      {/* <View style={styles.chartContainer}>
-        <SocialChart
-          routeColor={color}
-          data={formattedArr}
-          //   gridMin={gridMin}
-          //   gridMax={gridMax}
-        />
-      </View> */}
+      <View style={styles.row}>
+        <ThemeText
+          style={{ fontSize: Platform.isPad ? 30 : 15, fontWeight: "600" }}
+        >
+          {symbol.toUpperCase()} / USD
+        </ThemeText>
+        <ThemeText
+          style={{ fontSize: Platform.isPad ? 30 : 15, color: "#617485" }}
+        >
+          Daily - 30 days
+        </ThemeText>
+      </View>
+
+      <View style={styles.chartContainer}>
+        <SocialChart routeColor={color} data={formattedArr()} />
+      </View>
     </View>
   );
 }
@@ -58,5 +68,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     marginVertical: 7,
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "95%",
+    paddingVertical: 8,
   },
 });

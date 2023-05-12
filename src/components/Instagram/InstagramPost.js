@@ -60,7 +60,7 @@ export default function InstagramPost({ item }) {
           <Feather
             name="external-link"
             color={"#C13584"}
-            style={{ marginLeft: 10, fontSize: 18 }}
+            style={{ marginLeft: 10, fontSize: Platform.isPad ? 30 : 18 }}
             onPress={() => Linking.openURL(item.url)}
           />
         </View>

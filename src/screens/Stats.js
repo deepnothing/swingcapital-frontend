@@ -22,6 +22,7 @@ import { db } from "../config/firebase";
 import { formatTweetCount, formatGoogleValues } from "../utilities/utilities";
 import YoutubeFeed from "../components/Youtube/YoutubeFeed";
 import { numberWithCommas } from "../utilities/utilities";
+import Price from "../components/Price";
 
 export default ({ route, navigation }) => {
   const { theme } = useContext(ThemeContext);
@@ -122,10 +123,11 @@ export default ({ route, navigation }) => {
         bounces={false}
         showsVerticalScrollIndicator={false}
       >
-        {/* <Price
+        <Price
           data={route.params.coinPriceData}
-          color={route.params.coinColor}
-        /> */}
+          color={route.params.coinPriceChange > 1 ? "59,190,98" : "225,6,0"}
+          symbol={route.params.coinSymbol}
+        />
         <Map
           routeColor={route.params.coinColor}
           data={googleData ? googleData.map : []}
@@ -187,7 +189,7 @@ export default ({ route, navigation }) => {
             />
           }
           chartStyle={chartStyle}
-          data={instagramGraphData}
+          data={instagramGraphData?.slice(-168)}
           error={instagramGraphData === null}
         >
           <InstagramFeed
@@ -213,7 +215,7 @@ export default ({ route, navigation }) => {
               : null
           }
           chartStyle={chartStyle}
-          data={youtubeGraphData}
+          data={youtubeGraphData?.slice(-7)}
           error={youtubeGraphData === null}
         >
           <YoutubeFeed

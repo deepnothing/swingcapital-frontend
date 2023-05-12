@@ -6,6 +6,7 @@ import {
   Dimensions,
   Linking,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import { WebView } from "react-native-webview";
 
@@ -30,7 +31,7 @@ export default function YoutubeVideo({ item }) {
           >
             <Feather
               name="play-circle"
-              style={{ fontSize: 25 }}
+              style={{ fontSize: Platform.isPad ? 40 : 25 }}
               color={"#FF0000"}
             />
           </TouchableOpacity>
@@ -50,10 +51,12 @@ export default function YoutubeVideo({ item }) {
           <View style={styles.row}>
             <Feather
               name="calendar"
-              style={{ fontSize: 18 }}
+              style={{ fontSize: Platform.isPad ? 32 : 18 }}
               color={theme.mode === "light" ? "#000" : "#FFF"}
             />
-            <ThemeText style={{ color: "#777a7d" }}>
+            <ThemeText
+              style={{ color: "#777a7d", fontSize: Platform.isPad ? 25 : 15 }}
+            >
               {" "}
               {formatDateString(item.data_date)}
             </ThemeText>
@@ -62,25 +65,31 @@ export default function YoutubeVideo({ item }) {
           <View style={styles.row}>
             <Feather
               name="eye"
-              style={{ fontSize: 18 }}
+              style={{ fontSize: Platform.isPad ? 32 : 18 }}
               color={theme.mode === "light" ? "#000" : "#FFF"}
             />
-            <ThemeText style={{ color: "#777a7d" }}>
+            <ThemeText
+              style={{ color: "#777a7d", fontSize: Platform.isPad ? 25 : 15 }}
+            >
               {" "}
               {item.views ? numberWithCommas(item.views) : "?"}
             </ThemeText>
           </View>
         </View>
         <View style={styles.row}>
-          <ThemeText style={{ fontSize: 15 }}>@ {item.channel_name}</ThemeText>
+          <ThemeText style={{ fontSize: Platform.isPad ? 25 : 15 }}>
+            @ {item.channel_name}
+          </ThemeText>
           <View style={styles.spacer} />
-          <ThemeText style={{ fontSize: 12, color: "#777a7d" }}>
+          <ThemeText
+            style={{ fontSize: Platform.isPad ? 25 : 12, color: "#777a7d" }}
+          >
             {numberWithCommas(item.subscribers)} subscribers
           </ThemeText>
           <View style={styles.spacer} />
           <Feather
             name="external-link"
-            style={{ fontSize: 18 }}
+            style={{ fontSize: Platform.isPad ? 32 : 18 }}
             color={"#FF0000"}
             onPress={() => Linking.openURL(item.channel_link)}
           />
@@ -92,13 +101,16 @@ export default function YoutubeVideo({ item }) {
 
 const styles = StyleSheet.create({
   container: {
-    maxWidth: Dimensions.get("window").width / 1.2,
+    maxWidth: Platform.isPad
+      ? Dimensions.get("window").width / 1
+      : Dimensions.get("window").width / 1.2,
     padding: 5,
     marginVertical: 8,
   },
   videoTitle: {
     fontWeight: "600",
     width: "80%",
+    fontSize: Platform.isPad ? 25 : 15,
   },
   row: {
     display: "flex",
@@ -108,7 +120,7 @@ const styles = StyleSheet.create({
   column: {
     display: "flex",
     flexDirection: "column",
-    height: 120,
+    height: Platform.isPad ? 200 : 120,
   },
   spacer: { width: 10 },
   video: {

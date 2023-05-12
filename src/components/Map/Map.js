@@ -27,6 +27,15 @@ const Map = (props) => {
   const [countryList, setCountryList] = useState([]);
   const [clickedCountry, setClickedCountry] = useState(null);
 
+  function checkAllValuesZero(objects) {
+    for (let i = 0; i < objects.length; i++) {
+      if (objects[i].value[0] !== 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   const countryPaths = () => {
     const projection = geoCylindricalStereographic()
       .translate([1335, 896])
@@ -121,6 +130,12 @@ const Map = (props) => {
           console.log("touchend");
         }}
       >
+        {data.length > 0 && checkAllValuesZero(data) ? (
+          <ThemeText style={{ position: "absolute", top: 0 }}>
+            No data available right now
+          </ThemeText>
+        ) : null}
+
         <View style={styles.instructions}>
           <IonIcon
             name={"expand-outline"}
@@ -196,7 +211,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 11,
     transform: [{ scale: dimensions.width / 436 }],
-    marginVertical: Platform.isPad ? 190 : 10,
+    marginVertical: Platform.isPad ? 190 : Platform.OS === "android" ? 0 : 10,
   },
   svgCanvasStyle: {
     // backgroundColor: "yellow",

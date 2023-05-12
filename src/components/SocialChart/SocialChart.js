@@ -6,7 +6,7 @@ import * as shape from "d3-shape";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { colors } from "../../styles/colors";
 import { abbreviateNumber } from "../../utilities/utilities";
-import { apx, formatDate,numberWithCommas} from "../../utilities/utilities";
+import { apx, formatDate, numberWithCommas } from "../../utilities/utilities";
 
 export default function SocialChart({
   data,
@@ -14,6 +14,7 @@ export default function SocialChart({
   gridMin,
   gridMax,
   chartStyle,
+  dateOff,
 }) {
   const { theme } = useContext(ThemeContext);
   const [positionX, setPositionX] = useState(-1); // The currently selected X coordinate position
@@ -110,8 +111,8 @@ export default function SocialChart({
             y={-apx(24 + 24 + 20) / 2}
             rx={apx(12)} // borderRadius
             ry={apx(12)} // borderRadius
-            width={apx(250)}
-            height={apx(96)}
+            width={apx(dateOff ? 220 : 250)}
+            height={apx(dateOff ? 70 : 96)}
             stroke={`rgb(${routeColor})`}
             fill={`${
               theme.mode === "light"
@@ -120,22 +121,25 @@ export default function SocialChart({
             }`}
           />
 
+          {dateOff ? null : (
+            <SvgText
+              x={apx(20)}
+              fill={theme.mode === "light" ? "#617485" : colors.light.base}
+              opacity={0.65}
+              fontSize={apx(24)}
+            >
+              {date}
+            </SvgText>
+          )}
+
           <SvgText
             x={apx(20)}
-            fill={theme.mode === "light" ? "#617485" : colors.light.base}
-            opacity={0.65}
-            fontSize={apx(24)}
-          >
-            {date}
-          </SvgText>
-          <SvgText
-            x={apx(20)}
-            y={apx(24 + 20)}
+            y={apx(24 + (dateOff ? -12 : 20))}
             fontSize={apx(24)}
             fontWeight="bold"
             fill={`rgb(${routeColor})`}
           >
-            {numberWithCommas(priceList[positionX])}
+            {numberWithCommas(priceList[positionX]).substring(0, 12)}
           </SvgText>
         </G>
 
