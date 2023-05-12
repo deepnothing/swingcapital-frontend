@@ -130,7 +130,7 @@ function BotScreen({ route }) {
                 color={textColor}
                 style={{ marginLeft: 3, fontSize: 18 }}
               />{" "}
-              {formatDateString(item.startDate)}
+              {formatDateString(JSON.parse(item.startDate))}
             </Text>
           </View>
           <View style={style.row}>
@@ -147,7 +147,7 @@ function BotScreen({ route }) {
                 color={textColor}
                 style={{ marginLeft: 3, fontSize: 18 }}
               />{" "}
-              {formatDateString(item.endDate)}
+              {formatDateString(JSON.parse(item.endDate))}
             </Text>
           </View>
           <ThemeText style={style.tradeText}>
