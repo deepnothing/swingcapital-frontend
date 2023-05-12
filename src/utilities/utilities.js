@@ -39,7 +39,7 @@ export const formatDate = (dateStr) => {
   if (typeof dateStr === "number") {
     date = moment.unix(dateStr);
   } else {
-    date = moment(parseInt(dateStr));
+    date = moment.unix(parseInt(dateStr));
   }
   
   const formattedDate = date.format("MMM D [at] h:mmA");

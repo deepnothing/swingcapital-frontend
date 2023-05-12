@@ -20,7 +20,7 @@ export default {
     assetBundlePatterns: ["**/*"],
     ios: {
       supportsTablet: true,
-      buildNumber: "6",
+      buildNumber: "7",
       bundleIdentifier: "com.deepnothing.swingcapital",
     },
     android: {
