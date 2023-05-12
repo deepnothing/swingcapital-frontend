@@ -157,7 +157,7 @@ export default ({ route, navigation }) => {
               <IonIcon
                 name={"logo-twitter"}
                 color={"#FFF"}
-                style={{ fontSize: Platform.isPad ? 35 : 30 }}
+                style={{ fontSize: Platform.isPad ? 35 : 23 }}
               />
             </View>
           }
@@ -185,7 +185,7 @@ export default ({ route, navigation }) => {
             <IonIcon
               name={"logo-instagram"}
               color={"rgb(193, 53, 132)"}
-              style={{ fontSize: Platform.isPad ? 50 : 30 }}
+              style={{ fontSize: Platform.isPad ? 50 : 35 }}
             />
           }
           chartStyle={chartStyle}
