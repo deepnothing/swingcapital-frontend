@@ -21,13 +21,15 @@ export default {
     ios: {
       supportsTablet: true,
       buildNumber: "6",
-      bundleIdentifier:"com.deepnothing.swingcapital"
+      bundleIdentifier: "com.deepnothing.swingcapital",
     },
     android: {
+      package: "com.deepnothing.swingcapital",
       adaptiveIcon: {
         foregroundImage: "./assets/adaptive-icon.png",
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#ffc72c",
       },
+      icon: "./assets/icon.png",
     },
     web: {
       favicon: "./assets/favicon.png",
