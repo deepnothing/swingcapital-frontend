@@ -7153,11 +7153,6 @@ react-native-gradle-plugin@^0.0.7:
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.7.tgz#96602f909745239deab7b589443f14fce5da2056"
   integrity sha512-+4JpbIx42zGTONhBTIXSyfyHICHC29VTvhkkoUOJAh/XHPEixpuBduYgf6Y4y9wsN1ARlQhBBoptTvXvAFQf5g==
 
-react-native-graph@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-graph/-/react-native-graph-1.0.1.tgz#4fdd3a85f172d05af3290632a0f6dfd99a790626"
-  integrity sha512-Z0bacgmMApr2AUtOqUHj/Ny1sMQksxpcndM2OFpna90nZOqDXg+Ip500fNqG+HSX/n7bH1FcLISuC4cuHvgQbw==
-
 react-native-inset-shadow@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-native-inset-shadow/-/react-native-inset-shadow-1.0.3.tgz#9a0cd6d33b69cbc95d1aa5568e1b938e9a43506b"
