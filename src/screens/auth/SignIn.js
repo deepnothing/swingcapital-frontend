@@ -7,11 +7,11 @@ import {
   Alert,
   Platform,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import BigButton from "../../components/BigButton";
-import { SafeAreaView } from "react-native-safe-area-context";
 import WebView from "react-native-webview";
 import { html } from "./swingWebView";
 import { colors } from "../../styles/colors";
