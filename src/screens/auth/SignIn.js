@@ -96,7 +96,8 @@ function SignInScreen({ navigation, setGuestUser }) {
         <View style={styles.input}>
           <Feather name="mail" color={"#C3C3C3"} style={{ fontSize: 19 }} />
           <TextInput
-            placeholder="Email"
+            placeholder="Email / Username"
+            placeholderTextColor="#343434"
             value={value.email}
             style={{ padding: 5, width: "100%", height: "100%" }}
             onChangeText={(text) => setValue({ ...value, email: text })}
@@ -107,6 +108,7 @@ function SignInScreen({ navigation, setGuestUser }) {
           <TextInput
             style={{ padding: 5, width: "100%", height: "100%" }}
             placeholder="Password"
+            placeholderTextColor="#343434"
             onChangeText={(text) => setValue({ ...value, password: text })}
             secureTextEntry={true}
           />
