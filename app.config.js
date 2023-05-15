@@ -5,7 +5,7 @@ export default {
     name: "Swing Capital",
     slug: "SwingCapital",
     privacy: "public",
-    version: "1.0.0",
+    version: "1.0.1",
     orientation: "portrait",
     icon: "./assets/icon.png",
     userInterfaceStyle: "automatic",
@@ -20,11 +20,11 @@ export default {
     assetBundlePatterns: ["**/*"],
     ios: {
       supportsTablet: true,
-      buildNumber: "10",
+      buildNumber: "1",
       bundleIdentifier: "com.deepnothing.swingcapital",
     },
     android: {
-      versionCode:1,
+      versionCode:2,
       package: "com.deepnothing.swingcapital",
       adaptiveIcon: {
         foregroundImage: "./assets/adaptive-icon.png",
