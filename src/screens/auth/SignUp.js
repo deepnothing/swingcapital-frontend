@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Platform,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "../../config/firebase";
@@ -33,6 +34,14 @@ function SignUpScreen({ navigation, setGuestUser }) {
         ...value,
         error: "Email and password are mandatory.",
       });
+      Alert.alert("Error", "Email and password are mandatory.", [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") },
+      ]);
       return;
     }
 
@@ -50,10 +59,19 @@ function SignUpScreen({ navigation, setGuestUser }) {
       // navigate to home screen after creation
       navigation.navigate("Sign In");
     } catch (error) {
+      console.log(error);
       setValue({
         ...value,
         error: error.message,
       });
+      Alert.alert("Error", error.message.replace("Firebase:", ""), [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") },
+      ]);
     }
   }
 
@@ -87,7 +105,7 @@ function SignUpScreen({ navigation, setGuestUser }) {
         <View style={styles.input}>
           <Feather name="mail" color={"#C3C3C3"} style={{ fontSize: 19 }} />
           <TextInput
-            placeholder="Email / Username"
+            placeholder="Email"
             placeholderTextColor="#343434"
             value={value.email}
             style={{ padding: 5, width: "100%", height: "100%" }}

@@ -20,11 +20,11 @@ export default {
     assetBundlePatterns: ["**/*"],
     ios: {
       supportsTablet: true,
-      buildNumber: "8",
+      buildNumber: "10",
       bundleIdentifier: "com.deepnothing.swingcapital",
     },
     android: {
-      versionCode:2,
+      versionCode:1,
       package: "com.deepnothing.swingcapital",
       adaptiveIcon: {
         foregroundImage: "./assets/adaptive-icon.png",

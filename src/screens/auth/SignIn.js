@@ -96,7 +96,7 @@ function SignInScreen({ navigation, setGuestUser }) {
         <View style={styles.input}>
           <Feather name="mail" color={"#C3C3C3"} style={{ fontSize: 19 }} />
           <TextInput
-            placeholder="Email / Username"
+            placeholder="Email"
             placeholderTextColor="#343434"
             value={value.email}
             style={{ padding: 5, width: "100%", height: "100%" }}
