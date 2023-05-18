@@ -24,7 +24,7 @@ export default {
       bundleIdentifier: "com.deepnothing.swingcapital",
     },
     android: {
-      versionCode:2,
+      versionCode:3,
       package: "com.deepnothing.swingcapital",
       adaptiveIcon: {
         foregroundImage: "./assets/adaptive-icon.png",
