@@ -30,7 +30,7 @@ export default {
         foregroundImage: "./assets/adaptive-icon.png",
         backgroundColor: "#ffc72c",
       },
-      icon: "./assets/icon.png",
+      icon: "./assets/android-icon.png",
     },
     web: {
       favicon: "./assets/favicon.png",
